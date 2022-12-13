@@ -6,6 +6,13 @@ import ConnexionScreen from "./screens/ConnexionScreen";
 import MyMissionScreen from "./screens/MyMissionScreen";
 import ContactScreen from "./screens/ContactScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import user from './reducers/user';
+
+const store = configureStore({
+ reducer: { user },
+});
 
 import React, { useEffect } from "react";
 
@@ -30,10 +37,13 @@ export default function App() {
   
 
   return (
+    <Provider store={store}>
+
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="TabNavigator" component={TabNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
   );
 }
