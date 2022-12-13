@@ -32,12 +32,17 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={SignUpScreenFive} />
-      <Tab.Screen name="Home" component={HomeScreen} />
+      {/* <Tab.Screen name="Home" component={SignUpScreenFive} />
+      <Tab.Screen name="Home2" component={HomeScreen} />
       <Tab.Screen name="Connexion" component={ConnexionScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
       <Tab.Screen name="MyMission" component={MyMissionScreen} />
-      <Tab.Screen name="Contact" component={ContactScreen} />
+      <Tab.Screen name="Contact" component={ContactScreen} /> */}
+      <Tab.Screen name="1" component={SignUpScreenOne} /> 
+      <Tab.Screen name="2" component={SignUpScreenTwo} /> 
+      <Tab.Screen name="3" component={SignUpScreenThree} /> 
+      <Tab.Screen name="4" component={SignUpScreenFour} /> 
+      <Tab.Screen name="5" component={SignUpScreenFive} /> 
     </Tab.Navigator>
   );
 };
@@ -47,7 +52,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="TabNavigator" component={SignUpScreenFive} />
+          <Stack.Screen name="TabNavigator" component={TabNavigator} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

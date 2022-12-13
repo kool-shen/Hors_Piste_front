@@ -29,6 +29,8 @@ const TabNavigator = () => {
       <Tab.Screen name="Profile" component={ProfileScreen} />
       <Tab.Screen name="MyMission" component={MyMissionScreen} />
       <Tab.Screen name="Contact" component={ContactScreen} />
+
+      
     </Tab.Navigator>
   );
 };
