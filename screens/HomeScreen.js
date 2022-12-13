@@ -1,37 +1,78 @@
+import { useEffect, useState } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import {
+  faFile,
+  faEnvelope,
+  faPen,
+  faCircleDot,
+  faAddressBook,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function HomeScreen({ navigation }) {
+  /*useEffect(() => {
+    const keyframe = new Keyframe({
+      from: {
+        backgroundColor: "red",
+      },
+      to: {
+        backgroundColor: "blue",
+      },
+    });
+    console.log("Mount");
+  }, []);*/
+
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.container1}>
+      <Animated.View /*animation={keyframe}*/ style={styles.container1}>
         <TouchableOpacity style={styles.card1}>
-          <Text>Mes documents</Text>
+          <Text style={styles.mainText}>Mes{"\n"}documents</Text>
+          <FontAwesomeIcon icon={faFile} size={50} style={styles.icon} />
         </TouchableOpacity>
-      </View>
+      </Animated.View>
       <View style={styles.container2}>
         <TouchableOpacity style={styles.card2}>
-          <Text>Mes documents</Text>
+          <FontAwesomeIcon icon={faPen} size={50} style={styles.icon3} />
+          <Text style={styles.mainText}>Signer</Text>
+          <Text style={styles.secondaryText}> mes documents</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.container3}>
-        <TouchableOpacity style={styles.card1}>
-          <Text>Mes documents</Text>
+        <TouchableOpacity style={styles.card3}>
+          <Text style={styles.mainText}>Transmettre</Text>
+          <Text style={styles.secondaryText}> mes documents</Text>
+          <FontAwesomeIcon icon={faEnvelope} size={50} style={styles.icon2} />
         </TouchableOpacity>
       </View>
       <View style={styles.container4}>
         <TouchableOpacity style={styles.card2}>
-          <Text>Mes documents</Text>
+          <FontAwesomeIcon icon={faCircleDot} size={50} style={styles.icon3} />
+          <Text style={styles.mainText}>Ma mission</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.container5}>
         <TouchableOpacity style={styles.card1}>
-          <Text>Mes documents</Text>
+          <Text style={styles.mainText}>Mes contacts</Text>
+          <FontAwesomeIcon
+            icon={faAddressBook}
+            size={50}
+            style={styles.icon2}
+          />
         </TouchableOpacity>
       </View>
     </View>
   );
 }
 const styles = StyleSheet.create({
+  mainText: {
+    fontSize: 20,
+    color: "white",
+    fontWeight: "bold",
+  },
+  secondaryText: {
+    color: "white",
+    fontWeight: "bold",
+  },
   mainContainer: {
     backgroundColor: "#F8DFBD",
     height: "100%",
@@ -43,20 +84,43 @@ const styles = StyleSheet.create({
     backgroundColor: "#A5D8E6",
     transform: [{ rotate: "13deg" }],
     width: 200,
-    height: 70,
+    height: 80,
     borderRadius: 20,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 10,
   },
   card2: {
     backgroundColor: "#A5D8E6",
     transform: [{ rotate: "-13deg" }],
     width: 200,
-    height: 70,
+    height: 80,
     borderRadius: 10,
+    display: "flex",
+    alignItems: "baseline",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    padding: 10,
+  },
+  card3: {
+    backgroundColor: "#A5D8E6",
+    transform: [{ rotate: "13deg" }],
+    width: 200,
+    height: 80,
+    borderRadius: 10,
+    display: "flex",
+    alignItems: "baseline",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    padding: 10,
   },
   container1: {
     height: "20%",
-    backgroundColor: "#F29231",
+    //backgroundColor: "#F29231",
     transform: [{ rotate: "-13deg" }, { translateX: -19 }],
+
     width: 450,
     zIndex: 1,
     flex: 1,
@@ -102,5 +166,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  icon: {
+    color: "white",
+  },
+  icon2: {
+    color: "white",
+    marginLeft: 10,
+  },
+  icon3: {
+    color: "white",
+    marginRight: 10,
   },
 });
