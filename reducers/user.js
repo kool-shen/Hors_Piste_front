@@ -19,7 +19,8 @@ const initialState = {
     IBAN: "",
     CESNumber: "",
     ICNumber: "",
-    adress: {
+    address: {
+      street: '',
       zipCode: "",
       city: "",
       country: ""
