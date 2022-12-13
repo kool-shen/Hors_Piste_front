@@ -1,25 +1,17 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SignUpScreenThree from "./screens/SignUpScreenThree";
-
-import SignUpScreenTwo from "./screens/SignUpScreenTwo";
-import SignUpScreenOne from "./screens/SignUpScreenOne";
-import SignUpScreenFour from "./screens/SignUpScreenFour";
-import SignUpScreenFive from "./screens/SignUpScreenFive";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
-import user from "./reducers/user";
 import HomeScreen from "./screens/HomeScreen";
-
 import ProfileScreen from "./screens/ProfileScreen";
 import ConnexionScreen from "./screens/ConnexionScreen";
 import MyMissionScreen from "./screens/MyMissionScreen";
 import ContactScreen from "./screens/ContactScreen";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import user from './reducers/user';
 
 const store = configureStore({
-  reducer: { user },
+ reducer: { user },
 });
 
 import React, { useEffect } from "react";
@@ -32,7 +24,6 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={SignUpScreenFive} />
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Connexion" component={ConnexionScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
@@ -43,13 +34,16 @@ const TabNavigator = () => {
 };
 
 export default function App() {
+  
+
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="TabNavigator" component={SignUpScreenFive} />
-        </Stack.Navigator>
-      </NavigationContainer>
+
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="TabNavigator" component={TabNavigator} />
+      </Stack.Navigator>
+    </NavigationContainer>
     </Provider>
   );
 }

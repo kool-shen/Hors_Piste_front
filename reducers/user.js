@@ -2,10 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: {
+    token: '',
+    userId: '',
+    email: "",
+    mission: { _id: "639494b656430998cd5eabb1" },
     name: "",
     surname: "",
     gender: "",
-    email: "",
     password: "",
     photo: "",
     birthDate: "",
@@ -16,10 +19,21 @@ const initialState = {
     IBAN: "",
     CESNumber: "",
     ICNumber: "",
-    address: { street: "", zipCode: "", city: "", country: "" },
-    emergencyContact: { name: "", surname: "", relation: "", phone: "" },
-  },
+    address: {
+      street: '',
+      zipCode: "",
+      city: "",
+      country: ""
+    },
+    emergencyContact: {
+      name: "",
+      relation: "",
+      phone: ""
+    },
+    ICExpirationDate: ""
+  }
 };
+
 
 export const userSlice = createSlice({
   name: "user",
@@ -39,16 +53,10 @@ export const userSlice = createSlice({
     },
     deleteUser: (state, action) => {
       state.value = {};
-    },
-  },
+    }
+  }
 });
 
-export const {
-  addUser,
-  updateUserProperties,
-  updateManyUserProperties,
-  deleteUser,
-} = userSlice.actions;
+export const { addUser, updateUserProperties, updateManyUserProperties } = userSlice.actions;
 export default userSlice.reducer;
 
-//dispatch(updateUserProperties({ propertyName: "degrees" }));
