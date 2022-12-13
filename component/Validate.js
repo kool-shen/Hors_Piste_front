@@ -6,6 +6,7 @@ export default function Validate(props) {
       <TouchableOpacity
         onPress={() => {
           props.handleClick();
+          
         }}
         style={{
           backgroundColor: "green",

@@ -1,11 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SignUpScreenThree from "./screens/SignUpScreenThree";
-
-import SignUpScreenTwo from "./screens/SignUpScreenTwo";
-import SignUpScreenOne from "./screens/SignUpScreenOne";
-import SignUpScreenFour from "./screens/SignUpScreenFour";
-import SignUpScreenFive from "./screens/SignUpScreenFive";
+import SignUpScreen from "./screens/SignUpScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { Provider } from "react-redux";
@@ -38,11 +33,7 @@ const TabNavigator = () => {
       <Tab.Screen name="Profile" component={ProfileScreen} />
       <Tab.Screen name="MyMission" component={MyMissionScreen} />
       <Tab.Screen name="Contact" component={ContactScreen} /> */}
-      <Tab.Screen name="1" component={SignUpScreenOne} /> 
-      <Tab.Screen name="2" component={SignUpScreenTwo} /> 
-      <Tab.Screen name="3" component={SignUpScreenThree} /> 
-      <Tab.Screen name="4" component={SignUpScreenFour} /> 
-      <Tab.Screen name="5" component={SignUpScreenFive} /> 
+      <Tab.Screen name="1" component={SignUpScreen} /> 
     </Tab.Navigator>
   );
 };

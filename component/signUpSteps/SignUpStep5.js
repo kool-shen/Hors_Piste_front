@@ -13,26 +13,22 @@ import {
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
-import Validate from "../component/Validate";
+import Validate from "../Validate";
 import { useDispatch } from "react-redux";
-import { updateUserProperties } from "../reducers/user";
+import { updateUserProperties } from "../../reducers/user";
 
-export default function SignUpScreenFive() {
+export default function SignUpScreenFive(props) {
   ////RÉCUPÉRER LA PHOTO DANS LE STORE////
 
   const dispatch = useDispatch();
-
   const [user, setUser] = useState({
     photo: "",
   });
 
-  const [value, setValue] = useState(null);
-
   const handleValidate = () => {
     dispatch(updateUserProperties(user));
+    props.nextStep();
   };
-
-  console.log(user);
   /////CAMERA/////
 
   const [hasPermission, setHasPermission] = useState(false);
@@ -55,13 +51,10 @@ export default function SignUpScreenFive() {
   }
 
   return (
-    <KeyboardAvoidingView
-      style={styles.mainContainer}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
+    <>
       <View style={styles.pageTitleContainer}>
         <Text style={styles.pageTitle}>Inscription</Text>
-        <Text style={styles.progression}>4/7</Text>
+        <Text style={styles.progression}>5/7</Text>
       </View>
       <View style={styles.background}>
         <View style={styles.subBackground}>
@@ -77,17 +70,10 @@ export default function SignUpScreenFive() {
           <Validate handleClick={handleValidate} />
         </View>
       </View>
-    </KeyboardAvoidingView>
+    </>
   );
 }
 const styles = StyleSheet.create({
-  mainContainer: {
-    backgroundColor: "#F8DFBD",
-    height: "100%",
-    width: "100%",
-    flex: 1,
-    zIndex: -1,
-  },
   camera: {
     display: "flex",
     width: 350,
