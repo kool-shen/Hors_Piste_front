@@ -40,6 +40,7 @@ const TabNavigator = () => {
 
 export default function App() {
   return (
+    
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
