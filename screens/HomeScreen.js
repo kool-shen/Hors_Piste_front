@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   container1: {
     height: "20%",
-    //backgroundColor: "#F29231",
+    backgroundColor: "#F29231",
     transform: [{ rotate: "-13deg" }, { translateX: -19 }],
 
     width: 450,

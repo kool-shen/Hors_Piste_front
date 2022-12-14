@@ -4,11 +4,14 @@ import {
   TextInput,
   View,
   Text,
+  KeyboardAvoidingView,
 } from "react-native";
 import Validate from "../Validate";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
-
+import ValidateButton from "../buttons/ValidateButton";
+import NormalInput from "../inputs/NormalInput";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 export default function SignUpScreenOne(props) {
   ////reducer user ///
 
@@ -24,14 +27,16 @@ export default function SignUpScreenOne(props) {
     birthCity: "",
   });
 
-
   const handleValidate = () => {
     dispatch(updateUserProperties(user));
-    props.nextStep()
+    props.nextStep();
   };
 
   return (
-    <>
+    <KeyboardAwareScrollView
+      style={styles.mainContainer}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
       <View style={styles.pageTitleContainer}>
         <Text style={styles.pageTitle}>Inscription</Text>
         <Text style={styles.progression}>1/7</Text>
@@ -40,61 +45,79 @@ export default function SignUpScreenOne(props) {
         <View style={styles.subBackground}>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Prénom</Text>
-            <TextInput
+
+            <NormalInput
+              label="Ton prénom"
+              value={user.name}
               onChangeText={(value) => setUser({ ...user, name: value })}
               style={styles.input}
             />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Nom</Text>
-            <TextInput
+            <NormalInput
+              label="Ton nom de famille"
+              value={user.surname}
               onChangeText={(value) => setUser({ ...user, surname: value })}
               style={styles.input}
             />
+            <TextInput />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Mail</Text>
-            <TextInput
+            <NormalInput
+              label="Ton adresse mail"
+              value={user.email}
               onChangeText={(value) => setUser({ ...user, email: value })}
               style={styles.input}
             />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Genre</Text>
-            <TextInput
+            <NormalInput
+              label="Ton genre"
+              value={user.gender}
               onChangeText={(value) => setUser({ ...user, gender: value })}
               style={styles.input}
             />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Mot de passe</Text>
-            <TextInput
+            <NormalInput
+              label="Ton mot de passe"
+              value={user.password}
               onChangeText={(value) => setUser({ ...user, password: value })}
               style={styles.input}
             />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Date de naissance</Text>
-            <TextInput
+            <NormalInput
+              label="Ta date de naissance"
+              value={user.birthDate}
               onChangeText={(value) => setUser({ ...user, birthDate: value })}
               style={styles.input}
             />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Ville de naissance</Text>
-            <TextInput
+            <NormalInput
+              label="Ta ville de naissance"
+              value={user.birthCity}
               onChangeText={(value) => setUser({ ...user, birthCity: value })}
               style={styles.input}
             />
           </View>
-          <Validate handleClick={handleValidate}  />
+          <ValidateButton onPress={handleValidate} />
         </View>
       </View>
-    </>
+    </KeyboardAwareScrollView>
   );
 }
 const styles = StyleSheet.create({
-  
+  mainContainer: {
+    flex: 1,
+  },
   background: {
     backgroundColor: "#A5D8E6",
     transform: [
@@ -106,6 +129,7 @@ const styles = StyleSheet.create({
     width: 600,
     flex: 1,
     alignItems: "center",
+    zIndex: 1,
   },
   subBackground: {
     transform: [{ rotate: "35deg" }, { translateX: 9 }, { translateY: -16 }],
@@ -115,6 +139,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     paddingTop: 130,
+    zIndex: 30,
     paddingBottom: 20,
   },
   inputContainer: {

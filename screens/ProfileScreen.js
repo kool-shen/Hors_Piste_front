@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  KeyboardAvoidingView,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -13,7 +14,7 @@ import avatar from "../assets/avatar.png";
 
 const ProfileScreen = () => {
   return (
-    <KeyboardAwareScrollView
+    <KeyboardAvoidingView
       style={styles.mainContainer}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
@@ -29,7 +30,7 @@ const ProfileScreen = () => {
             </TouchableOpacity>
 
             <View style={styles.inputContainer}>
-              <Text style={styles.inputText}>Prenom</Text>
+              <Text style={styles.inputText}>Prénom</Text>
               <TextInput style={styles.input} />
             </View>
             <View style={styles.inputContainer}>
@@ -47,7 +48,7 @@ const ProfileScreen = () => {
           </View>
         </View>
       </View>
-    </KeyboardAwareScrollView>
+    </KeyboardAvoidingView>
   );
 };
 const styles = StyleSheet.create({

@@ -3,6 +3,7 @@ import { useState } from "react";
 import Validate from "../Validate";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
+import ValidateButton from "../buttons/ValidateButton";
 
 export default function SignUpScreenTwo(props) {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ export default function SignUpScreenTwo(props) {
 
   function handleValidate() {
     dispatch(updateUserProperties(user));
-    props.nextStep()
+    props.nextStep();
   }
 
   return (
@@ -70,7 +71,7 @@ export default function SignUpScreenTwo(props) {
             />
           </View>
 
-          <Validate handleClick={handleValidate} />
+          <ValidateButton onPress={handleValidate} />
         </View>
       </View>
     </>

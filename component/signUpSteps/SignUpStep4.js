@@ -4,6 +4,7 @@ import { StyleSheet, TextInput, View, Text } from "react-native";
 import Validate from "../Validate";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
+import ValidateButton from "../buttons/ValidateButton";
 
 export default function SignUpScreenFour(props) {
   ////reducer user ///
@@ -50,7 +51,7 @@ export default function SignUpScreenFour(props) {
             />
           </View>
 
-          <Validate handleClick={handleValidate} />
+          <ValidateButton onPress={handleValidate} />
         </View>
       </View>
     </>

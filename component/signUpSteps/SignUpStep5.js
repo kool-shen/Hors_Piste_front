@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Camera } from "expo-camera";
 import { useIsFocused } from "@react-navigation/native";
+import ValidateButton from "../buttons/ValidateButton";
 
 import {
   StyleSheet,
@@ -67,7 +68,7 @@ export default function SignUpScreenFive(props) {
             title="Snap"
             onPress={() => takePicture()}
           ></TouchableOpacity>
-          <Validate handleClick={handleValidate} />
+          <ValidateButton onPress={handleValidate} />
         </View>
       </View>
     </>
