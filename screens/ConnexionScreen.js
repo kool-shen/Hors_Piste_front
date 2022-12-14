@@ -10,66 +10,88 @@ import { useState } from "react";
 import Logo from "../assets/Logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../reducers/user";
-
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function ConnexionScreen({ navigation }) {
-  const user = useSelector(state => state.user.value)
-  console.log(user)
+  const user = useSelector((state) => state.user.value);
+  console.log(user);
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  
-  const handleConnect = async() => {
-    console.log(user)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleConnect = async () => {
+    console.log(user);
     const res = await fetch(`http://10.2.1.233:3000/users/signin`, {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: email,
-        password: password
-      })
+        password: password,
+      }),
     });
     const userData = await res.json();
-    console.log(userData)
+    console.log(userData);
     if (userData.result) {
-      dispatch(updateUserProperties({ ...userData.data, userId: userData.data._id, email: userData.data.email, token: userData.token }));
+      dispatch(
+        updateUserProperties({
+          ...userData.data,
+          userId: userData.data._id,
+          email: userData.data.email,
+          token: userData.token,
+        })
+      );
     }
-  }
-
+  };
 
   return (
-    <View style={styles.mainContainer}>
-      <View style={styles.container}></View>
-      <View style={styles.background}>
-        <View style={styles.subBackground}>
-          <Image source={Logo} style={styles.logo} resizeMode="contain" />
-          <View style={styles.containerSignin}>
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputText} >Email</Text>
-              <TextInput style={styles.input} value={email} onChangeText={(value) => setEmail(value)}/>
-            </View>
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputText} >Mot de passe</Text>
-              <TextInput style={styles.input} value={password} onChangeText={(value) => setPassword(value)}/>
-            </View>
-            <TouchableOpacity style={styles.validateButton} onPress={() => handleConnect()}>
-              <Text style={styles.validate}>Valider</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.forgot}>Mot de passe oublié ?</Text>
-            </TouchableOpacity>
+    <KeyboardAwareScrollView
+      style={styles.mainContainer}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <View style={styles.mainContainer}>
+        <View style={styles.container}></View>
+        <View style={styles.background}>
+          <View style={styles.subBackground}>
+            <Image source={Logo} style={styles.logo} resizeMode="contain" />
+            <View style={styles.containerSignin}>
+              <View style={styles.inputContainer}>
+                <Text style={styles.inputText}>Email</Text>
+                <TextInput
+                  style={styles.input}
+                  value={email}
+                  onChangeText={(value) => setEmail(value)}
+                />
+              </View>
+              <View style={styles.inputContainer}>
+                <Text style={styles.inputText}>Mot de passe</Text>
+                <TextInput
+                  style={styles.input}
+                  value={password}
+                  onChangeText={(value) => setPassword(value)}
+                />
+              </View>
+              <TouchableOpacity
+                style={styles.validateButton}
+                onPress={() => handleConnect()}
+              >
+                <Text style={styles.validate}>Valider</Text>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Text style={styles.forgot}>Mot de passe oublié ?</Text>
+              </TouchableOpacity>
 
-            <Text style={styles.notYet}>Pas encore de compte ?</Text>
-            <TouchableOpacity style={styles.createButton}>
-              <Text style={styles.createText}>Créer un compte</Text>
-            </TouchableOpacity>
+              <Text style={styles.notYet}>Pas encore de compte ?</Text>
+              <TouchableOpacity style={styles.createButton}>
+                <Text style={styles.createText}>Créer un compte</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 }
 const styles = StyleSheet.create({
