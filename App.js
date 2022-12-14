@@ -3,11 +3,16 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignUpScreen from "./screens/SignUpScreen";
 import SignInScreen from "./screens/SignInScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { Provider } from "react-redux";
+import { Provider as PaperProvider } from "react-native-paper";
+import { AppRegistry } from "react-native";
+
+import * as React from "react";
+
+import { Provider as StoreProvider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
 import HomeScreen from "./screens/HomeScreen";
+import { name as appName } from "./app.json";
 
 import ProfileScreen from "./screens/ProfileScreen";
 import ConnexionScreen from "./screens/SignInScreen";
@@ -18,7 +23,7 @@ const store = configureStore({
   reducer: { user },
 });
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import SplashScreen from "react-native-splash-screen";
 import IntroductionScreen from "./screens/IntroductionScreen";
@@ -39,15 +44,19 @@ const TabNavigator = () => {
 
 export default function App() {
   return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Introduction" component={IntroductionScreen} />
-          <Stack.Screen name="SignIn" component={SignInScreen} />
-          <Stack.Screen name="SignUp" component={SignUpScreen} />
-          <Stack.Screen name="TabNavigator" component={TabNavigator} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
+    <StoreProvider store={store}>
+      <PaperProvider>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Introduction" component={IntroductionScreen} />
+            <Stack.Screen name="SignIn" component={SignInScreen} />
+            <Stack.Screen name="SignUp" component={SignUpScreen} />
+            <Stack.Screen name="TabNavigator" component={TabNavigator} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+    </StoreProvider>
   );
 }
+
+AppRegistry.registerComponent(appName, () => Main);

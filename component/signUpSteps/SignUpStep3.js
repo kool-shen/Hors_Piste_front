@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  TextInput,
-  View,
-  Text,
-  useWindowDimensions,
-} from "react-native";
+import { StyleSheet, TextInput, View, Text } from "react-native";
 import { useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -96,13 +90,12 @@ export default function SignUpScreenThree(props) {
             />
           </View>
 
-          <Validate handleClick={handleValidate} />
+          <ValidateButton onPress={handleValidate} />
         </View>
       </View>
     </>
   );
 }
-
 const makeStyles = () => {
   const { fontScale } = useWindowDimensions();
 

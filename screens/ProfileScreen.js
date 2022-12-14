@@ -15,7 +15,7 @@ import avatar from "../assets/avatar.png";
 const ProfileScreen = () => {
   const styles = makeStyles();
   return (
-    <KeyboardAwareScrollView
+    <KeyboardAvoidingView
       style={styles.mainContainer}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
@@ -31,7 +31,7 @@ const ProfileScreen = () => {
             </TouchableOpacity>
 
             <View style={styles.inputContainer}>
-              <Text style={styles.inputText}>Prenom</Text>
+              <Text style={styles.inputText}>Prénom</Text>
               <TextInput style={styles.input} />
             </View>
             <View style={styles.inputContainer}>
@@ -49,7 +49,7 @@ const ProfileScreen = () => {
           </View>
         </View>
       </View>
-    </KeyboardAwareScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

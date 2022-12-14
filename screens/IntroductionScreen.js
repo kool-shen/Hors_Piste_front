@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React from "react";
 import { useEffect } from "react";
-import Logo from "../assets/Logo.png";
+import logo from "../assets/logo.png";
 
 const IntroductionScreen = ({ navigation }) => {
   const styles = makeStyles();
@@ -19,7 +19,7 @@ const IntroductionScreen = ({ navigation }) => {
 
   return (
     <View style={styles.globalContainer}>
-      <Image source={Logo} style={styles.logo} resizeMode="contain" />
+      <Image source={logo} style={styles.logo} resizeMode="contain" />
     </View>
   );
 };

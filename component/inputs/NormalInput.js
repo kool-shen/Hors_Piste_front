@@ -1,0 +1,20 @@
+import * as React from "react";
+import { TextInput } from "react-native-paper";
+import { color } from "react-native-reanimated";
+
+const NormalInput = (props) => {
+  return (
+    <TextInput
+      outlineStyle={{ borderColor: "#143143" }}
+      selectionColor="#143143"
+      textColor="black"
+      mode="outlined"
+      style={{ width: 250, height: 35 }}
+      value={props.value}
+      onChangeText={props.onChangeText}
+      label={props.label}
+    />
+  );
+};
+
+export default NormalInput;
