@@ -6,7 +6,7 @@ import Logo from "../assets/Logo.png";
 const IntroductionScreen = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate("TabNavigator");
+      navigation.navigate("SignIn");
     }, 3000);
   }, []);
 

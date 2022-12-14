@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./screens/HomeScreen";
 import ProfileScreen from "./screens/ProfileScreen";
-import ConnexionScreen from "./screens/ConnexionScreen";
+import ConnexionScreen from "./screens/SignInScreen";
 import MyMissionScreen from "./screens/MyMissionScreen";
 import ContactScreen from "./screens/ContactScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";

@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../reducers/user";
 
 
-export default function ConnexionScreen({ navigation }) {
+export default function SignInScreen({ navigation }) {
   const user = useSelector(state => state.user.value)
   console.log(user)
   const dispatch = useDispatch();
@@ -36,6 +36,7 @@ export default function ConnexionScreen({ navigation }) {
     console.log(userData)
     if (userData.result) {
       dispatch(updateUserProperties({ ...userData.data, userId: userData.data._id, email: userData.data.email, token: userData.token }));
+      navigation.navigate("TabNavigator");
     }
   }
 
@@ -63,7 +64,7 @@ export default function ConnexionScreen({ navigation }) {
             </TouchableOpacity>
 
             <Text style={styles.notYet}>Pas encore de compte ?</Text>
-            <TouchableOpacity style={styles.createButton}>
+            <TouchableOpacity style={styles.createButton} onPress={() => navigation.navigate("SignUp")} >
               <Text style={styles.createText}>Créer un compte</Text>
             </TouchableOpacity>
           </View>
