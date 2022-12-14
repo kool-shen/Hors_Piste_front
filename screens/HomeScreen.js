@@ -24,12 +24,12 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.mainContainer}>
-      <Animated.View /*animation={keyframe}*/ style={styles.container1}>
+      <View /*animation={keyframe}*/ style={styles.container1}>
         <TouchableOpacity style={styles.card1}>
           <Text style={styles.mainText}>Mes{"\n"}documents</Text>
           <FontAwesomeIcon icon={faFile} size={50} style={styles.icon} />
         </TouchableOpacity>
-      </Animated.View>
+      </View>
       <View style={styles.container2}>
         <TouchableOpacity style={styles.card2}>
           <FontAwesomeIcon icon={faPen} size={50} style={styles.icon3} />

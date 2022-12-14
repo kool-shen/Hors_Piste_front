@@ -1,55 +1,42 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  Image,
-} from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useState } from "react";
+import { StyleSheet, KeyboardAvoidingView } from "react-native";
+import SignUpStep1 from "../component/signUpSteps/SignUpStep1";
+import SignUpStep2 from "../component/signUpSteps/SignUpStep2";
+import SignUpStep3 from "../component/signUpSteps/SignUpStep3";
+import SignUpStep4 from "../component/signUpSteps/SignUpStep4";
+import SignUpStep5 from "../component/signUpSteps/SignUpStep5";
 
-import React from "react";
-import avatar from "../assets/avatar.png";
+export default function SignUpScreen() {
+  ////reducer user ///
 
-const ProfileScreen = () => {
+  const [stepValue, setStepValue] = useState(0);
+  //   const [activeStep, setActiveStep] = useState();
+
+  const nextStep = () => setStepValue(stepValue + 1);
+
+  let activeStep;
+  
+  if (stepValue === 0) {
+    activeStep = <SignUpStep1 nextStep={() => nextStep()} />;
+  } else if (stepValue === 1) {
+    activeStep = <SignUpStep2 nextStep={() => nextStep()} />;
+  } else if (stepValue === 2) {
+    activeStep = <SignUpStep3 nextStep={() => nextStep()} />;
+  } else if (stepValue === 3) {
+    activeStep = <SignUpStep4 nextStep={() => nextStep()} />;
+  } else if (stepValue === 4) {
+    activeStep = <SignUpStep5 nextStep={() => nextStep()} />;
+  }
+
   return (
-    <KeyboardAwareScrollView
+    <KeyboardAvoidingView
       style={styles.mainContainer}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <View style={styles.mainContainer}>
-        <View style={styles.pageTitleContainer}>
-          <Text style={styles.pageTitle}>Mon Profil</Text>
-        </View>
-        <View style={styles.background}>
-          <View style={styles.subBackground}>
-            <Image source={avatar} style={styles.logo} resizeMode="contain" />
-            <TouchableOpacity>
-              <Text style={styles.change}>Modifier</Text>
-            </TouchableOpacity>
-
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputText}>Prenom</Text>
-              <TextInput style={styles.input} />
-            </View>
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputText}>Nom</Text>
-              <TextInput style={styles.input} />
-            </View>
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputText}>Adresse</Text>
-              <TextInput style={styles.input} />
-            </View>
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputText}>Mail</Text>
-              <TextInput style={styles.input} />
-            </View>
-          </View>
-        </View>
-      </View>
-    </KeyboardAwareScrollView>
+      {activeStep}
+    </KeyboardAvoidingView>
   );
-};
+}
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: "#F8DFBD",
@@ -80,7 +67,6 @@ const styles = StyleSheet.create({
     paddingTop: 130,
     paddingBottom: 20,
   },
-
   inputContainer: {
     height: 70,
     display: "flex",
@@ -137,15 +123,4 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 25,
   },
-  logo: {
-    width: "40%",
-    height: 120,
-    marginLeft: 30,
-    justifyContent: "center",
-  },
-  change: {
-    color: "red",
-  },
 });
-
-export default ProfileScreen;

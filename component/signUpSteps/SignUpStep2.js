@@ -1,20 +1,10 @@
-import {
-  StyleSheet,
-  TextInput,
-  View,
-  Text,
-  KeyboardAvoidingView,
-} from "react-native";
+import { StyleSheet, TextInput, View, Text } from "react-native";
 import { useState } from "react";
-
-import Validate from "../component/Validate";
-import InputTitle from "../component/InputTitle";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
+import Validate from "../Validate";
 import { useDispatch } from "react-redux";
-import { updateUserProperties } from "../reducers/user";
+import { updateUserProperties } from "../../reducers/user";
 
-export default function SignUpScreenTwo({ navigation }) {
+export default function SignUpScreenTwo(props) {
   const dispatch = useDispatch();
 
   const [user, setUser] = useState({
@@ -23,14 +13,11 @@ export default function SignUpScreenTwo({ navigation }) {
 
   function handleValidate() {
     dispatch(updateUserProperties(user));
-    console.log(user);
+    props.nextStep()
   }
 
   return (
-    <KeyboardAvoidingView
-      style={styles.mainContainer}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
+    <>
       <View style={styles.pageTitleContainer}>
         <Text style={styles.pageTitle}>Inscription</Text>
         <Text style={styles.progression}>2/7</Text>
@@ -86,17 +73,10 @@ export default function SignUpScreenTwo({ navigation }) {
           <Validate handleClick={handleValidate} />
         </View>
       </View>
-    </KeyboardAvoidingView>
+    </>
   );
 }
 const styles = StyleSheet.create({
-  mainContainer: {
-    backgroundColor: "#F8DFBD",
-    height: "100%",
-    width: "100%",
-    flex: 1,
-    zIndex: -1,
-  },
   background: {
     backgroundColor: "#A5D8E6",
     transform: [

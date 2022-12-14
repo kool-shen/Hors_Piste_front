@@ -1,114 +1,62 @@
 import { useState } from "react";
-import {
-  StyleSheet,
-  TextInput,
-  View,
-  Text,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Button,
-} from "react-native";
-import Validate from "../component/Validate";
-import { useDispatch } from "react-redux";
-import { updateUserProperties } from "../reducers/user";
 
-export default function SignUpScreenOne({ navigation }) {
+import { StyleSheet, TextInput, View, Text } from "react-native";
+import Validate from "../Validate";
+import { useDispatch } from "react-redux";
+import { updateUserProperties } from "../../reducers/user";
+
+export default function SignUpScreenFour(props) {
   ////reducer user ///
 
   const dispatch = useDispatch();
-
   const [user, setUser] = useState({
-    name: "",
-    surname: "",
-    gender: "",
-    email: "",
-    password: "",
-    birthDate: "",
-    birthCity: "",
+    degrees: "",
+    occupation: "",
+    CESNumber: "",
   });
-
-  /////
-  const [value, setValue] = useState(null);
 
   const handleValidate = () => {
     dispatch(updateUserProperties(user));
-    console.log(user);
+    props.nextStep();
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.mainContainer}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
+    <>
       <View style={styles.pageTitleContainer}>
         <Text style={styles.pageTitle}>Inscription</Text>
-        <Text style={styles.progression}>1/7</Text>
+        <Text style={styles.progression}>4/7</Text>
       </View>
       <View style={styles.background}>
         <View style={styles.subBackground}>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Prénom</Text>
+            <Text style={styles.inputText}>Diplôme</Text>
             <TextInput
-              onChangeText={(value) => setUser({ ...user, name: value })}
+              onChangeText={(value) => setUser({ ...user, degree: value })}
               style={styles.input}
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Nom</Text>
+            <Text style={styles.inputText}>Situation</Text>
             <TextInput
-              onChangeText={(value) => setUser({ ...user, surname: value })}
+              onChangeText={(value) => setUser({ ...user, occupation: value })}
               style={styles.input}
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Mail</Text>
+            <Text style={styles.inputText}>Numéro CES</Text>
             <TextInput
-              onChangeText={(value) => setUser({ ...user, email: value })}
+              onChangeText={(value) => setUser({ ...user, CESNumber: value })}
               style={styles.input}
             />
           </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Genre</Text>
-            <TextInput
-              onChangeText={(value) => setUser({ ...user, gender: value })}
-              style={styles.input}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Mot de passe</Text>
-            <TextInput
-              onChangeText={(value) => setUser({ ...user, password: value })}
-              style={styles.input}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Date de naissance</Text>
-            <TextInput
-              onChangeText={(value) => setUser({ ...user, birthDate: value })}
-              style={styles.input}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Ville de naissance</Text>
-            <TextInput
-              onChangeText={(value) => setUser({ ...user, birthCity: value })}
-              style={styles.input}
-            />
-          </View>
+
           <Validate handleClick={handleValidate} />
         </View>
       </View>
-    </KeyboardAvoidingView>
+    </>
   );
 }
 const styles = StyleSheet.create({
-  mainContainer: {
-    backgroundColor: "#F8DFBD",
-    height: "100%",
-    width: "100%",
-    flex: 1,
-    zIndex: -1,
-  },
   background: {
     backgroundColor: "#A5D8E6",
     transform: [
@@ -131,6 +79,23 @@ const styles = StyleSheet.create({
     paddingTop: 130,
     paddingBottom: 20,
   },
+  emergencyContainer: {
+    backgroundColor: "#F5C2C8",
+    maxWidth: 350,
+    maxHeight: 100,
+    display: "flex",
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 5,
+  },
+  emergencyText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
   inputContainer: {
     height: 70,
     display: "flex",
@@ -147,7 +112,7 @@ const styles = StyleSheet.create({
   },
   inputText: {
     backgroundColor: "#143143",
-    maxWidth: 150,
+    maxWidth: 200,
     textAlign: "center",
     fontSize: 15,
     borderRadius: 5,
