@@ -23,6 +23,7 @@ export default function SignInScreen({ navigation }) {
 
   const handleConnect = async () => {
     console.log(user);
+    navigation.navigate("TabNavigator");
     const res = await fetch(`http://10.2.1.233:3000/users/signin`, {
       method: "POST",
       headers: {
@@ -45,7 +46,7 @@ export default function SignInScreen({ navigation }) {
           token: userData.token
         })
       );
-      navigation.navigate("TabNavigator");
+      
     }
   };
 
