@@ -13,7 +13,7 @@ const IntroductionScreen = ({ navigation }) => {
   const styles = makeStyles();
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate("TabNavigator");
+      navigation.navigate("SignIn");
     }, 3000);
   }, []);
 
