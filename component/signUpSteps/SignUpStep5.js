@@ -145,7 +145,7 @@ const makeStyles = () => {
 
 
 
-//how to use expo-document-picker?
+
 
 
 
