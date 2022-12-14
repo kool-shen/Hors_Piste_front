@@ -2,9 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: {
+    email: "",
+    passportImg: '',
+    folderId: '',
+    connectionCode: '',
     token: '',
     userId: '',
-    email: "",
     mission: { _id: "639494b656430998cd5eabb1" },
     name: "",
     surname: "",
@@ -19,6 +22,7 @@ const initialState = {
     IBAN: "",
     CESNumber: "",
     ICNumber: "",
+    ICExpirationDate: "",
     address: {
       street: '',
       zipCode: "",
@@ -30,7 +34,6 @@ const initialState = {
       relation: "",
       phone: ""
     },
-    ICExpirationDate: ""
   }
 };
 

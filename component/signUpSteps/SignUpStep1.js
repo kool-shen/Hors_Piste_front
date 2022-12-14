@@ -4,6 +4,7 @@ import {
   TextInput,
   View,
   Text,
+  useWindowDimensions,
   KeyboardAvoidingView,
 } from "react-native";
 import Validate from "../Validate";
@@ -13,6 +14,7 @@ import ValidateButton from "../buttons/ValidateButton";
 import NormalInput from "../inputs/NormalInput";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 export default function SignUpScreenOne(props) {
+  const styles = makeStyles();
   ////reducer user ///
 
   const dispatch = useDispatch();
@@ -108,16 +110,13 @@ export default function SignUpScreenOne(props) {
               style={styles.input}
             />
           </View>
-          <ValidateButton onPress={handleValidate} />
+          <Validate handleClick={handleValidate} />
         </View>
       </View>
     </KeyboardAwareScrollView>
   );
 }
 const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-  },
   background: {
     backgroundColor: "#A5D8E6",
     transform: [
@@ -129,7 +128,6 @@ const styles = StyleSheet.create({
     width: 600,
     flex: 1,
     alignItems: "center",
-    zIndex: 1,
   },
   subBackground: {
     transform: [{ rotate: "35deg" }, { translateX: 9 }, { translateY: -16 }],
@@ -139,7 +137,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     paddingTop: 130,
-    zIndex: 30,
     paddingBottom: 20,
   },
   inputContainer: {
