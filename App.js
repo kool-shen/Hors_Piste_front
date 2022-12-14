@@ -32,19 +32,21 @@ const TabNavigator = () => {
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
       <Tab.Screen name="MyMission" component={MyMissionScreen} />
-      <Tab.Screen name="Contact" component={ContactScreen} /> 
-      <Tab.Screen name="1" component={SignUpScreen} /> 
+      <Tab.Screen name="Contact" component={ContactScreen} />
+      <Tab.Screen name="1" component={SignUpScreen} />
     </Tab.Navigator>
   );
 };
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Introduction" component={IntroductionScreen} />
-        <Stack.Screen name="TabNavigator" component={TabNavigator} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Introduction" component={IntroductionScreen} />
+          <Stack.Screen name="TabNavigator" component={TabNavigator} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
