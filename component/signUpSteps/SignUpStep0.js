@@ -8,22 +8,21 @@ import {
   useWindowDimensions
 } from "react-native";
 import { useState } from "react";
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserProperties } from "../reducers/user";
+import { updateUserProperties } from "../../reducers/user";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-export default function SignInScreen({ navigation }) {
+export default function SignInScreen({ navigation, nextStep }) {
   const user = useSelector((state) => state.user.value);
   console.log(user);
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [connectionCode, setConnectionCode] = useState("");
   const styles = makeStyles();
 
   const handleConnect = async () => {
-    console.log(user);
-    const res = await fetch(`http://10.2.1.233:3000/users/signin`, {
+    const res = await fetch(`http://10.2.1.233:3000/users/firstConnection`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -31,21 +30,32 @@ export default function SignInScreen({ navigation }) {
       },
       body: JSON.stringify({
         email: email,
-        password: password
+        connectionCode: connectionCode
       })
     });
     const userData = await res.json();
-    console.log(userData);
     if (userData.result) {
+      const res = await fetch(`http://10.2.1.233:3000/docs/createFolders`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          connectionString: connectionCode
+        })
+      });
+      const foldersData = await res.json();
       dispatch(
         updateUserProperties({
           ...userData.data,
           userId: userData.data._id,
           email: userData.data.email,
+          folderId: foldersData.data.id,
           token: userData.token
         })
       );
-      navigation.navigate("TabNavigator");
+      nextStep()
     }
   };
 
@@ -69,11 +79,11 @@ export default function SignInScreen({ navigation }) {
                 />
               </View>
               <View style={styles.inputContainer}>
-                <Text style={styles.inputText}>Mot de passe</Text>
+                <Text style={styles.inputText}>Code de connexion</Text>
                 <TextInput
                   style={styles.input}
-                  value={password}
-                  onChangeText={(value) => setPassword(value)}
+                  value={connectionCode}
+                  onChangeText={(value) => setConnectionCode(value)}
                 />
               </View>
               <TouchableOpacity
@@ -82,16 +92,13 @@ export default function SignInScreen({ navigation }) {
               >
                 <Text style={styles.validate}>Valider</Text>
               </TouchableOpacity>
-              <TouchableOpacity>
-                <Text style={styles.forgot}>Mot de passe oublié ?</Text>
-              </TouchableOpacity>
 
-              <Text style={styles.notYet}>Pas encore de compte ?</Text>
+              <Text style={styles.notYet}>Déjà inscrit ?</Text>
               <TouchableOpacity
                 style={styles.createButton}
-                onPress={() => navigation.navigate("SignUp")}
+                onPress={() => navigation.navigate("SignIn")}
               >
-                <Text style={styles.createText}>Créer un compte</Text>
+                <Text style={styles.createText}>Se connecter</Text>
               </TouchableOpacity>
             </View>
           </View>

@@ -4,13 +4,14 @@ import {
   KeyboardAvoidingView,
   useWindowDimensions,
 } from "react-native";
+import SignUpStep0 from "../component/signUpSteps/SignUpStep0";
 import SignUpStep1 from "../component/signUpSteps/SignUpStep1";
 import SignUpStep2 from "../component/signUpSteps/SignUpStep2";
 import SignUpStep3 from "../component/signUpSteps/SignUpStep3";
 import SignUpStep4 from "../component/signUpSteps/SignUpStep4";
 import SignUpStep5 from "../component/signUpSteps/SignUpStep5";
 
-export default function SignUpScreen() {
+export default function SignUpScreen({navigation}) {
   const styles = makeStyles();
   ////reducer user ///
 
@@ -22,17 +23,20 @@ export default function SignUpScreen() {
   let activeStep;
 
   if (stepValue === 0) {
-    activeStep = <SignUpStep1 nextStep={() => nextStep()} />;
+    activeStep = <SignUpStep0 navigation={navigation} nextStep={() => nextStep()} />;
+    
   } else if (stepValue === 1) {
-    activeStep = <SignUpStep2 nextStep={() => nextStep()} />;
+    activeStep = <SignUpStep1 nextStep={() => nextStep()} />;
   } else if (stepValue === 2) {
-    activeStep = <SignUpStep3 nextStep={() => nextStep()} />;
+    activeStep = <SignUpStep2 nextStep={() => nextStep()} />;
   } else if (stepValue === 3) {
-    activeStep = <SignUpStep4 nextStep={() => nextStep()} />;
+    activeStep = <SignUpStep3 nextStep={() => nextStep()} />;
   } else if (stepValue === 4) {
+    activeStep = <SignUpStep4 nextStep={() => nextStep()} />;
+  } else if(stepValue === 5) {
+
     activeStep = <SignUpStep5 nextStep={() => nextStep()} />;
   }
-
   return (
     <KeyboardAvoidingView
       style={styles.mainContainer}
