@@ -1,107 +1,112 @@
 import {
-    StyleSheet,
-    TextInput,
-    View,
-    Text,
-  } from "react-native";
-  import { useState } from "react";
-  
-  import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-  import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
-  import Validate from "../Validate";
-  import { useDispatch } from "react-redux";
-  import { updateUserProperties } from "../../reducers/user";
-  
-  export default function SignUpScreenThree(props) {
-    const [user, setUser] = useState({
-      emergencyContact: { name: "", surname: "", relation: "", phone: "" },
-    });
-  
-  
-    const dispatch = useDispatch();
-  
-    const handleValidate = () => {
-      dispatch(updateUserProperties(user));
-      props.nextStep()
-    };
-  
-    return (
-      <>
-        <View style={styles.pageTitleContainer}>
-          <Text style={styles.pageTitle}>Inscription</Text>
-          <Text style={styles.progression}>3/7</Text>
-        </View>
-        <View style={styles.background}>
-          <View style={styles.subBackground}>
-            <View style={styles.emergencyContainer}>
-              <FontAwesomeIcon icon={faAddressCard} size={50} />
-  
-              <Text style={styles.emergencyText}>
-                Personne à contacter en cas d'urgence
-              </Text>
-            </View>
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputText}>Prénom</Text>
-              <TextInput
-                onChangeText={(value) =>
-                  setUser({
-                    ...user,
-                    emergencyContact: { ...user.emergencyContact, name: value },
-                  })
-                }
-                style={styles.input}
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputText}>Nom</Text>
-              <TextInput
-                onChangeText={(value) =>
-                  setUser({
-                    ...user,
-                    emergencyContact: {
-                      ...user.emergencyContact,
-                      surname: value,
-                    },
-                  })
-                }
-                style={styles.input}
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputText}>Numéro de téléphone</Text>
-              <TextInput
-                onChangeText={(value) =>
-                  setUser({
-                    ...user,
-                    emergencyContact: { ...user.emergencyContact, phone: value },
-                  })
-                }
-                style={styles.input}
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputText}>Lien</Text>
-              <TextInput
-                onChangeText={(value) =>
-                  setUser({
-                    ...user,
-                    emergencyContact: {
-                      ...user.emergencyContact,
-                      relation: value,
-                    },
-                  })
-                }
-                style={styles.input}
-              />
-            </View>
-  
-            <Validate handleClick={handleValidate} />
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+  useWindowDimensions,
+} from "react-native";
+import { useState } from "react";
+
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
+import Validate from "../Validate";
+import { useDispatch } from "react-redux";
+import { updateUserProperties } from "../../reducers/user";
+
+export default function SignUpScreenThree(props) {
+  const styles = makeStyles();
+  const [user, setUser] = useState({
+    emergencyContact: { name: "", surname: "", relation: "", phone: "" },
+  });
+
+  const dispatch = useDispatch();
+
+  const handleValidate = () => {
+    dispatch(updateUserProperties(user));
+    props.nextStep();
+  };
+
+  return (
+    <>
+      <View style={styles.pageTitleContainer}>
+        <Text style={styles.pageTitle}>Inscription</Text>
+        <Text style={styles.progression}>3/7</Text>
+      </View>
+      <View style={styles.background}>
+        <View style={styles.subBackground}>
+          <View style={styles.emergencyContainer}>
+            <FontAwesomeIcon icon={faAddressCard} size={50} />
+
+            <Text style={styles.emergencyText}>
+              Personne à contacter en cas d'urgence
+            </Text>
           </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Prénom</Text>
+            <TextInput
+              onChangeText={(value) =>
+                setUser({
+                  ...user,
+                  emergencyContact: { ...user.emergencyContact, name: value },
+                })
+              }
+              style={styles.input}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Nom</Text>
+            <TextInput
+              onChangeText={(value) =>
+                setUser({
+                  ...user,
+                  emergencyContact: {
+                    ...user.emergencyContact,
+                    surname: value,
+                  },
+                })
+              }
+              style={styles.input}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Numéro de téléphone</Text>
+            <TextInput
+              onChangeText={(value) =>
+                setUser({
+                  ...user,
+                  emergencyContact: { ...user.emergencyContact, phone: value },
+                })
+              }
+              style={styles.input}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Lien</Text>
+            <TextInput
+              onChangeText={(value) =>
+                setUser({
+                  ...user,
+                  emergencyContact: {
+                    ...user.emergencyContact,
+                    relation: value,
+                  },
+                })
+              }
+              style={styles.input}
+            />
+          </View>
+
+          <Validate handleClick={handleValidate} />
         </View>
-      </>
-    );
-  }
-  const styles = StyleSheet.create({
+      </View>
+    </>
+  );
+}
+
+const makeStyles = () => {
+  const { fontScale } = useWindowDimensions();
+
+  return StyleSheet.create({
     background: {
       backgroundColor: "#A5D8E6",
       transform: [
@@ -137,7 +142,7 @@ import {
       padding: 5,
     },
     emergencyText: {
-      fontSize: 20,
+      fontSize: 20 / fontScale,
       fontWeight: "bold",
       textAlign: "center",
     },
@@ -159,19 +164,19 @@ import {
       backgroundColor: "#143143",
       maxWidth: 200,
       textAlign: "center",
-      fontSize: 15,
+      fontSize: 15 / fontScale,
       borderRadius: 5,
       color: "white",
       paddingHorizontal: 10,
     },
     pageTitle: {
       color: "white",
-      fontSize: 40,
+      fontSize: 40 / fontScale,
       fontWeight: "bold",
     },
     progression: {
       color: "white",
-      fontSize: 15,
+      fontSize: 15 / fontScale,
       alignSelf: "flex-end",
     },
     pageTitleContainer: {
@@ -195,7 +200,7 @@ import {
     validate: {
       color: "white",
       fontWeight: "bold",
-      fontSize: 25,
+      fontSize: 25 / fontScale,
     },
   });
-  
+};
