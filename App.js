@@ -6,6 +6,7 @@ import UploadFile from "./component/UploadFile";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Provider as PaperProvider } from "react-native-paper";
 import { AppRegistry } from "react-native";
+import { NativeBaseProvider } from "native-base";
 
 import * as React from "react";
 
@@ -16,12 +17,12 @@ import HomeScreen from "./screens/HomeScreen";
 import { name as appName } from "./app.json";
 
 import ProfileScreen from "./screens/ProfileScreen";
-import ConnexionScreen from "./screens/SignInScreen";
+import MyDocuments from "./screens/MyDocuments";
 import MyMissionScreen from "./screens/MyMissionScreen";
 import ContactScreen from "./screens/ContactScreen";
 
 const store = configureStore({
-  reducer: { user },
+  reducer: { user }
 });
 
 import { useEffect } from "react";
@@ -39,7 +40,7 @@ const TabNavigator = () => {
       <Tab.Screen name="Profile" component={ProfileScreen} />
       <Tab.Screen name="MyMission" component={MyMissionScreen} />
       <Tab.Screen name="Contact" component={ContactScreen} />
-      <Tab.Screen name="File" component={UploadFile} />
+      <Tab.Screen name="SignUp" component={SignUpScreen} />
     </Tab.Navigator>
   );
 };
@@ -47,17 +48,18 @@ const TabNavigator = () => {
 export default function App() {
   return (
     <StoreProvider store={store}>
-      <PaperProvider>
+      <NativeBaseProvider>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Introduction" component={IntroductionScreen} />
             <Stack.Screen name="SignIn" component={SignInScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
+            <Stack.Screen name="MyDocuments" component={MyDocuments} />
             <Stack.Screen name="TabNavigator" component={TabNavigator} />
             <Stack.Screen name="File" component={UploadFile}/>
           </Stack.Navigator>
         </NavigationContainer>
-      </PaperProvider>
+      </NativeBaseProvider>
     </StoreProvider>
   );
 }

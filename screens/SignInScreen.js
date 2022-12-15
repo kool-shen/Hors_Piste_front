@@ -5,10 +5,10 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  useWindowDimensions
+  useWindowDimensions,
 } from "react-native";
 import { useState } from "react";
-import logo from "../assets/logo.png";
+import logo from "../assets/Logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../reducers/user";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -27,12 +27,12 @@ export default function SignInScreen({ navigation }) {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: email,
-        password: password
-      })
+        password: password,
+      }),
     });
     const userData = await res.json();
     console.log(userData);
@@ -42,7 +42,7 @@ export default function SignInScreen({ navigation }) {
           ...userData.data,
           userId: userData.data._id,
           email: userData.data.email,
-          token: userData.token
+          token: userData.token,
         })
       );
       
@@ -108,7 +108,7 @@ const makeStyles = () => {
       height: "100%",
       width: "100%",
       flex: 1,
-      zIndex: -1
+      zIndex: -1,
     },
 
     background: {
@@ -116,32 +116,32 @@ const makeStyles = () => {
       transform: [
         { rotate: "-35deg" },
         { translateX: -100 },
-        { translateY: -50 }
+        { translateY: -50 },
       ],
       height: "100%",
       width: 600,
       flex: 1,
-      alignItems: "center"
+      alignItems: "center",
     },
     subBackground: {
       transform: [{ rotate: "35deg" }, { translateX: 9 }, { translateY: -16 }],
       height: "100%",
       width: 300,
       display: "flex",
-      alignItems: "center"
+      alignItems: "center",
     },
     containerSignin: {
       display: "flex",
       alignItems: "center",
       height: 350,
-      justifyContent: "space-between"
+      justifyContent: "space-between",
     },
 
     inputContainer: {
       height: 70,
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between"
+      justifyContent: "space-between",
     },
     input: {
       backgroundColor: "white",
@@ -149,18 +149,18 @@ const makeStyles = () => {
       width: 250,
       borderColor: "gray",
       borderWidth: 1,
-      placeholderTextColor: "gray"
+      placeholderTextColor: "gray",
     },
     createButton: {
       paddingHorizontal: 30,
       paddingVertical: 10,
       borderRadius: 10,
-      backgroundColor: "#143143"
+      backgroundColor: "#143143",
     },
     createText: {
       color: "white",
       fontWeight: "bold",
-      fontSize: 20 / fontScale
+      fontSize: 20 / fontScale,
     },
     inputText: {
       backgroundColor: "#143143",
@@ -169,32 +169,32 @@ const makeStyles = () => {
       fontSize: 15 / fontScale,
       borderRadius: 5,
       color: "white",
-      paddingHorizontal: 10
+      paddingHorizontal: 10,
     },
     forgot: {
       fontWeight: "bold",
-      color: "red"
+      color: "red",
     },
 
     notYet: {
       color: "white",
-      paddingTop: 20
+      paddingTop: 20,
     },
 
     validateButton: {
       backgroundColor: "green",
       paddingHorizontal: 40,
-      borderRadius: 10
+      borderRadius: 10,
     },
     validate: {
       color: "white",
       fontWeight: "bold",
-      fontSize: 25 / fontScale
+      fontSize: 25 / fontScale,
     },
     logo: {
       width: "100%",
       height: 300,
-      marginLeft: 90
-    }
+      marginLeft: 90,
+    },
   });
 };
