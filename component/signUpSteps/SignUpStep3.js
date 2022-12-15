@@ -1,11 +1,11 @@
-import { StyleSheet, TextInput, View, Text } from "react-native";
+import { StyleSheet, TextInput, View, Text, useWindowDimensions } from "react-native";
 import { useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
-import Validate from "../Validate";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
+import ValidateButton from "../buttons/ValidateButton";
 
 export default function SignUpScreenThree(props) {
   const styles = makeStyles();
