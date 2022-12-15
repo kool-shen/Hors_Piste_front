@@ -29,13 +29,13 @@ export default function HomeScreen({ navigation }) {
       </View>
       <View style={styles.container2}>
         <TouchableOpacity style={styles.card2}>
-          <FontAwesomeIcon icon={faPen} size={50} style={styles.icon3} />
+          <FontAwesomeIcon icon={faPen} size={50} style={styles.icon3}  />
           <Text style={styles.mainText}>Signer</Text>
           <Text style={styles.secondaryText}> mes documents</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.container3}>
-        <TouchableOpacity style={styles.card3}>
+        <TouchableOpacity style={styles.card3} onPress={() => navigation.navigate('UploadDocuments')}>
           <Text style={styles.mainText}>Transmettre</Text>
           <Text style={styles.secondaryText}> mes documents</Text>
           <FontAwesomeIcon icon={faEnvelope} size={50} style={styles.icon2} />

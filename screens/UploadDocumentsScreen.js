@@ -6,38 +6,24 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   useWindowDimensions,
-  Linking
+  Linking,
+  Button
 } from "react-native";
-import { Button, Spinner, Link } from "native-base";
+// import { Button, Spinner, Link } from "native-base";
 import React, { useEffect, useState } from "react";
 import { List } from "react-native-paper";
+import * as DocumentPicker from "expo-document-picker";
 
 import { useSelector } from "react-redux";
 
-const MyMissionScreen = () => {
+const UploadDocumentsScreen = () => {
   const styles = makeStyles();
-  const [loading, setLoading] = useState(true);
-  const [documents, setDocuments] = useState([]);
-  const user = useSelector((state) => state.user.value);
+  const pickDocument = async () => {
+    const result = await DocumentPicker.getDocumentAsync({});
+    console.log(result.uri);
+    console.log(result);
+  };
 
-  useEffect(() => {
-    (async () => {
-      const res = await fetch(
-        `http://10.2.1.233:3000/docs/listFolder/${user.folderIds.toSignFolderId}`
-      );
-      const documentsData = await res.json();
-      setDocuments(documentsData);
-      setLoading(false);
-    })();
-  }, []);
-  const documentsToComponents = documents.map((document) => (
-    <Link
-      href={`https://docs.google.com/document/d/${document.id}`}
-      style={styles.listItem}
-    >
-      {document.name}
-    </Link>
-  ));
   return (
     <KeyboardAvoidingView
       style={styles.mainContainer}
@@ -45,13 +31,19 @@ const MyMissionScreen = () => {
     >
       <View style={styles.mainContainer}>
         <View style={styles.pageTitleContainer}>
-          <Text style={styles.pageTitle}>Mes documents</Text>
+          <Text style={styles.pageTitle}>Transmettre</Text>
         </View>
         <View style={styles.background}>
           <View style={styles.subBackground}>
             <View>
               <View style={styles.listContainer}>
-                {loading ? <Spinner size="lg" /> : documentsToComponents}
+                <TouchableOpacity>
+                  <Button
+                    title="upload your file"
+                    color="black"
+                    onPress={pickDocument}
+                  />
+                </TouchableOpacity>
               </View>
             </View>
           </View>
@@ -126,4 +118,5 @@ const makeStyles = () => {
     listContainer: {}
   });
 };
-export default MyMissionScreen;
+
+export default UploadDocumentsScreen;

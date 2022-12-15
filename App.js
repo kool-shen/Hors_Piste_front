@@ -20,6 +20,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import MyDocuments from "./screens/MyDocuments";
 import MyMissionScreen from "./screens/MyMissionScreen";
 import ContactScreen from "./screens/ContactScreen";
+import UploadDocumentsScreen from "./screens/UploadDocumentsScreen";
 
 const store = configureStore({
   reducer: { user }
@@ -56,7 +57,7 @@ export default function App() {
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="MyDocuments" component={MyDocuments} />
             <Stack.Screen name="TabNavigator" component={TabNavigator} />
-            <Stack.Screen name="File" component={UploadFile}/>
+            <Stack.Screen name="UploadDocuments" component={UploadDocumentsScreen}/>
           </Stack.Navigator>
         </NavigationContainer>
       </NativeBaseProvider>
