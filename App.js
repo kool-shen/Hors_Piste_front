@@ -56,7 +56,6 @@ export default function App() {
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="MyDocuments" component={MyDocuments} />
             <Stack.Screen name="TabNavigator" component={TabNavigator} />
-            <Stack.Screen name="File" component={UploadFile}/>
           </Stack.Navigator>
         </NavigationContainer>
       </NativeBaseProvider>

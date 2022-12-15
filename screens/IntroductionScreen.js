@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React from "react";
 import { useEffect } from "react";
-import logo from "../assets/Logo.png";
+import logo from "../assets/logo.png";
 
 const IntroductionScreen = ({ navigation }) => {
   const styles = makeStyles();
