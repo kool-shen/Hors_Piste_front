@@ -8,9 +8,10 @@ import {
   useWindowDimensions,
   Linking
 } from "react-native";
-import { Button, Spinner } from "native-base";
+import { Button, Spinner, Link } from "native-base";
 import React, { useEffect, useState } from "react";
 import { List } from "react-native-paper";
+
 import { useSelector } from "react-redux";
 
 const MyMissionScreen = () => {
@@ -48,7 +49,6 @@ const MyMissionScreen = () => {
       <View style={styles.mainContainer}>
         <View style={styles.pageTitleContainer}>
           <Text style={styles.pageTitle}>Mes documents</Text>
-          
         </View>
         <View style={styles.background}>
           <View style={styles.subBackground}>
