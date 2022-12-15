@@ -22,7 +22,7 @@ export default function SignInScreen({ navigation, nextStep }) {
   const styles = makeStyles();
 
   const handleConnect = async () => {
-    nextStep()
+    
     const res = await fetch(`http://10.2.1.233:3000/users/firstConnection`, {
       method: "POST",
       headers: {
@@ -47,15 +47,17 @@ export default function SignInScreen({ navigation, nextStep }) {
         })
       });
       const foldersData = await res.json();
+      console.log(foldersData)
       dispatch(
         updateUserProperties({
           ...userData.data,
           userId: userData.data._id,
           email: userData.data.email,
-          folderId: foldersData.data.id,
+          folderIds: foldersData.data,
           token: userData.token
         })
       );
+      nextStep();
     }
   };
 

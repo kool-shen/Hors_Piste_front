@@ -18,22 +18,11 @@ import {
 
 export default function HomeScreen({ navigation }) {
   const styles = makeStyles();
-  /*useEffect(() => {
-    const keyframe = new Keyframe({
-      from: {
-        backgroundColor: "red",
-      },
-      to: {
-        backgroundColor: "blue",
-      },
-    });
-    console.log("Mount");
-  }, []);*/
 
   return (
     <View style={styles.mainContainer}>
-      <View /*animation={keyframe}*/ style={styles.container1}>
-        <TouchableOpacity style={styles.card1}>
+      <View /*animation={keyframe}*/ style={styles.container1} >
+        <TouchableOpacity style={styles.card1} onPress={() => navigation.navigate('MyDocuments')}>
           <Text style={styles.mainText}>Mes{"\n"}documents</Text>
           <FontAwesomeIcon icon={faFile} size={50} style={styles.icon} />
         </TouchableOpacity>
