@@ -7,7 +7,6 @@ import {
   Text,
   useWindowDimensions,
 } from "react-native";
-import Validate from "../Validate";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";

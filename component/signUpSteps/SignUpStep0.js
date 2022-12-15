@@ -22,6 +22,7 @@ export default function SignInScreen({ navigation, nextStep }) {
   const styles = makeStyles();
 
   const handleConnect = async () => {
+    nextStep();
     const res = await fetch(`http://10.2.1.233:3000/users/firstConnection`, {
       method: "POST",
       headers: {
@@ -55,7 +56,6 @@ export default function SignInScreen({ navigation, nextStep }) {
           token: userData.token,
         })
       );
-      nextStep();
     }
   };
 

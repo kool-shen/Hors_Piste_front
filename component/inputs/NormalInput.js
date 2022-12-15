@@ -1,6 +1,5 @@
 import * as React from "react";
 import { TextInput } from "react-native-paper";
-import { color } from "react-native-reanimated";
 
 const NormalInput = (props) => {
   return (

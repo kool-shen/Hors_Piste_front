@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Camera } from "expo-camera";
 import { useIsFocused } from "@react-navigation/native";
-import ValidateButton from "../buttons/ValidateButton";
 
 import {
   StyleSheet,
@@ -11,13 +10,13 @@ import {
   KeyboardAvoidingView,
   Button,
   TouchableOpacity,
-  useWindowDimensions,
+  useWindowDimensions
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
-import Validate from "../Validate";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
+import ValidateButton from "../buttons/ValidateButton";
 
 export default function SignUpScreenFive(props) {
   const styles = makeStyles();
@@ -25,7 +24,7 @@ export default function SignUpScreenFive(props) {
 
   const dispatch = useDispatch();
   const [user, setUser] = useState({
-    photo: "",
+    photo: ""
   });
 
   const handleValidate = () => {
@@ -85,7 +84,7 @@ const makeStyles = () => {
       display: "flex",
       width: 350,
       height: 350,
-      borderRadius: 350,
+      borderRadius: 350
     },
     pageTitleContainer: {
       backgroundColor: "#2D5971",
@@ -98,23 +97,23 @@ const makeStyles = () => {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
-      padding: 10,
+      padding: 10
     },
     pageTitle: {
       color: "white",
       fontSize: 40 / fontScale,
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     progression: {
       color: "white",
       fontSize: 15 / fontScale,
-      alignSelf: "flex-end",
+      alignSelf: "flex-end"
     },
     takePhoto: {
       width: 100,
       height: 100,
       borderRadius: 200,
-      backgroundColor: "darkred",
+      backgroundColor: "darkred"
     },
     subBackground: {
       transform: [{ rotate: "35deg" }, { translateX: 9 }, { translateY: -16 }],
@@ -124,28 +123,19 @@ const makeStyles = () => {
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
-      paddingBottom: 20,
+      paddingBottom: 20
     },
     background: {
       backgroundColor: "#A5D8E6",
       transform: [
         { rotate: "-35deg" },
         { translateX: -100 },
-        { translateY: -50 },
+        { translateY: -50 }
       ],
       height: "100%",
       width: 600,
       flex: 1,
-      alignItems: "center",
-    },
+      alignItems: "center"
+    }
   });
 };
-
-
-
-
-
-//how to use expo-document-picker?
-
-
-
