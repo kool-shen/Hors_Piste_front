@@ -38,6 +38,7 @@ const TabNavigator = () => {
       <Tab.Screen name="Profile" component={ProfileScreen} />
       <Tab.Screen name="MyMission" component={MyMissionScreen} />
       <Tab.Screen name="Contact" component={ContactScreen} />
+      <Tab.Screen name="SignUp" component={SignUpScreen} />
     </Tab.Navigator>
   );
 };
@@ -48,10 +49,10 @@ export default function App() {
       <PaperProvider>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="TabNavigator" component={TabNavigator} />
             <Stack.Screen name="Introduction" component={IntroductionScreen} />
             <Stack.Screen name="SignIn" component={SignInScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
-            <Stack.Screen name="TabNavigator" component={TabNavigator} />
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>
