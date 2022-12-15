@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignUpScreen from "./screens/SignUpScreen";
 import SignInScreen from "./screens/SignInScreen";
+import UploadFile from "./component/UploadFile";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Provider as PaperProvider } from "react-native-paper";
 import { AppRegistry } from "react-native";
@@ -38,6 +39,7 @@ const TabNavigator = () => {
       <Tab.Screen name="Profile" component={ProfileScreen} />
       <Tab.Screen name="MyMission" component={MyMissionScreen} />
       <Tab.Screen name="Contact" component={ContactScreen} />
+      <Tab.Screen name="File" component={UploadFile} />
     </Tab.Navigator>
   );
 };
@@ -52,6 +54,7 @@ export default function App() {
             <Stack.Screen name="SignIn" component={SignInScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="TabNavigator" component={TabNavigator} />
+            <Stack.Screen name="File" component={UploadFile}/>
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>

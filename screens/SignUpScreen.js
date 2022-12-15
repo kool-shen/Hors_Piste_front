@@ -4,6 +4,8 @@ import {
   KeyboardAvoidingView,
   useWindowDimensions,
 } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
 import SignUpStep0 from "../component/signUpSteps/SignUpStep0";
 import SignUpStep1 from "../component/signUpSteps/SignUpStep1";
 import SignUpStep2 from "../component/signUpSteps/SignUpStep2";
@@ -38,12 +40,12 @@ export default function SignUpScreen({navigation}) {
     activeStep = <SignUpStep5 nextStep={() => nextStep()} />;
   }
   return (
-    <KeyboardAvoidingView
+    < KeyboardAwareScrollView
       style={styles.mainContainer}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       {activeStep}
-    </KeyboardAvoidingView>
+    </ KeyboardAwareScrollView>
   );
 }
 
