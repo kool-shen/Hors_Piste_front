@@ -8,7 +8,7 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { useState } from "react";
-import logo from "../../assets/Logo.png";
+import logo from "../../assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
