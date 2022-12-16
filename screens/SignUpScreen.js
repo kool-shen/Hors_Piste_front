@@ -15,7 +15,6 @@ import SignUpStep4 from "../component/signUpSteps/SignUpStep4";
 import SignUpStep5 from "../component/signUpSteps/SignUpStep5";
 import SignUpStep6 from "../component/signUpSteps/SignUpStep6";
 import SignUpStep7 from "../component/signUpSteps/SignUpStep7";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function SignUpScreen({ navigation }) {
   const styles = makeStyles();
