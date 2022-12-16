@@ -4,62 +4,89 @@ import {
   StyleSheet,
   Image,
   useWindowDimensions,
+  ImageBackground,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
 const ContactScreen = () => {
-  const user = useSelector(state => state.user.value)
-  const [mission, setMission] = useState({})
+  const user = useSelector((state) => state.user.value);
+  const [mission, setMission] = useState({});
   const styles = makeStyles();
-  useEffect(()=>{
-    (async()=>{
-      const res = await fetch(`http://10.2.1.233:3000/missions/${user.mission._id}/${user.userId}`)
-      const missionData = await res.json()
-      setMission(missionData.data)
-    })()
-    
-  },[])
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(
+        `http://10.2.1.233:3000/missions/${user.mission._id}/${user.userId}`
+      );
+      const missionData = await res.json();
+      setMission(missionData.data);
+    })();
+  }, []);
   return (
-    <View style={styles.container}>
-      <Image
+    <View mainContainer>
+      <ImageBackground
         source={require("../assets/contact.png")}
-        style={styles.container}
-      />
-      <View style={styles.pageTitleContainer}>
-        <Text style={styles.pageTitle}>Mes Contacts</Text>
-      </View>
-
-      <View style={styles.firstContainer}>
-        <View>
-          <Text style={styles.textContainer}>Référent Hors Piste</Text>
+        style={styles.containerimage}
+      >
+        <View style={styles.pageTitleContainer}>
+          <Text style={styles.pageTitle}>Mes Contacts</Text>
         </View>
 
-            {mission.projectReferant && <Text style={styles.infoContainer}>
-              Name:{mission.projectReferant.surname} {mission.projectReferant.name}{"\n"}N°:{mission.projectReferant.phoneNumber}{"\n"}
-              Mail:{mission.projectReferant.email}
-            </Text>}
-          </View>
+        <View style={styles.cardContainer}>
+          <View style={styles.card}>
+            <View>
+              <Text style={styles.textContainer}>Référent Hors Piste</Text>
+            </View>
 
-          <View style={styles.secondContainer}>
+            {mission.projectReferant && (
+              <Text style={styles.infoContainer}>
+                {mission.projectReferant.surname} {mission.projectReferant.name}
+                {"\n"}téléphone : {mission.projectReferant.phoneNumber}
+                {"\n"}
+                E-mail : {mission.projectReferant.email}
+              </Text>
+            )}
+          </View>
+          <View style={styles.card}>
             <View>
               <Text style={styles.textContainer}>Référent HAS</Text>
             </View>
-            {mission.projectReferant && <Text style={styles.infoContainer}>
-              Name:{mission.missionReferant.surname} {mission.missionReferant.name}{"\n"}N°:{mission.missionReferant.phone}{"\n"}
-              Mail:{mission.missionReferant.email}
-            </Text>}
+            {mission.projectReferant && (
+              <Text style={styles.infoContainer}>
+                {mission.missionReferant.surname} {mission.missionReferant.name}
+                {"\n"}téléphone : {mission.missionReferant.phone}
+                {"\n"}
+                E-mail : {mission.missionReferant.email}
+              </Text>
+            )}
           </View>
+        </View>
+      </ImageBackground>
     </View>
   );
 };
 const makeStyles = () => {
-  const { fontScale } = useWindowDimensions();
+  const { width, height, fontScale } = useWindowDimensions();
   return StyleSheet.create({
-    container: {
+    mainContainer: {
       flex: 1,
+      width: width,
+      height: height,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-around",
+    },
+    containerimage: {
       width: "100%",
       height: "100%",
+    },
+    cardContainer: {
+      width: width,
+      height: height * 0.5,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-around",
+      marginTop: height * 0.2,
     },
     pageTitle: {
       color: "white",
@@ -79,17 +106,23 @@ const makeStyles = () => {
       justifyContent: "space-between",
       padding: 10,
     },
-    firstContainer: {
-      backgroundColor: "red",
+    card: {
+      backgroundColor: "#A5D8E6",
+      width: 400,
+      height: 200,
+      borderRadius: 20,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "space-around",
     },
     textContainer: {
       fontSize: 30,
+      fontStyle: "bold",
+      marginEnd: 20,
     },
     infoContainer: {
-      fontSize: 15,
-    },
-    secondContainer: {
-      backgroundColor: "violet",
+      fontSize: 20,
     },
   });
 };
