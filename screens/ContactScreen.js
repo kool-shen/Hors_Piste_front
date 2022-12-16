@@ -1,26 +1,31 @@
-import { View, Text, StyleSheet, Image ,KeyboardAvoidingView} from "react-native";
-import React from "react";
+import { View, Text,StyleSheet,Image,KeyboardAvoidingView} from 'react-native'
+import React from 'react'
 
 const ContactScreen = () => {
   return (
-   
-    <View style={styles.container}>
+  
+    <View  style={ styles.container }>
+       <Image source={require('../assets/contact.png')} style={styles.backgroundImage} />
       
     </View>
-   
-  );
-};
+    
+  )
+}
+
+
 
 var styles = StyleSheet.create({
- 
-  container:{
-    backgroundImage: url("contact.png"),
-backgroundPosition: center,
-backgroundRepeat: no-repeat,
-backgroundSize: cover,
-  }
-    
-  
-});
+  container: {
+    flex: 1,
+  },
 
-export default ContactScreen;
+  backgroundImage: {
+    flex: 1,
+   
+
+  },
+
+})
+
+export default ContactScreen
+
