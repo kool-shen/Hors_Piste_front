@@ -5,6 +5,7 @@ import SignInScreen from "./screens/SignInScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Provider as PaperProvider } from "react-native-paper";
 import { AppRegistry } from "react-native";
+import { NativeBaseProvider } from "native-base";
 
 import * as React from "react";
 
@@ -47,14 +48,19 @@ export default function App() {
   return (
     <StoreProvider store={store}>
       <PaperProvider>
-        <NavigationContainer>
-          <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="TabNavigator" component={TabNavigator} />
-            <Stack.Screen name="Introduction" component={IntroductionScreen} />
-            <Stack.Screen name="SignIn" component={SignInScreen} />
-            <Stack.Screen name="SignUp" component={SignUpScreen} />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <NativeBaseProvider>
+          <NavigationContainer>
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="TabNavigator" component={TabNavigator} />
+              <Stack.Screen
+                name="Introduction"
+                component={IntroductionScreen}
+              />
+              <Stack.Screen name="SignIn" component={SignInScreen} />
+              <Stack.Screen name="SignUp" component={SignUpScreen} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </NativeBaseProvider>
       </PaperProvider>
     </StoreProvider>
   );

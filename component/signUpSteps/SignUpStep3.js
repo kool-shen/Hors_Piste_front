@@ -1,11 +1,18 @@
-import { StyleSheet, TextInput, View, Text, useWindowDimensions } from "react-native";
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+  useWindowDimensions,
+} from "react-native";
 import { useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
+import MainInput from "../inputs/MainInput";
 
 export default function SignUpScreenThree(props) {
   const styles = makeStyles();
@@ -24,6 +31,8 @@ export default function SignUpScreenThree(props) {
     <>
       <View style={styles.pageTitleContainer}>
         <Text style={styles.pageTitle}>Inscription</Text>
+        <FontAwesomeIcon icon={faUser} color="#F29231" size={40} />
+
         <Text style={styles.progression}>3/7</Text>
       </View>
       <View style={styles.background}>
@@ -37,19 +46,22 @@ export default function SignUpScreenThree(props) {
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Prénom</Text>
-            <TextInput
+            <MainInput
+              label="Prénom"
+              value={user.name}
               onChangeText={(value) =>
                 setUser({
                   ...user,
                   emergencyContact: { ...user.emergencyContact, name: value },
                 })
               }
-              style={styles.input}
             />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Nom</Text>
-            <TextInput
+            <MainInput
+              label="Nom"
+              value={user.surname}
               onChangeText={(value) =>
                 setUser({
                   ...user,
@@ -59,24 +71,26 @@ export default function SignUpScreenThree(props) {
                   },
                 })
               }
-              style={styles.input}
             />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Numéro de téléphone</Text>
-            <TextInput
+            <MainInput
+              label="Numéro de téléphone"
+              value={user.phone}
               onChangeText={(value) =>
                 setUser({
                   ...user,
                   emergencyContact: { ...user.emergencyContact, phone: value },
                 })
               }
-              style={styles.input}
             />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Lien</Text>
-            <TextInput
+            <MainInput
+              label="Lien"
+              value={user.relation}
               onChangeText={(value) =>
                 setUser({
                   ...user,
@@ -86,7 +100,6 @@ export default function SignUpScreenThree(props) {
                   },
                 })
               }
-              style={styles.input}
             />
           </View>
 
@@ -183,6 +196,7 @@ const makeStyles = () => {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
+      alignItems: "center",
       padding: 10,
     },
     validateButton: {

@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   value: {
     email: "",
-    passportImg: '',
-    folderId: '',
-    connectionCode: '',
-    token: '',
-    userId: '',
+    passportImg: "",
+    folderId: "",
+    connectionCode: "",
+    token: "",
+    userId: "",
     mission: { _id: "639494b656430998cd5eabb1" },
     name: "",
     surname: "",
@@ -19,24 +19,25 @@ const initialState = {
     phone: "",
     degrees: "",
     occupation: "",
+    RIBImg: "",
     IBAN: "",
     CESNumber: "",
     ICNumber: "",
     ICExpirationDate: "",
     address: {
-      street: '',
+      street: "",
       zipCode: "",
       city: "",
-      country: ""
+      country: "",
     },
     emergencyContact: {
       name: "",
+      surname: "",
       relation: "",
-      phone: ""
+      phone: "",
     },
-  }
+  },
 };
-
 
 export const userSlice = createSlice({
   name: "user",
@@ -56,10 +57,10 @@ export const userSlice = createSlice({
     },
     deleteUser: (state, action) => {
       state.value = {};
-    }
-  }
+    },
+  },
 });
 
-export const { addUser, updateUserProperties, updateManyUserProperties } = userSlice.actions;
+export const { addUser, updateUserProperties, updateManyUserProperties } =
+  userSlice.actions;
 export default userSlice.reducer;
-

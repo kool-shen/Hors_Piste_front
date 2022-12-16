@@ -2,7 +2,8 @@ import { useState } from "react";
 import {
   StyleSheet,
   KeyboardAvoidingView,
-  useWindowDimensions
+  useWindowDimensions,
+  View,
 } from "react-native";
 import SignUpStep0 from "../component/signUpSteps/SignUpStep0";
 import SignUpStep1 from "../component/signUpSteps/SignUpStep1";
@@ -10,6 +11,9 @@ import SignUpStep2 from "../component/signUpSteps/SignUpStep2";
 import SignUpStep3 from "../component/signUpSteps/SignUpStep3";
 import SignUpStep4 from "../component/signUpSteps/SignUpStep4";
 import SignUpStep5 from "../component/signUpSteps/SignUpStep5";
+import SignUpStep6 from "../component/signUpSteps/SignUpStep6";
+import SignUpStep7 from "../component/signUpSteps/SignUpStep7";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function SignUpScreen({ navigation }) {
   const styles = makeStyles();
@@ -36,15 +40,12 @@ export default function SignUpScreen({ navigation }) {
     activeStep = <SignUpStep4 nextStep={() => nextStep()} />;
   } else if (stepValue === 5) {
     activeStep = <SignUpStep5 nextStep={() => nextStep()} />;
+  } else if (stepValue === 6) {
+    activeStep = <SignUpStep6 nextStep={() => nextStep()} />;
+  } else if (stepValue === 7) {
+    activeStep = <SignUpStep7 nextStep={() => nextStep()} />;
   }
-  return (
-    <KeyboardAvoidingView
-      style={styles.mainContainer}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      {activeStep}
-    </KeyboardAvoidingView>
-  );
+  return <View style={styles.mainContainer}>{activeStep}</View>;
 }
 
 const makeStyles = () => {
@@ -55,19 +56,19 @@ const makeStyles = () => {
       height: "100%",
       width: "100%",
       flex: 1,
-      zIndex: -1
+      zIndex: -1,
     },
     background: {
       backgroundColor: "#A5D8E6",
       transform: [
         { rotate: "-35deg" },
         { translateX: -100 },
-        { translateY: -50 }
+        { translateY: -50 },
       ],
       height: "100%",
       width: 600,
       flex: 1,
-      alignItems: "center"
+      alignItems: "center",
     },
     subBackground: {
       transform: [{ rotate: "35deg" }, { translateX: 9 }, { translateY: -16 }],
@@ -77,13 +78,13 @@ const makeStyles = () => {
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
-      paddingBottom: 20
+      paddingBottom: 20,
     },
     inputContainer: {
       height: 70,
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between"
+      justifyContent: "space-between",
     },
     input: {
       backgroundColor: "white",
@@ -91,7 +92,7 @@ const makeStyles = () => {
       width: 250,
       borderColor: "gray",
       borderWidth: 1,
-      placeholderTextColor: "gray"
+      placeholderTextColor: "gray",
     },
     inputText: {
       backgroundColor: "#143143",
@@ -100,17 +101,17 @@ const makeStyles = () => {
       fontSize: 15 / fontScale,
       borderRadius: 5,
       color: "white",
-      paddingHorizontal: 10
+      paddingHorizontal: 10,
     },
     pageTitle: {
       color: "white",
       fontSize: 40 / fontScale,
-      fontWeight: "bold"
+      fontWeight: "bold",
     },
     progression: {
       color: "white",
       fontSize: 15 / fontScale,
-      alignSelf: "flex-end"
+      alignSelf: "flex-end",
     },
     pageTitleContainer: {
       backgroundColor: "#2D5971",
@@ -123,17 +124,17 @@ const makeStyles = () => {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
-      padding: 10
+      padding: 10,
     },
     validateButton: {
       backgroundColor: "green",
       paddingHorizontal: 40,
-      borderRadius: 10
+      borderRadius: 10,
     },
     validate: {
       color: "white",
       fontWeight: "bold",
-      fontSize: 25 / fontScale
-    }
+      fontSize: 25 / fontScale,
+    },
   });
 };

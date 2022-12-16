@@ -16,7 +16,7 @@ import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import { useIsFocused } from "@react-navigation/native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCameraRetro } from "@fortawesome/free-solid-svg-icons";
+import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import MainInput from "../inputs/MainInput";
 
 export default function SignUpScreenFive(props) {
@@ -43,7 +43,7 @@ export default function SignUpScreenFive(props) {
   let cameraRef = useRef(null);
   const takePicture = async () => {
     const photo = await cameraRef.takePictureAsync({ quality: 0.3 });
-    dispatch(updateUserProperties({ photo: photo.uri }));
+    dispatch(updateUserProperties({ passportImg: photo.uri }));
     console.log(photo.uri);
   };
 
@@ -62,12 +62,12 @@ export default function SignUpScreenFive(props) {
     <>
       <View style={styles.pageTitleContainer}>
         <Text style={styles.pageTitle}>Inscription</Text>
-        <FontAwesomeIcon icon={faCameraRetro} color="#F29231" size={40} />
-        <Text style={styles.progression}>5/7</Text>
+        <FontAwesomeIcon icon={faCoins} color="#F29231" size={40} />
+        <Text style={styles.progression}>7/7</Text>
       </View>
       <View style={styles.background}>
         <View style={styles.textContainer}>
-          <Text style={styles.mainText}>Prendre ma photo de profil</Text>
+          <Text style={styles.mainText}>Prendre mon RIB en photo</Text>
         </View>
         <View style={styles.cameraContainer}>
           <Camera
@@ -86,6 +86,13 @@ export default function SignUpScreenFive(props) {
           ></TouchableOpacity>
         </View>
 
+        <MainInput
+          label="n° IBAN"
+          width="75%"
+          value={user.IBAN}
+          onChangeText={(value) => setUser({ ...user, IBAN: value })}
+          style={styles.input}
+        />
         <ValidateButton onPress={handleValidate} />
       </View>
     </>

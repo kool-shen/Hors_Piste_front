@@ -1,18 +1,18 @@
 import { useState } from "react";
 import {
   StyleSheet,
-  TextInput,
   View,
   Text,
   useWindowDimensions,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
-import NormalInput from "../inputs/NormalInput";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
+import MainInput from "../inputs/MainInput";
 export default function SignUpScreenOne(props) {
   const styles = makeStyles();
   ////reducer user ///
@@ -26,7 +26,7 @@ export default function SignUpScreenOne(props) {
     email: "",
     password: "",
     birthDate: "",
-    birthCity: ""
+    birthCity: "",
   });
 
   const handleValidate = () => {
@@ -35,20 +35,20 @@ export default function SignUpScreenOne(props) {
   };
 
   return (
-    <KeyboardAwareScrollView
-      style={styles.mainContainer}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
+    <View style={styles.mainContainer}>
       <View style={styles.pageTitleContainer}>
         <Text style={styles.pageTitle}>Inscription</Text>
+        <FontAwesomeIcon icon={faUser} color="#F29231" size={40} />
+
         <Text style={styles.progression}>1/7</Text>
       </View>
+
       <View style={styles.background}>
         <View style={styles.subBackground}>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Prénom</Text>
 
-            <NormalInput
+            <MainInput
               label="Ton prénom"
               value={user.name}
               onChangeText={(value) => setUser({ ...user, name: value })}
@@ -57,17 +57,16 @@ export default function SignUpScreenOne(props) {
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Nom</Text>
-            <NormalInput
+            <MainInput
               label="Ton nom de famille"
               value={user.surname}
               onChangeText={(value) => setUser({ ...user, surname: value })}
               style={styles.input}
             />
-            <TextInput />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Mail</Text>
-            <NormalInput
+            <MainInput
               label="Ton adresse mail"
               value={user.email}
               onChangeText={(value) => setUser({ ...user, email: value })}
@@ -76,7 +75,7 @@ export default function SignUpScreenOne(props) {
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Genre</Text>
-            <NormalInput
+            <MainInput
               label="Ton genre"
               value={user.gender}
               onChangeText={(value) => setUser({ ...user, gender: value })}
@@ -85,7 +84,7 @@ export default function SignUpScreenOne(props) {
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Mot de passe</Text>
-            <NormalInput
+            <MainInput
               label="Ton mot de passe"
               value={user.password}
               onChangeText={(value) => setUser({ ...user, password: value })}
@@ -94,7 +93,7 @@ export default function SignUpScreenOne(props) {
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Date de naissance</Text>
-            <NormalInput
+            <MainInput
               label="Ta date de naissance"
               value={user.birthDate}
               onChangeText={(value) => setUser({ ...user, birthDate: value })}
@@ -103,7 +102,7 @@ export default function SignUpScreenOne(props) {
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Ville de naissance</Text>
-            <NormalInput
+            <MainInput
               label="Ta ville de naissance"
               value={user.birthCity}
               onChangeText={(value) => setUser({ ...user, birthCity: value })}
@@ -113,7 +112,7 @@ export default function SignUpScreenOne(props) {
           <ValidateButton onPress={handleValidate} />
         </View>
       </View>
-    </KeyboardAwareScrollView>
+    </View>
   );
 }
 
@@ -121,17 +120,24 @@ const makeStyles = () => {
   const { fontScale } = useWindowDimensions();
 
   return StyleSheet.create({
+    mainContainer: {
+      backgroundColor: "#F8DFBD",
+      height: "100%",
+      width: "100%",
+      flex: 1,
+      zIndex: -1,
+    },
     background: {
       backgroundColor: "#A5D8E6",
       transform: [
         { rotate: "-35deg" },
         { translateX: -100 },
-        { translateY: -50 }
+        { translateY: -50 },
       ],
       height: "100%",
       width: 600,
       flex: 1,
-      alignItems: "center"
+      alignItems: "center",
     },
     subBackground: {
       transform: [{ rotate: "35deg" }, { translateX: 9 }, { translateY: -16 }],
@@ -141,21 +147,17 @@ const makeStyles = () => {
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
-      paddingBottom: 20
+      paddingBottom: 20,
+      overflow: "scroll",
     },
     inputContainer: {
       height: 70,
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between"
+      justifyContent: "space-between",
     },
     input: {
-      backgroundColor: "white",
-      height: 40,
-      width: 250,
-      borderColor: "gray",
-      borderWidth: 1,
-      placeholderTextColor: "gray"
+      margin: 10,
     },
     inputText: {
       backgroundColor: "#143143",
@@ -164,17 +166,17 @@ const makeStyles = () => {
       fontSize: 15,
       borderRadius: 5,
       color: "white",
-      paddingHorizontal: 10
+      paddingHorizontal: 10,
     },
     pageTitle: {
       color: "white",
       fontSize: 40,
-      fontWeight: "bold"
+      fontWeight: "bold",
     },
     progression: {
       color: "white",
       fontSize: 15,
-      alignSelf: "flex-end"
+      alignSelf: "flex-end",
     },
     pageTitleContainer: {
       backgroundColor: "#2D5971",
@@ -187,17 +189,18 @@ const makeStyles = () => {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
-      padding: 10
+      alignItems: "center",
+      padding: 10,
     },
     validateButton: {
       backgroundColor: "green",
       paddingHorizontal: 40,
-      borderRadius: 10
+      borderRadius: 10,
     },
     validate: {
       color: "white",
       fontWeight: "bold",
-      fontSize: 25
-    }
+      fontSize: 25,
+    },
   });
 };
