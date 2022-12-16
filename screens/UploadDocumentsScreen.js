@@ -9,20 +9,43 @@ import {
   Linking,
   Button
 } from "react-native";
-// import { Button, Spinner, Link } from "native-base";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { List } from "react-native-paper";
 import * as DocumentPicker from "expo-document-picker";
-
+// import RNFetchBlob from "rn-fetch-blob";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 const UploadDocumentsScreen = () => {
+  const user = useSelector(state => state.user.value)
+  const [uploadFile, setUploadFile] = useState({})
+  const [uploadName, setUploadName] = useState('')
+  const [resultMessage, setResultMessage] = useState('')
+
   const styles = makeStyles();
   const pickDocument = async () => {
     const result = await DocumentPicker.getDocumentAsync({});
-    console.log(result.uri);
-    console.log(result);
+    setUploadName(result.name)
+    const formData = new FormData();
+    formData.append("document", {...result, type: 'image/jpeg'});  
+    setUploadFile(formData)
   };
+
+  const sendDocument = async () => {
+    const res = await fetch(`http://10.2.1.233:3000/docs/uploads/${user.folderIds.toValidateFolderId}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+      body: uploadFile,
+    })
+    const data = await res.json()
+    setResultMessage(data.message)
+  };
+    
+
+  
 
   return (
     <KeyboardAvoidingView
@@ -39,10 +62,17 @@ const UploadDocumentsScreen = () => {
               <View style={styles.listContainer}>
                 <TouchableOpacity>
                   <Button
-                    title="upload your file"
+                    title="Choisir un fichier"
                     color="black"
                     onPress={pickDocument}
                   />
+                  <Text>{uploadName}</Text>
+                  <Button
+                    title="Envoyer"
+                    color="black"
+                    onPress={sendDocument}
+                  />
+                  <Text>{resultMessage}</Text>
                 </TouchableOpacity>
               </View>
             </View>

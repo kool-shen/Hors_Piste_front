@@ -15,7 +15,6 @@ import { configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
 import HomeScreen from "./screens/HomeScreen";
 import { name as appName } from "./app.json";
-
 import ProfileScreen from "./screens/ProfileScreen";
 import MyDocuments from "./screens/MyDocuments";
 import MyMissionScreen from "./screens/MyMissionScreen";
