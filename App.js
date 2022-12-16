@@ -19,9 +19,11 @@ import MyDocuments from "./screens/MyDocuments";
 import MyMissionScreen from "./screens/MyMissionScreen";
 import ContactScreen from "./screens/ContactScreen";
 import UploadDocumentsScreen from "./screens/UploadDocumentsScreen";
+import Mail from "./component/Mail";
+import Cellular from "./component/Cellular";
 
 const store = configureStore({
-  reducer: { user }
+  reducer: { user },
 });
 
 import { useEffect } from "react";
@@ -40,6 +42,8 @@ const TabNavigator = () => {
       <Tab.Screen name="MyMission" component={MyMissionScreen} />
       <Tab.Screen name="Contact" component={ContactScreen} />
       <Tab.Screen name="SignUp" component={SignUpScreen} />
+      <Tab.Screen name="Mail" component={Mail} />
+      <Tab.Screen name="Phone" component={Cellular} />
     </Tab.Navigator>
   );
 };
@@ -55,11 +59,15 @@ export default function App() {
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="MyDocuments" component={MyDocuments} />
             <Stack.Screen name="TabNavigator" component={TabNavigator} />
-            <Stack.Screen name="UploadDocuments" component={UploadDocumentsScreen}/>
+            <Stack.Screen
+              name="UploadDocuments"
+              component={UploadDocumentsScreen}
+            />
+            <Stack.Screen name="Mail" component={Mail} />
+            <Stack.Screen name="Phone" component={Cellular} />
           </Stack.Navigator>
         </NavigationContainer>
       </NativeBaseProvider>
     </StoreProvider>
   );
 }
-

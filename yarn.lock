@@ -4076,6 +4076,11 @@ expo-camera@~13.1.0:
     "@koale/useworker" "^4.0.2"
     invariant "^2.2.4"
 
+expo-cellular@~5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/expo-cellular/-/expo-cellular-5.0.1.tgz#30e6acdf37843ef49993b2d21f66435c319cf682"
+  integrity sha512-5Y6MFk03VyAMpv1MgkY7PPDFmRZKoY2/G8pKjssRaWfbhL5H+CHW2jacMlfJbOHHOMooNKdknBpYxnddO6Se5w==
+
 expo-constants@~14.0.0, expo-constants@~14.0.2:
   version "14.0.2"
   resolved "https://registry.npmjs.org/expo-constants/-/expo-constants-14.0.2.tgz"
@@ -4114,6 +4119,13 @@ expo-keep-awake@~11.0.1:
   version "11.0.1"
   resolved "https://registry.npmjs.org/expo-keep-awake/-/expo-keep-awake-11.0.1.tgz"
   integrity sha512-44ZjgLE4lnce2d40Pv8xsjMVc6R5GvgHOwZfkLYtGmgYG9TYrEJeEj5UfSeweXPL3pBFhXKfFU8xpGYMaHdP0A==
+
+expo-mail-composer@~12.0.0:
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/expo-mail-composer/-/expo-mail-composer-12.0.0.tgz#d7e98af7dfe4434a3167eb11cd87ffa55d7b0a84"
+  integrity sha512-Q1ko7D+knF1nOF2VKPc9AESowQaG7ta435PWjP0tKu33rmG4EzIzjHfDsCxMoQ9uiqJEwc1mdx/MOQpJlGEtLg==
+  dependencies:
+    query-string "^6.2.0"
 
 expo-modules-autolinking@1.0.0:
   version "1.0.0"
@@ -6503,6 +6515,16 @@ qs@6.7.0:
   version "6.7.0"
   resolved "https://registry.npmjs.org/qs/-/qs-6.7.0.tgz"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
+
+query-string@^6.2.0:
+  version "6.14.1"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.14.1.tgz#7ac2dca46da7f309449ba0f86b1fd28255b0c86a"
+  integrity sha512-XDxAeVmpfu1/6IjyT/gXHOl+S0vQ9owggJ30hhWKdHAsNPOcasn5o9BW0eejZqL2e4vMjhAxoW3jVHcD6mbcYw==
+  dependencies:
+    decode-uri-component "^0.2.0"
+    filter-obj "^1.1.0"
+    split-on-first "^1.0.0"
+    strict-uri-encode "^2.0.0"
 
 query-string@^7.1.3:
   version "7.1.3"
