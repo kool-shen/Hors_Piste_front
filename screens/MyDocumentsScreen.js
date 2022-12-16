@@ -5,25 +5,39 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
-  useWindowDimensions
+  useWindowDimensions,
+  Linking
 } from "react-native";
+import { Button, Spinner, Link } from "native-base";
 import React, { useEffect, useState } from "react";
+import { List } from "react-native-paper";
+
 import { useSelector } from "react-redux";
 
 const MyMissionScreen = () => {
-  const user = useSelector((state) => state.user.value);
   const styles = makeStyles();
-  const [mission, setMission] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [documents, setDocuments] = useState([]);
+  const user = useSelector((state) => state.user.value);
 
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        `http://10.2.1.233:3000/missions/${user.mission._id}/${user.userId}`
+        `http://10.2.1.233:3000/docs/listFolder/${user.folderIds.toSignFolderId}`
       );
-      const missionData = await res.json();
-      setMission(missionData.data);
+      const documentsData = await res.json();
+      setDocuments(documentsData);
+      setLoading(false);
     })();
   }, []);
+  const documentsToComponents = documents.map((document) => (
+    <Button
+      href={`https://docs.google.com/document/d/${document.id}`}
+      style={styles.listItem}
+    >
+      {document.name}
+    </Button>
+  ));
   return (
     <KeyboardAvoidingView
       style={styles.mainContainer}
@@ -31,15 +45,13 @@ const MyMissionScreen = () => {
     >
       <View style={styles.mainContainer}>
         <View style={styles.pageTitleContainer}>
-          <Text style={styles.pageTitle}>Ma Mission</Text>
+          <Text style={styles.pageTitle}>Mes documents</Text>
         </View>
         <View style={styles.background}>
           <View style={styles.subBackground}>
             <View>
-              <View>
-                 {mission.projectName && <Text>
-                  Type de mission: {mission.missionType}{'\n'}Nom du projet: {mission.projectName}{'\n'}Date de départ: {mission.startDate}{'\n'}Date de fin: {mission.endDate}
-                </Text>}
+              <View style={styles.listContainer}>
+                {loading ? <Spinner size="lg" /> : documentsToComponents}
               </View>
             </View>
           </View>
@@ -50,7 +62,7 @@ const MyMissionScreen = () => {
 };
 
 const makeStyles = () => {
-  const { fontScale } = useWindowDimensions();
+  const { fontScale, width } = useWindowDimensions();
   return StyleSheet.create({
     mainContainer: {
       backgroundColor: "#F8DFBD",
@@ -84,7 +96,7 @@ const makeStyles = () => {
 
     pageTitle: {
       color: "white",
-      fontSize: 40 / fontScale,
+      fontSize: 35 / fontScale,
       fontWeight: "bold"
     },
     progression: {
@@ -104,7 +116,14 @@ const makeStyles = () => {
       flexDirection: "row",
       justifyContent: "space-between",
       padding: 10
-    }
+    },
+    listItem: {
+      padding: 10,
+      fontSize: 30,
+      margin: 15,
+      width: width * 0.9
+    },
+    listContainer: {}
   });
 };
 export default MyMissionScreen;
