@@ -13,7 +13,7 @@ const initialState = {
     connectionCode: "6398a42dac77fef2a1ea8bb3",
     token: "",
     userId: "6398a42dac77fef2a1ea8bb3",
-    mission: { _id: "639494b656430998cd5eabb1" },
+    mission: { _id: "63978a322c47055615199fbf" },
     name: "Youss",
     surname: "Chen",
     gender: "Non-binary",
