@@ -45,7 +45,6 @@ export default function SignInScreen({ navigation }) {
           token: userData.token,
         })
       );
-      
     }
   };
 
