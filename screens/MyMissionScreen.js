@@ -5,12 +5,25 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
-  useWindowDimensions,
+  useWindowDimensions
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+const [mission, setMission] = useState({});
 
 const MyMissionScreen = () => {
+  const user = useSelector((state) => state.user.value);
   const styles = makeStyles();
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(
+        `http://10.2.1.233:3000/missions/${user.mission._id}/${user.userId}`
+      );
+      const missionData = await res.json();
+      setMission(missionData.data);
+    })();
+  }, []);
   return (
     <KeyboardAvoidingView
       style={styles.mainContainer}
@@ -24,7 +37,9 @@ const MyMissionScreen = () => {
           <View style={styles.subBackground}>
             <View>
               <View>
-                <Text>test</Text>
+                 {mission.projectName && <Text>
+                  Type de mission: {mission.missionType}{'\n'}Nom du projet: {mission.projectName}{'\n'}Date de départ: {mission.startDate}{'\n'}Date de fin: {mission.endDate}
+                </Text>}
               </View>
             </View>
           </View>
@@ -42,19 +57,19 @@ const makeStyles = () => {
       height: "100%",
       width: "100%",
       flex: 1,
-      zIndex: -1,
+      zIndex: -1
     },
     background: {
       backgroundColor: "#A5D8E6",
       transform: [
         { rotate: "-35deg" },
         { translateX: -100 },
-        { translateY: -50 },
+        { translateY: -50 }
       ],
       height: "100%",
       width: 600,
       flex: 1,
-      alignItems: "center",
+      alignItems: "center"
     },
     subBackground: {
       transform: [{ rotate: "35deg" }, { translateX: 9 }, { translateY: -16 }],
@@ -64,18 +79,18 @@ const makeStyles = () => {
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
-      paddingBottom: 20,
+      paddingBottom: 20
     },
 
     pageTitle: {
       color: "white",
       fontSize: 40 / fontScale,
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     progression: {
       color: "white",
       fontSize: 15 / fontScale,
-      alignSelf: "flex-end",
+      alignSelf: "flex-end"
     },
     pageTitleContainer: {
       backgroundColor: "#2D5971",
@@ -88,8 +103,8 @@ const makeStyles = () => {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
-      padding: 10,
-    },
+      padding: 10
+    }
   });
 };
 export default MyMissionScreen;

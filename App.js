@@ -15,9 +15,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
 import HomeScreen from "./screens/HomeScreen";
 import ProfileScreen from "./screens/ProfileScreen";
-import MyDocuments from "./screens/MyDocuments";
+import MyDocumentsScreen from "./screens/MyDocumentsScreen";
 import MyMissionScreen from "./screens/MyMissionScreen";
-import ContactScreen from "./screens/ContactScreen";
+import ContactsScreen from "./screens/ContactsScreen";
 import UploadDocumentsScreen from "./screens/UploadDocumentsScreen";
 
 const store = configureStore({
@@ -53,9 +53,11 @@ export default function App() {
             <Stack.Screen name="Introduction" component={IntroductionScreen} />
             <Stack.Screen name="SignIn" component={SignInScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
-            <Stack.Screen name="MyDocuments" component={MyDocuments} />
+            <Stack.Screen name="MyDocuments" component={MyDocumentsScreen} />
             <Stack.Screen name="TabNavigator" component={TabNavigator} />
             <Stack.Screen name="UploadDocuments" component={UploadDocumentsScreen}/>
+            <Stack.Screen name="MyMission" component={MyMissionScreen}/>
+            <Stack.Screen name="Contacts" component={ContactsScreen}/>
           </Stack.Navigator>
         </NavigationContainer>
       </NativeBaseProvider>

@@ -4,7 +4,7 @@ import HomeScreen from "./screens/HomeScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import ConnexionScreen from "./screens/SignInScreen";
 import MyMissionScreen from "./screens/MyMissionScreen";
-import ContactScreen from "./screens/ContactScreen";
+import ContactScreen from "./screens/ContactsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
