@@ -5,10 +5,21 @@ import {
   Image,
   useWindowDimensions,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from 'react-redux';
 
 const ContactScreen = () => {
+  const user = useSelector(state => state.user.value)
+  const [mission, setMission] = useState({})
   const styles = makeStyles();
+  useEffect(()=>{
+    (async()=>{
+      const res = await fetch(`http://10.2.1.233:3000/missions/${user.mission._id}/${user.userId}`)
+      const missionData = await res.json()
+      setMission(missionData.data)
+    })()
+    
+  },[])
   return (
     <View style={styles.container}>
       <Image
@@ -24,21 +35,21 @@ const ContactScreen = () => {
           <Text style={styles.textContainer}>Référent Hors Piste</Text>
         </View>
 
-        <Text style={styles.infoContainer}>
-          Name:Benjamin Tagawa{"\n"}N°:06 16 66 65 43{"\n"}
-          Mail:btag@horspistes.com
-        </Text>
-      </View>
+            {mission.projectReferant && <Text style={styles.infoContainer}>
+              Name:{mission.projectReferant.surname} {mission.projectReferant.name}{"\n"}N°:{mission.projectReferant.phoneNumber}{"\n"}
+              Mail:{mission.projectReferant.email}
+            </Text>}
+          </View>
 
-      <View style={styles.secondContainer}>
-        <View>
-          <Text style={styles.textContainer}>Référent HAS</Text>
-        </View>
-        <Text style={styles.infoContainer}>
-          Name:Julien Hopper{"\n"}N°:06 16 66 65 43{"\n"}
-          Mail:leh-has@gmail.com
-        </Text>
-      </View>
+          <View style={styles.secondContainer}>
+            <View>
+              <Text style={styles.textContainer}>Référent HAS</Text>
+            </View>
+            {mission.projectReferant && <Text style={styles.infoContainer}>
+              Name:{mission.missionReferant.surname} {mission.missionReferant.name}{"\n"}N°:{mission.missionReferant.phone}{"\n"}
+              Mail:{mission.missionReferant.email}
+            </Text>}
+          </View>
     </View>
   );
 };
