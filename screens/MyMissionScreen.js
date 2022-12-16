@@ -7,13 +7,13 @@ import {
   KeyboardAvoidingView,
   useWindowDimensions
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-const [mission, setMission] = useState({});
 
 const MyMissionScreen = () => {
   const user = useSelector((state) => state.user.value);
   const styles = makeStyles();
+  const [mission, setMission] = useState({});
 
   useEffect(() => {
     (async () => {

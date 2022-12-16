@@ -38,7 +38,7 @@ const TabNavigator = () => {
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
       <Tab.Screen name="MyMission" component={MyMissionScreen} />
-      <Tab.Screen name="Contact" component={ContactScreen} />
+      <Tab.Screen name="Contact" component={ContactsScreen} />
       <Tab.Screen name="SignUp" component={SignUpScreen} />
     </Tab.Navigator>
   );
@@ -57,7 +57,7 @@ export default function App() {
             <Stack.Screen name="TabNavigator" component={TabNavigator} />
             <Stack.Screen name="UploadDocuments" component={UploadDocumentsScreen}/>
             <Stack.Screen name="MyMission" component={MyMissionScreen}/>
-            <Stack.Screen name="Contacts" component={ContactsScreen}/>
+            <Stack.Screen name="MyContacts" component={ContactsScreen}/>
           </Stack.Navigator>
         </NavigationContainer>
       </NativeBaseProvider>

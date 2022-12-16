@@ -8,7 +8,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-const ContactScreen = () => {
+const ContactsScreen = () => {
   const user = useSelector((state) => state.user.value);
   const [mission, setMission] = useState({});
   const styles = makeStyles();
@@ -102,4 +102,4 @@ const makeStyles = () => {
   });
 };
 
-export default ContactScreen;
+export default ContactsScreen;

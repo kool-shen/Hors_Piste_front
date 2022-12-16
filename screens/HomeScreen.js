@@ -48,7 +48,7 @@ export default function HomeScreen({ navigation }) {
         </TouchableOpacity>
       </View>
       <View style={styles.container5}>
-        <TouchableOpacity style={styles.card1} onPress={() => navigation.navigate('MyContact')}>
+        <TouchableOpacity style={styles.card1} onPress={() => navigation.navigate('MyContacts')}>
           <Text style={styles.mainText}>Mes contacts</Text>
           <FontAwesomeIcon
             icon={faAddressBook}
