@@ -15,12 +15,9 @@ import { useIsFocused } from "@react-navigation/native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import MainInput from "../inputs/MainInput";
-<<<<<<< HEAD
 import { BACKEND_URL } from "@env"
 import { useToast } from 'native-base';
-=======
 import BannerScreenTitle from "../BannerScreenTitle";
->>>>>>> 88d8202d1b58a6b1022ece757ac05f13a3377dda
 
 export default function SignUpScreenFive(props) {
   const styles = makeStyles();

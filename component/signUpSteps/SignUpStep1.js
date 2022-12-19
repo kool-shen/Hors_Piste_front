@@ -25,7 +25,7 @@ export default function SignUpScreenOne(props) {
     email: "",
     password: "",
     password: null,
-    birthDate: new Date(),
+    birthDate: new Date().toISOString(),
     birthCity: ""
   });
 
@@ -72,18 +72,6 @@ export default function SignUpScreenOne(props) {
             label="Ton genre"
             value={user.gender}
             onChangeText={(value) => setUser({ ...user, gender: value })}
-            style={styles.input}
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Date de naissance</Text>
-          <MainInput
-            label="Ta date de naissance"
-            value={user.birthDate}
-            onChangeText={(value) =>
-              setUser({ ...user, birthDate: new Date(value) })
-            }
             style={styles.input}
           />
         </View>

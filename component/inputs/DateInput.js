@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import { Input, Box } from "native-base";
 import { Button, View, Text } from 'react-native'
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { useDispatch } from "react-redux";
