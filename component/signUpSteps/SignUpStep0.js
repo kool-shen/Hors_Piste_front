@@ -21,13 +21,8 @@ export default function SignInScreen({ navigation, nextStep }) {
   const styles = makeStyles();
 
   const handleConnect = async () => {
-    nextStep();
-    dispatch(
-      updateUserProperties({
-        ...userData.data,
-        email: userData.data.email,
-      })
-    );
+    
+    
     const res = await fetch(`${BACKEND_URL}/users/firstConnection`, {
       method: "POST",
       headers: {
@@ -57,11 +52,12 @@ export default function SignInScreen({ navigation, nextStep }) {
         updateUserProperties({
           ...userData.data,
           userId: userData.data._id,
-          email: userData.data.email,
+          email: email,
           folderIds: foldersData.data,
           token: userData.token
         })
         );
+        nextStep();
       }
       
     };

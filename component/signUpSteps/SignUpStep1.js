@@ -15,14 +15,13 @@ export default function SignUpScreenOne(props) {
   const toast = useToast();
   const styles = makeStyles();
   ////reducer user ///
-
+  console.log(user)
   const dispatch = useDispatch();
 
   const [user, setUser] = useState({
     name: "",
     surname: "",
     gender: "",
-    email: "",
     password: "",
     password: null,
     birthDate: new Date().toISOString(),
