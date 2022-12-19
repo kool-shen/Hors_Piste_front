@@ -5,7 +5,7 @@ import {
   View
 } from "react-native";
 
-import SignUpStep0 from "../component/signUpSteps/SignUpStep1";
+import SignUpStep0 from "../component/signUpSteps/SignUpStep0";
 import SignUpStep1 from "../component/signUpSteps/SignUpStep1";
 import SignUpStep2 from "../component/signUpSteps/SignUpStep2";
 import SignUpStep3 from "../component/signUpSteps/SignUpStep3";
