@@ -15,6 +15,7 @@ import UploadDocumentsScreen from "./screens/UploadDocumentsScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import SignInScreen from "./screens/SignInScreen";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import SignDocumentsScreen from './screens/SignDocumentsScreen'
 
 const store = configureStore({
   reducer: { user }
@@ -160,6 +161,7 @@ export default function App() {
       <NativeBaseProvider>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="SignDocuments" component={SignDocumentsScreen} />
             <Stack.Screen name="Introduction" component={IntroductionScreen} />
             <Stack.Screen name="SignIn" component={SignInScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
@@ -174,6 +176,6 @@ export default function App() {
           </Stack.Navigator>
         </NavigationContainer>
       </NativeBaseProvider>
-    </StoreProvider>
+    </StoreProvider> 
   );
 }
