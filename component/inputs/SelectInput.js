@@ -21,18 +21,18 @@ const SelectInput = (props) => {
           placeholder={`Sélectionne ${placeHolderLowerCased}`}
           _selectedItem={{
             bg: "white",
-            endIcon: <CheckIcon size={6} />,
+            endIcon: <CheckIcon size={props.numberOfSelections} />,
           }}
           mt="1"
           onValueChange={props.onValueChange}
           value={props.value}
           label={props.label}
         >
-          <Select.Item label="Chômeur" value="Chômeur" />
-          <Select.Item label="Branleur" value="Branleur" />
-          <Select.Item label="Gros chill" value="Gros chill" />
-          <Select.Item label="Pépouze" value="Pépouze" />
-          <Select.Item label="OKLM" value="OKLM" />
+          <Select.Item label={props.label1} value={props.label1} />
+          <Select.Item label={props.label2} value={props.label2} />
+          <Select.Item label={props.label3} value={props.label3} />
+          <Select.Item label={props.label4} value={props.label3} />
+          <Select.Item label={props.label5} value={props.label5} />
         </Select>
         <FormControl.ErrorMessage
           leftIcon={<WarningOutlineIcon size="xs" />}

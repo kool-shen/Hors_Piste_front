@@ -8,27 +8,47 @@ import {
   TouchableOpacity,
   useWindowDimensions,
 } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import { useIsFocused } from "@react-navigation/native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCameraRetro } from "@fortawesome/free-solid-svg-icons";
+import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import MainInput from "../inputs/MainInput";
+import { BACKEND_URL } from "@env";
+import { useToast } from "native-base";
 import BannerScreenTitle from "../BannerScreenTitle";
 
 export default function SignUpScreenFive(props) {
   const styles = makeStyles();
+  const userReducer = useSelector((state) => state.user.value);
   ////RÉCUPÉRER LA PHOTO DANS LE STORE////
 
   const dispatch = useDispatch();
+  const toast = useToast();
   const [user, setUser] = useState({
     photo: "",
   });
 
-  const handleValidate = () => {
+  console.log(userReducer);
+  const handleValidate = async () => {
     dispatch(updateUserProperties(user));
-    props.nextStep();
+    const res = await fetch(`${BACKEND_URL}/users/signup`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userReducer),
+    });
+    const userData = await res.json();
+    console.log(userData);
+    if (userData.result) {
+      props.nextStep();
+    }
+    toast.show({
+      description: userData.message,
+    });
   };
 
   /////
@@ -41,7 +61,7 @@ export default function SignUpScreenFive(props) {
   let cameraRef = useRef(null);
   const takePicture = async () => {
     const photo = await cameraRef.takePictureAsync({ quality: 0.3 });
-    dispatch(updateUserProperties({ photo: photo.uri }));
+    dispatch(updateUserProperties({ passportImg: photo.uri }));
     console.log(photo.uri);
   };
 
@@ -58,11 +78,11 @@ export default function SignUpScreenFive(props) {
 
   return (
     <>
-      <BannerScreenTitle progressionStep="6" />
+      <BannerScreenTitle progressionStep="8" />
 
       <View style={styles.background}>
         <View style={styles.textContainer}>
-          <Text style={styles.mainText}>Prendre ma photo de profil</Text>
+          <Text style={styles.mainText}>Prendre mon RIB en photo</Text>
         </View>
         <View style={styles.cameraContainer}>
           <Camera
@@ -81,6 +101,12 @@ export default function SignUpScreenFive(props) {
           ></TouchableOpacity>
         </View>
 
+        <MainInput
+          label="n° IBAN"
+          value={user.IBAN}
+          onChangeText={(value) => setUser({ ...user, IBAN: value })}
+          style={styles.input}
+        />
         <ValidateButton onPress={handleValidate} />
       </View>
     </>

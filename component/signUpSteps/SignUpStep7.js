@@ -8,12 +8,12 @@ import {
   TouchableOpacity,
   useWindowDimensions
 } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import { useIsFocused } from "@react-navigation/native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { faPassport } from "@fortawesome/free-solid-svg-icons";
 import MainInput from "../inputs/MainInput";
 import { BACKEND_URL } from "@env";
 import { useToast } from "native-base";
@@ -37,19 +37,18 @@ export default function SignUpScreenFive(props) {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(userReducer)
+      body: JSON.stringify(userReducer),
     });
     const userData = await res.json();
     console.log(userData);
     if (userData.result) {
-      dispatch(updateUserProperties({...userData.data, token: userData.token}))
       props.nextStep();
     }
     toast.show({
       description: userData.message
-    });
+    })
   };
 
   /////
@@ -82,7 +81,7 @@ export default function SignUpScreenFive(props) {
 
       <View style={styles.background}>
         <View style={styles.textContainer}>
-          <Text style={styles.mainText}>Prendre mon RIB en photo</Text>
+          <Text style={styles.mainText}>Prendre mon passeport en photo</Text>
         </View>
         <View style={styles.cameraContainer}>
           <Camera
@@ -102,9 +101,19 @@ export default function SignUpScreenFive(props) {
         </View>
 
         <MainInput
-          label="n° IBAN"
+          label="Date d'expiration du passeport"
+          width="75%"
           value={user.IBAN}
-          onChangeText={(value) => setUser({ ...user, IBAN: value })}
+          onChangeText={(value) =>
+            setUser({ ...user, ICExpirationDate: value })
+          }
+          style={styles.input}
+        />
+        <MainInput
+          label="Numéro de passeport"
+          width="75%"
+          value={user.IBAN}
+          onChangeText={(value) => setUser({ ...user, ICNumber: value })}
           style={styles.input}
         />
         <ValidateButton onPress={handleValidate} />

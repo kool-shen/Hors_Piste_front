@@ -1,29 +1,25 @@
-import { useEffect, useState, useRef } from "react";
-import { Camera } from "expo-camera";
+import { useState } from "react";
 
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  useWindowDimensions,
-} from "react-native";
+import { StyleSheet, View, Text, useWindowDimensions } from "react-native";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
-import { useIsFocused } from "@react-navigation/native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCameraRetro } from "@fortawesome/free-solid-svg-icons";
 import MainInput from "../inputs/MainInput";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import BannerScreenTitle from "../BannerScreenTitle";
 
-export default function SignUpScreenFive(props) {
+import SelectInput from "../inputs/SelectInput";
+
+export default function SignUpScreenFour(props) {
   const styles = makeStyles();
-  ////RÉCUPÉRER LA PHOTO DANS LE STORE////
+  ////reducer user ///
 
   const dispatch = useDispatch();
   const [user, setUser] = useState({
-    photo: "",
+    degrees: "",
+    occupation: "",
+    CESNumber: "",
   });
 
   const handleValidate = () => {
@@ -31,54 +27,44 @@ export default function SignUpScreenFive(props) {
     props.nextStep();
   };
 
-  /////
-
-  const isFocused = useIsFocused();
-
-  /////CAMERA/////
-
-  const [hasPermission, setHasPermission] = useState(false);
-  let cameraRef = useRef(null);
-  const takePicture = async () => {
-    const photo = await cameraRef.takePictureAsync({ quality: 0.3 });
-    dispatch(updateUserProperties({ photo: photo.uri }));
-    console.log(photo.uri);
-  };
-
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(status === "granted");
-    })();
-  }, []);
-
-  if (!hasPermission || !isFocused) {
-    return <View></View>;
-  }
-
   return (
     <>
       <BannerScreenTitle progressionStep="5" />
 
       <View style={styles.background}>
-        <View style={styles.textContainer}>
-          <Text style={styles.mainText}>Prendre ma photo de profil</Text>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputText}>Diplôme</Text>
+          <SelectInput
+            label="Ton / tes diplôme(s)"
+            value={user.degrees}
+            onValueChange={(value) => setUser({ ...user, degrees: value })}
+            style={styles.input}
+            numberOfSelections="3"
+            label1="1"
+            label2="2"
+            label3="3"
+          />
         </View>
-        <View style={styles.cameraContainer}>
-          <Camera
-            style={{
-              zIndex: 1,
-              width: 250,
-              height: 250,
-            }}
-            ref={(ref) => (cameraRef = ref)}
-          ></Camera>
-
-          <TouchableOpacity
-            style={styles.redDot}
-            title="Snap"
-            onPress={() => takePicture()}
-          ></TouchableOpacity>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputText}>Situation</Text>
+          <SelectInput
+            label="Ta situation"
+            value={user.occupation}
+            onValueChange={(value) => setUser({ ...user, occupation: value })}
+            style={styles.input}
+            numberOfSelections="3"
+            label1="1"
+            label2="2"
+            label3="3"
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputText}>Numéro CES</Text>
+          <MainInput
+            label="Ton numéro CES"
+            value={user.CESNumber}
+            onChangeText={(value) => setUser({ ...user, CESNumber: value })}
+          />
         </View>
 
         <ValidateButton onPress={handleValidate} />
@@ -88,23 +74,68 @@ export default function SignUpScreenFive(props) {
 }
 
 const makeStyles = () => {
-  const { fontScale, width, height } = useWindowDimensions();
+  const { fontScale } = useWindowDimensions();
 
   return StyleSheet.create({
-    camera: {
-      width: 350,
-      height: 350,
-      borderRadius: 350,
-      overflow: "hidden",
-      borderTopLeftRadius: 175,
-    },
-
-    cameraContainer: {
+    background: {
+      flex: 1,
       display: "flex",
-      justifyContent: "space-between",
       alignItems: "center",
+      justifyContent: "space-around",
+      paddingTop: 130,
+      paddingBottom: 20,
     },
 
+    emergencyContainer: {
+      backgroundColor: "#F5C2C8",
+      maxWidth: 350,
+      maxHeight: 100,
+      display: "flex",
+      borderRadius: 20,
+      borderWidth: 1,
+      borderColor: "white",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: 5,
+    },
+    emergencyText: {
+      fontSize: 20 / fontScale,
+      fontWeight: "bold",
+      textAlign: "center",
+    },
+    inputContainer: {
+      height: 70,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    input: {
+      backgroundColor: "white",
+      height: 40,
+      width: 250,
+      borderColor: "gray",
+      borderWidth: 1,
+      placeholderTextColor: "gray",
+    },
+    inputText: {
+      backgroundColor: "#143143",
+      maxWidth: 200,
+      textAlign: "center",
+      fontSize: 15 / fontScale,
+      borderRadius: 5,
+      color: "white",
+      paddingHorizontal: 10,
+    },
+    pageTitle: {
+      color: "white",
+      fontSize: 40 / fontScale,
+      fontWeight: "bold",
+    },
+    progression: {
+      color: "white",
+      fontSize: 15 / fontScale,
+      alignSelf: "flex-end",
+    },
     pageTitleContainer: {
       backgroundColor: "#2D5971",
       borderTopRightRadius: 10,
@@ -119,41 +150,15 @@ const makeStyles = () => {
       alignItems: "center",
       padding: 10,
     },
-    pageTitle: {
+    validateButton: {
+      backgroundColor: "green",
+      paddingHorizontal: 40,
+      borderRadius: 10,
+    },
+    validate: {
       color: "white",
-      fontSize: 40 / fontScale,
       fontWeight: "bold",
-    },
-    progression: {
-      color: "white",
-      fontSize: 15 / fontScale,
-      alignSelf: "flex-end",
-    },
-    redDot: {
-      width: 60,
-      height: 60,
-      borderRadius: 120,
-      backgroundColor: "darkred",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-
-      borderWidth: 1,
-      borderColor: "white",
-    },
-    mainText: {
-      color: "white",
-      fontSize: 20,
-      fontWeight: "bold",
-    },
-
-    background: {
-      flex: 1,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-around",
-      paddingTop: 130,
-      paddingBottom: 20,
+      fontSize: 25 / fontScale,
     },
   });
 };

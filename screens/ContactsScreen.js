@@ -25,7 +25,7 @@ const ContactsScreen = () => {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../assets/contact.png")}
+        source={require("../assets/contactBackground.png")}
         style={styles.container}
       />
       <View style={styles.pageTitleContainer}>

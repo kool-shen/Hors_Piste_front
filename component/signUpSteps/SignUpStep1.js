@@ -10,6 +10,7 @@ import BannerScreenTitle from "../BannerScreenTitle";
 import MainInput from "../inputs/MainInput";
 import DateInput from "../inputs/DateInput";
 import { useToast } from "native-base";
+import SelectInput from "../inputs/SelectInput";
 
 export default function SignUpScreenOne(props) {
   const toast = useToast();
@@ -25,15 +26,10 @@ export default function SignUpScreenOne(props) {
     password: "",
     password: null,
     birthDate: new Date().toISOString(),
-    birthCity: ""
+    birthCity: "",
   });
 
   const handleValidate = () => {
-    if (user.password !== user.passwordConfirm) {
-      return toast.show({
-        description: "Les mots de passes ne sont pas identiques."
-      });
-    }
     dispatch(updateUserProperties(user));
     props.nextStep();
   };
@@ -67,42 +63,19 @@ export default function SignUpScreenOne(props) {
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.inputText}>Genre</Text>
-          <MainInput
+          <SelectInput
             label="Ton genre"
-            value={user.gender}
-            onChangeText={(value) => setUser({ ...user, gender: value })}
+            value={user.degrees}
+            onValueChange={(value) => setUser({ ...user, gender: value })}
             style={styles.input}
+            numberOfSelections="4"
+            label1="Homme"
+            label2="Femme"
+            label3="Transgenre"
+            label4="Non-binaire"
           />
         </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Ville de naissance</Text>
-          <MainInput
-            label="Ta ville de naissance"
-            value={user.birthCity}
-            onChangeText={(value) => setUser({ ...user, birthCity: value })}
-            style={styles.input}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Mot de passe</Text>
-          <MainInput
-            label="Ton mot de passe"
-            value={user.password}
-            onChangeText={(value) => setUser({ ...user, password: value })}
-            style={styles.input}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Confirmation</Text>
-          <MainInput
-            label="Confirmer le mot de passe"
-            value={user.passwordConfirm}
-            onChangeText={(value) =>
-              setUser({ ...user, passwordConfirm: value })
-            }
-            style={styles.input}
-          />
-        </View>
+
         <ValidateButton onPress={handleValidate} />
       </View>
     </>
@@ -119,17 +92,17 @@ const makeStyles = () => {
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
-      paddingBottom: 20
+      paddingBottom: 20,
     },
 
     inputContainer: {
       height: 70,
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between"
+      justifyContent: "space-between",
     },
     input: {
-      margin: 10
+      margin: 10,
     },
     inputText: {
       backgroundColor: "#143143",
@@ -138,17 +111,17 @@ const makeStyles = () => {
       fontSize: 15,
       borderRadius: 5,
       color: "white",
-      paddingHorizontal: 10
+      paddingHorizontal: 10,
     },
     pageTitle: {
       color: "white",
       fontSize: 40,
-      fontWeight: "bold"
+      fontWeight: "bold",
     },
     progression: {
       color: "white",
       fontSize: 15,
-      alignSelf: "flex-end"
+      alignSelf: "flex-end",
     },
     pageTitleContainer: {
       backgroundColor: "#2D5971",
@@ -162,12 +135,12 @@ const makeStyles = () => {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      padding: 10
+      padding: 10,
     },
     validateButton: {
       backgroundColor: "green",
       paddingHorizontal: 40,
-      borderRadius: 10
-    }
+      borderRadius: 10,
+    },
   });
 };

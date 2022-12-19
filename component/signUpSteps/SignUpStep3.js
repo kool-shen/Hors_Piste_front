@@ -1,98 +1,79 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  useWindowDimensions,
-} from "react-native";
+import { StyleSheet, View, Text, useWindowDimensions } from "react-native";
 import { useState } from "react";
-
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser, faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import MainInput from "../inputs/MainInput";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import BannerScreenTitle from "../BannerScreenTitle";
 
-export default function SignUpScreenThree(props) {
+export default function SignUpScreenTwo(props) {
   const styles = makeStyles();
-  const [user, setUser] = useState({
-    emergencyContact: { name: "", surname: "", relation: "", phone: "" },
-  });
-
   const dispatch = useDispatch();
 
-  const handleValidate = () => {
+  const [user, setUser] = useState({
+    address: { street: "", zipCode: "", city: "", country: "" },
+  });
+
+  function handleValidate() {
     dispatch(updateUserProperties(user));
     props.nextStep();
-  };
+  }
 
   return (
     <>
       <BannerScreenTitle progressionStep="3" />
 
       <View style={styles.background}>
-        <View style={styles.emergencyContainer}>
-          <FontAwesomeIcon icon={faAddressCard} size={50} />
-
-          <Text style={styles.emergencyText}>
-            Personne à contacter en cas d'urgence
-          </Text>
-        </View>
         <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Prénom</Text>
+          <Text style={styles.inputText}>Adresse</Text>
           <MainInput
-            label="Prénom"
-            value={user.name}
+            label="Ton adresse"
+            value={user.address}
             onChangeText={(value) =>
               setUser({
                 ...user,
-                emergencyContact: { ...user.emergencyContact, name: value },
+                address: { ...user.address, street: value },
               })
             }
           />
         </View>
         <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Nom</Text>
+          <Text style={styles.inputText}>Code Postal</Text>
           <MainInput
-            label="Nom"
-            value={user.surname}
+            label="Ton code postal"
+            value={user.zipCode}
             onChangeText={(value) =>
               setUser({
                 ...user,
-                emergencyContact: {
-                  ...user.emergencyContact,
-                  surname: value,
-                },
+                address: { ...user.address, zipCode: value },
               })
             }
           />
         </View>
         <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Numéro de téléphone</Text>
+          <Text style={styles.inputText}>Ville</Text>
           <MainInput
-            label="Numéro de téléphone"
-            value={user.phone}
+            label="Ta ville de résidence"
+            value={user.city}
             onChangeText={(value) =>
               setUser({
                 ...user,
-                emergencyContact: { ...user.emergencyContact, phone: value },
+                address: { ...user.address, city: value },
               })
             }
           />
         </View>
         <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Lien</Text>
+          <Text style={styles.inputText}>Pays</Text>
           <MainInput
-            label="Lien"
-            value={user.relation}
+            label="Ton pays de résidence"
+            value={user.city}
             onChangeText={(value) =>
               setUser({
                 ...user,
-                emergencyContact: {
-                  ...user.emergencyContact,
-                  relation: value,
-                },
+                address: { ...user.address, country: value },
               })
             }
           />
@@ -103,6 +84,7 @@ export default function SignUpScreenThree(props) {
     </>
   );
 }
+
 const makeStyles = () => {
   const { fontScale } = useWindowDimensions();
 
@@ -116,23 +98,6 @@ const makeStyles = () => {
       paddingBottom: 20,
     },
 
-    emergencyContainer: {
-      backgroundColor: "#F5C2C8",
-      maxWidth: 350,
-      maxHeight: 100,
-      display: "flex",
-      borderRadius: 20,
-      borderWidth: 1,
-      borderColor: "white",
-      justifyContent: "center",
-      alignItems: "center",
-      padding: 5,
-    },
-    emergencyText: {
-      fontSize: 20 / fontScale,
-      fontWeight: "bold",
-      textAlign: "center",
-    },
     inputContainer: {
       height: 70,
       display: "flex",
@@ -149,7 +114,7 @@ const makeStyles = () => {
     },
     inputText: {
       backgroundColor: "#143143",
-      maxWidth: 200,
+      maxWidth: 150,
       textAlign: "center",
       fontSize: 15 / fontScale,
       borderRadius: 5,
