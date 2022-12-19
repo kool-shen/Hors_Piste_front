@@ -22,7 +22,7 @@ const MyMissionScreen = () => {
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        `http://10.2.1.233:3000/docs/listFolder/${user.folderIds.toSignFolderId}`
+        `http://localhost:3000/docs/listFolder/${user.folderIds.toSignFolderId}`
       );
       const documentsData = await res.json();
       setDocuments(documentsData);

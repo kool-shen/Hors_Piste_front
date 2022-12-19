@@ -28,7 +28,7 @@ export default function HomeScreen({ navigation }) {
         </TouchableOpacity>
       </View>
       <View style={styles.container2}>
-        <TouchableOpacity style={styles.card2}>
+        <TouchableOpacity style={styles.card2} onPress={() => navigation.navigate('SignDocuments')}>
           <FontAwesomeIcon icon={faPen} size={50} style={styles.icon3} />
           <Text style={styles.mainText}>Signer</Text>
           <Text style={styles.secondaryText}> mes documents</Text>

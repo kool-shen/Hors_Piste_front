@@ -16,9 +16,10 @@ import HomeScreen from "./screens/HomeScreen";
 import { name as appName } from "./app.json";
 
 import ProfileScreen from "./screens/ProfileScreen";
-import MyDocuments from "./screens/MyDocuments";
+import MyDocuments from "./screens/MyDocumentsScreen";
 import MyMissionScreen from "./screens/MyMissionScreen";
 import ContactScreen from "./screens/ContactScreen";
+import SignDocumentsScreen from './screens/SignDocumentsScreen'
 
 const store = configureStore({
   reducer: { user }
@@ -50,7 +51,7 @@ export default function App() {
       <NativeBaseProvider>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="TabNavigator" component={TabNavigator} />
+            <Stack.Screen name="SignDocuments" component={SignDocumentsScreen} />
             <Stack.Screen name="Introduction" component={IntroductionScreen} />
             <Stack.Screen name="SignIn" component={SignInScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
@@ -59,7 +60,7 @@ export default function App() {
           </Stack.Navigator>
         </NavigationContainer>
       </NativeBaseProvider>
-    </StoreProvider>
+    </StoreProvider> 
   );
 }
 
