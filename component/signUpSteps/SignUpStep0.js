@@ -1,6 +1,5 @@
 import {
   StyleSheet,
-  TextInput,
   View,
   Text,
   TouchableOpacity,
@@ -8,22 +7,28 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { useState } from "react";
-import logo from "../../assets/Logo.png";
-import { useDispatch, useSelector } from "react-redux";
+import logo from "../../assets/logo.png";
+import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import MainInput from "../inputs/MainInput";
+import ValidateButton from "../buttons/ValidateButton";
+import { BACKEND_URL } from "@env"
 
 export default function SignInScreen({ navigation, nextStep }) {
-  const user = useSelector((state) => state.user.value);
-  console.log(user);
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [connectionCode, setConnectionCode] = useState("");
   const styles = makeStyles();
 
   const handleConnect = async () => {
-    
-    const res = await fetch(`http://10.2.1.233:3000/users/firstConnection`, {
+    nextStep();
+    dispatch(
+      updateUserProperties({
+        ...userData.data,
+        email: userData.data.email,
+      })
+    );
+    const res = await fetch(`${BACKEND_URL}/users/firstConnection`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -36,7 +41,7 @@ export default function SignInScreen({ navigation, nextStep }) {
     });
     const userData = await res.json();
     if (userData.result) {
-      const res = await fetch(`http://10.2.1.233:3000/docs/createFolders`, {
+      const res = await fetch(`${BACKEND_URL}/docs/createFolders`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -56,57 +61,50 @@ export default function SignInScreen({ navigation, nextStep }) {
           folderIds: foldersData.data,
           token: userData.token
         })
-      );
-      nextStep();
-    }
-  };
+        );
+      }
+      
+    };
 
   return (
-    <KeyboardAwareScrollView
-      style={styles.mainContainer}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <View style={styles.mainContainer}>
-        <View style={styles.container}></View>
-        <View style={styles.background}>
-          <View style={styles.subBackground}>
-            <Image source={logo} style={styles.logo} resizeMode="contain" />
-            <View style={styles.containerSignin}>
-              <View style={styles.inputContainer}>
-                <Text style={styles.inputText}>Email</Text>
-                <TextInput
-                  style={styles.input}
-                  value={email}
-                  onChangeText={(value) => setEmail(value)}
-                />
-              </View>
-              <View style={styles.inputContainer}>
-                <Text style={styles.inputText}>Code de connexion</Text>
-                <TextInput
-                  style={styles.input}
-                  value={connectionCode}
-                  onChangeText={(value) => setConnectionCode(value)}
-                />
-              </View>
-              <TouchableOpacity
-                style={styles.validateButton}
-                onPress={() => handleConnect()}
-              >
-                <Text style={styles.validate}>Valider</Text>
-              </TouchableOpacity>
+    <View style={styles.mainContainer}>
+      <View style={styles.container}></View>
+      <View style={styles.background}>
+        <View style={styles.subBackground}>
+          <Image source={logo} style={styles.logo} resizeMode="contain" />
+          <View style={styles.containerSignin}>
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputText}>Email</Text>
 
-              <Text style={styles.notYet}>Déjà inscrit ?</Text>
-              <TouchableOpacity
-                style={styles.createButton}
-                onPress={() => navigation.navigate("SignIn")}
-              >
-                <Text style={styles.createText}>Se connecter</Text>
-              </TouchableOpacity>
+              <MainInput
+                label="Ton adresse mail"
+                value={email}
+                onChangeText={(value) => setEmail(value)}
+                style={styles.input}
+              />
             </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputText}>Code de connexion</Text>
+              <MainInput
+                label="Ton code de connection"
+                value={connectionCode}
+                onChangeText={(value) => setConnectionCode(value)}
+                style={styles.input}
+              />
+            </View>
+            <ValidateButton onPress={() => handleConnect()} />
+
+            <Text style={styles.notYet}>Déjà inscrit ?</Text>
+            <TouchableOpacity
+              style={styles.createButton}
+              onPress={() => navigation.navigate("SignIn")}
+            >
+              <Text style={styles.createText}>Se connecter</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
-    </KeyboardAwareScrollView>
+    </View>
   );
 }
 const makeStyles = () => {
@@ -119,7 +117,6 @@ const makeStyles = () => {
       flex: 1,
       zIndex: -1,
     },
-
     background: {
       backgroundColor: "#A5D8E6",
       transform: [
@@ -145,7 +142,6 @@ const makeStyles = () => {
       height: 350,
       justifyContent: "space-between",
     },
-
     inputContainer: {
       height: 70,
       display: "flex",

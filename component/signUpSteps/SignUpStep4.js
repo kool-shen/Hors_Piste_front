@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import {
   StyleSheet,
-  TextInput,
   View,
   Text,
   useWindowDimensions,
@@ -10,6 +9,12 @@ import {
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
+import MainInput from "../inputs/MainInput";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import BannerScreenTitle from "../BannerScreenTitle";
+
+import SelectInput from "../inputs/SelectInput";
 
 export default function SignUpScreenFour(props) {
   const styles = makeStyles();
@@ -29,36 +34,37 @@ export default function SignUpScreenFour(props) {
 
   return (
     <>
-      <View style={styles.pageTitleContainer}>
-        <Text style={styles.pageTitle}>Inscription</Text>
-        <Text style={styles.progression}>4/7</Text>
-      </View>
-      <View style={styles.background}>
-        <View style={styles.subBackground}>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Diplôme</Text>
-            <TextInput
-              onChangeText={(value) => setUser({ ...user, degree: value })}
-              style={styles.input}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Situation</Text>
-            <TextInput
-              onChangeText={(value) => setUser({ ...user, occupation: value })}
-              style={styles.input}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Numéro CES</Text>
-            <TextInput
-              onChangeText={(value) => setUser({ ...user, CESNumber: value })}
-              style={styles.input}
-            />
-          </View>
+      <BannerScreenTitle progressionStep="4" />
 
-          <ValidateButton onPress={handleValidate} />
+      <View style={styles.background}>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputText}>Diplôme</Text>
+          <SelectInput
+            label="Ton / tes diplôme(s)"
+            value={user.degrees}
+            onValueChange={(value) => setUser({ ...user, degrees: value })}
+            style={styles.input}
+          />
         </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputText}>Situation</Text>
+          <SelectInput
+            label="Ta situation"
+            value={user.occupation}
+            onValueChange={(value) => setUser({ ...user, occupation: value })}
+            style={styles.input}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputText}>Numéro CES</Text>
+          <MainInput
+            label="Ton numéro CES"
+            value={user.CESNumber}
+            onChangeText={(value) => setUser({ ...user, CESNumber: value })}
+          />
+        </View>
+
+        <ValidateButton onPress={handleValidate} />
       </View>
     </>
   );
@@ -69,27 +75,14 @@ const makeStyles = () => {
 
   return StyleSheet.create({
     background: {
-      backgroundColor: "#A5D8E6",
-      transform: [
-        { rotate: "-35deg" },
-        { translateX: -100 },
-        { translateY: -50 },
-      ],
-      height: "100%",
-      width: 600,
       flex: 1,
-      alignItems: "center",
-    },
-    subBackground: {
-      transform: [{ rotate: "35deg" }, { translateX: 9 }, { translateY: -16 }],
-      height: "100%",
-      width: 300,
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
       paddingBottom: 20,
     },
+
     emergencyContainer: {
       backgroundColor: "#F5C2C8",
       maxWidth: 350,
@@ -151,6 +144,7 @@ const makeStyles = () => {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
+      alignItems: "center",
       padding: 10,
     },
     validateButton: {

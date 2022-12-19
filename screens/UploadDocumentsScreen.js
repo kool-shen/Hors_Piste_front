@@ -2,38 +2,48 @@ import {
   View,
   Text,
   StyleSheet,
+  TouchableOpacity,
   KeyboardAvoidingView,
-  useWindowDimensions} from "react-native";
-import { Button, Spinner } from "native-base";
-import React, { useEffect, useState } from "react";
+  useWindowDimensions,
+  Button
+} from "react-native";
+import React, { useState } from "react";
+import * as DocumentPicker from "expo-document-picker";
+import { useSelector } from "react-redux";
 import { BACKEND_URL } from "@env"
 
-import { useSelector } from "react-redux";
+const UploadDocumentsScreen = () => {
+  const user = useSelector(state => state.user.value)
+  const [uploadFile, setUploadFile] = useState({})
+  const [uploadName, setUploadName] = useState('')
+  const [resultMessage, setResultMessage] = useState('')
 
-const MyMissionScreen = () => {
   const styles = makeStyles();
-  const [loading, setLoading] = useState(true);
-  const [documents, setDocuments] = useState([]);
-  const user = useSelector((state) => state.user.value);
+  const pickDocument = async () => {
+    const result = await DocumentPicker.getDocumentAsync({});
+    setUploadName(result.name)
+    const formData = new FormData();
+    formData.append("document", {...result, type: 'image/jpeg'});  
+    setUploadFile(formData)
+    console.log(formData)
+  };
 
-  useEffect(() => {
-    (async () => {
-      const res = await fetch(
-        `${BACKEND_URL}/docs/listFolder/${user.folderIds.toSignFolderId}`
-      );
-      const documentsData = await res.json();
-      setDocuments(documentsData);
-      setLoading(false);
-    })();
-  }, []);
-  const documentsToComponents = documents.map((document) => (
-    <Button
-      href={`https://docs.google.com/document/d/${document.id}`}
-      style={styles.listItem}
-    >
-      {document.name}
-    </Button>
-  ));
+  const sendDocument = async () => {
+    const res = await fetch(`${BACKEND_URL}/docs/uploads/${user.folderIds.toValidateFolderId}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+      body: uploadFile,
+    })
+    const data = await res.json()
+    setResultMessage(data.message)
+  };
+    
+
+  
+
   return (
     <KeyboardAvoidingView
       style={styles.mainContainer}
@@ -41,13 +51,26 @@ const MyMissionScreen = () => {
     >
       <View style={styles.mainContainer}>
         <View style={styles.pageTitleContainer}>
-          <Text style={styles.pageTitle}>Mes documents</Text>
+          <Text style={styles.pageTitle}>Transmettre</Text>
         </View>
         <View style={styles.background}>
           <View style={styles.subBackground}>
             <View>
               <View style={styles.listContainer}>
-                {loading ? <Spinner size="lg" /> : documentsToComponents}
+                <TouchableOpacity>
+                  <Button
+                    title="Choisir un fichier"
+                    color="black"
+                    onPress={pickDocument}
+                  />
+                  <Text>{uploadName}</Text>
+                  <Button
+                    title="Envoyer"
+                    color="black"
+                    onPress={sendDocument}
+                  />
+                  <Text>{resultMessage}</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
@@ -122,4 +145,5 @@ const makeStyles = () => {
     listContainer: {}
   });
 };
-export default MyMissionScreen;
+
+export default UploadDocumentsScreen;

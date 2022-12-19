@@ -13,7 +13,7 @@ import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import { useIsFocused } from "@react-navigation/native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCameraRetro } from "@fortawesome/free-solid-svg-icons";
+import { faPassport } from "@fortawesome/free-solid-svg-icons";
 import MainInput from "../inputs/MainInput";
 import BannerScreenTitle from "../BannerScreenTitle";
 
@@ -41,7 +41,7 @@ export default function SignUpScreenFive(props) {
   let cameraRef = useRef(null);
   const takePicture = async () => {
     const photo = await cameraRef.takePictureAsync({ quality: 0.3 });
-    dispatch(updateUserProperties({ photo: photo.uri }));
+    dispatch(updateUserProperties({ RIBImg: photo.uri }));
     console.log(photo.uri);
   };
 
@@ -58,11 +58,11 @@ export default function SignUpScreenFive(props) {
 
   return (
     <>
-      <BannerScreenTitle progressionStep="5" />
+      <BannerScreenTitle progressionStep="6" />
 
       <View style={styles.background}>
         <View style={styles.textContainer}>
-          <Text style={styles.mainText}>Prendre ma photo de profil</Text>
+          <Text style={styles.mainText}>Prendre mon passeport en photo</Text>
         </View>
         <View style={styles.cameraContainer}>
           <Camera
@@ -81,6 +81,22 @@ export default function SignUpScreenFive(props) {
           ></TouchableOpacity>
         </View>
 
+        <MainInput
+          label="Date d'expiration du passeport"
+          width="75%"
+          value={user.IBAN}
+          onChangeText={(value) =>
+            setUser({ ...user, ICExpirationDate: value })
+          }
+          style={styles.input}
+        />
+        <MainInput
+          label="Numéro de passeport"
+          width="75%"
+          value={user.IBAN}
+          onChangeText={(value) => setUser({ ...user, ICNumber: value })}
+          style={styles.input}
+        />
         <ValidateButton onPress={handleValidate} />
       </View>
     </>
