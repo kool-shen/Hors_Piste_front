@@ -11,8 +11,8 @@ import { useState } from "react";
 import logo from "../../assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
+import MainInput from "../inputs/MainInput";
+import ValidateButton from "../buttons/ValidateButton";
 export default function SignInScreen({ navigation, nextStep }) {
   const user = useSelector((state) => state.user.value);
   console.log(user);
@@ -62,51 +62,44 @@ export default function SignInScreen({ navigation, nextStep }) {
   };
 
   return (
-    <KeyboardAwareScrollView
-      style={styles.mainContainer}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <View style={styles.mainContainer}>
-        <View style={styles.container}></View>
-        <View style={styles.background}>
-          <View style={styles.subBackground}>
-            <Image source={logo} style={styles.logo} resizeMode="contain" />
-            <View style={styles.containerSignin}>
-              <View style={styles.inputContainer}>
-                <Text style={styles.inputText}>Email</Text>
-                <TextInput
-                  style={styles.input}
-                  value={email}
-                  onChangeText={(value) => setEmail(value)}
-                />
-              </View>
-              <View style={styles.inputContainer}>
-                <Text style={styles.inputText}>Code de connexion</Text>
-                <TextInput
-                  style={styles.input}
-                  value={connectionCode}
-                  onChangeText={(value) => setConnectionCode(value)}
-                />
-              </View>
-              <TouchableOpacity
-                style={styles.validateButton}
-                onPress={() => handleConnect()}
-              >
-                <Text style={styles.validate}>Valider</Text>
-              </TouchableOpacity>
+    <View style={styles.mainContainer}>
+      <View style={styles.container}></View>
+      <View style={styles.background}>
+        <View style={styles.subBackground}>
+          <Image source={logo} style={styles.logo} resizeMode="contain" />
+          <View style={styles.containerSignin}>
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputText}>Email</Text>
 
-              <Text style={styles.notYet}>Déjà inscrit ?</Text>
-              <TouchableOpacity
-                style={styles.createButton}
-                onPress={() => navigation.navigate("SignIn")}
-              >
-                <Text style={styles.createText}>Se connecter</Text>
-              </TouchableOpacity>
+              <MainInput
+                label="Ton adresse mail"
+                value={email}
+                onChangeText={(value) => setEmail(value)}
+                style={styles.input}
+              />
             </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputText}>Code de connexion</Text>
+              <MainInput
+                label="Ton code de connection"
+                value={connectionCode}
+                onChangeText={(value) => setConnectionCode(value)}
+                style={styles.input}
+              />
+            </View>
+            <ValidateButton onPress={() => handleConnect()} />
+
+            <Text style={styles.notYet}>Déjà inscrit ?</Text>
+            <TouchableOpacity
+              style={styles.createButton}
+              onPress={() => navigation.navigate("SignIn")}
+            >
+              <Text style={styles.createText}>Se connecter</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
-    </KeyboardAwareScrollView>
+    </View>
   );
 }
 const makeStyles = () => {

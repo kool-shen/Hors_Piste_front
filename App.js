@@ -15,12 +15,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
 import HomeScreen from "./screens/HomeScreen";
 import ProfileScreen from "./screens/ProfileScreen";
-import MyDocuments from "./screens/MyDocuments";
+import MyDocumentsScreen from "./screens/MyDocumentsScreen";
 import MyMissionScreen from "./screens/MyMissionScreen";
-import ContactScreen from "./screens/ContactScreen";
+import ContactsScreen from "./screens/ContactsScreen";
 import UploadDocumentsScreen from "./screens/UploadDocumentsScreen";
-import Mail from "./component/Mail";
-import Cellular from "./component/Cellular";
+import MailScreen from "./component/EMail";
+import CellularScreen from "./screens/CellularScreen";
 
 const store = configureStore({
   reducer: { user },
@@ -40,10 +40,9 @@ const TabNavigator = () => {
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
       <Tab.Screen name="MyMission" component={MyMissionScreen} />
-      <Tab.Screen name="Contact" component={ContactScreen} />
+      <Tab.Screen name="Contact" component={ContactsScreen} />
       <Tab.Screen name="SignUp" component={SignUpScreen} />
-      <Tab.Screen name="Mail" component={Mail} />
-      <Tab.Screen name="Phone" component={Cellular} />
+      
     </Tab.Navigator>
   );
 };
@@ -57,14 +56,16 @@ export default function App() {
             <Stack.Screen name="Introduction" component={IntroductionScreen} />
             <Stack.Screen name="SignIn" component={SignInScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
-            <Stack.Screen name="MyDocuments" component={MyDocuments} />
+            <Stack.Screen name="MyDocuments" component={MyDocumentsScreen} />
             <Stack.Screen name="TabNavigator" component={TabNavigator} />
+
             <Stack.Screen
               name="UploadDocuments"
               component={UploadDocumentsScreen}
             />
-            <Stack.Screen name="Mail" component={Mail} />
-            <Stack.Screen name="Phone" component={Cellular} />
+
+            <Stack.Screen name="MyMission" component={MyMissionScreen} />
+            <Stack.Screen name="MyContacts" component={ContactsScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </NativeBaseProvider>

@@ -31,12 +31,12 @@ const MyMissionScreen = () => {
     })();
   }, []);
   const documentsToComponents = documents.map((document) => (
-    <Link
+    <Button
       href={`https://docs.google.com/document/d/${document.id}`}
       style={styles.listItem}
     >
       {document.name}
-    </Link>
+    </Button>
   ));
   return (
     <KeyboardAvoidingView

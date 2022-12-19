@@ -42,13 +42,13 @@ export default function HomeScreen({ navigation }) {
         </TouchableOpacity>
       </View>
       <View style={styles.container4}>
-        <TouchableOpacity style={styles.card2}>
+        <TouchableOpacity style={styles.card2} onPress={() => navigation.navigate('MyMission')}>
           <FontAwesomeIcon icon={faCircleDot} size={50} style={styles.icon3} />
           <Text style={styles.mainText}>Ma mission</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.container5}>
-        <TouchableOpacity style={styles.card1}>
+        <TouchableOpacity style={styles.card1} onPress={() => navigation.navigate('MyContacts')}>
           <Text style={styles.mainText}>Mes contacts</Text>
           <FontAwesomeIcon
             icon={faAddressBook}
@@ -118,7 +118,7 @@ const makeStyles = () => {
     },
     container1: {
       height: "20%",
-      //backgroundColor: "#F29231",
+      backgroundColor: "#F29231",
       transform: [{ rotate: "-13deg" }, { translateX: -19 }],
 
       width: 450,

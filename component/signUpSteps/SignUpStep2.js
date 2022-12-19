@@ -9,6 +9,9 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
+import MainInput from "../inputs/MainInput";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 export default function SignUpScreenTwo(props) {
   const styles = makeStyles();
@@ -27,53 +30,62 @@ export default function SignUpScreenTwo(props) {
     <>
       <View style={styles.pageTitleContainer}>
         <Text style={styles.pageTitle}>Inscription</Text>
+        <FontAwesomeIcon icon={faUser} color="#F29231" size={40} />
+
         <Text style={styles.progression}>2/7</Text>
       </View>
       <View style={styles.background}>
         <View style={styles.subBackground}>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Adresse</Text>
-            <TextInput
+            <MainInput
+              label="Ton adresse"
+              value={user.address}
               onChangeText={(value) =>
                 setUser({
                   ...user,
                   address: { ...user.address, street: value },
                 })
               }
-              style={styles.input}
             />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Code Postal</Text>
-            <TextInput
+            <MainInput
+              label="Ton code postal"
+              value={user.zipCode}
               onChangeText={(value) =>
                 setUser({
                   ...user,
                   address: { ...user.address, zipCode: value },
                 })
               }
-              style={styles.input}
             />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Ville</Text>
-            <TextInput
+            <MainInput
+              label="Ta ville de résidence"
+              value={user.city}
               onChangeText={(value) =>
-                setUser({ ...user, address: { ...user.address, city: value } })
+                setUser({
+                  ...user,
+                  address: { ...user.address, city: value },
+                })
               }
-              style={styles.input}
             />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Pays</Text>
-            <TextInput
+            <MainInput
+              label="Ton pays de résidence"
+              value={user.city}
               onChangeText={(value) =>
                 setUser({
                   ...user,
                   address: { ...user.address, country: value },
                 })
               }
-              style={styles.input}
             />
           </View>
 
@@ -154,6 +166,7 @@ const makeStyles = () => {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
+      alignItems: "center",
       padding: 10,
     },
     validateButton: {

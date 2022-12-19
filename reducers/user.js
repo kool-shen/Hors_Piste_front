@@ -2,13 +2,24 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: {
+    email: "",
+    passportImg: "",
+    folderId: "",
+    connectionCode: "",
+    token: "",
+    userId: "",
+    mission: { _id: "639494b656430998cd5eabb1" },
+    name: "",
+    surname: "",
+    gender: "",
+    password: "",
     email: "chen@gmail.com",
     passportImg: "",
     folderIds: {
       mainFolderId: "1ywHhaMbyg6PJFYBbyMbZ3cmbGoeRVe_-",
       completeFolderId: "1wDyGB2C4l65tT_7GBMcj_dX23h9mQPZ2",
       toSignFolderId: "1QvIdyPb2ekYueYumJUtdMDMNVbbl63Oh",
-      toValidateFolderId: "1iiSAEEbHeXFHbmXbKoFZcS7-ifxHyR8z"
+      toValidateFolderId: "1iiSAEEbHeXFHbmXbKoFZcS7-ifxHyR8z",
     },
     connectionCode: "6398a42dac77fef2a1ea8bb3",
     token: "",
@@ -24,6 +35,7 @@ const initialState = {
     phone: "",
     degrees: "",
     occupation: "",
+    RIBImg: "",
     IBAN: "",
     CESNumber: "",
     ICNumber: "",
@@ -32,15 +44,15 @@ const initialState = {
       street: "",
       zipCode: "",
       city: "",
-      country: ""
+      country: "",
     },
     emergencyContact: {
       name: "",
       surname: "",
       relation: "",
-      phone: ""
-    }
-  }
+      phone: "",
+    },
+  },
 };
 
 export const userSlice = createSlice({
@@ -61,8 +73,8 @@ export const userSlice = createSlice({
     },
     deleteUser: (state, action) => {
       state.value = {};
-    }
-  }
+    },
+  },
 });
 
 export const { addUser, updateUserProperties, updateManyUserProperties } =
