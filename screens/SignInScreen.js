@@ -54,10 +54,7 @@ export default function SignInScreen({ navigation }) {
   };
 
   return (
-    <KeyboardAwareScrollView
-      style={styles.mainContainer}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
+    <>
       <View style={styles.mainContainer}>
         <View style={styles.container}></View>
         <View style={styles.background}>
@@ -101,7 +98,7 @@ export default function SignInScreen({ navigation }) {
           </View>
         </View>
       </View>
-    </KeyboardAwareScrollView>
+    </>
   );
 }
 const makeStyles = () => {

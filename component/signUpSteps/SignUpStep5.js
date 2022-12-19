@@ -14,6 +14,11 @@ import ValidateButton from "../buttons/ValidateButton";
 import { useIsFocused } from "@react-navigation/native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCameraRetro } from "@fortawesome/free-solid-svg-icons";
+<<<<<<< HEAD
+=======
+import MainInput from "../inputs/MainInput";
+import BannerScreenTitle from "../BannerScreenTitle";
+>>>>>>> 88d8202d1b58a6b1022ece757ac05f13a3377dda
 
 export default function SignUpScreenFive(props) {
   const styles = makeStyles();
@@ -56,11 +61,8 @@ export default function SignUpScreenFive(props) {
 
   return (
     <>
-      <View style={styles.pageTitleContainer}>
-        <Text style={styles.pageTitle}>Inscription</Text>
-        <FontAwesomeIcon icon={faCameraRetro} color="#F29231" size={40} />
-        <Text style={styles.progression}>5/7</Text>
-      </View>
+      <BannerScreenTitle progressionStep="5" />
+
       <View style={styles.background}>
         <View style={styles.textContainer}>
           <Text style={styles.mainText}>Prendre ma photo de profil</Text>
