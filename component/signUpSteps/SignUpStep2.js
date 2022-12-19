@@ -19,6 +19,7 @@ export default function SignUpScreenTwo(props) {
 
   const [user, setUser] = useState({
     address: { street: "", zipCode: "", city: "", country: "" },
+    phone: ''
   });
 
   function handleValidate() {
@@ -44,6 +45,20 @@ export default function SignUpScreenTwo(props) {
             }
           />
         </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputText}>Telephone</Text>
+          <MainInput
+            label="Ton numéro de téléphone"
+            value={user.phone}
+            onChangeText={(value) =>
+              setUser({
+                ...user,
+                phone: value,
+              })
+            }
+          />
+        </View>
+        
         <View style={styles.inputContainer}>
           <Text style={styles.inputText}>Code Postal</Text>
           <MainInput
