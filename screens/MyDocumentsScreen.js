@@ -3,8 +3,8 @@ import {
   Text,
   StyleSheet,
   KeyboardAvoidingView,
-  useWindowDimensions} from "react-native";
-import { Button, Spinner } from "native-base";
+  useWindowDimensions, Linking} from "react-native";
+import {  Spinner, Button } from "native-base";
 import React, { useEffect, useState } from "react";
 import { BACKEND_URL } from "@env"
 
@@ -26,11 +26,12 @@ const MyDocumentsScreen = () => {
       setLoading(false);
     })();
   }, []);
+  console.log(documents)
   const documentsToComponents = documents.map((document, i) => (
     <Button
       key={i}
-      href={`https://docs.google.com/document/d/${document.id}`}
       style={styles.listItem}
+      onPress={()=> Linking.openURL(`https://docs.google.com/document/d/${document.id}`)}
     >
       {document.name}
     </Button>
