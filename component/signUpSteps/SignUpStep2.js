@@ -15,19 +15,14 @@ import SelectInput from "../inputs/SelectInput";
 export default function SignUpScreenOne(props) {
   const toast = useToast();
   const styles = makeStyles();
-  ////reducer user ///
+
+  ////reducer user /// 
 
   const dispatch = useDispatch();
 
   const [user, setUser] = useState({
-    name: "",
-    surname: "",
-    gender: "",
-    email: "",
-    password: "",
-    password: null,
-    birthDate: new Date().toISOString(),
-    birthCity: "",
+    address: { street: "", zipCode: "", city: "", country: "" },
+    phone: ''
   });
 
   const handleValidate = () => {
@@ -54,7 +49,35 @@ export default function SignUpScreenOne(props) {
           />
         </View>
         <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Mot de passe</Text>
+          <Text style={styles.inputText}>Telephone</Text>
+          <MainInput
+            label="Ton numéro de téléphone"
+            value={user.phone}
+            onChangeText={(value) =>
+              setUser({
+                ...user,
+                phone: value,
+              })
+            }
+          />
+        </View>
+        
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputText}>Telephone</Text>
+          <MainInput
+            label="Ton numéro de téléphone"
+            value={user.phone}
+            onChangeText={(value) =>
+              setUser({
+                ...user,
+                phone: value,
+              })
+            }
+          />
+        </View>
+        
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputText}>Code Postal</Text>
           <MainInput
             label="Ton mot de passe"
             value={user.password}

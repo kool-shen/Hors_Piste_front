@@ -6,7 +6,7 @@ import {
   View,
   Text,
   TouchableOpacity,
-  useWindowDimensions,
+  useWindowDimensions
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
@@ -15,20 +15,40 @@ import { useIsFocused } from "@react-navigation/native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPassport } from "@fortawesome/free-solid-svg-icons";
 import MainInput from "../inputs/MainInput";
+import { BACKEND_URL } from "@env";
+import { useToast } from "native-base";
 import BannerScreenTitle from "../BannerScreenTitle";
 
 export default function SignUpScreenFive(props) {
   const styles = makeStyles();
+  const userReducer = useSelector((state) => state.user.value);
   ////RÉCUPÉRER LA PHOTO DANS LE STORE////
 
   const dispatch = useDispatch();
+  const toast = useToast();
   const [user, setUser] = useState({
-    photo: "",
+    IBAN: ""
   });
 
-  const handleValidate = () => {
+  console.log(userReducer);
+  const handleValidate = async () => {
     dispatch(updateUserProperties(user));
-    props.nextStep();
+    const res = await fetch(`${BACKEND_URL}/users/signup`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userReducer),
+    });
+    const userData = await res.json();
+    console.log(userData);
+    if (userData.result) {
+      props.nextStep();
+    }
+    toast.show({
+      description: userData.message
+    })
   };
 
   /////
@@ -42,7 +62,6 @@ export default function SignUpScreenFive(props) {
   const takePicture = async () => {
     const photo = await cameraRef.takePictureAsync({ quality: 0.3 });
     dispatch(updateUserProperties({ RIBImg: photo.uri }));
-    console.log(photo.uri);
   };
 
   useEffect(() => {
@@ -69,7 +88,7 @@ export default function SignUpScreenFive(props) {
             style={{
               zIndex: 1,
               width: 250,
-              height: 250,
+              height: 250
             }}
             ref={(ref) => (cameraRef = ref)}
           ></Camera>
@@ -112,13 +131,13 @@ const makeStyles = () => {
       height: 350,
       borderRadius: 350,
       overflow: "hidden",
-      borderTopLeftRadius: 175,
+      borderTopLeftRadius: 175
     },
 
     cameraContainer: {
       display: "flex",
       justifyContent: "space-between",
-      alignItems: "center",
+      alignItems: "center"
     },
 
     pageTitleContainer: {
@@ -133,17 +152,17 @@ const makeStyles = () => {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      padding: 10,
+      padding: 10
     },
     pageTitle: {
       color: "white",
       fontSize: 40 / fontScale,
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     progression: {
       color: "white",
       fontSize: 15 / fontScale,
-      alignSelf: "flex-end",
+      alignSelf: "flex-end"
     },
     redDot: {
       width: 60,
@@ -155,12 +174,12 @@ const makeStyles = () => {
       alignItems: "center",
 
       borderWidth: 1,
-      borderColor: "white",
+      borderColor: "white"
     },
     mainText: {
       color: "white",
       fontSize: 20,
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
 
     background: {
@@ -169,7 +188,7 @@ const makeStyles = () => {
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
-      paddingBottom: 20,
-    },
+      paddingBottom: 20
+    }
   });
 };

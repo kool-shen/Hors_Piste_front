@@ -10,7 +10,7 @@ import { BACKEND_URL } from "@env"
 
 import { useSelector } from "react-redux";
 
-const MyMissionScreen = () => {
+const MyDocumentsScreen = () => {
   const styles = makeStyles();
   const [loading, setLoading] = useState(true);
   const [documents, setDocuments] = useState([]);
@@ -19,15 +19,16 @@ const MyMissionScreen = () => {
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        `${BACKEND_URL}/docs/listFolder/${user.folderIds.toSignFolderId}`
+        `${BACKEND_URL}/docs/listFolder/${user.folderIds.completeFolderId}`
       );
       const documentsData = await res.json();
       setDocuments(documentsData);
       setLoading(false);
     })();
   }, []);
-  const documentsToComponents = documents.map((document) => (
+  const documentsToComponents = documents.map((document, i) => (
     <Button
+      key={i}
       href={`https://docs.google.com/document/d/${document.id}`}
       style={styles.listItem}
     >
@@ -122,4 +123,4 @@ const makeStyles = () => {
     listContainer: {}
   });
 };
-export default MyMissionScreen;
+export default MyDocumentsScreen;
