@@ -4,7 +4,6 @@ import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 
-
 const DateInput = (props) => {
   const dispatch = useDispatch();
   const [date, setDate] = useState(new Date(1598051730000));
@@ -27,7 +26,6 @@ const DateInput = (props) => {
         is24Hour: true,
       });
       setShow(false);
-      // for iOS, add a button that closes the picker
     }
     setMode(currentMode);
   };
