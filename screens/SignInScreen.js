@@ -12,6 +12,8 @@ import logo from "../assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../reducers/user";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { BACKEND_URL } from "@env"
+import { useToast } from 'native-base';
 
 export default function SignInScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
@@ -19,11 +21,11 @@ export default function SignInScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const styles = makeStyles();
+  const toast = useToast()
 
   const handleConnect = async () => {
-    console.log(user);
     navigation.navigate("TabNavigator");
-    const res = await fetch(`http://10.2.1.233:3000/users/signin`, {
+    const res = await fetch(`${BACKEND_URL}/users/signin`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -46,6 +48,9 @@ export default function SignInScreen({ navigation }) {
         })
       );
     }
+    toast.show({
+      description: userData.message
+    })
   };
 
   return (

@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import {
   StyleSheet,
-  TextInput,
   View,
   Text,
   useWindowDimensions,

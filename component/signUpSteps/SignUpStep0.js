@@ -1,6 +1,5 @@
 import {
   StyleSheet,
-  TextInput,
   View,
   Text,
   TouchableOpacity,
@@ -9,21 +8,27 @@ import {
 } from "react-native";
 import { useState } from "react";
 import logo from "../../assets/logo.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import MainInput from "../inputs/MainInput";
 import ValidateButton from "../buttons/ValidateButton";
+import { BACKEND_URL } from "@env"
+
 export default function SignInScreen({ navigation, nextStep }) {
-  const user = useSelector((state) => state.user.value);
-  console.log(user);
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [connectionCode, setConnectionCode] = useState("");
   const styles = makeStyles();
 
   const handleConnect = async () => {
-    
-    const res = await fetch(`http://10.2.1.233:3000/users/firstConnection`, {
+    nextStep();
+    dispatch(
+      updateUserProperties({
+        ...userData.data,
+        email: userData.data.email,
+      })
+    );
+    const res = await fetch(`${BACKEND_URL}/users/firstConnection`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -36,7 +41,7 @@ export default function SignInScreen({ navigation, nextStep }) {
     });
     const userData = await res.json();
     if (userData.result) {
-      const res = await fetch(`http://10.2.1.233:3000/docs/createFolders`, {
+      const res = await fetch(`${BACKEND_URL}/docs/createFolders`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -56,10 +61,10 @@ export default function SignInScreen({ navigation, nextStep }) {
           folderIds: foldersData.data,
           token: userData.token
         })
-      );
-      nextStep();
-    }
-  };
+        );
+      }
+      
+    };
 
   return (
     <View style={styles.mainContainer}>
@@ -112,7 +117,6 @@ const makeStyles = () => {
       flex: 1,
       zIndex: -1,
     },
-
     background: {
       backgroundColor: "#A5D8E6",
       transform: [
@@ -138,7 +142,6 @@ const makeStyles = () => {
       height: 350,
       justifyContent: "space-between",
     },
-
     inputContainer: {
       height: 70,
       display: "flex",

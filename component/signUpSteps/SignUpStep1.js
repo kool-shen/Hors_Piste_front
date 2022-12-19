@@ -4,7 +4,6 @@ import {
   View,
   Text,
   useWindowDimensions,
-  KeyboardAvoidingView,
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
@@ -13,7 +12,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 import MainInput from "../inputs/MainInput";
+import DateInput from "../inputs/DateInput";
+import { useToast } from 'native-base';
+
+
 export default function SignUpScreenOne(props) {
+  const toast = useToast()
   const styles = makeStyles();
   ////reducer user ///
 
@@ -25,11 +29,17 @@ export default function SignUpScreenOne(props) {
     gender: "",
     email: "",
     password: "",
-    birthDate: "",
+    password: null,
+    birthDate: new Date(),
     birthCity: "",
   });
 
   const handleValidate = () => {
+    if(user.password !== user.passwordConfirm) {
+      return toast.show({
+        description: 'Les mots de passes ne sont pas identiques.'
+      })
+    }
     dispatch(updateUserProperties(user));
     props.nextStep();
   };
@@ -65,13 +75,8 @@ export default function SignUpScreenOne(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Mail</Text>
-            <MainInput
-              label="Ton adresse mail"
-              value={user.email}
-              onChangeText={(value) => setUser({ ...user, email: value })}
-              style={styles.input}
-            />
+            <Text style={styles.inputText}>Date de naissance</Text>
+            <DateInput />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Genre</Text>
@@ -79,6 +84,25 @@ export default function SignUpScreenOne(props) {
               label="Ton genre"
               value={user.gender}
               onChangeText={(value) => setUser({ ...user, gender: value })}
+              style={styles.input}
+            />
+          </View>
+          
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Date de naissance</Text>
+            <MainInput
+              label="Ta date de naissance"
+              value={user.birthDate}
+              onChangeText={(value) => setUser({ ...user, birthDate: new Date(value) })}
+              style={styles.input}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Ville de naissance</Text>
+            <MainInput
+              label="Ta ville de naissance"
+              value={user.birthCity}
+              onChangeText={(value) => setUser({ ...user, birthCity: value })}
               style={styles.input}
             />
           </View>
@@ -92,20 +116,11 @@ export default function SignUpScreenOne(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Date de naissance</Text>
+            <Text style={styles.inputText}>Confirmation</Text>
             <MainInput
-              label="Ta date de naissance"
-              value={user.birthDate}
-              onChangeText={(value) => setUser({ ...user, birthDate: value })}
-              style={styles.input}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Ville de naissance</Text>
-            <MainInput
-              label="Ta ville de naissance"
-              value={user.birthCity}
-              onChangeText={(value) => setUser({ ...user, birthCity: value })}
+              label="Confirmer le mot de passe"
+              value={user.passwordConfirm}
+              onChangeText={(value) => setUser({ ...user, passwordConfirm: value })}
               style={styles.input}
             />
           </View>

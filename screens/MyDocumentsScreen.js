@@ -2,15 +2,11 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
-  TouchableOpacity,
   KeyboardAvoidingView,
-  useWindowDimensions,
-  Linking
-} from "react-native";
-import { Button, Spinner, Link } from "native-base";
+  useWindowDimensions} from "react-native";
+import { Button, Spinner } from "native-base";
 import React, { useEffect, useState } from "react";
-import { List } from "react-native-paper";
+import { BACKEND_URL } from "@env"
 
 import { useSelector } from "react-redux";
 
@@ -23,7 +19,7 @@ const MyMissionScreen = () => {
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        `http://10.2.1.233:3000/docs/listFolder/${user.folderIds.toSignFolderId}`
+        `${BACKEND_URL}/docs/listFolder/${user.folderIds.toSignFolderId}`
       );
       const documentsData = await res.json();
       setDocuments(documentsData);

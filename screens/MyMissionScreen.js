@@ -2,13 +2,12 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
-  TouchableOpacity,
   KeyboardAvoidingView,
   useWindowDimensions
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { BACKEND_URL } from "@env"
 
 const MyMissionScreen = () => {
   const user = useSelector((state) => state.user.value);
@@ -18,7 +17,7 @@ const MyMissionScreen = () => {
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        `http://10.2.1.233:3000/missions/${user.mission._id}/${user.userId}`
+        `${BACKEND_URL}/missions/${user.mission._id}/${user.userId}`
       );
       const missionData = await res.json();
       setMission(missionData.data);

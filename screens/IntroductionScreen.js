@@ -1,6 +1,5 @@
 import {
   View,
-  Text,
   StyleSheet,
   Image,
   useWindowDimensions,
@@ -14,7 +13,7 @@ const IntroductionScreen = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate("SignIn");
-    }, 3000);
+    }, 2000);
   }, []);
 
   return (

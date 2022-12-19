@@ -3,11 +3,8 @@ import { Camera } from "expo-camera";
 
 import {
   StyleSheet,
-  TextInput,
   View,
   Text,
-  KeyboardAvoidingView,
-  Button,
   TouchableOpacity,
   useWindowDimensions,
 } from "react-native";

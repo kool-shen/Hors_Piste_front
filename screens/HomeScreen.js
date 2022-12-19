@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import {
-  Button,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -15,10 +13,13 @@ import {
   faCircleDot,
   faAddressBook,
 } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
+
 
 export default function HomeScreen({ navigation }) {
   const styles = makeStyles();
-
+  const user = useSelector(state=> state.user.value)
+  console.log(user)
   return (
     <View style={styles.mainContainer}>
       <View /*animation={keyframe}*/ style={styles.container1} >

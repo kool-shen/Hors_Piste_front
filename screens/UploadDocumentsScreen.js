@@ -2,19 +2,15 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
   useWindowDimensions,
-  Linking,
   Button
 } from "react-native";
 import React, { useState } from "react";
-import { List } from "react-native-paper";
 import * as DocumentPicker from "expo-document-picker";
-// import RNFetchBlob from "rn-fetch-blob";
 import { useSelector } from "react-redux";
-import axios from "axios";
+import { BACKEND_URL } from "@env"
 
 const UploadDocumentsScreen = () => {
   const user = useSelector(state => state.user.value)
@@ -29,10 +25,11 @@ const UploadDocumentsScreen = () => {
     const formData = new FormData();
     formData.append("document", {...result, type: 'image/jpeg'});  
     setUploadFile(formData)
+    console.log(formData)
   };
 
   const sendDocument = async () => {
-    const res = await fetch(`http://10.2.1.233:3000/docs/uploads/${user.folderIds.toValidateFolderId}`, {
+    const res = await fetch(`${BACKEND_URL}/docs/uploads/${user.folderIds.toValidateFolderId}`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

@@ -3,34 +3,51 @@ import { Camera } from "expo-camera";
 
 import {
   StyleSheet,
-  TextInput,
   View,
   Text,
-  KeyboardAvoidingView,
-  Button,
   TouchableOpacity,
   useWindowDimensions,
 } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import { useIsFocused } from "@react-navigation/native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import MainInput from "../inputs/MainInput";
+import { BACKEND_URL } from "@env"
+import { useToast } from 'native-base';
 
 export default function SignUpScreenFive(props) {
   const styles = makeStyles();
+  const userReducer = useSelector(state => state.user.value)
   ////RÉCUPÉRER LA PHOTO DANS LE STORE////
-
+  
   const dispatch = useDispatch();
+  const toast = useToast()
   const [user, setUser] = useState({
     photo: "",
   });
 
-  const handleValidate = () => {
+  console.log(userReducer)
+  const handleValidate = async() => {
     dispatch(updateUserProperties(user));
-    props.nextStep();
+    const res = await fetch(`${BACKEND_URL}/users/signup`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userReducer),
+    });
+    const userData = await res.json();
+    console.log(userData);
+    if (userData.result) {
+      props.nextStep();
+    }
+    toast.show({
+      description: userData.message
+    })
   };
 
   /////

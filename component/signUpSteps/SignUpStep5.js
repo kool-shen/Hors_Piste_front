@@ -3,11 +3,8 @@ import { Camera } from "expo-camera";
 
 import {
   StyleSheet,
-  TextInput,
   View,
   Text,
-  KeyboardAvoidingView,
-  Button,
   TouchableOpacity,
   useWindowDimensions,
 } from "react-native";
@@ -17,7 +14,6 @@ import ValidateButton from "../buttons/ValidateButton";
 import { useIsFocused } from "@react-navigation/native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCameraRetro } from "@fortawesome/free-solid-svg-icons";
-import MainInput from "../inputs/MainInput";
 
 export default function SignUpScreenFive(props) {
   const styles = makeStyles();
