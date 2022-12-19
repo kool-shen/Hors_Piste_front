@@ -9,7 +9,7 @@ const MainInput = (props) => {
         placeholder={props.label}
         onChangeText={props.onChangeText}
         value={props.value}
-        w={props.width}
+        w="75%"
       />
     </Box>
   );

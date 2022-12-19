@@ -2,19 +2,15 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
-  TouchableOpacity,
   KeyboardAvoidingView,
-  useWindowDimensions,
-  Linking
-} from "react-native";
-import { Button, Spinner, Link } from "native-base";
+  useWindowDimensions} from "react-native";
+import { Button, Spinner } from "native-base";
 import React, { useEffect, useState } from "react";
-import { List } from "react-native-paper";
+import { BACKEND_URL } from "@env"
 
 import { useSelector } from "react-redux";
 
-const MyMissionScreen = () => {
+const MyDocumentsScreen = () => {
   const styles = makeStyles();
   const [loading, setLoading] = useState(true);
   const [documents, setDocuments] = useState([]);
@@ -23,15 +19,16 @@ const MyMissionScreen = () => {
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        `http://10.2.1.233:3000/docs/listFolder/${user.folderIds.toSignFolderId}`
+        `${BACKEND_URL}/docs/listFolder/${user.folderIds.completeFolderId}`
       );
       const documentsData = await res.json();
       setDocuments(documentsData);
       setLoading(false);
     })();
   }, []);
-  const documentsToComponents = documents.map((document) => (
+  const documentsToComponents = documents.map((document, i) => (
     <Button
+      key={i}
       href={`https://docs.google.com/document/d/${document.id}`}
       style={styles.listItem}
     >
@@ -126,4 +123,4 @@ const makeStyles = () => {
     listContainer: {}
   });
 };
-export default MyMissionScreen;
+export default MyDocumentsScreen;

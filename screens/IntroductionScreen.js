@@ -1,36 +1,36 @@
 import {
   View,
-  Text,
   StyleSheet,
   Image,
   useWindowDimensions,
 } from "react-native";
 import React from "react";
 import { useEffect } from "react";
-import logo from "../assets/logo.png";
+import Logo from "../assets/logo.png";
 
 const IntroductionScreen = ({ navigation }) => {
   const styles = makeStyles();
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate("SignIn");
-    }, 3000);
+    }, 2000);
   }, []);
 
   return (
     <View style={styles.globalContainer}>
-      <Image source={logo} style={styles.logo} resizeMode="contain" />
+      <Image source={Logo} style={styles.logo} resizeMode="contain" />
     </View>
   );
 };
 
 const makeStyles = () => {
-  const { fontScale } = useWindowDimensions();
+  const { fontScale, width, height } = useWindowDimensions();
   return StyleSheet.create({
     globalContainer: {
       backgroundColor: "white",
       flex: 1,
-      width: "100%",
+      width: width,
+      height: height,
       justifyContent: "center",
       alignItems: "center",
     },

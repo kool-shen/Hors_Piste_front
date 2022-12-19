@@ -3,34 +3,52 @@ import { Camera } from "expo-camera";
 
 import {
   StyleSheet,
-  TextInput,
   View,
   Text,
-  KeyboardAvoidingView,
-  Button,
   TouchableOpacity,
-  useWindowDimensions,
+  useWindowDimensions
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import { useIsFocused } from "@react-navigation/native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { faPassport } from "@fortawesome/free-solid-svg-icons";
 import MainInput from "../inputs/MainInput";
+import { BACKEND_URL } from "@env";
+import { useToast } from "native-base";
+import BannerScreenTitle from "../BannerScreenTitle";
 
 export default function SignUpScreenFive(props) {
   const styles = makeStyles();
+  const userReducer = useSelector((state) => state.user.value);
   ////RÉCUPÉRER LA PHOTO DANS LE STORE////
 
   const dispatch = useDispatch();
+  const toast = useToast();
   const [user, setUser] = useState({
-    photo: "",
+    IBAN: ""
   });
 
-  const handleValidate = () => {
+  console.log(userReducer);
+  const handleValidate = async () => {
     dispatch(updateUserProperties(user));
-    props.nextStep();
+    const res = await fetch(`${BACKEND_URL}/users/signup`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userReducer),
+    });
+    const userData = await res.json();
+    console.log(userData);
+    if (userData.result) {
+      props.nextStep();
+    }
+    toast.show({
+      description: userData.message
+    })
   };
 
   /////
@@ -43,8 +61,7 @@ export default function SignUpScreenFive(props) {
   let cameraRef = useRef(null);
   const takePicture = async () => {
     const photo = await cameraRef.takePictureAsync({ quality: 0.3 });
-    dispatch(updateUserProperties({ passportImg: photo.uri }));
-    console.log(photo.uri);
+    dispatch(updateUserProperties({ RIBImg: photo.uri }));
   };
 
   useEffect(() => {
@@ -60,21 +77,18 @@ export default function SignUpScreenFive(props) {
 
   return (
     <>
-      <View style={styles.pageTitleContainer}>
-        <Text style={styles.pageTitle}>Inscription</Text>
-        <FontAwesomeIcon icon={faCoins} color="#F29231" size={40} />
-        <Text style={styles.progression}>7/7</Text>
-      </View>
+      <BannerScreenTitle progressionStep="7" />
+
       <View style={styles.background}>
         <View style={styles.textContainer}>
-          <Text style={styles.mainText}>Prendre mon RIB en photo</Text>
+          <Text style={styles.mainText}>Prendre mon passeport en photo</Text>
         </View>
         <View style={styles.cameraContainer}>
           <Camera
             style={{
               zIndex: 1,
               width: 250,
-              height: 250,
+              height: 250
             }}
             ref={(ref) => (cameraRef = ref)}
           ></Camera>
@@ -87,10 +101,19 @@ export default function SignUpScreenFive(props) {
         </View>
 
         <MainInput
-          label="n° IBAN"
+          label="Date d'expiration du passeport"
           width="75%"
           value={user.IBAN}
-          onChangeText={(value) => setUser({ ...user, IBAN: value })}
+          onChangeText={(value) =>
+            setUser({ ...user, ICExpirationDate: value })
+          }
+          style={styles.input}
+        />
+        <MainInput
+          label="Numéro de passeport"
+          width="75%"
+          value={user.IBAN}
+          onChangeText={(value) => setUser({ ...user, ICNumber: value })}
           style={styles.input}
         />
         <ValidateButton onPress={handleValidate} />
@@ -108,13 +131,13 @@ const makeStyles = () => {
       height: 350,
       borderRadius: 350,
       overflow: "hidden",
-      borderTopLeftRadius: 175,
+      borderTopLeftRadius: 175
     },
 
     cameraContainer: {
       display: "flex",
       justifyContent: "space-between",
-      alignItems: "center",
+      alignItems: "center"
     },
 
     pageTitleContainer: {
@@ -129,17 +152,17 @@ const makeStyles = () => {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      padding: 10,
+      padding: 10
     },
     pageTitle: {
       color: "white",
       fontSize: 40 / fontScale,
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     progression: {
       color: "white",
       fontSize: 15 / fontScale,
-      alignSelf: "flex-end",
+      alignSelf: "flex-end"
     },
     redDot: {
       width: 60,
@@ -151,12 +174,12 @@ const makeStyles = () => {
       alignItems: "center",
 
       borderWidth: 1,
-      borderColor: "white",
+      borderColor: "white"
     },
     mainText: {
       color: "white",
       fontSize: 20,
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
 
     background: {
@@ -165,7 +188,7 @@ const makeStyles = () => {
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
-      paddingBottom: 20,
-    },
+      paddingBottom: 20
+    }
   });
 };

@@ -2,28 +2,15 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
-  TouchableOpacity,
   KeyboardAvoidingView,
   useWindowDimensions
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 
 const MyMissionScreen = () => {
   const user = useSelector((state) => state.user.value);
   const styles = makeStyles();
-  const [mission, setMission] = useState({});
-
-  useEffect(() => {
-    (async () => {
-      const res = await fetch(
-        `http://10.2.1.233:3000/missions/${user.mission._id}/${user.userId}`
-      );
-      const missionData = await res.json();
-      setMission(missionData.data);
-    })();
-  }, []);
   return (
     <KeyboardAvoidingView
       style={styles.mainContainer}
@@ -37,9 +24,14 @@ const MyMissionScreen = () => {
           <View style={styles.subBackground}>
             <View>
               <View>
-                 {mission.projectName && <Text>
-                  Type de mission: {mission.missionType}{'\n'}Nom du projet: {mission.projectName}{'\n'}Date de départ: {mission.startDate}{'\n'}Date de fin: {mission.endDate}
-                </Text>}
+                {user.mission.projectName && (
+                  <Text>
+                    Type de mission: {user.mission.missionType}
+                    {"\n"}Nom du projet: {user.mission.projectName}
+                    {"\n"}Date de départ: {user.mission.startDate}
+                    {"\n"}Date de fin: {user.mission.endDate}
+                  </Text>
+                )}
               </View>
             </View>
           </View>

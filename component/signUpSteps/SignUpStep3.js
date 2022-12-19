@@ -1,157 +1,103 @@
-import {
-  StyleSheet,
-  TextInput,
-  View,
-  Text,
-  useWindowDimensions,
-} from "react-native";
+import { StyleSheet, View, Text, useWindowDimensions } from "react-native";
 import { useState } from "react";
-
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser, faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import MainInput from "../inputs/MainInput";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import BannerScreenTitle from "../BannerScreenTitle";
 
-export default function SignUpScreenThree(props) {
+export default function SignUpScreenTwo(props) {
   const styles = makeStyles();
-  const [user, setUser] = useState({
-    emergencyContact: { name: "", surname: "", relation: "", phone: "" },
-  });
-
   const dispatch = useDispatch();
 
-  const handleValidate = () => {
+  const [user, setUser] = useState({
+    address: { street: "", zipCode: "", city: "", country: "" },
+  });
+
+  function handleValidate() {
     dispatch(updateUserProperties(user));
     props.nextStep();
-  };
+  }
 
   return (
     <>
-      <View style={styles.pageTitleContainer}>
-        <Text style={styles.pageTitle}>Inscription</Text>
-        <FontAwesomeIcon icon={faUser} color="#F29231" size={40} />
+      <BannerScreenTitle progressionStep="3" />
 
-        <Text style={styles.progression}>3/7</Text>
-      </View>
       <View style={styles.background}>
-        <View style={styles.subBackground}>
-          <View style={styles.emergencyContainer}>
-            <FontAwesomeIcon icon={faAddressCard} size={50} />
-
-            <Text style={styles.emergencyText}>
-              Personne à contacter en cas d'urgence
-            </Text>
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Prénom</Text>
-            <MainInput
-              label="Prénom"
-              value={user.name}
-              onChangeText={(value) =>
-                setUser({
-                  ...user,
-                  emergencyContact: { ...user.emergencyContact, name: value },
-                })
-              }
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Nom</Text>
-            <MainInput
-              label="Nom"
-              value={user.surname}
-              onChangeText={(value) =>
-                setUser({
-                  ...user,
-                  emergencyContact: {
-                    ...user.emergencyContact,
-                    surname: value,
-                  },
-                })
-              }
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Numéro de téléphone</Text>
-            <MainInput
-              label="Numéro de téléphone"
-              value={user.phone}
-              onChangeText={(value) =>
-                setUser({
-                  ...user,
-                  emergencyContact: { ...user.emergencyContact, phone: value },
-                })
-              }
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Lien</Text>
-            <MainInput
-              label="Lien"
-              value={user.relation}
-              onChangeText={(value) =>
-                setUser({
-                  ...user,
-                  emergencyContact: {
-                    ...user.emergencyContact,
-                    relation: value,
-                  },
-                })
-              }
-            />
-          </View>
-
-          <ValidateButton onPress={handleValidate} />
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputText}>Adresse</Text>
+          <MainInput
+            label="Ton adresse"
+            value={user.address}
+            onChangeText={(value) =>
+              setUser({
+                ...user,
+                address: { ...user.address, street: value },
+              })
+            }
+          />
         </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputText}>Code Postal</Text>
+          <MainInput
+            label="Ton code postal"
+            value={user.zipCode}
+            onChangeText={(value) =>
+              setUser({
+                ...user,
+                address: { ...user.address, zipCode: value },
+              })
+            }
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputText}>Ville</Text>
+          <MainInput
+            label="Ta ville de résidence"
+            value={user.city}
+            onChangeText={(value) =>
+              setUser({
+                ...user,
+                address: { ...user.address, city: value },
+              })
+            }
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputText}>Pays</Text>
+          <MainInput
+            label="Ton pays de résidence"
+            value={user.city}
+            onChangeText={(value) =>
+              setUser({
+                ...user,
+                address: { ...user.address, country: value },
+              })
+            }
+          />
+        </View>
+
+        <ValidateButton onPress={handleValidate} />
       </View>
     </>
   );
 }
+
 const makeStyles = () => {
   const { fontScale } = useWindowDimensions();
 
   return StyleSheet.create({
     background: {
-      backgroundColor: "#A5D8E6",
-      transform: [
-        { rotate: "-35deg" },
-        { translateX: -100 },
-        { translateY: -50 },
-      ],
-      height: "100%",
-      width: 600,
       flex: 1,
-      alignItems: "center",
-    },
-    subBackground: {
-      transform: [{ rotate: "35deg" }, { translateX: 9 }, { translateY: -16 }],
-      height: "100%",
-      width: 300,
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
       paddingBottom: 20,
     },
-    emergencyContainer: {
-      backgroundColor: "#F5C2C8",
-      maxWidth: 350,
-      maxHeight: 100,
-      display: "flex",
-      borderRadius: 20,
-      borderWidth: 1,
-      borderColor: "white",
-      justifyContent: "center",
-      alignItems: "center",
-      padding: 5,
-    },
-    emergencyText: {
-      fontSize: 20 / fontScale,
-      fontWeight: "bold",
-      textAlign: "center",
-    },
+
     inputContainer: {
       height: 70,
       display: "flex",
@@ -168,7 +114,7 @@ const makeStyles = () => {
     },
     inputText: {
       backgroundColor: "#143143",
-      maxWidth: 200,
+      maxWidth: 150,
       textAlign: "center",
       fontSize: 15 / fontScale,
       borderRadius: 5,

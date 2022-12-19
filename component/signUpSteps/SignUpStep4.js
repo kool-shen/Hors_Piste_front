@@ -1,31 +1,21 @@
+import { StyleSheet, View, Text, useWindowDimensions } from "react-native";
 import { useState } from "react";
 
-import {
-  StyleSheet,
-  TextInput,
-  View,
-  Text,
-  useWindowDimensions,
-} from "react-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faUser, faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import MainInput from "../inputs/MainInput";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import BannerScreenTitle from "../BannerScreenTitle";
 
-import SelectInput from "../inputs/SelectInput";
-
-export default function SignUpScreenFour(props) {
+export default function SignUpScreenThree(props) {
   const styles = makeStyles();
-  ////reducer user ///
+  const [user, setUser] = useState({
+    emergencyContact: { name: "", surname: "", relation: "", phone: "" },
+  });
 
   const dispatch = useDispatch();
-  const [user, setUser] = useState({
-    degrees: "",
-    occupation: "",
-    CESNumber: "",
-  });
 
   const handleValidate = () => {
     dispatch(updateUserProperties(user));
@@ -34,75 +24,93 @@ export default function SignUpScreenFour(props) {
 
   return (
     <>
-      <View style={styles.pageTitleContainer}>
-        <Text style={styles.pageTitle}>Inscription</Text>
+      <BannerScreenTitle progressionStep="4" />
 
-        <FontAwesomeIcon icon={faUser} color="#F29231" size={40} />
-
-        <Text style={styles.progression}>4/7</Text>
-      </View>
       <View style={styles.background}>
-        <View style={styles.subBackground}>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Diplôme</Text>
-            <SelectInput
-              label="Ton / tes diplôme(s)"
-              value={user.degrees}
-              onValueChange={(value) => setUser({ ...user, degrees: value })}
-              style={styles.input}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Situation</Text>
-            <SelectInput
-              label="Ta situation"
-              value={user.occupation}
-              onValueChange={(value) => setUser({ ...user, occupation: value })}
-              style={styles.input}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Numéro CES</Text>
-            <MainInput
-              label="Ton numéro CES"
-              value={user.CESNumber}
-              onChangeText={(value) => setUser({ ...user, CESNumber: value })}
-            />
-          </View>
+        <View style={styles.emergencyContainer}>
+          <FontAwesomeIcon icon={faAddressCard} size={50} />
 
-          <ValidateButton onPress={handleValidate} />
+          <Text style={styles.emergencyText}>
+            Personne à contacter en cas d'urgence
+          </Text>
         </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputText}>Prénom</Text>
+          <MainInput
+            label="Prénom"
+            value={user.name}
+            onChangeText={(value) =>
+              setUser({
+                ...user,
+                emergencyContact: { ...user.emergencyContact, name: value },
+              })
+            }
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputText}>Nom</Text>
+          <MainInput
+            label="Nom"
+            value={user.surname}
+            onChangeText={(value) =>
+              setUser({
+                ...user,
+                emergencyContact: {
+                  ...user.emergencyContact,
+                  surname: value,
+                },
+              })
+            }
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputText}>Numéro de téléphone</Text>
+          <MainInput
+            label="Numéro de téléphone"
+            value={user.phone}
+            onChangeText={(value) =>
+              setUser({
+                ...user,
+                emergencyContact: { ...user.emergencyContact, phone: value },
+              })
+            }
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputText}>Lien</Text>
+          <MainInput
+            label="Lien"
+            value={user.relation}
+            onChangeText={(value) =>
+              setUser({
+                ...user,
+                emergencyContact: {
+                  ...user.emergencyContact,
+                  relation: value,
+                },
+              })
+            }
+          />
+        </View>
+
+        <ValidateButton onPress={handleValidate} />
       </View>
     </>
   );
 }
-
 const makeStyles = () => {
   const { fontScale } = useWindowDimensions();
 
   return StyleSheet.create({
     background: {
-      backgroundColor: "#A5D8E6",
-      transform: [
-        { rotate: "-35deg" },
-        { translateX: -100 },
-        { translateY: -50 },
-      ],
-      height: "100%",
-      width: 600,
       flex: 1,
-      alignItems: "center",
-    },
-    subBackground: {
-      transform: [{ rotate: "35deg" }, { translateX: 9 }, { translateY: -16 }],
-      height: "100%",
-      width: 300,
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
       paddingBottom: 20,
     },
+
     emergencyContainer: {
       backgroundColor: "#F5C2C8",
       maxWidth: 350,

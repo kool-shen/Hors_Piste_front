@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  StyleSheet,
-  KeyboardAvoidingView,
-  useWindowDimensions,
-  View,
-} from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { StyleSheet, useWindowDimensions, View } from "react-native";
 
 import SignUpStep0 from "../component/signUpSteps/SignUpStep0";
 import SignUpStep1 from "../component/signUpSteps/SignUpStep1";
@@ -15,14 +9,13 @@ import SignUpStep4 from "../component/signUpSteps/SignUpStep4";
 import SignUpStep5 from "../component/signUpSteps/SignUpStep5";
 import SignUpStep6 from "../component/signUpSteps/SignUpStep6";
 import SignUpStep7 from "../component/signUpSteps/SignUpStep7";
+import SignUpStep8 from "../component/signUpSteps/SignUpStep8";
 
 export default function SignUpScreen({ navigation }) {
   const styles = makeStyles();
   ////reducer user ///
 
   const [stepValue, setStepValue] = useState(0);
-  //   const [activeStep, setActiveStep] = useState();
-
   const nextStep = () => setStepValue(stepValue + 1);
 
   let activeStep;
@@ -45,7 +38,13 @@ export default function SignUpScreen({ navigation }) {
     activeStep = <SignUpStep6 nextStep={() => nextStep()} />;
   } else if (stepValue === 7) {
     activeStep = <SignUpStep7 nextStep={() => nextStep()} />;
+  } else if (stepValue === 8) {
+    activeStep = <SignUpStep8 nextStep={() => nextStep()} />;
+  } else {
+    navigation.navigate("TabNavigator");
+    return;
   }
+
   return <View style={styles.mainContainer}>{activeStep}</View>;
 }
 
