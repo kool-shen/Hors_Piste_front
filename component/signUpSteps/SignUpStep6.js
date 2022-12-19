@@ -18,6 +18,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPassport } from "@fortawesome/free-solid-svg-icons";
 import MainInput from "../inputs/MainInput";
+import BannerScreenTitle from "../BannerScreenTitle";
 
 export default function SignUpScreenFive(props) {
   const styles = makeStyles();
@@ -60,11 +61,8 @@ export default function SignUpScreenFive(props) {
 
   return (
     <>
-      <View style={styles.pageTitleContainer}>
-        <Text style={styles.pageTitle}>Inscription</Text>
-        <FontAwesomeIcon icon={faPassport} color="#F29231" size={40} />
-        <Text style={styles.progression}>6/7</Text>
-      </View>
+      <BannerScreenTitle progressionStep="6" />
+
       <View style={styles.background}>
         <View style={styles.textContainer}>
           <Text style={styles.mainText}>Prendre mon passeport en photo</Text>

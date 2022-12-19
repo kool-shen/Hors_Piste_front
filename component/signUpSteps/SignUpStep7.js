@@ -18,6 +18,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import MainInput from "../inputs/MainInput";
+import BannerScreenTitle from "../BannerScreenTitle";
 
 export default function SignUpScreenFive(props) {
   const styles = makeStyles();
@@ -60,11 +61,8 @@ export default function SignUpScreenFive(props) {
 
   return (
     <>
-      <View style={styles.pageTitleContainer}>
-        <Text style={styles.pageTitle}>Inscription</Text>
-        <FontAwesomeIcon icon={faCoins} color="#F29231" size={40} />
-        <Text style={styles.progression}>7/7</Text>
-      </View>
+      <BannerScreenTitle progressionStep="7" />
+
       <View style={styles.background}>
         <View style={styles.textContainer}>
           <Text style={styles.mainText}>Prendre mon RIB en photo</Text>
@@ -88,7 +86,6 @@ export default function SignUpScreenFive(props) {
 
         <MainInput
           label="n° IBAN"
-          width="75%"
           value={user.IBAN}
           onChangeText={(value) => setUser({ ...user, IBAN: value })}
           style={styles.input}
