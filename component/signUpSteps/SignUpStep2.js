@@ -6,6 +6,7 @@ import ValidateButton from "../buttons/ValidateButton";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import BannerScreenTitle from "../BannerScreenTitle";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import MainInput from "../inputs/MainInput";
 import DateInput from "../inputs/DateInput";
@@ -36,7 +37,7 @@ export default function SignUpScreenOne(props) {
   };
 
   return (
-    <>
+    <KeyboardAwareScrollView>
       <BannerScreenTitle progressionStep="2" />
       <View style={styles.background}>
         <View style={styles.inputContainer}>
@@ -63,21 +64,7 @@ export default function SignUpScreenOne(props) {
         </View>
         
         <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Telephone</Text>
-          <MainInput
-            label="Ton numéro de téléphone"
-            value={user.phone}
-            onChangeText={(value) =>
-              setUser({
-                ...user,
-                phone: value,
-              })
-            }
-          />
-        </View>
-        
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Code Postal</Text>
+          <Text style={styles.inputText}>Mot de passe</Text>
           <MainInput
             label="Ton mot de passe"
             value={user.password}
@@ -98,16 +85,17 @@ export default function SignUpScreenOne(props) {
         </View>
         <ValidateButton onPress={handleValidate} />
       </View>
-    </>
+    </ KeyboardAwareScrollView>
   );
 }
 
 const makeStyles = () => {
-  const { fontScale } = useWindowDimensions();
+  const { fontScale, height } = useWindowDimensions();
 
   return StyleSheet.create({
     background: {
       flex: 1,
+      height: height,
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",

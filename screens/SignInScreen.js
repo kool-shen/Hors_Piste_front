@@ -55,7 +55,7 @@ export default function SignInScreen({ navigation }) {
 
   return (
     <>
-      <View style={styles.mainContainer}>
+      <KeyboardAwareScrollView style={styles.mainContainer}>
         <View style={styles.container}></View>
         <View style={styles.background}>
           <View style={styles.subBackground}>
@@ -97,7 +97,7 @@ export default function SignInScreen({ navigation }) {
             </View>
           </View>
         </View>
-      </View>
+      </KeyboardAwareScrollView>
     </>
   );
 }

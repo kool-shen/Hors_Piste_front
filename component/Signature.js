@@ -116,7 +116,6 @@ const Sign = (props) => {
         <Text style={styles.input}>Le {date}</Text>
         <Button
           onPress={() => {
-            console.log("test");
             setInputModal(!inputModal);
             setSignatureModal(!signatureModal);
           }}
