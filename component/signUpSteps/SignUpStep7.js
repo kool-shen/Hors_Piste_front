@@ -27,7 +27,6 @@ export default function SignUpScreenFive(props) {
   const dispatch = useDispatch();
   const toast = useToast();
   const [user, setUser] = useState({
-    photo: "",
     IBAN: ""
   });
 
@@ -45,6 +44,7 @@ export default function SignUpScreenFive(props) {
     const userData = await res.json();
     console.log(userData);
     if (userData.result) {
+      dispatch(updateUserProperties({...userData.data, token: userData.token}))
       props.nextStep();
     }
     toast.show({
@@ -62,8 +62,7 @@ export default function SignUpScreenFive(props) {
   let cameraRef = useRef(null);
   const takePicture = async () => {
     const photo = await cameraRef.takePictureAsync({ quality: 0.3 });
-    dispatch(updateUserProperties({ passportImg: photo.uri }));
-    console.log(photo.uri);
+    dispatch(updateUserProperties({ RIBImg: photo.uri }));
   };
 
   useEffect(() => {
