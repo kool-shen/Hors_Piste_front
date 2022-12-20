@@ -15,7 +15,6 @@ import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import MainInput from "../inputs/MainInput";
-import BannerScreenTitle from "../BannerScreenTitle";
 
 export default function SignUpScreenTwo(props) {
   const styles = makeStyles();

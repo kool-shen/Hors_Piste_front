@@ -16,12 +16,12 @@ import SignUpScreen from "./screens/SignUpScreen";
 import SignInScreen from "./screens/SignInScreen";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import SignDocumentsScreen from './screens/SignDocumentsScreen'
+import IntroductionScreen from "./screens/IntroductionScreen";
 
 const store = configureStore({
   reducer: { user }
 });
 
-import IntroductionScreen from "./screens/IntroductionScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -38,12 +38,9 @@ const TabNavigator = () => {
   const changeColor = (e) => {
     if (e.target.split("-")[0] == activeTab) return;
     setActiveTab(e.target.split("-")[0]);
-    const colors = ["#A5D8E6", "#F29231", "#143143", "#2D5971"];
+    const colors = ["#143143", "#F29231", "#F29231", "#143143", "#2D5971"];
     console.log(e.target.split("-")[0]);
     console.log(activeTab);
-    while (tabBackgroundColor === colors[0]) {
-      colors.sort(() => Math.random() - 0.5);
-    }
     setActiveColorsMenu({
       tabBackground: colors[0],
       activeIcon: colors[1],
