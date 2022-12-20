@@ -27,7 +27,7 @@ const BannerScreenTitle = (props) => {
           fontWeight: "bold",
         }}
       >
-        Inscription
+        {props.title}
       </Text>
       <FontAwesomeIcon icon={faUser} color="#F29231" size={40} />
 

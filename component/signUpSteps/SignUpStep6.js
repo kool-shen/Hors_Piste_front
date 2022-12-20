@@ -19,6 +19,8 @@ import MainInput from "../inputs/MainInput";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import UploadFile from "../UploadFile";
+import NextPrevious from "../NextPrevious";
+
 export default function SignUpScreenFive(props) {
   const styles = makeStyles();
   const userReducer = useSelector(state => state.user.value)
@@ -69,7 +71,7 @@ export default function SignUpScreenFive(props) {
         source={require("../../assets/signupScreenBackground.png")}
         style={{ width: "100%", height: "100%" }}
       >
-        <BannerScreenTitle progressionStep="6" />
+        <BannerScreenTitle title="Inscription" progressionStep="6" />
 
         <View style={styles.background}>
           <Text style={styles.inputText}>Mon passeport</Text>
@@ -102,6 +104,7 @@ export default function SignUpScreenFive(props) {
           <UploadFile title="Télécharger mon RIB" />
 
           <ValidateButton onPress={handleValidate} />
+          <NextPrevious />
         </View>
       </ImageBackground>
     </KeyboardAwareScrollView>
