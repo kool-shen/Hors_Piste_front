@@ -23,9 +23,18 @@ const DateInput = (props) => {
         value: date,
         onChange,
         mode: currentMode,
-        is24Hour: true,
+        is24Hour: true
       });
       setShow(false);
+    } else {
+      <DatePickerIOS
+        date={date}
+        onDateChange={(newDate) => {
+          setDate(newDate);
+          setShow(false);
+          dispatch(updateUserProperties({ birthDate: date.toISOString() }));
+        }}
+      />;
     }
     setMode(currentMode);
   };
@@ -42,7 +51,16 @@ const DateInput = (props) => {
     <View>
       <TouchableOpacity onPress={showDatepicker} style={styles.button}>
         <Text style={styles.text}>Sélectionne ta date de naissance</Text>
-        {show && (
+
+        {show && Platform.OS === "android" ? (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode={mode}
+            is24Hour={true}
+            onChange={onChange}
+          />
+        ) : (
           <DateTimePicker
             testID="dateTimePicker"
             value={date}
@@ -65,14 +83,14 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     display: "flex",
     alignItems: "flex-start",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   text: {
     fontSize: 16,
     lineHeight: 21,
     fontWeight: "light",
-    color: "grey",
-  },
+    color: "grey"
+  }
 });
 
 export default DateInput;
