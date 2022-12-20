@@ -14,6 +14,7 @@ import MainInput from "../inputs/MainInput";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import BannerScreenTitle from "../BannerScreenTitle";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import SelectInput from "../inputs/SelectInput";
 
@@ -34,7 +35,7 @@ export default function SignUpScreenFour(props) {
   };
 
   return (
-    <>
+    <KeyboardAwareScrollView>
       <ImageBackground
         source={require("../../assets/signupScreenBackground.png")}
         style={{ width: "100%", height: "100%" }}
@@ -80,16 +81,17 @@ export default function SignUpScreenFour(props) {
           <ValidateButton onPress={handleValidate} />
         </View>
       </ImageBackground>
-    </>
+    </KeyboardAwareScrollView>
   );
 }
 
 const makeStyles = () => {
-  const { fontScale } = useWindowDimensions();
+  const { fontScale, height } = useWindowDimensions();
 
   return StyleSheet.create({
     background: {
       flex: 1,
+      minHeight: height,
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",
