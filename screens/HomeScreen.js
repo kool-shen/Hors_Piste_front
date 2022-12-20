@@ -16,15 +16,17 @@ import {
 import { useSelector } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
-
 export default function HomeScreen({ navigation }) {
   const styles = makeStyles();
-  const user = useSelector(state=> state.user.value)
-  console.log(user)
+  const user = useSelector((state) => state.user.value);
+  console.log(user);
   return (
     <View style={styles.mainContainer}>
-      <View /*animation={keyframe}*/ style={styles.container1} >
-        <TouchableOpacity style={styles.card1} onPress={() => navigation.navigate('MyDocuments')}>
+      <View /*animation={keyframe}*/ style={styles.container1}>
+        <TouchableOpacity
+          style={styles.card1}
+          onPress={() => navigation.navigate("MyDocuments")}
+        >
           <Text style={styles.mainText}>Mes{"\n"}documents</Text>
           <FontAwesome name='folder-open' size={40} style={styles.icon} />
         </TouchableOpacity>
@@ -37,7 +39,10 @@ export default function HomeScreen({ navigation }) {
         </TouchableOpacity>
       </View>
       <View style={styles.container3}>
-        <TouchableOpacity style={styles.card3} onPress={() => navigation.navigate('UploadDocuments')}>
+        <TouchableOpacity
+          style={styles.card3}
+          onPress={() => navigation.navigate("UploadDocuments")}
+        >
           <Text style={styles.mainText}>Transmettre</Text>
           <Text style={styles.secondaryText}> mes documents</Text>
           <FontAwesome name='upload' size={40} style={styles.icon2} />
@@ -50,7 +55,10 @@ export default function HomeScreen({ navigation }) {
         </TouchableOpacity>
       </View>
       <View style={styles.container5}>
-        <TouchableOpacity style={styles.card1} onPress={() => navigation.navigate('MyContacts')}>
+        <TouchableOpacity
+          style={styles.card1}
+          onPress={() => navigation.navigate("MyContacts")}
+        >
           <Text style={styles.mainText}>Mes contacts</Text>
           <FontAwesome
             name='address-book'

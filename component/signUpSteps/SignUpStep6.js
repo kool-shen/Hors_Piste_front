@@ -18,7 +18,7 @@ import { faCameraRetro } from "@fortawesome/free-solid-svg-icons";
 import MainInput from "../inputs/MainInput";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
+import UploadFile from "../UploadFile";
 export default function SignUpScreenFive(props) {
   const styles = makeStyles();
   ////RÉCUPÉRER LA PHOTO DANS LE STORE////
@@ -39,25 +39,6 @@ export default function SignUpScreenFive(props) {
 
   /////CAMERA/////
 
-  const [hasPermission, setHasPermission] = useState(false);
-  let cameraRef = useRef(null);
-  const takePicture = async () => {
-    const photo = await cameraRef.takePictureAsync({ quality: 0.3 });
-    dispatch(updateUserProperties({ photo: photo.uri }));
-    console.log(photo.uri);
-  };
-
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(status === "granted");
-    })();
-  }, []);
-
-  if (!hasPermission || !isFocused) {
-    return <View></View>;
-  }
-
   return (
     <KeyboardAwareScrollView>
       <ImageBackground
@@ -67,25 +48,34 @@ export default function SignUpScreenFive(props) {
         <BannerScreenTitle progressionStep="6" />
 
         <View style={styles.background}>
-          <View style={styles.textContainer}>
-            <Text style={styles.mainText}>Prendre ma photo de profil</Text>
-          </View>
-          <View style={styles.cameraContainer}>
-            <Camera
-              style={{
-                zIndex: 1,
-                width: 250,
-                height: 250,
-              }}
-              ref={(ref) => (cameraRef = ref)}
-            ></Camera>
+          <Text style={styles.inputText}>Mon passeport</Text>
 
-            <TouchableOpacity
-              style={styles.redDot}
-              title="Snap"
-              onPress={() => takePicture()}
-            ></TouchableOpacity>
-          </View>
+          <MainInput
+            label="Numéro de passeport"
+            value={user.ICNumber}
+            onChangeText={(value) => setUser({ ...user, ICNumber: value })}
+            style={styles.input}
+          />
+          <MainInput
+            label="Date d'expiration du passeport"
+            value={user.ICExpirationDate}
+            onChangeText={(value) =>
+              setUser({ ...user, ICExpirationDate: value })
+            }
+            style={styles.input}
+          />
+          <UploadFile title="Télécharger mon passeport" />
+
+          <Text style={styles.inputText}>Mon RIB</Text>
+
+          <MainInput
+            label="Numéro IBAN"
+            value={user.IBAN}
+            onChangeText={(value) => setUser({ ...user, IBAN: value })}
+            style={styles.input}
+          />
+
+          <UploadFile title="Télécharger mon RIB" />
 
           <ValidateButton onPress={handleValidate} />
         </View>
@@ -125,6 +115,16 @@ const makeStyles = () => {
       justifyContent: "space-between",
       alignItems: "center",
       padding: 10,
+    },
+
+    inputText: {
+      backgroundColor: "#143143",
+      maxWidth: 150,
+      textAlign: "center",
+      fontSize: 15 / fontScale,
+      borderRadius: 5,
+      color: "white",
+      paddingHorizontal: 10,
     },
     pageTitle: {
       color: "white",

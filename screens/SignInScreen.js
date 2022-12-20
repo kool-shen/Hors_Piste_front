@@ -39,7 +39,7 @@ export default function SignInScreen({ navigation }) {
       }),
     });
     const userData = await res.json();
-    
+
     if (userData.result) {
       dispatch(
         updateUserProperties({
@@ -48,19 +48,19 @@ export default function SignInScreen({ navigation }) {
           email: userData.data.email,
           token: userData.token,
         })
-        );
-        navigation.navigate("TabNavigator");
-      }
-      toast.show({
+      );
+      navigation.navigate("TabNavigator");
+    }
+    toast.show({
       description: userData.message,
     });
   };
 
   return (
-    <>
+    <KeyboardAwareScrollView>
       <ImageBackground
         source={require("../assets/signinScreenBackground.png")}
-        style={{ width: "100%", height: "100%" }}
+        style={styles.imageBackground}
       >
         <View style={styles.background}>
           <Image source={logo} style={styles.logo} resizeMode="contain" />
@@ -76,22 +76,17 @@ export default function SignInScreen({ navigation }) {
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Mot de passe</Text>
             <MainInput
-              label="Ton adresse mail"
+              label="Ton mot de passe"
               value={password}
-              onChangeText={(value) =>
-                setPassword(value)
-              }
+              onChangeText={(value) => setPassword(value)}
               style={styles.input}
             />
           </View>
           <TouchableOpacity
-            style={styles.validateButton}
+            style={styles.connectButton}
             onPress={() => handleConnect()}
           >
-            <Text style={styles.validate}>Valider</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.forgot}>Mot de passe oublié ?</Text>
+            <Text style={styles.validate}>Se connecter</Text>
           </TouchableOpacity>
 
           <Text style={styles.notYet}>Pas encore de compte ?</Text>
@@ -103,18 +98,26 @@ export default function SignInScreen({ navigation }) {
           </TouchableOpacity>
         </View>
       </ImageBackground>
-    </>
+    </KeyboardAwareScrollView>
   );
 }
 const makeStyles = () => {
-  const { fontScale } = useWindowDimensions();
+  const { fontScale, height, width } = useWindowDimensions();
   return StyleSheet.create({
     background: {
       flex: 1,
+      minHeight: height,
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",
-
+      paddingBottom: 100,
+    },
+    imageBackground: {
+      flex: 1,
+      minHeight: height,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-around",
       paddingBottom: 100,
     },
 
@@ -142,10 +145,11 @@ const makeStyles = () => {
       color: "white",
       fontWeight: "bold",
       fontSize: 20 / fontScale,
+      flexWrap: "wrap",
     },
     inputText: {
       backgroundColor: "#143143",
-      maxWidth: 150,
+      minWidth: 150,
       textAlign: "center",
       fontSize: 15 / fontScale,
       borderRadius: 5,
@@ -162,15 +166,16 @@ const makeStyles = () => {
       paddingTop: 20,
     },
 
-    validateButton: {
-      backgroundColor: "green",
-      paddingHorizontal: 40,
+    connectButton: {
+      backgroundColor: "#F29231",
+      paddingHorizontal: 30,
+      paddingVertical: 10,
       borderRadius: 10,
     },
     validate: {
       color: "white",
       fontWeight: "bold",
-      fontSize: 25 / fontScale,
+      fontSize: 20 / fontScale,
     },
     logo: {
       width: 400,

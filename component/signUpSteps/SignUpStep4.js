@@ -88,7 +88,7 @@ export default function SignUpScreenThree(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Lien (famille, ami,...)</Text>
+            <Text style={styles.inputText}>Lien (famille, ami(e),...)</Text>
             <MainInput
               label="Lien"
               value={user.relation}

@@ -15,6 +15,7 @@ import MainInput from "../inputs/MainInput";
 import ValidateButton from "../buttons/ValidateButton";
 import { BACKEND_URL } from "@env";
 import BannerScreenTitle from "../BannerScreenTitle";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function SignInScreen({ navigation, nextStep }) {
   const dispatch = useDispatch();
@@ -65,7 +66,7 @@ export default function SignInScreen({ navigation, nextStep }) {
   };
 
   return (
-    <>
+    <KeyboardAwareScrollView>
       <ImageBackground
         source={require("../../assets/signupScreenBackground.png")}
         style={{ width: "100%", height: "100%" }}
@@ -103,14 +104,15 @@ export default function SignInScreen({ navigation, nextStep }) {
           </View>
         </View>
       </ImageBackground>
-    </>
+    </KeyboardAwareScrollView>
   );
 }
 const makeStyles = () => {
-  const { fontScale, width, eight } = useWindowDimensions();
+  const { fontScale, width, height } = useWindowDimensions();
   return StyleSheet.create({
     background: {
       flex: 1,
+      minHeight: height,
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",
@@ -157,6 +159,7 @@ const makeStyles = () => {
       borderRadius: 5,
       color: "white",
       paddingHorizontal: 10,
+      flexWrap: "nowrap",
     },
     forgot: {
       fontWeight: "bold",
