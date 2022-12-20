@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Button, View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  Button,
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  DatePickerIOS
+} from "react-native";
 import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
@@ -26,15 +33,6 @@ const DateInput = (props) => {
         is24Hour: true
       });
       setShow(false);
-    } else {
-      <DatePickerIOS
-        date={date}
-        onDateChange={(newDate) => {
-          setDate(newDate);
-          setShow(false);
-          dispatch(updateUserProperties({ birthDate: date.toISOString() }));
-        }}
-      />;
     }
     setMode(currentMode);
   };
@@ -52,15 +50,7 @@ const DateInput = (props) => {
       <TouchableOpacity onPress={showDatepicker} style={styles.button}>
         <Text style={styles.text}>Sélectionne ta date de naissance</Text>
 
-        {show && Platform.OS === "android" ? (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={mode}
-            is24Hour={true}
-            onChange={onChange}
-          />
-        ) : (
+        {show && (
           <DateTimePicker
             testID="dateTimePicker"
             value={date}
