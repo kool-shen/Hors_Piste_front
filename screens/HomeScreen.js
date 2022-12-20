@@ -15,41 +15,55 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 
-
 export default function HomeScreen({ navigation }) {
   const styles = makeStyles();
-  const user = useSelector(state=> state.user.value)
-  console.log(user)
+  const user = useSelector((state) => state.user.value);
+  console.log(user);
   return (
     <View style={styles.mainContainer}>
-      <View /*animation={keyframe}*/ style={styles.container1} >
-        <TouchableOpacity style={styles.card1} onPress={() => navigation.navigate('MyDocuments')}>
+      <View /*animation={keyframe}*/ style={styles.container1}>
+        <TouchableOpacity
+          style={styles.card1}
+          onPress={() => navigation.navigate("MyDocuments")}
+        >
           <Text style={styles.mainText}>Mes{"\n"}documents</Text>
           <FontAwesomeIcon icon={faFile} size={50} style={styles.icon} />
         </TouchableOpacity>
       </View>
-      <View style={styles.container2} >
-        <TouchableOpacity style={styles.card2} onPress={() => navigation.navigate('SignDocuments')}>
-          <FontAwesomeIcon icon={faPen} size={50} style={styles.icon3}  />
+      <View style={styles.container2}>
+        <TouchableOpacity
+          style={styles.card2}
+          onPress={() => navigation.navigate("SignDocuments")}
+        >
+          <FontAwesomeIcon icon={faPen} size={50} style={styles.icon3} />
           <Text style={styles.mainText}>Signer</Text>
           <Text style={styles.secondaryText}> mes documents</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.container3}>
-        <TouchableOpacity style={styles.card3} onPress={() => navigation.navigate('UploadDocuments')}>
+        <TouchableOpacity
+          style={styles.card3}
+          onPress={() => navigation.navigate("UploadDocuments")}
+        >
           <Text style={styles.mainText}>Transmettre</Text>
           <Text style={styles.secondaryText}> mes documents</Text>
           <FontAwesomeIcon icon={faEnvelope} size={50} style={styles.icon2} />
         </TouchableOpacity>
       </View>
       <View style={styles.container4}>
-        <TouchableOpacity style={styles.card2} onPress={() => navigation.navigate('MyMission')}>
+        <TouchableOpacity
+          style={styles.card2}
+          onPress={() => navigation.navigate("MyMission")}
+        >
           <FontAwesomeIcon icon={faCircleDot} size={50} style={styles.icon3} />
           <Text style={styles.mainText}>Ma mission</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.container5}>
-        <TouchableOpacity style={styles.card1} onPress={() => navigation.navigate('MyContacts')}>
+        <TouchableOpacity
+          style={styles.card1}
+          onPress={() => navigation.navigate("MyContacts")}
+        >
           <Text style={styles.mainText}>Mes contacts</Text>
           <FontAwesomeIcon
             icon={faAddressBook}
@@ -86,7 +100,7 @@ const makeStyles = () => {
       transform: [{ rotate: "13deg" }],
       width: 200,
       height: 80,
-      borderRadius: 20,
+      borderRadius: 10,
       display: "flex",
       flexDirection: "row",
       alignItems: "center",

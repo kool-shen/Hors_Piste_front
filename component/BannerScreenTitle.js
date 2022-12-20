@@ -38,7 +38,7 @@ const BannerScreenTitle = (props) => {
           alignSelf: "flex-end",
         }}
       >
-        {props.progressionStep}/8
+        {props.progressionStep}/6
       </Text>
     </View>
   );

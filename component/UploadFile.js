@@ -9,7 +9,7 @@ import {
 import React, { useState } from "react";
 import * as DocumentPicker from "expo-document-picker";
 
-const UploadFile = () => {
+const UploadFile = (props) => {
   const pickDocument = async () => {
     const result = await DocumentPicker.getDocumentAsync({});
     console.log(result.uri);
@@ -18,36 +18,17 @@ const UploadFile = () => {
 
   return (
     <View>
-      <Text style={styles.file}>
-        Upload file
-        <View style={styles.button}>
-          <TouchableOpacity>
-            <Button
-              title="upload your file"
-              color="black"
-              onPress={pickDocument}
-            />
-          </TouchableOpacity>
-        </View>
-      </Text>
+      <View style={styles.button}>
+        <TouchableOpacity>
+          <Button title={props.title} color="#F29231" onPress={pickDocument} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  file: {
-    color: "black",
-    marginHorizontal: 145,
-  },
-  button: {
-    marginHorizontal: 60,
-  },
+  button: {},
 });
 
 export default UploadFile;
-
-
-
-
-
-

@@ -64,7 +64,7 @@ export default function SignUpScreenTwo(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Ville</Text>
+            <Text style={styles.inputText}>Ville de résidence</Text>
             <MainInput
               label="Ta ville de résidence"
               value={user.city}
@@ -77,7 +77,7 @@ export default function SignUpScreenTwo(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Pays</Text>
+            <Text style={styles.inputText}>Pays de résidence</Text>
             <MainInput
               label="Ton pays de résidence"
               value={user.city}
