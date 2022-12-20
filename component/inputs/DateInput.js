@@ -5,7 +5,6 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  DatePickerIOS
 } from "react-native";
 import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import { useDispatch } from "react-redux";
@@ -13,7 +12,8 @@ import { updateUserProperties } from "../../reducers/user";
 
 const DateInput = (props) => {
   const dispatch = useDispatch();
-  const [date, setDate] = useState(new Date(1598051730000));
+  const initialDate = new Date(1598051730000)
+  const [date, setDate] = useState(initialDate);
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
 
@@ -48,7 +48,11 @@ const DateInput = (props) => {
   return (
     <View>
       <TouchableOpacity onPress={showDatepicker} style={styles.button}>
-        <Text style={styles.text}>Sélectionne ta date de naissance</Text>
+        {date === initialDate ? (
+          <Text style={styles.text}>Sélectionne ta date de naissance</Text>
+        ) : (
+          <Text style={styles.text}>{date.toLocaleString().split(' ')[0]}</Text>
+        )}
 
         {show && (
           <DateTimePicker
