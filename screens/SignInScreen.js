@@ -20,8 +20,8 @@ import MainInput from "../component/inputs/MainInput";
 export default function SignInScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("leoferte@gmail.com");
+  const [password, setPassword] = useState("Ferte");
   const styles = makeStyles();
   const toast = useToast();
 
