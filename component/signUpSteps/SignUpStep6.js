@@ -21,6 +21,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import UploadFile from "../UploadFile";
 export default function SignUpScreenFive(props) {
   const styles = makeStyles();
+  const userReducer = useSelector(state => state.user.value)
   ////RÉCUPÉRER LA PHOTO DANS LE STORE////
 
   const dispatch = useDispatch();
@@ -28,10 +29,33 @@ export default function SignUpScreenFive(props) {
     photo: "",
   });
 
-  const handleValidate = () => {
+  const handleValidate = async () => {
     dispatch(updateUserProperties(user));
-    props.nextStep();
-  };
+    const res = await fetch(`${BACKEND_URL}/users/signup`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userReducer),
+    });
+    const userData = await res.json();
+    if (userData.result) {
+      dispatch(updateUserProperties(userData.data))
+      const res = await fetch(`${BACKEND_URL}/docs/createFiles`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userReducer),
+      });
+      props.nextStep();
+    }
+    toast.show({
+      description: userData.message,
+    });
+  }
 
   /////
 
