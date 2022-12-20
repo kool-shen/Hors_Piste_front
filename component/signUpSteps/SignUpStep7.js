@@ -29,6 +29,8 @@ export default function SignUpScreenFive(props) {
   const dispatch = useDispatch();
   const toast = useToast();
   const [user, setUser] = useState({
+    ICExpirationDate: "",
+    ICNumber: "",
     IBAN: "",
   });
 
@@ -63,7 +65,7 @@ export default function SignUpScreenFive(props) {
   let cameraRef = useRef(null);
   const takePicture = async () => {
     const photo = await cameraRef.takePictureAsync({ quality: 0.3 });
-    dispatch(updateUserProperties({ RIBImg: photo.uri }));
+    dispatch(updateUserProperties({ passportImg: photo.uri }));
   };
 
   useEffect(() => {
@@ -112,7 +114,7 @@ export default function SignUpScreenFive(props) {
           <MainInput
             label="Date d'expiration du passeport"
             width="75%"
-            value={user.IBAN}
+            value={user.ICExpirationDate}
             onChangeText={(value) =>
               setUser({ ...user, ICExpirationDate: value })
             }
@@ -121,7 +123,7 @@ export default function SignUpScreenFive(props) {
           <MainInput
             label="Numéro de passeport"
             width="75%"
-            value={user.IBAN}
+            value={user.ICNumber}
             onChangeText={(value) => setUser({ ...user, ICNumber: value })}
             style={styles.input}
           />
