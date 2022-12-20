@@ -7,7 +7,6 @@ import {
   ImageBackground,
   TouchableOpacity,
   Button,
-  useWindowDimensions,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -23,7 +22,7 @@ const ContactsScreen = () => {
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        `http://10.2.1.233:3000/missions/${user.mission._id}/${user.userId}`
+        `${BACKEND_URL}/missions/${user.mission._id}/${user.userId}`
       );
       const missionData = await res.json();
       setMission(missionData.data);
