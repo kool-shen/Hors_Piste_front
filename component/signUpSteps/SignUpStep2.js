@@ -1,113 +1,109 @@
+import {
+  StyleSheet,
+  View,
+  Text,
+  useWindowDimensions,
+  ImageBackground,
+} from "react-native";
 import { useState } from "react";
-import { StyleSheet, View, Text, useWindowDimensions } from "react-native";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import BannerScreenTitle from "../BannerScreenTitle";
-
 import MainInput from "../inputs/MainInput";
-import DateInput from "../inputs/DateInput";
-import { useToast } from "native-base";
-import SelectInput from "../inputs/SelectInput";
+import BannerScreenTitle from "../BannerScreenTitle";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-export default function SignUpScreenOne(props) {
-  const toast = useToast();
+export default function SignUpScreenTwo(props) {
   const styles = makeStyles();
-
-  ////reducer user /// 
-
   const dispatch = useDispatch();
 
   const [user, setUser] = useState({
     address: { street: "", zipCode: "", city: "", country: "" },
-    phone: ''
+    phone: "",
   });
 
-  const handleValidate = () => {
-    if (user.password !== user.passwordConfirm) {
-      return toast.show({
-        description: "Les mots de passes ne sont pas identiques.",
-      });
-    }
+  function handleValidate() {
     dispatch(updateUserProperties(user));
     props.nextStep();
-  };
+  }
 
   return (
-    <>
-      <BannerScreenTitle progressionStep="2" />
-      <View style={styles.background}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Ville de naissance</Text>
-          <MainInput
-            label="Ta ville de naissance"
-            value={user.birthCity}
-            onChangeText={(value) => setUser({ ...user, birthCity: value })}
-            style={styles.input}
-          />
+    <KeyboardAwareScrollView>
+      <ImageBackground
+        source={require("../../assets/signupScreenBackground.png")}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <BannerScreenTitle progressionStep="2" />
+
+        <View style={styles.background}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Ville de naissance</Text>
+            <MainInput
+              label="Ta ville de naissance"
+              value={user.birthCity}
+              onChangeText={(value) =>
+                setUser({
+                  ...user,
+                  birthCity: value,
+                })
+              }
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Téléphone</Text>
+            <MainInput
+              label="Ton numéro de téléphone"
+              value={user.phone}
+              onChangeText={(value) =>
+                setUser({
+                  ...user,
+                  phone: value,
+                })
+              }
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Mot de passe</Text>
+            <MainInput
+              label="Ton mot de passe"
+              value={user.password}
+              onChangeText={(value) =>
+                setUser({
+                  ...user,
+                  password: value,
+                })
+              }
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Confirmation mot de passe</Text>
+            <MainInput
+              label="Confirmation du mot de passe"
+              value={user.password}
+              onChangeText={(value) =>
+                setUser({
+                  ...user,
+                  password: value,
+                })
+              }
+            />
+          </View>
+
+          <ValidateButton onPress={handleValidate} />
         </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Telephone</Text>
-          <MainInput
-            label="Ton numéro de téléphone"
-            value={user.phone}
-            onChangeText={(value) =>
-              setUser({
-                ...user,
-                phone: value,
-              })
-            }
-          />
-        </View>
-        
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Telephone</Text>
-          <MainInput
-            label="Ton numéro de téléphone"
-            value={user.phone}
-            onChangeText={(value) =>
-              setUser({
-                ...user,
-                phone: value,
-              })
-            }
-          />
-        </View>
-        
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Code Postal</Text>
-          <MainInput
-            label="Ton mot de passe"
-            value={user.password}
-            onChangeText={(value) => setUser({ ...user, password: value })}
-            style={styles.input}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Confirmation du mot de passe</Text>
-          <MainInput
-            label="Confirmer le mot de passe"
-            value={user.passwordConfirm}
-            onChangeText={(value) =>
-              setUser({ ...user, passwordConfirm: value })
-            }
-            style={styles.input}
-          />
-        </View>
-        <ValidateButton onPress={handleValidate} />
-      </View>
-    </>
+      </ImageBackground>
+    </KeyboardAwareScrollView>
   );
 }
 
 const makeStyles = () => {
-  const { fontScale } = useWindowDimensions();
+  const { fontScale, height } = useWindowDimensions();
 
   return StyleSheet.create({
     background: {
       flex: 1,
+      minHeight: height,
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",
@@ -122,25 +118,30 @@ const makeStyles = () => {
       justifyContent: "space-between",
     },
     input: {
-      margin: 10,
+      backgroundColor: "white",
+      height: 40,
+      width: 250,
+      borderColor: "gray",
+      borderWidth: 1,
+      placeholderTextColor: "gray",
     },
     inputText: {
       backgroundColor: "#143143",
-      maxWidth: 150,
+      maxWidth: 300,
       textAlign: "center",
-      fontSize: 15,
+      fontSize: 15 / fontScale,
       borderRadius: 5,
       color: "white",
       paddingHorizontal: 10,
     },
     pageTitle: {
       color: "white",
-      fontSize: 40,
+      fontSize: 40 / fontScale,
       fontWeight: "bold",
     },
     progression: {
       color: "white",
-      fontSize: 15,
+      fontSize: 15 / fontScale,
       alignSelf: "flex-end",
     },
     pageTitleContainer: {
@@ -161,6 +162,11 @@ const makeStyles = () => {
       backgroundColor: "green",
       paddingHorizontal: 40,
       borderRadius: 10,
+    },
+    validate: {
+      color: "white",
+      fontWeight: "bold",
+      fontSize: 25 / fontScale,
     },
   });
 };

@@ -1,11 +1,18 @@
 import { useState } from "react";
-import { StyleSheet, View, Text, useWindowDimensions } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  useWindowDimensions,
+  ImageBackground,
+} from "react-native";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import BannerScreenTitle from "../BannerScreenTitle";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import MainInput from "../inputs/MainInput";
 import DateInput from "../inputs/DateInput";
@@ -16,7 +23,7 @@ export default function SignUpScreenOne(props) {
   const toast = useToast();
   const styles = makeStyles();
   ////reducer user ///
-  console.log(user)
+  console.log(user);
   const dispatch = useDispatch();
 
   const [user, setUser] = useState({
@@ -35,59 +42,65 @@ export default function SignUpScreenOne(props) {
   };
 
   return (
-    <>
-      <BannerScreenTitle progressionStep="1" />
-      <View style={styles.background}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Prénom</Text>
+    <KeyboardAwareScrollView>
+      <ImageBackground
+        source={require("../../assets/signupScreenBackground.png")}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <BannerScreenTitle progressionStep="1" />
+        <View style={styles.background}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Prénom</Text>
 
-          <MainInput
-            label="Ton prénom"
-            value={user.name}
-            onChangeText={(value) => setUser({ ...user, name: value })}
-            style={styles.input}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Nom</Text>
-          <MainInput
-            label="Ton nom de famille"
-            value={user.surname}
-            onChangeText={(value) => setUser({ ...user, surname: value })}
-            style={styles.input}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Date de naissance</Text>
-          <DateInput />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Genre</Text>
-          <SelectInput
-            label="Ton genre"
-            value={user.degrees}
-            onValueChange={(value) => setUser({ ...user, gender: value })}
-            style={styles.input}
-            numberOfSelections="4"
-            label1="Homme"
-            label2="Femme"
-            label3="Transgenre"
-            label4="Non-binaire"
-          />
-        </View>
+            <MainInput
+              label="Ton prénom"
+              value={user.name}
+              onChangeText={(value) => setUser({ ...user, name: value })}
+              style={styles.input}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Nom</Text>
+            <MainInput
+              label="Ton nom de famille"
+              value={user.surname}
+              onChangeText={(value) => setUser({ ...user, surname: value })}
+              style={styles.input}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Date de naissance</Text>
+            <DateInput />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Genre</Text>
+            <SelectInput
+              label="Ton genre"
+              value={user.degrees}
+              onValueChange={(value) => setUser({ ...user, gender: value })}
+              style={styles.input}
+              numberOfSelections="4"
+              label1="Homme"
+              label2="Femme"
+              label3="Transgenre"
+              label4="Non-binaire"
+            />
+          </View>
 
-        <ValidateButton onPress={handleValidate} />
-      </View>
-    </>
+          <ValidateButton onPress={handleValidate} />
+        </View>
+      </ImageBackground>
+    </KeyboardAwareScrollView>
   );
 }
 
 const makeStyles = () => {
-  const { fontScale } = useWindowDimensions();
+  const { fontScale, height } = useWindowDimensions();
 
   return StyleSheet.create({
     background: {
       flex: 1,
+      minHeight: height,
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",

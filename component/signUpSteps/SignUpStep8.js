@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   useWindowDimensions,
+  ImageBackground,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
@@ -78,37 +79,42 @@ export default function SignUpScreenFive(props) {
 
   return (
     <>
-      <BannerScreenTitle progressionStep="8" />
+      <ImageBackground
+        source={require("../../assets/signupScreenBackground.png")}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <BannerScreenTitle progressionStep="8" />
 
-      <View style={styles.background}>
-        <View style={styles.textContainer}>
-          <Text style={styles.mainText}>Prendre mon RIB en photo</Text>
+        <View style={styles.background}>
+          <View style={styles.textContainer}>
+            <Text style={styles.mainText}>Prendre mon RIB en photo</Text>
+          </View>
+          <View style={styles.cameraContainer}>
+            <Camera
+              style={{
+                zIndex: 1,
+                width: 250,
+                height: 250,
+              }}
+              ref={(ref) => (cameraRef = ref)}
+            ></Camera>
+
+            <TouchableOpacity
+              style={styles.redDot}
+              title="Snap"
+              onPress={() => takePicture()}
+            ></TouchableOpacity>
+          </View>
+
+          <MainInput
+            label="n° IBAN"
+            value={user.IBAN}
+            onChangeText={(value) => setUser({ ...user, IBAN: value })}
+            style={styles.input}
+          />
+          <ValidateButton onPress={handleValidate} />
         </View>
-        <View style={styles.cameraContainer}>
-          <Camera
-            style={{
-              zIndex: 1,
-              width: 250,
-              height: 250,
-            }}
-            ref={(ref) => (cameraRef = ref)}
-          ></Camera>
-
-          <TouchableOpacity
-            style={styles.redDot}
-            title="Snap"
-            onPress={() => takePicture()}
-          ></TouchableOpacity>
-        </View>
-
-        <MainInput
-          label="n° IBAN"
-          value={user.IBAN}
-          onChangeText={(value) => setUser({ ...user, IBAN: value })}
-          style={styles.input}
-        />
-        <ValidateButton onPress={handleValidate} />
-      </View>
+      </ImageBackground>
     </>
   );
 }

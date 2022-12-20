@@ -3,11 +3,11 @@ import {
   Text,
   StyleSheet,
   Image,
-  useWindowDimensions
+  useWindowDimensions,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { BACKEND_URL } from "@env"
+import { BACKEND_URL } from "@env";
 
 const ContactsScreen = () => {
   const user = useSelector((state) => state.user.value);
@@ -25,7 +25,7 @@ const ContactsScreen = () => {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../assets/contact.png")}
+        source={require("../assets/contactScreenBackground.png")}
         style={styles.container}
       />
       <View style={styles.pageTitleContainer}>
@@ -68,12 +68,12 @@ const makeStyles = () => {
     container: {
       flex: 1,
       width: "100%",
-      height: "100%"
+      height: "100%",
     },
     pageTitle: {
       color: "white",
       fontSize: 40 / fontScale,
-      fontWeight: "bold"
+      fontWeight: "bold",
     },
     pageTitleContainer: {
       backgroundColor: "#2D5971",
@@ -86,20 +86,20 @@ const makeStyles = () => {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
-      padding: 10
+      padding: 10,
     },
     firstContainer: {
-      backgroundColor: "red"
+      backgroundColor: "red",
     },
     textContainer: {
-      fontSize: 30
+      fontSize: 30,
     },
     infoContainer: {
-      fontSize: 15
+      fontSize: 15,
     },
     secondContainer: {
-      backgroundColor: "violet"
-    }
+      backgroundColor: "violet",
+    },
   });
 };
 
