@@ -13,12 +13,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useToast } from "native-base";
+
 
 import MainInput from "../inputs/MainInput";
 
 export default function SignUpScreenTwo(props) {
+  const toast = useToast()
   const styles = makeStyles();
   const dispatch = useDispatch();
+  const [firstPassword, setFirstPassword] = useState('')
+  const [checkPassword, setCheckPassword] = useState('')
 
   const [user, setUser] = useState({
     address: { street: "", zipCode: "", city: "", country: "" },
@@ -26,8 +31,17 @@ export default function SignUpScreenTwo(props) {
   });
 
   function handleValidate() {
-    dispatch(updateUserProperties(user));
-    props.nextStep();
+    if (setFirstPassword === setCheckPassword) {
+      setUser({
+        ...user,
+      })
+      dispatch(updateUserProperties(user));
+      props.nextStep();
+    } else {
+      toast.show({
+        description: 'Les mots de passe ne correspondent pas !',
+      });
+    }
   }
 
   return (
@@ -68,27 +82,21 @@ export default function SignUpScreenTwo(props) {
 
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Mot de passe</Text>
-            <MainInput
+            <PasswordInput
               label="Ton mot de passe"
-              value={user.password}
+              value={firstPassword}
               onChangeText={(value) =>
-                setUser({
-                  ...user,
-                  password: value,
-                })
+                setFirstPassword(value)
               }
             />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Confirmation mot de passe</Text>
-            <MainInput
+            <PasswordInput
               label="Confirmation du mot de passe"
-              value={user.password}
+              value={checkPassword}
               onChangeText={(value) =>
-                setUser({
-                  ...user,
-                  password: value,
-                })
+                setCheckPassword(value)
               }
             />
           </View>

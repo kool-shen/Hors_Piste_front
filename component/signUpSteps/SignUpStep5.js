@@ -46,27 +46,34 @@ export default function SignUpScreenFour(props) {
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Diplôme</Text>
             <SelectInput
-              label="Ton / tes diplôme(s)"
+              label="Ton niveau de diplôme"
               value={user.degrees}
               onValueChange={(value) => setUser({ ...user, degrees: value })}
               style={styles.input}
-              numberOfSelections="3"
-              label1="1"
-              label2="2"
-              label3="3"
+              numberOfSelections="7"
+              label1="niveau VI: je n'ai jamais obtenu de diplôme"
+              label2="niveau V (CAP, BEP...)"
+              label3="niveau IV (baccalauréats, BP, BTM...)"
+              label4="niveau III (BTS, DUT, BM, autres bac+2...)"
+              label5='niveau II (licences, autres Bac+3...)'
+              label6='niveau I (Masters, Doctorat, autres bac+4/5 et plus...)'
+              label7='autre'
             />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Situation</Text>
             <SelectInput
-              label="Ta situation"
+              label="Ta situation actuelle"
               value={user.occupation}
               onValueChange={(value) => setUser({ ...user, occupation: value })}
               style={styles.input}
-              numberOfSelections="3"
-              label1="1"
-              label2="2"
-              label3="3"
+              numberOfSelections="6"
+              label1="en études"
+              label2="en formation"
+              label3="en volontariat"
+              label4='en emploi'
+              label5="en recherche d'emploi"
+              label6='autre'
             />
           </View>
           <View style={styles.inputContainer}>

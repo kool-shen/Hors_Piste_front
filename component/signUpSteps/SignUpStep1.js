@@ -79,11 +79,10 @@ export default function SignUpScreenOne(props) {
               value={user.degrees}
               onValueChange={(value) => setUser({ ...user, gender: value })}
               style={styles.input}
-              numberOfSelections="4"
+              numberOfSelections="3"
               label1="Homme"
               label2="Femme"
-              label3="Transgenre"
-              label4="Non-binaire"
+              label3="Non-binaire"
             />
           </View>
 

@@ -6,7 +6,7 @@ const PasswordInput = (props) => {
 
   return (
     <TextInput
-      secureTextEntry
+      secureTextEntry={true}
       right={<TextInput.Icon icon="eye" />}
       outlineStyle={{ borderColor: "#143143" }}
       selectionColor="#143143"
