@@ -3,10 +3,15 @@ import {
   Text,
   StyleSheet,
   KeyboardAvoidingView,
-  useWindowDimensions, Linking} from "react-native";
-import {  Spinner, Button } from "native-base";
+  useWindowDimensions,
+  Linking,
+  ImageBackground,
+  ScrollView
+} from "react-native";
+
+import { Spinner, Button } from "native-base";
 import React, { useEffect, useState } from "react";
-import { BACKEND_URL } from "@env"
+import { BACKEND_URL } from "@env";
 
 import { useSelector } from "react-redux";
 
@@ -17,21 +22,27 @@ const MyDocumentsScreen = () => {
   const user = useSelector((state) => state.user.value);
 
   useEffect(() => {
-    (async () => {
-      const res = await fetch(
-        `${BACKEND_URL}/docs/listFolder/${user.folderIds.completeFolderId}`
-      );
-      const documentsData = await res.json();
-      setDocuments(documentsData);
-      setLoading(false);
-    })();
+    fetchCompleteDocs();
   }, []);
-  console.log(documents)
+
+  const fetchCompleteDocs = async () => {
+    setLoading(true);
+    const res = await fetch(
+      `${BACKEND_URL}/docs/listFolder/${user.folderIds.completeFolderId}`
+    );
+    const documentsData = await res.json();
+    setDocuments(documentsData);
+    setLoading(false);
+  };
+
+  console.log(documents);
   const documentsToComponents = documents.map((document, i) => (
     <Button
       key={i}
       style={styles.listItem}
-      onPress={()=> Linking.openURL(`https://docs.google.com/document/d/${document.id}`)}
+      onPress={() =>
+        Linking.openURL(`https://docs.google.com/document/d/${document.id}`)
+      }
     >
       {document.name}
     </Button>
@@ -41,26 +52,29 @@ const MyDocumentsScreen = () => {
       style={styles.mainContainer}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <View style={styles.mainContainer}>
+      <ImageBackground
+        source={require("../assets/backgrounds/orange.png")}
+        style={styles.mainContainer}
+      >
         <View style={styles.pageTitleContainer}>
           <Text style={styles.pageTitle}>Mes documents</Text>
         </View>
-        <View style={styles.background}>
-          <View style={styles.subBackground}>
-            <View>
-              <View style={styles.listContainer}>
-                {loading ? <Spinner size="lg" /> : documentsToComponents}
-              </View>
-            </View>
+        <ScrollView>
+          <View style={styles.listContainer}>
+            {loading ? <Spinner size="lg" /> : documentsToComponents}
+            {!documentsToComponents.length && (
+              <Text>Il n'y a aucun document à afficher pour le moment.</Text>
+            )}
+            <Button onPress={() => fetchCompleteDocs()}>Actualiser</Button>
           </View>
-        </View>
-      </View>
+        </ScrollView>
+      </ImageBackground>
     </KeyboardAvoidingView>
   );
 };
 
 const makeStyles = () => {
-  const { fontScale, width } = useWindowDimensions();
+  const { fontScale, width, height } = useWindowDimensions();
   return StyleSheet.create({
     mainContainer: {
       backgroundColor: "#F8DFBD",
@@ -68,18 +82,6 @@ const makeStyles = () => {
       width: "100%",
       flex: 1,
       zIndex: -1
-    },
-    background: {
-      backgroundColor: "#A5D8E6",
-      transform: [
-        { rotate: "-35deg" },
-        { translateX: -100 },
-        { translateY: -50 }
-      ],
-      height: "100%",
-      width: 600,
-      flex: 1,
-      alignItems: "center"
     },
     subBackground: {
       transform: [{ rotate: "35deg" }, { translateX: 9 }, { translateY: -16 }],
@@ -121,7 +123,12 @@ const makeStyles = () => {
       margin: 15,
       width: width * 0.9
     },
-    listContainer: {}
+    listContainer: {
+      marginTop: height*0.05,
+      height: height,
+      justifyContent: "center",
+      alignItems: "center"
+    }
   });
 };
 export default MyDocumentsScreen;

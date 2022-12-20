@@ -3,7 +3,8 @@ import {
   Text,
   StyleSheet,
   KeyboardAvoidingView,
-  useWindowDimensions
+  useWindowDimensions,
+  ImageBackground
 } from "react-native";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -16,33 +17,31 @@ const MyMissionScreen = () => {
       style={styles.mainContainer}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <View style={styles.mainContainer}>
+      <ImageBackground
+        source={require("../assets/backgrounds/orange.png")}
+        style={styles.mainContainer}
+      >
         <View style={styles.pageTitleContainer}>
           <Text style={styles.pageTitle}>Ma Mission</Text>
         </View>
-        <View style={styles.background}>
-          <View style={styles.subBackground}>
-            <View>
-              <View>
-                {user.mission.projectName && (
-                  <Text>
-                    Type de mission: {user.mission.missionType}
-                    {"\n"}Nom du projet: {user.mission.projectName}
-                    {"\n"}Date de départ: {user.mission.startDate}
-                    {"\n"}Date de fin: {user.mission.endDate}
-                  </Text>
-                )}
-              </View>
-            </View>
-          </View>
+        <View style={styles.missionListContainer}>
+          {user.mission.projectName && (
+            <>
+              <Text>Type de mission: {user.mission.missionType}</Text>
+              <Text>Date de départ: {user.mission.startDate}</Text>
+              <Text>Nom du projet: {user.mission.projectName}</Text>
+              <Text>Date de fin: {user.mission.endDate}</Text>
+            </>
+            
+          )}
         </View>
-      </View>
+      </ImageBackground>
     </KeyboardAvoidingView>
   );
 };
 
 const makeStyles = () => {
-  const { fontScale } = useWindowDimensions();
+  const { fontScale, height } = useWindowDimensions();
   return StyleSheet.create({
     mainContainer: {
       backgroundColor: "#F8DFBD",
@@ -50,28 +49,6 @@ const makeStyles = () => {
       width: "100%",
       flex: 1,
       zIndex: -1
-    },
-    background: {
-      backgroundColor: "#A5D8E6",
-      transform: [
-        { rotate: "-35deg" },
-        { translateX: -100 },
-        { translateY: -50 }
-      ],
-      height: "100%",
-      width: 600,
-      flex: 1,
-      alignItems: "center"
-    },
-    subBackground: {
-      transform: [{ rotate: "35deg" }, { translateX: 9 }, { translateY: -16 }],
-      height: "100%",
-      width: 300,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-around",
-      paddingTop: 130,
-      paddingBottom: 20
     },
 
     pageTitle: {
@@ -96,6 +73,11 @@ const makeStyles = () => {
       flexDirection: "row",
       justifyContent: "space-between",
       padding: 10
+    },
+    missionListContainer: {
+      height,
+      justifyContent: 'center',
+      alignItems: 'center'
     }
   });
 };
