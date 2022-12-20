@@ -14,6 +14,7 @@ import {
   faAddressBook,
 } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 
 export default function HomeScreen({ navigation }) {
@@ -25,12 +26,12 @@ export default function HomeScreen({ navigation }) {
       <View /*animation={keyframe}*/ style={styles.container1} >
         <TouchableOpacity style={styles.card1} onPress={() => navigation.navigate('MyDocuments')}>
           <Text style={styles.mainText}>Mes{"\n"}documents</Text>
-          <FontAwesomeIcon icon={faFile} size={50} style={styles.icon} />
+          <FontAwesome name='folder-open' size={40} style={styles.icon} />
         </TouchableOpacity>
       </View>
       <View style={styles.container2} >
         <TouchableOpacity style={styles.card2} onPress={() => navigation.navigate('SignDocuments')}>
-          <FontAwesomeIcon icon={faPen} size={50} style={styles.icon3}  />
+          <FontAwesome name='pencil' size={40} style={styles.icon3}  />
           <Text style={styles.mainText}>Signer</Text>
           <Text style={styles.secondaryText}> mes documents</Text>
         </TouchableOpacity>
@@ -39,22 +40,22 @@ export default function HomeScreen({ navigation }) {
         <TouchableOpacity style={styles.card3} onPress={() => navigation.navigate('UploadDocuments')}>
           <Text style={styles.mainText}>Transmettre</Text>
           <Text style={styles.secondaryText}> mes documents</Text>
-          <FontAwesomeIcon icon={faEnvelope} size={50} style={styles.icon2} />
+          <FontAwesome name='upload' size={40} style={styles.icon2} />
         </TouchableOpacity>
       </View>
       <View style={styles.container4}>
         <TouchableOpacity style={styles.card2} onPress={() => navigation.navigate('MyMission')}>
-          <FontAwesomeIcon icon={faCircleDot} size={50} style={styles.icon3} />
+          <FontAwesome name='plane' size={40} style={styles.icon3} />
           <Text style={styles.mainText}>Ma mission</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.container5}>
         <TouchableOpacity style={styles.card1} onPress={() => navigation.navigate('MyContacts')}>
           <Text style={styles.mainText}>Mes contacts</Text>
-          <FontAwesomeIcon
-            icon={faAddressBook}
+          <FontAwesome
+            name='address-book'
             size={50}
-            style={styles.icon2}
+            style={styles.icon4}
           />
         </TouchableOpacity>
       </View>
@@ -86,12 +87,12 @@ const makeStyles = () => {
       transform: [{ rotate: "13deg" }],
       width: 200,
       height: 80,
-      borderRadius: 20,
+      borderRadius: 10,
       display: "flex",
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      padding: 10,
+      padding: 15,
     },
     card2: {
       backgroundColor: "#A5D8E6",
@@ -103,7 +104,7 @@ const makeStyles = () => {
       alignItems: "baseline",
       justifyContent: "center",
       flexWrap: "wrap",
-      padding: 10,
+      padding: 15,
     },
     card3: {
       backgroundColor: "#A5D8E6",
@@ -112,10 +113,10 @@ const makeStyles = () => {
       height: 80,
       borderRadius: 10,
       display: "flex",
-      alignItems: "baseline",
       justifyContent: "center",
+      alignItems: 'center',
       flexWrap: "wrap",
-      padding: 10,
+      padding: 15,
     },
     container1: {
       height: "20%",
@@ -170,6 +171,8 @@ const makeStyles = () => {
     },
     icon: {
       color: "white",
+      marginLeft: 10,
+
     },
     icon2: {
       color: "white",
@@ -178,6 +181,12 @@ const makeStyles = () => {
     icon3: {
       color: "white",
       marginRight: 10,
+    },
+    icon4: {
+      color: "white",
+      marginLeft: 5,
+      marginRight: 5,
+
     },
   });
 };
