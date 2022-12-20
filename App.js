@@ -57,10 +57,10 @@ const TabNavigator = () => {
           let iconName = "";
           if (route.name === "Home") {
             iconName = "home";
-          } else if (route.name === "Profile") {
-            iconName = "user";
+          } else if (route.name === "SignDocuments") {
+            iconName = "pencil";
           } else if (route.name === "MyDocuments") {
-            iconName = "file";
+            iconName = "folder-open";
           } else if (route.name === "UploadDocuments") {
             iconName = "upload";
           } else if (route.name === "MyMission") {
@@ -110,6 +110,32 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
+        name="SignDocuments"
+        component={SignDocumentsScreen}
+        options={{
+          tabBarColor: activeColorsMenu.tabBackground,
+          title: "Signer"
+        }}
+        listeners={{
+          tabPress: (e) => {
+            changeColor(e);
+          }
+        }}
+      />
+      <Tab.Screen
+        name="UploadDocuments"
+        component={UploadDocumentsScreen}
+        options={{
+          tabBarColor: activeColorsMenu.tabBackground,
+          title: "Envoyer"
+        }}
+        listeners={{
+          tabPress: (e) => {
+            changeColor(e);
+          }
+        }}
+      />
+      <Tab.Screen
         name="MyMission"
         component={MyMissionScreen}
         options={{
@@ -122,32 +148,8 @@ const TabNavigator = () => {
           }
         }}
       />
-      <Tab.Screen
-        name="MyContacts"
-        component={ContactsScreen}
-        options={{
-          tabBarColor: activeColorsMenu.tabBackground,
-          title: "Contacts"
-        }}
-        listeners={{
-          tabPress: (e) => {
-            changeColor(e);
-          }
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          tabBarColor: activeColorsMenu.tabBackground,
-          title: "Profile"
-        }}
-        listeners={{
-          tabPress: (e) => {
-            changeColor(e);
-          }
-        }}
-      />
+      
+      
     </Tab.Navigator>
   );
 };

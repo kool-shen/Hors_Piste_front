@@ -9,7 +9,14 @@ import {
   Linking,
   Pressable
 } from "react-native";
-import { Button, Spinner, Modal, FormControl, Input } from "native-base";
+import {
+  Button,
+  Spinner,
+  Modal,
+  FormControl,
+  Input,
+  useToast
+} from "native-base";
 import React, { useEffect, useState, useRef } from "react";
 import { List } from "react-native-paper";
 import { useSelector } from "react-redux";
@@ -19,10 +26,12 @@ import * as Location from "expo-location";
 import { BACKEND_URL } from "@env";
 
 const Sign = (props) => {
+  const toast = useToast();
   const styles = makeStyles();
   const [signatureModal, setSignatureModal] = useState(false);
   const [infoModal, setInfoModal] = useState(true);
   const [inputModal, setInputModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [locationModal, setLocationModal] = useState(false);
   const [signature, setSignature] = useState("");
   const [signatureImage, setSignatureImage] = useState("");
@@ -60,6 +69,7 @@ const Sign = (props) => {
 
   // Called after ref.current.getData()
   const handleData = async (data) => {
+    setLoading(true);
     const formData = new FormData();
     const path = FileSystem.cacheDirectory + "sign.png";
     const encoding = await FileSystem.writeAsStringAsync(
@@ -87,7 +97,18 @@ const Sign = (props) => {
         "Content-Type": "multipart/form-data"
       },
       body: formData
-    }).then((response) => response.json());
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.moveDoc.status === 200) {
+          toast.show({
+            description: "Le fichier à bien été signé"
+          });
+        }
+        setLoading(false);
+        props.fetchToSignDocs();
+      });
 
     setSignatureModal(!signatureModal);
   };
@@ -107,69 +128,89 @@ const Sign = (props) => {
 
   return (
     <View>
-      <Modal isOpen={inputModal} onClose={() => setInputModal(!inputModal)}>
-        <Input
-          placeholder="fait à..."
-          style={styles.input}
-          onChangeText={(value) => setSignatureLocation(value)}
-        ></Input>
-        <Text style={styles.input}>Le {date}</Text>
-        <Button
-          onPress={() => {
-            setInputModal(!inputModal);
-            setSignatureModal(!signatureModal);
-          }}
-        >
-          Valider
-        </Button>
-      </Modal>
-      <Modal
-        isOpen={signatureModal}
-        onClose={() => setSignatureModal(!signatureModal)}
-      >
-        <View
-          style={{
-            position: "absolute",
-            top: "20%",
-            height: "50%",
-            width: "90%"
-          }}
-        >
-          <Signature
-            ref={ref}
-            onEnd={handleEnd}
-            onOK={handleOK}
-            onEmpty={handleEmpty}
-            onClear={handleClear}
-            onGetData={() => handleData(signature)}
-            autoClear={false}
-            descriptionText="sign here"
-            webStyle={style}
-          />
-        </View>
-      </Modal>
-      <View style={styles.card}>
-        <Button
-          size="lg"
-          style={styles.listItem}
-          onPress={() => {
-            Linking.openURL(`https://docs.google.com/document/d/${props.ID}`);
-            setDocumentID(props.ID);
-            setInfoModal(false);
-          }}
-        >
-          {props.name}
-        </Button>
-        <Button
-          style={styles.signButton}
-          onPress={() => {
-            setInputModal(!inputModal);
-          }}
-          disabled={infoModal}
-        >
-          Sign document
-        </Button>
-      </View>
+      {loading ? (
+        <Spinner size="lg" />
+      ) : (
+        <>
+          <Modal isOpen={inputModal} onClose={() => setInputModal(!inputModal)}>
+            <Input
+              placeholder="fait à..."
+              style={styles.input}
+              onChangeText={(value) => setSignatureLocation(value)}
+            ></Input>
+            <Text style={styles.input}>Le {date}</Text>
+            <Button
+              onPress={() => {
+                setInputModal(!inputModal);
+                setSignatureModal(!signatureModal);
+              }}
+            >
+              Valider
+            </Button>
+          </Modal>
+          <Modal
+            isOpen={signatureModal}
+            onClose={() => setSignatureModal(!signatureModal)}
+          >
+            <View
+              style={{
+                position: "absolute",
+                top: "20%",
+                height: "50%",
+                width: "90%"
+              }}
+            >
+              <Signature
+                ref={ref}
+                onEnd={handleEnd}
+                onOK={handleOK}
+                onEmpty={handleEmpty}
+                onClear={handleClear}
+                onGetData={() => handleData(signature)}
+                autoClear={false}
+                descriptionText="sign here"
+                webStyle={style}
+              />
+            </View>
+          </Modal>
+          <View style={styles.card}>
+            <Button
+              size="lg"
+              style={styles.listItem}
+              onPress={() => {
+                Linking.openURL(
+                  `https://docs.google.com/document/d/${props.ID}`
+                );
+                setDocumentID(props.ID);
+                setInfoModal(false);
+              }}
+            >
+              {props.name}
+            </Button>
+            <Pressable
+              onPress={() => {
+                if (infoModal) {
+                  toast.show({
+                    description: "Veuillez lire le document avant de le signer."
+                  });
+                }
+              }}
+            >
+              <Button
+                style={styles.signButton}
+                onPress={() => {
+                  console.log("test");
+
+                  setInputModal(!inputModal);
+                }}
+                disabled={infoModal}
+              >
+                Sign document
+              </Button>
+            </Pressable>
+          </View>
+        </>
+      )}
     </View>
   );
 };

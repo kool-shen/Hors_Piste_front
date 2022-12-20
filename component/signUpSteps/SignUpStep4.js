@@ -15,6 +15,7 @@ import ValidateButton from "../buttons/ValidateButton";
 import MainInput from "../inputs/MainInput";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import NextPrevious from "../NextPrevious";
 
 export default function SignUpScreenThree(props) {
   const styles = makeStyles();
@@ -35,7 +36,7 @@ export default function SignUpScreenThree(props) {
         source={require("../../assets/signupScreenBackground.png")}
         style={{ width: "100%", height: "100%" }}
       >
-        <BannerScreenTitle progressionStep="4" />
+        <BannerScreenTitle title="Inscription" progressionStep="4" />
 
         <View style={styles.background}>
           <View style={styles.emergencyContainer}>
@@ -88,7 +89,7 @@ export default function SignUpScreenThree(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Lien (famille, ami,...)</Text>
+            <Text style={styles.inputText}>Lien (famille, ami(e),...)</Text>
             <MainInput
               label="Lien"
               value={user.relation}
@@ -105,6 +106,7 @@ export default function SignUpScreenThree(props) {
           </View>
 
           <ValidateButton onPress={handleValidate} />
+          <NextPrevious />
         </View>
       </ImageBackground>
     </KeyboardAwareScrollView>

@@ -5,7 +5,8 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   useWindowDimensions,
-  Button
+  Button,
+  ImageBackground
 } from "react-native";
 import React, { useState } from "react";
 import * as DocumentPicker from "expo-document-picker";
@@ -49,13 +50,11 @@ const UploadDocumentsScreen = () => {
       style={styles.mainContainer}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <View style={styles.mainContainer}>
+      <ImageBackground source={require("../assets/backgrounds/royalBlue.png")} style={styles.mainContainer}>
         <View style={styles.pageTitleContainer}>
           <Text style={styles.pageTitle}>Transmettre</Text>
         </View>
-        <View style={styles.background}>
-          <View style={styles.subBackground}>
-            <View>
+        
               <View style={styles.listContainer}>
                 <TouchableOpacity>
                   <Button
@@ -72,16 +71,13 @@ const UploadDocumentsScreen = () => {
                   <Text>{resultMessage}</Text>
                 </TouchableOpacity>
               </View>
-            </View>
-          </View>
-        </View>
-      </View>
+      </ImageBackground>
     </KeyboardAvoidingView>
   );
 };
 
 const makeStyles = () => {
-  const { fontScale, width } = useWindowDimensions();
+  const { fontScale, width, height } = useWindowDimensions();
   return StyleSheet.create({
     mainContainer: {
       backgroundColor: "#F8DFBD",
@@ -89,28 +85,6 @@ const makeStyles = () => {
       width: "100%",
       flex: 1,
       zIndex: -1
-    },
-    background: {
-      backgroundColor: "#A5D8E6",
-      transform: [
-        { rotate: "-35deg" },
-        { translateX: -100 },
-        { translateY: -50 }
-      ],
-      height: "100%",
-      width: 600,
-      flex: 1,
-      alignItems: "center"
-    },
-    subBackground: {
-      transform: [{ rotate: "35deg" }, { translateX: 9 }, { translateY: -16 }],
-      height: "100%",
-      width: 300,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-around",
-      paddingTop: 130,
-      paddingBottom: 20
     },
 
     pageTitle: {
@@ -142,7 +116,11 @@ const makeStyles = () => {
       margin: 15,
       width: width * 0.9
     },
-    listContainer: {}
+    listContainer: {
+      height: height,
+      justifyContent: 'center',
+      alignItems: 'center'
+    }
   });
 };
 
