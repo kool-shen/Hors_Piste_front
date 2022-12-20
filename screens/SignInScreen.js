@@ -26,7 +26,7 @@ export default function SignInScreen({ navigation }) {
   const toast = useToast();
 
   const handleConnect = async () => {
-    navigation.navigate("TabNavigator");
+    console.log(password);
     const res = await fetch(`${BACKEND_URL}/users/signin`, {
       method: "POST",
       headers: {
@@ -39,7 +39,7 @@ export default function SignInScreen({ navigation }) {
       }),
     });
     const userData = await res.json();
-    console.log(userData);
+    
     if (userData.result) {
       dispatch(
         updateUserProperties({
@@ -48,9 +48,10 @@ export default function SignInScreen({ navigation }) {
           email: userData.data.email,
           token: userData.token,
         })
-      );
-    }
-    toast.show({
+        );
+        navigation.navigate("TabNavigator");
+      }
+      toast.show({
       description: userData.message,
     });
   };
@@ -68,7 +69,7 @@ export default function SignInScreen({ navigation }) {
             <MainInput
               label="Ton adresse mail"
               value={email}
-              onChangeText={(value) => setEmail({ ...user, email: value })}
+              onChangeText={(value) => setEmail(value)}
               style={styles.input}
             />
           </View>
@@ -78,7 +79,7 @@ export default function SignInScreen({ navigation }) {
               label="Ton adresse mail"
               value={password}
               onChangeText={(value) =>
-                setpassword({ ...user, password: value })
+                setPassword(value)
               }
               style={styles.input}
             />
