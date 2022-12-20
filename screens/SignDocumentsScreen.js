@@ -17,6 +17,7 @@ import * as FileSystem from 'expo-file-system';
 import Signature from 'react-native-signature-canvas';
 import Sign from '../component/Signature'
 import * as Location from 'expo-location';
+import { BACKEND_URL} from '@env'
 
 const MyMissionScreen = () => {
   const styles = makeStyles();
@@ -35,7 +36,7 @@ const MyMissionScreen = () => {
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        `http://10.2.0.228:3000/docs/listFolder/${user.folderIds.toSignFolderId}`
+        `${BACKEND_URL}/docs/listFolder/${user.folderIds.toSignFolderId}`
       );
       const documentsData = await res.json();
       setDocuments(documentsData);
@@ -108,7 +109,7 @@ const makeStyles = () => {
     pageTitleContainer: {
       backgroundColor: "#2D5971",
       borderTopRightRadius: 10,
-      borderBottomRightRadius: 10,
+      // borderBottomRightRadius: 10,
       zIndex: 90,
       width: "100%",
       // position: "absolute",

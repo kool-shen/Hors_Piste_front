@@ -9,9 +9,13 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
-import MainInput from "../inputs/MainInput";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
+import MainInput from "../inputs/MainInput";
+import BannerScreenTitle from "../BannerScreenTitle";
 
 export default function SignUpScreenTwo(props) {
   const styles = makeStyles();

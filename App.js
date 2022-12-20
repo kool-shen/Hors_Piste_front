@@ -167,10 +167,12 @@ export default function App() {
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="MyDocuments" component={MyDocumentsScreen} />
             <Stack.Screen name="TabNavigator" component={TabNavigator} />
+
             <Stack.Screen
               name="UploadDocuments"
               component={UploadDocumentsScreen}
             />
+
             <Stack.Screen name="MyMission" component={MyMissionScreen} />
             <Stack.Screen name="MyContacts" component={ContactsScreen} />
           </Stack.Navigator>

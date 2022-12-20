@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
+import { Button, Spinner } from "native-base";
 import MainInput from "../inputs/MainInput";
 import ValidateButton from "../buttons/ValidateButton";
 import { BACKEND_URL } from "@env";
@@ -20,8 +21,10 @@ export default function SignInScreen({ navigation, nextStep }) {
   const [email, setEmail] = useState("");
   const [connectionCode, setConnectionCode] = useState("");
   const styles = makeStyles();
+  const [loading, setLoading] = useState(false);
 
   const handleConnect = async () => {
+    setLoading(true);
     const res = await fetch(`${BACKEND_URL}/users/firstConnection`, {
       method: "POST",
       headers: {
@@ -56,6 +59,7 @@ export default function SignInScreen({ navigation, nextStep }) {
           token: userData.token,
         })
       );
+      setLoading(false);
       nextStep();
     }
   };
@@ -71,7 +75,6 @@ export default function SignInScreen({ navigation, nextStep }) {
           <View style={styles.containerSignin}>
             <View style={styles.inputContainer}>
               <Text style={styles.inputText}>Email</Text>
-
               <MainInput
                 label="Ton adresse mail"
                 value={email}
@@ -89,7 +92,7 @@ export default function SignInScreen({ navigation, nextStep }) {
               />
             </View>
             <ValidateButton onPress={() => handleConnect()} />
-
+            {loading && <Spinner size="lg" />}
             <Text style={styles.notYet}>Déjà inscrit ?</Text>
             <TouchableOpacity
               style={styles.createButton}
