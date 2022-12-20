@@ -16,6 +16,8 @@ import ValidateButton from "../buttons/ValidateButton";
 import { BACKEND_URL } from "@env";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import NextPrevious from "../NextPrevious";
 
 export default function SignInScreen({ navigation, nextStep }) {
   const dispatch = useDispatch();
@@ -71,7 +73,7 @@ export default function SignInScreen({ navigation, nextStep }) {
         source={require("../../assets/signupScreenBackground.png")}
         style={{ width: "100%", height: "100%" }}
       >
-        <BannerScreenTitle />
+        <BannerScreenTitle title="Inscription" icon="faUser" />
         <View style={styles.background}>
           <View style={styles.containerSignin}>
             <View style={styles.inputContainer}>
@@ -102,6 +104,7 @@ export default function SignInScreen({ navigation, nextStep }) {
               <Text style={styles.createText}>Se connecter</Text>
             </TouchableOpacity>
           </View>
+          <NextPrevious />
         </View>
       </ImageBackground>
     </KeyboardAwareScrollView>
