@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import NextPrevious from "../NextPrevious";
 
 export default function SignUpScreenTwo(props) {
   const styles = makeStyles();
@@ -34,7 +35,7 @@ export default function SignUpScreenTwo(props) {
         source={require("../../assets/signupScreenBackground.png")}
         style={{ width: "100%", height: "100%" }}
       >
-        <BannerScreenTitle progressionStep="3" />
+        <BannerScreenTitle title="Inscription" progressionStep="3" />
 
         <View style={styles.background}>
           <View style={styles.inputContainer}>
@@ -91,6 +92,7 @@ export default function SignUpScreenTwo(props) {
           </View>
 
           <ValidateButton onPress={handleValidate} />
+          <NextPrevious />
         </View>
       </ImageBackground>
     </KeyboardAwareScrollView>
