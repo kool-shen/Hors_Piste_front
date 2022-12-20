@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCameraRetro } from "@fortawesome/free-solid-svg-icons";
 import MainInput from "../inputs/MainInput";
 import BannerScreenTitle from "../BannerScreenTitle";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function SignUpScreenFive(props) {
   const styles = makeStyles();
@@ -58,7 +59,7 @@ export default function SignUpScreenFive(props) {
   }
 
   return (
-    <>
+    <KeyboardAwareScrollView>
       <ImageBackground
         source={require("../../assets/signupScreenBackground.png")}
         style={{ width: "100%", height: "100%" }}
@@ -89,7 +90,7 @@ export default function SignUpScreenFive(props) {
           <ValidateButton onPress={handleValidate} />
         </View>
       </ImageBackground>
-    </>
+    </KeyboardAwareScrollView>
   );
 }
 
@@ -155,6 +156,7 @@ const makeStyles = () => {
 
     background: {
       flex: 1,
+      minHeight: height,
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",
