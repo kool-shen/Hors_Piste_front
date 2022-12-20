@@ -6,9 +6,11 @@ import {
   View,
   Text,
   TouchableOpacity,
-  useWindowDimensions
+  useWindowDimensions,
+  ImageBackground,
+  KeyboardAvoidingView,
 } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import { useIsFocused } from "@react-navigation/native";
@@ -27,7 +29,9 @@ export default function SignUpScreenFive(props) {
   const dispatch = useDispatch();
   const toast = useToast();
   const [user, setUser] = useState({
-    IBAN: ""
+    ICExpirationDate: "",
+    ICNumber: "",
+    IBAN: "",
   });
 
   console.log(userReducer);
@@ -47,8 +51,8 @@ export default function SignUpScreenFive(props) {
       props.nextStep();
     }
     toast.show({
-      description: userData.message
-    })
+      description: userData.message,
+    });
   };
 
   /////
@@ -61,7 +65,7 @@ export default function SignUpScreenFive(props) {
   let cameraRef = useRef(null);
   const takePicture = async () => {
     const photo = await cameraRef.takePictureAsync({ quality: 0.3 });
-    dispatch(updateUserProperties({ RIBImg: photo.uri }));
+    dispatch(updateUserProperties({ passportImg: photo.uri }));
   };
 
   useEffect(() => {
@@ -76,49 +80,57 @@ export default function SignUpScreenFive(props) {
   }
 
   return (
-    <>
-      <BannerScreenTitle progressionStep="7" />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <ImageBackground
+        source={require("../../assets/signupScreenBackground.png")}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <BannerScreenTitle progressionStep="7" />
 
-      <View style={styles.background}>
-        <View style={styles.textContainer}>
-          <Text style={styles.mainText}>Prendre mon passeport en photo</Text>
+        <View style={styles.background}>
+          <View style={styles.textContainer}>
+            <Text style={styles.mainText}>Prendre mon passeport en photo</Text>
+          </View>
+          <View style={styles.cameraContainer}>
+            <Camera
+              style={{
+                zIndex: 1,
+                width: 250,
+                height: 250,
+              }}
+              ref={(ref) => (cameraRef = ref)}
+            ></Camera>
+
+            <TouchableOpacity
+              style={styles.redDot}
+              title="Snap"
+              onPress={() => takePicture()}
+            ></TouchableOpacity>
+          </View>
+
+          <MainInput
+            label="Date d'expiration du passeport"
+            width="75%"
+            value={user.ICExpirationDate}
+            onChangeText={(value) =>
+              setUser({ ...user, ICExpirationDate: value })
+            }
+            style={styles.input}
+          />
+          <MainInput
+            label="Numéro de passeport"
+            width="75%"
+            value={user.ICNumber}
+            onChangeText={(value) => setUser({ ...user, ICNumber: value })}
+            style={styles.input}
+          />
+          <ValidateButton onPress={handleValidate} />
         </View>
-        <View style={styles.cameraContainer}>
-          <Camera
-            style={{
-              zIndex: 1,
-              width: 250,
-              height: 250
-            }}
-            ref={(ref) => (cameraRef = ref)}
-          ></Camera>
-
-          <TouchableOpacity
-            style={styles.redDot}
-            title="Snap"
-            onPress={() => takePicture()}
-          ></TouchableOpacity>
-        </View>
-
-        <MainInput
-          label="Date d'expiration du passeport"
-          width="75%"
-          value={user.IBAN}
-          onChangeText={(value) =>
-            setUser({ ...user, ICExpirationDate: value })
-          }
-          style={styles.input}
-        />
-        <MainInput
-          label="Numéro de passeport"
-          width="75%"
-          value={user.IBAN}
-          onChangeText={(value) => setUser({ ...user, ICNumber: value })}
-          style={styles.input}
-        />
-        <ValidateButton onPress={handleValidate} />
-      </View>
-    </>
+      </ImageBackground>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -131,13 +143,13 @@ const makeStyles = () => {
       height: 350,
       borderRadius: 350,
       overflow: "hidden",
-      borderTopLeftRadius: 175
+      borderTopLeftRadius: 175,
     },
 
     cameraContainer: {
       display: "flex",
       justifyContent: "space-between",
-      alignItems: "center"
+      alignItems: "center",
     },
 
     pageTitleContainer: {
@@ -152,17 +164,17 @@ const makeStyles = () => {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      padding: 10
+      padding: 10,
     },
     pageTitle: {
       color: "white",
       fontSize: 40 / fontScale,
-      fontWeight: "bold"
+      fontWeight: "bold",
     },
     progression: {
       color: "white",
       fontSize: 15 / fontScale,
-      alignSelf: "flex-end"
+      alignSelf: "flex-end",
     },
     redDot: {
       width: 60,
@@ -174,12 +186,12 @@ const makeStyles = () => {
       alignItems: "center",
 
       borderWidth: 1,
-      borderColor: "white"
+      borderColor: "white",
     },
     mainText: {
       color: "white",
       fontSize: 20,
-      fontWeight: "bold"
+      fontWeight: "bold",
     },
 
     background: {
@@ -188,7 +200,6 @@ const makeStyles = () => {
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
-      paddingBottom: 20
-    }
+    },
   });
 };

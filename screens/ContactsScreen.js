@@ -7,26 +7,18 @@ import {
   ImageBackground,
   TouchableOpacity,
   Button,
+  useWindowDimensions,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import EMail from "../component/EMail";
 import * as Mail from "expo-mail-composer";
-
-
-
-
-
+import { BACKEND_URL } from "@env";
 
 const ContactsScreen = () => {
   const user = useSelector((state) => state.user.value);
   const [mission, setMission] = useState({});
   const styles = makeStyles();
-
-
- 
-  
-
 
   useEffect(() => {
     (async () => {
@@ -38,9 +30,6 @@ const ContactsScreen = () => {
     })();
   }, []);
 
-
- 
-  
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -127,8 +116,6 @@ const makeStyles = () => {
 
     textContainer: {
       fontSize: 30,
-     
-      
     },
     infoContainer: {
       fontSize: 15,
@@ -137,9 +124,3 @@ const makeStyles = () => {
 };
 
 export default ContactsScreen;
-
-
-
-
-
-

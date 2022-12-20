@@ -7,8 +7,9 @@ import {
   Text,
   TouchableOpacity,
   useWindowDimensions,
+  ImageBackground,
 } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import { useIsFocused } from "@react-navigation/native";
@@ -58,31 +59,36 @@ export default function SignUpScreenFive(props) {
 
   return (
     <>
-      <BannerScreenTitle progressionStep="6" />
+      <ImageBackground
+        source={require("../../assets/signupScreenBackground.png")}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <BannerScreenTitle progressionStep="6" />
 
-      <View style={styles.background}>
-        <View style={styles.textContainer}>
-          <Text style={styles.mainText}>Prendre ma photo de profil</Text>
+        <View style={styles.background}>
+          <View style={styles.textContainer}>
+            <Text style={styles.mainText}>Prendre ma photo de profil</Text>
+          </View>
+          <View style={styles.cameraContainer}>
+            <Camera
+              style={{
+                zIndex: 1,
+                width: 250,
+                height: 250,
+              }}
+              ref={(ref) => (cameraRef = ref)}
+            ></Camera>
+
+            <TouchableOpacity
+              style={styles.redDot}
+              title="Snap"
+              onPress={() => takePicture()}
+            ></TouchableOpacity>
+          </View>
+
+          <ValidateButton onPress={handleValidate} />
         </View>
-        <View style={styles.cameraContainer}>
-          <Camera
-            style={{
-              zIndex: 1,
-              width: 250,
-              height: 250,
-            }}
-            ref={(ref) => (cameraRef = ref)}
-          ></Camera>
-
-          <TouchableOpacity
-            style={styles.redDot}
-            title="Snap"
-            onPress={() => takePicture()}
-          ></TouchableOpacity>
-        </View>
-
-        <ValidateButton onPress={handleValidate} />
-      </View>
+      </ImageBackground>
     </>
   );
 }

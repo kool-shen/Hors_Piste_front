@@ -5,23 +5,26 @@ import {
   TouchableOpacity,
   Image,
   useWindowDimensions,
+  ImageBackground,
 } from "react-native";
 import { useState } from "react";
-import logo from "../../assets/logo.png";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
+import { Button, Spinner } from "native-base";
 import MainInput from "../inputs/MainInput";
 import ValidateButton from "../buttons/ValidateButton";
-import { BACKEND_URL } from "@env"
+import { BACKEND_URL } from "@env";
+import BannerScreenTitle from "../BannerScreenTitle";
 
 export default function SignInScreen({ navigation, nextStep }) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [connectionCode, setConnectionCode] = useState("");
   const styles = makeStyles();
+  const [loading, setLoading] = useState(false);
 
   const handleConnect = async () => {
-    
+    setLoading(true);
     const res = await fetch(`${BACKEND_URL}/users/firstConnection`, {
       method: "POST",
       headers: {
@@ -46,31 +49,32 @@ export default function SignInScreen({ navigation, nextStep }) {
         }),
       });
       const foldersData = await res.json();
-      console.log(foldersData)
+      console.log(foldersData);
       dispatch(
         updateUserProperties({
           ...userData.data,
           userId: userData.data._id,
           email: email,
           folderIds: foldersData.data,
-          token: userData.token
+          token: userData.token,
         })
-        );
-        nextStep();
-      }
-      
-    };
+      );
+      setLoading(false);
+      nextStep();
+    }
+  };
 
   return (
-    <View style={styles.mainContainer}>
-      <View style={styles.container}></View>
-      <View style={styles.background}>
-        <View style={styles.subBackground}>
-          <Image source={logo} style={styles.logo} resizeMode="contain" />
+    <>
+      <ImageBackground
+        source={require("../../assets/signupScreenBackground.png")}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <BannerScreenTitle />
+        <View style={styles.background}>
           <View style={styles.containerSignin}>
             <View style={styles.inputContainer}>
               <Text style={styles.inputText}>Email</Text>
-
               <MainInput
                 label="Ton adresse mail"
                 value={email}
@@ -88,7 +92,7 @@ export default function SignInScreen({ navigation, nextStep }) {
               />
             </View>
             <ValidateButton onPress={() => handleConnect()} />
-
+            {loading && <Spinner size="lg" />}
             <Text style={styles.notYet}>Déjà inscrit ?</Text>
             <TouchableOpacity
               style={styles.createButton}
@@ -98,39 +102,22 @@ export default function SignInScreen({ navigation, nextStep }) {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
-    </View>
+      </ImageBackground>
+    </>
   );
 }
 const makeStyles = () => {
-  const { fontScale } = useWindowDimensions();
+  const { fontScale, width, eight } = useWindowDimensions();
   return StyleSheet.create({
-    mainContainer: {
-      backgroundColor: "#F8DFBD",
-      height: "100%",
-      width: "100%",
-      flex: 1,
-      zIndex: -1,
-    },
     background: {
-      backgroundColor: "#A5D8E6",
-      transform: [
-        { rotate: "-35deg" },
-        { translateX: -100 },
-        { translateY: -50 },
-      ],
-      height: "100%",
-      width: 600,
       flex: 1,
-      alignItems: "center",
-    },
-    subBackground: {
-      transform: [{ rotate: "35deg" }, { translateX: 9 }, { translateY: -16 }],
-      height: "100%",
-      width: 300,
       display: "flex",
       alignItems: "center",
+      justifyContent: "space-around",
+      paddingTop: 130,
+      paddingBottom: 20,
     },
+
     containerSignin: {
       display: "flex",
       alignItems: "center",
@@ -190,11 +177,6 @@ const makeStyles = () => {
       color: "white",
       fontWeight: "bold",
       fontSize: 25 / fontScale,
-    },
-    logo: {
-      width: "100%",
-      height: 300,
-      marginLeft: 90,
     },
   });
 };

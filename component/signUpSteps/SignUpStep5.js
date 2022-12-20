@@ -1,7 +1,13 @@
 import { useState } from "react";
 
-import { StyleSheet, View, Text, useWindowDimensions } from "react-native";
-import { useDispatch } from "react-redux";
+import {
+  StyleSheet,
+  View,
+  Text,
+  useWindowDimensions,
+  ImageBackground,
+} from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import MainInput from "../inputs/MainInput";
@@ -29,46 +35,51 @@ export default function SignUpScreenFour(props) {
 
   return (
     <>
-      <BannerScreenTitle progressionStep="5" />
+      <ImageBackground
+        source={require("../../assets/signupScreenBackground.png")}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <BannerScreenTitle progressionStep="5" />
 
-      <View style={styles.background}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Diplôme</Text>
-          <SelectInput
-            label="Ton / tes diplôme(s)"
-            value={user.degrees}
-            onValueChange={(value) => setUser({ ...user, degrees: value })}
-            style={styles.input}
-            numberOfSelections="3"
-            label1="1"
-            label2="2"
-            label3="3"
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Situation</Text>
-          <SelectInput
-            label="Ta situation"
-            value={user.occupation}
-            onValueChange={(value) => setUser({ ...user, occupation: value })}
-            style={styles.input}
-            numberOfSelections="3"
-            label1="1"
-            label2="2"
-            label3="3"
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>Numéro CES</Text>
-          <MainInput
-            label="Ton numéro CES"
-            value={user.CESNumber}
-            onChangeText={(value) => setUser({ ...user, CESNumber: value })}
-          />
-        </View>
+        <View style={styles.background}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Diplôme</Text>
+            <SelectInput
+              label="Ton / tes diplôme(s)"
+              value={user.degrees}
+              onValueChange={(value) => setUser({ ...user, degrees: value })}
+              style={styles.input}
+              numberOfSelections="3"
+              label1="1"
+              label2="2"
+              label3="3"
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Situation</Text>
+            <SelectInput
+              label="Ta situation"
+              value={user.occupation}
+              onValueChange={(value) => setUser({ ...user, occupation: value })}
+              style={styles.input}
+              numberOfSelections="3"
+              label1="1"
+              label2="2"
+              label3="3"
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Numéro CES</Text>
+            <MainInput
+              label="Ton numéro CES"
+              value={user.CESNumber}
+              onChangeText={(value) => setUser({ ...user, CESNumber: value })}
+            />
+          </View>
 
-        <ValidateButton onPress={handleValidate} />
-      </View>
+          <ValidateButton onPress={handleValidate} />
+        </View>
+      </ImageBackground>
     </>
   );
 }

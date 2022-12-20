@@ -6,14 +6,16 @@ import {
   TouchableOpacity,
   Image,
   useWindowDimensions,
+  ImageBackground,
 } from "react-native";
 import { useState } from "react";
 import logo from "../assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../reducers/user";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { BACKEND_URL } from "@env"
-import { useToast } from 'native-base';
+import { BACKEND_URL } from "@env";
+import { useToast } from "native-base";
+import MainInput from "../component/inputs/MainInput";
 
 export default function SignInScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
@@ -21,7 +23,7 @@ export default function SignInScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const styles = makeStyles();
-  const toast = useToast()
+  const toast = useToast();
 
   const handleConnect = async () => {
     navigation.navigate("TabNavigator");
@@ -49,93 +51,70 @@ export default function SignInScreen({ navigation }) {
       );
     }
     toast.show({
-      description: userData.message
-    })
+      description: userData.message,
+    });
   };
 
   return (
     <>
-      <View style={styles.mainContainer}>
-        <View style={styles.container}></View>
+      <ImageBackground
+        source={require("../assets/signinScreenBackground.png")}
+        style={{ width: "100%", height: "100%" }}
+      >
         <View style={styles.background}>
-          <View style={styles.subBackground}>
-            <Image source={logo} style={styles.logo} resizeMode="contain" />
-            <View style={styles.containerSignin}>
-              <View style={styles.inputContainer}>
-                <Text style={styles.inputText}>Email</Text>
-                <TextInput
-                  style={styles.input}
-                  value={email}
-                  onChangeText={(value) => setEmail(value)}
-                />
-              </View>
-              <View style={styles.inputContainer}>
-                <Text style={styles.inputText}>Mot de passe</Text>
-                <TextInput
-                  style={styles.input}
-                  value={password}
-                  onChangeText={(value) => setPassword(value)}
-                />
-              </View>
-              <TouchableOpacity
-                style={styles.validateButton}
-                onPress={() => handleConnect()}
-              >
-                <Text style={styles.validate}>Valider</Text>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Text style={styles.forgot}>Mot de passe oublié ?</Text>
-              </TouchableOpacity>
-
-              <Text style={styles.notYet}>Pas encore de compte ?</Text>
-              <TouchableOpacity
-                style={styles.createButton}
-                onPress={() => navigation.navigate("SignUp")}
-              >
-                <Text style={styles.createText}>Créer un compte</Text>
-              </TouchableOpacity>
-            </View>
+          <Image source={logo} style={styles.logo} resizeMode="contain" />
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Email</Text>
+            <MainInput
+              label="Ton adresse mail"
+              value={email}
+              onChangeText={(value) => setEmail({ ...user, email: value })}
+              style={styles.input}
+            />
           </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Mot de passe</Text>
+            <MainInput
+              label="Ton adresse mail"
+              value={password}
+              onChangeText={(value) =>
+                setpassword({ ...user, password: value })
+              }
+              style={styles.input}
+            />
+          </View>
+          <TouchableOpacity
+            style={styles.validateButton}
+            onPress={() => handleConnect()}
+          >
+            <Text style={styles.validate}>Valider</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.forgot}>Mot de passe oublié ?</Text>
+          </TouchableOpacity>
+
+          <Text style={styles.notYet}>Pas encore de compte ?</Text>
+          <TouchableOpacity
+            style={styles.createButton}
+            onPress={() => navigation.navigate("SignUp")}
+          >
+            <Text style={styles.createText}>Créer un compte</Text>
+          </TouchableOpacity>
         </View>
-      </View>
+      </ImageBackground>
     </>
   );
 }
 const makeStyles = () => {
   const { fontScale } = useWindowDimensions();
   return StyleSheet.create({
-    mainContainer: {
-      backgroundColor: "#F8DFBD",
-      height: "100%",
-      width: "100%",
-      flex: 1,
-      zIndex: -1,
-    },
-
     background: {
-      backgroundColor: "#A5D8E6",
-      transform: [
-        { rotate: "-35deg" },
-        { translateX: -100 },
-        { translateY: -50 },
-      ],
-      height: "100%",
-      width: 600,
       flex: 1,
-      alignItems: "center",
-    },
-    subBackground: {
-      transform: [{ rotate: "35deg" }, { translateX: 9 }, { translateY: -16 }],
-      height: "100%",
-      width: 300,
       display: "flex",
       alignItems: "center",
-    },
-    containerSignin: {
-      display: "flex",
-      alignItems: "center",
-      height: 350,
-      justifyContent: "space-between",
+      justifyContent: "space-around",
+
+      paddingBottom: 100,
     },
 
     inputContainer: {
@@ -193,9 +172,8 @@ const makeStyles = () => {
       fontSize: 25 / fontScale,
     },
     logo: {
-      width: "100%",
-      height: 300,
-      marginLeft: 90,
+      width: 400,
+      height: 400,
     },
   });
 };
