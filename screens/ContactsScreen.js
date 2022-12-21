@@ -41,26 +41,26 @@ const ContactsScreen = () => {
           <View style={styles.firstContainer}>
             <Text style={styles.textContainer}>Référent Hors Piste</Text>
 
-            {mission.projectReferant && (
+            {mission.projectReferent && (
               <View style={styles.infoContainer}>
                 <View>
                   <Text style={styles.nameContainer}>
-                    {mission.projectReferant.surname}{" "}
-                    {mission.projectReferant.name}
+                    {mission.projectReferent.surname}{" "}
+                    {mission.projectReferent.name}
                   </Text>
                 </View>
                 <View>
                   <Text
                     onPress={() => {
                       Linking.openURL(
-                        `tel:${mission.projectReferant.phoneNumber}`
+                        `tel:${mission.projectReferent.phoneNumber}`
                       );
                     }}
                     style={styles.infoContainer}
                   >
                     {" "}
                     <FontAwesomeIcon icon={faPhone} size={20} />
-                    {mission.projectReferant.phoneNumber}
+                    {mission.projectReferent.phoneNumber}
                   </Text>
                 </View>
 
@@ -68,14 +68,14 @@ const ContactsScreen = () => {
                   <Text
                     onPress={() => {
                       Linking.openURL(
-                        `mailto:${mission.missionReferant.email}`
+                        `mailto:${mission.missionReferent.email}`
                       );
                     }}
                     style={styles.infoContainer}
                   >
                     {" "}
                     <FontAwesomeIcon icon={faEnvelope} size={20} />
-                    {mission.missionReferant.email}
+                    {mission.missionReferent.email}
                   </Text>
                 </View>
               </View>
@@ -85,12 +85,12 @@ const ContactsScreen = () => {
             <View>
               <Text style={styles.textContainer}>Référent HAS</Text>
             </View>
-            {mission.projectReferant && (
+            {mission.projectReferent && (
               <View style={styles.infoContainer}>
                 <View>
                   <Text style={styles.nameContainer}>
-                    {mission.missionReferant.surname}{" "}
-                    {mission.missionReferant.name}
+                    {mission.missionReferent.surname}{" "}
+                    {mission.missionReferent.name}
                   </Text>
                 </View>
 
@@ -98,14 +98,14 @@ const ContactsScreen = () => {
                   <Text
                     onPress={() => {
                       Linking.openURL(
-                        `tel:${mission.projectReferant.phoneNumber}`
+                        `tel:${mission.projectReferent.phoneNumber}`
                       );
                     }}
                     style={styles.infoContainer}
                   >
                     {" "}
                     <FontAwesomeIcon icon={faPhone} size={20} />
-                    {mission.missionReferant.phone}
+                    {mission.missionReferent.phone}
                   </Text>
                 </View>
 
@@ -113,14 +113,14 @@ const ContactsScreen = () => {
                   <Text
                     onPress={() => {
                       Linking.openURL(
-                        `mailto:${mission.missionReferant.email}`
+                        `mailto:${mission.missionReferent.email}`
                       );
                     }}
                     style={styles.infoContainer}
                   >
                     {" "}
                     <FontAwesomeIcon icon={faEnvelope} size={20} />
-                    {mission.missionReferant.email}
+                    {mission.missionReferent.email}
                   </Text>
                 </View>
               </View>
@@ -167,6 +167,8 @@ const makeStyles = () => {
       flexDirection: "column",
       alignItems: "center",
       padding: 10,
+      margin: height*0.01,
+      width: width * 0.95,
     },
     textContainer: {
       fontSize: 30,
@@ -192,10 +194,12 @@ const makeStyles = () => {
     mainContainer: {
       paddingTop: 180,
       display: "flex",
-      justifyContent: "space-around",
+      justifyContent: "center",
+      alignItems: 'center',
       textAlign: "center",
+      width: width,
+      height: height*0.8,
 
-      height: height * 0.7,
     },
   });
 };
