@@ -3,13 +3,13 @@ import {
   View,
   Text,
   useWindowDimensions,
-  ImageBackground,
+  ImageBackground
 } from "react-native";
 import { useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import MainInput from "../inputs/MainInput";
@@ -19,15 +19,22 @@ import NextPrevious from "../NextPrevious";
 
 export default function SignUpScreenThree(props) {
   const styles = makeStyles();
+  const userReducer = useSelector(state => state.user.value);
+  console.log('reducer', userReducer)
   const [user, setUser] = useState({
-    emergencyContact: { name: "", surname: "", relation: "", phone: "" },
+    emergencyContact: {
+      name: userReducer.emergencyContact.name,
+      surname: userReducer.emergencyContact.surname,
+      relation: userReducer.emergencyContact.relation,
+      phone: userReducer.emergencyContact.phone
+    }
   });
 
   const dispatch = useDispatch();
 
   const handleValidate = () => {
     dispatch(updateUserProperties(user));
-    props.nextStep();
+    props.nextStep(1);
   };
 
   return (
@@ -50,11 +57,11 @@ export default function SignUpScreenThree(props) {
             <Text style={styles.inputText}>Prénom</Text>
             <MainInput
               label="Prénom"
-              value={user.name}
+              value={user.emergencyContact.name}
               onChangeText={(value) =>
                 setUser({
                   ...user,
-                  emergencyContact: { ...user.emergencyContact, name: value },
+                  emergencyContact: { ...user.emergencyContact, name: value }
                 })
               }
             />
@@ -63,14 +70,14 @@ export default function SignUpScreenThree(props) {
             <Text style={styles.inputText}>Nom</Text>
             <MainInput
               label="Nom"
-              value={user.surname}
+              value={user.emergencyContact.surname}
               onChangeText={(value) =>
                 setUser({
                   ...user,
                   emergencyContact: {
                     ...user.emergencyContact,
-                    surname: value,
-                  },
+                    surname: value
+                  }
                 })
               }
             />
@@ -79,11 +86,11 @@ export default function SignUpScreenThree(props) {
             <Text style={styles.inputText}>Numéro de téléphone</Text>
             <MainInput
               label="Numéro de téléphone"
-              value={user.phone}
+              value={user.emergencyContact.phone}
               onChangeText={(value) =>
                 setUser({
                   ...user,
-                  emergencyContact: { ...user.emergencyContact, phone: value },
+                  emergencyContact: { ...user.emergencyContact, phone: value }
                 })
               }
             />
@@ -92,21 +99,23 @@ export default function SignUpScreenThree(props) {
             <Text style={styles.inputText}>Lien (famille, ami(e),...)</Text>
             <MainInput
               label="Lien"
-              value={user.relation}
+              value={user.emergencyContact.relation}
               onChangeText={(value) =>
                 setUser({
                   ...user,
                   emergencyContact: {
                     ...user.emergencyContact,
-                    relation: value,
-                  },
+                    relation: value
+                  }
                 })
               }
             />
           </View>
 
-          <ValidateButton onPress={handleValidate} />
-          <NextPrevious />
+          <NextPrevious
+            nextStep={props.nextStep}
+            handleValidate={handleValidate}
+          />
         </View>
       </ImageBackground>
     </KeyboardAwareScrollView>
@@ -123,7 +132,7 @@ const makeStyles = () => {
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
-      paddingBottom: 20,
+      paddingBottom: 20
     },
 
     emergencyContainer: {
@@ -136,18 +145,18 @@ const makeStyles = () => {
       borderColor: "white",
       justifyContent: "center",
       alignItems: "center",
-      padding: 5,
+      padding: 5
     },
     emergencyText: {
       fontSize: 20 / fontScale,
       fontWeight: "bold",
-      textAlign: "center",
+      textAlign: "center"
     },
     inputContainer: {
       height: 70,
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between",
+      justifyContent: "space-between"
     },
     input: {
       backgroundColor: "white",
@@ -155,7 +164,7 @@ const makeStyles = () => {
       width: 250,
       borderColor: "gray",
       borderWidth: 1,
-      placeholderTextColor: "gray",
+      placeholderTextColor: "gray"
     },
     inputText: {
       backgroundColor: "#143143",
@@ -165,16 +174,17 @@ const makeStyles = () => {
       borderRadius: 5,
       color: "white",
       paddingHorizontal: 10,
+      margin: 5
     },
     pageTitle: {
       color: "white",
       fontSize: 40 / fontScale,
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     progression: {
       color: "white",
       fontSize: 15 / fontScale,
-      alignSelf: "flex-end",
+      alignSelf: "flex-end"
     },
     pageTitleContainer: {
       backgroundColor: "#2D5971",
@@ -188,17 +198,17 @@ const makeStyles = () => {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      padding: 10,
+      padding: 10
     },
     validateButton: {
       backgroundColor: "green",
       paddingHorizontal: 40,
-      borderRadius: 10,
+      borderRadius: 10
     },
     validate: {
       color: "white",
       fontWeight: "bold",
-      fontSize: 25 / fontScale,
-    },
+      fontSize: 25 / fontScale
+    }
   });
 };

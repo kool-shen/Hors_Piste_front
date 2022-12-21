@@ -3,10 +3,10 @@ import {
   View,
   Text,
   useWindowDimensions,
-  ImageBackground,
+  ImageBackground
 } from "react-native";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import MainInput from "../inputs/MainInput";
@@ -15,14 +15,21 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import NextPrevious from "../NextPrevious";
 
 export default function SignUpScreenTwo(props) {
+  const userReducer = useSelector(state => state.user.value);
   const styles = makeStyles();
   const dispatch = useDispatch();
   const [user, setUser] = useState({
-    address: { street: "", zipCode: "", city: "", country: "" },
+    address: {
+      street: userReducer.address.street,
+      zipCode: userReducer.address.zipCode,
+      city: userReducer.address.city,
+      country: userReducer.address.country
+    }
   });
   function handleValidate() {
     dispatch(updateUserProperties(user));
-    props.nextStep();
+    console.log(userReducer)
+    props.nextStep(1);
   }
   return (
     <KeyboardAwareScrollView>
@@ -36,11 +43,11 @@ export default function SignUpScreenTwo(props) {
             <Text style={styles.inputText}>Adresse</Text>
             <MainInput
               label="Ton adresse"
-              value={user.address}
+              value={user.address.street}
               onChangeText={(value) =>
                 setUser({
                   ...user,
-                  address: { ...user.address, street: value },
+                  address: { ...user.address, street: value }
                 })
               }
             />
@@ -49,11 +56,11 @@ export default function SignUpScreenTwo(props) {
             <Text style={styles.inputText}>Code Postal</Text>
             <MainInput
               label="Ton code postal"
-              value={user.zipCode}
+              value={user.address.zipCode}
               onChangeText={(value) =>
                 setUser({
                   ...user,
-                  address: { ...user.address, zipCode: value },
+                  address: { ...user.address, zipCode: value }
                 })
               }
             />
@@ -62,11 +69,11 @@ export default function SignUpScreenTwo(props) {
             <Text style={styles.inputText}>Ville de résidence</Text>
             <MainInput
               label="Ta ville de résidence"
-              value={user.city}
+              value={user.address.city}
               onChangeText={(value) =>
                 setUser({
                   ...user,
-                  address: { ...user.address, city: value },
+                  address: { ...user.address, city: value }
                 })
               }
             />
@@ -75,17 +82,19 @@ export default function SignUpScreenTwo(props) {
             <Text style={styles.inputText}>Pays de résidence</Text>
             <MainInput
               label="Ton pays de résidence"
-              value={user.city}
+              value={user.address.city}
               onChangeText={(value) =>
                 setUser({
                   ...user,
-                  address: { ...user.address, country: value },
+                  address: { ...user.address, country: value }
                 })
               }
             />
           </View>
-          <ValidateButton onPress={handleValidate} />
-          <NextPrevious />
+          <NextPrevious
+            nextStep={props.nextStep}
+            handleValidate={handleValidate}
+          />
         </View>
       </ImageBackground>
     </KeyboardAwareScrollView>
@@ -103,14 +112,14 @@ const makeStyles = () => {
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
-      paddingBottom: 20,
+      paddingBottom: 20
     },
 
     inputContainer: {
       height: 70,
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between",
+      justifyContent: "space-between"
     },
     input: {
       backgroundColor: "white",
@@ -118,7 +127,7 @@ const makeStyles = () => {
       width: 250,
       borderColor: "gray",
       borderWidth: 1,
-      placeholderTextColor: "gray",
+      placeholderTextColor: "gray"
     },
     inputText: {
       backgroundColor: "#143143",
@@ -128,16 +137,17 @@ const makeStyles = () => {
       borderRadius: 5,
       color: "white",
       paddingHorizontal: 10,
+      margin: 5
     },
     pageTitle: {
       color: "white",
       fontSize: 40 / fontScale,
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     progression: {
       color: "white",
       fontSize: 15 / fontScale,
-      alignSelf: "flex-end",
+      alignSelf: "flex-end"
     },
     pageTitleContainer: {
       backgroundColor: "#2D5971",
@@ -151,17 +161,17 @@ const makeStyles = () => {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      padding: 10,
+      padding: 10
     },
     validateButton: {
       backgroundColor: "green",
       paddingHorizontal: 40,
-      borderRadius: 10,
+      borderRadius: 10
     },
     validate: {
       color: "white",
       fontWeight: "bold",
-      fontSize: 25 / fontScale,
-    },
+      fontSize: 25 / fontScale
+    }
   });
 };

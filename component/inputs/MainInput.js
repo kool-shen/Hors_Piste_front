@@ -11,6 +11,7 @@ const MainInput = (props) => {
         value={props.value}
         w="85%"
         h='85%'
+        size="lg"
       />
     </Box>
   );

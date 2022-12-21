@@ -6,7 +6,7 @@ import {
   View,
   Text,
   useWindowDimensions,
-  ImageBackground,
+  ImageBackground
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
@@ -17,15 +17,14 @@ import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import UploadFile from "../UploadFile";
 import NextPrevious from "../NextPrevious";
-import {BACKEND_URL} from '@env'
+import { BACKEND_URL } from "@env";
 import { useToast } from "native-base";
-
 
 export default function SignUpScreenFive(props) {
   const styles = makeStyles();
-  const userReducer = useSelector(state => state.user.value)
+  const userReducer = useSelector((state) => state.user.value);
   ////RÉCUPÉRER LA PHOTO DANS LE STORE////
-  const toast = useToast()
+  const toast = useToast();
   const dispatch = useDispatch();
   const [user, setUser] = useState({
     photo: "",
@@ -40,28 +39,28 @@ export default function SignUpScreenFive(props) {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(userReducer),
+      body: JSON.stringify(userReducer)
     });
     const userData = await res.json();
     if (userData.result) {
-      console.log('ok')
-      dispatch(updateUserProperties(userData.data))
+      console.log("ok");
+      dispatch(updateUserProperties(userData.data));
       await fetch(`${BACKEND_URL}/docs/createFiles`, {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify(userData.data),
-      })
-      props.nextStep()
+        body: JSON.stringify(userData.data)
+      });
+      props.nextStep(1);
     }
     toast.show({
-      description: userData.message,
+      description: userData.message
     });
-  }
+  };
 
   /////
 
@@ -77,38 +76,56 @@ export default function SignUpScreenFive(props) {
       >
         <BannerScreenTitle title="Inscription" progressionStep="6" />
 
-        <View style={styles.background}>
-          <Text style={styles.inputText}>Mon passeport</Text>
+        <View style={styles.container}>
+          <View style={styles.contentContainer}>
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputText}>Numéro de passeport</Text>
+              <MainInput
+                label="Numéro de passeport"
+                value={user.phone}
+                onChangeText={(value) =>
+                  setUser({
+                    ...user,
+                    ICNumber: value
+                  })
+                }
+              />
+            </View>
 
-          <MainInput
-            label="Numéro de passeport"
-            value={user.ICNumber}
-            onChangeText={(value) => setUser({ ...user, ICNumber: value })}
-            style={styles.input}
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputText}>
+                Date d'expiration du passeport
+              </Text>
+              <MainInput
+                label="Date d'expiration du passeport"
+                value={user.ICExpirationDate}
+                onChangeText={(value) =>
+                  setUser({
+                    ...user,
+                    ICExpirationDate: value
+                  })
+                }
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputText}>Mon RIB</Text>
+              <MainInput
+                label="Mon RIB"
+                value={user.IBAN}
+                onChangeText={(value) =>
+                  setUser({
+                    ...user,
+                    IBAN: value
+                  })
+                }
+              />
+            </View>
+          </View>
+
+          <NextPrevious
+            nextStep={props.nextStep}
+            handleValidate={handleValidate}
           />
-          <MainInput
-            label="Date d'expiration du passeport"
-            value={user.ICExpirationDate}
-            onChangeText={(value) =>
-              setUser({ ...user, ICExpirationDate: value })
-            }
-            style={styles.input}
-          />
-          <UploadFile title="Télécharger mon passeport" />
-
-          <Text style={styles.inputText}>Mon RIB</Text>
-
-          <MainInput
-            label="Numéro IBAN"
-            value={user.IBAN}
-            onChangeText={(value) => setUser({ ...user, IBAN: value })}
-            style={styles.input}
-          />
-
-          <UploadFile title="Télécharger mon RIB" />
-
-          <ValidateButton onPress={handleValidate} />
-          <NextPrevious />
         </View>
       </ImageBackground>
     </KeyboardAwareScrollView>
@@ -119,18 +136,10 @@ const makeStyles = () => {
   const { fontScale, width, height } = useWindowDimensions();
 
   return StyleSheet.create({
-    camera: {
-      width: 350,
-      height: 350,
-      borderRadius: 350,
-      overflow: "hidden",
-      borderTopLeftRadius: 175,
-    },
-
     cameraContainer: {
       display: "flex",
       justifyContent: "space-between",
-      alignItems: "center",
+      alignItems: "center"
     },
 
     pageTitleContainer: {
@@ -145,7 +154,7 @@ const makeStyles = () => {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      padding: 10,
+      padding: 10
     },
 
     inputText: {
@@ -156,16 +165,17 @@ const makeStyles = () => {
       borderRadius: 5,
       color: "white",
       paddingHorizontal: 10,
+      margin: 5
     },
     pageTitle: {
       color: "white",
       fontSize: 40 / fontScale,
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     progression: {
       color: "white",
       fontSize: 15 / fontScale,
-      alignSelf: "flex-end",
+      alignSelf: "flex-end"
     },
     redDot: {
       width: 60,
@@ -177,12 +187,12 @@ const makeStyles = () => {
       alignItems: "center",
 
       borderWidth: 1,
-      borderColor: "white",
+      borderColor: "white"
     },
     mainText: {
       color: "white",
       fontSize: 20,
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
 
     background: {
@@ -192,7 +202,23 @@ const makeStyles = () => {
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
-      paddingBottom: 20,
+      paddingBottom: 20
     },
+    
+    contentContainer: {
+      flex: 1,
+      height: height*0.9,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-around",
+      paddingTop: 100,
+      // paddingBottom: 20
+    },
+    inputContainer: {
+      margin:15,
+      height: 70,
+      alignItems: "center",
+      justifyContent: "center"
+    }
   });
 };
