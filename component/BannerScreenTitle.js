@@ -3,6 +3,20 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { View, Text } from "react-native";
 
 const BannerScreenTitle = (props) => {
+  let progression = ''
+  if (props.progressionStep) {
+    const progression = 
+    <Text
+    style={{
+      color: "white",
+      fontSize: 15,
+      alignSelf: "flex-end",
+    }}
+  >
+    {props.progressionStep}/6
+  </Text>
+  } 
+
   return (
     <View
       style={{
@@ -12,7 +26,7 @@ const BannerScreenTitle = (props) => {
         zIndex: 90,
         width: "80%",
         position: "absolute",
-        top: 40,
+        top: '10%',
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
@@ -31,15 +45,8 @@ const BannerScreenTitle = (props) => {
       </Text>
       <FontAwesomeIcon icon={faUser} color="#F29231" size={40} />
 
-      <Text
-        style={{
-          color: "white",
-          fontSize: 15,
-          alignSelf: "flex-end",
-        }}
-      >
-        {props.progressionStep}/6
-      </Text>
+        {progression}
+
     </View>
   );
 };

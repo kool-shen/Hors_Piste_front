@@ -13,21 +13,22 @@ import { BACKEND_URL } from "@env";
 import { Linking } from "react-native";
 import BannerScreenTitle from "../component/BannerScreenTitle";
 import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { Center } from "native-base";
 
 const ContactsScreen = () => {
   const user = useSelector((state) => state.user.value);
   const [mission, setMission] = useState({});
   const styles = makeStyles();
 
-  useEffect(() => {
-    (async () => {
-      const res = await fetch(
-        `${BACKEND_URL}/missions/${user.mission._id}/${user.userId}`
-      );
-      const missionData = await res.json();
-      setMission(missionData.data);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const res = await fetch(
+  //       `${BACKEND_URL}/missions/${user.mission._id}/${user.userId}`
+  //     );
+  //     const missionData = await res.json();
+  //     setMission(missionData.data);
+  //   })();
+  // }, []);
 
   return (
     <View style={styles.container}>
@@ -38,33 +39,31 @@ const ContactsScreen = () => {
         <BannerScreenTitle title="Mes contacts" />
 
         <View style={styles.mainContainer}>
-          <View style={styles.firstContainer}>
-            <Text style={styles.textContainer}>Référent Hors Pistes</Text>
-
-            {mission.projectReferent && (
-              <View style={styles.infoContainer}>
+          <View style={styles.cardContainer}>
+              <Text style={styles.textContainer}>Hors Pistes</Text>
+                <Text>______________</Text>
                 <View>
                   <Text style={styles.nameContainer}>
-                    {mission.projectReferent.surname}{" "}
-                    {mission.projectReferent.name}
+                  {`Référent : ${user.mission.projectReferent.surname} ${user.mission.projectReferent.name}`}
                   </Text>
                 </View>
-                <View>
+                <View style={styles.telContainer}>
+                  <FontAwesomeIcon icon={faPhone} size={20} style={{color: 'white'}} />
                   <Text
                     onPress={() => {
                       Linking.openURL(
-                        `tel:${mission.projectReferent.phoneNumber}`
+                        `tel:${user.mission.projectReferent.phoneNumber}`
                       );
                     }}
                     style={styles.infoContainer}
                   >
-                    {" "}
-                    <FontAwesomeIcon icon={faPhone} size={20} />
-                    {mission.projectReferent.phoneNumber}
+                    {"   "}
+                    {user.mission.projectReferent.phoneNumber}
                   </Text>
                 </View>
 
-                <View>
+                <View style={styles.telContainer}>
+                  <FontAwesomeIcon icon={faEnvelope} size={20} style={{color: 'white'}} />
                   <Text
                     onPress={() => {
                       Linking.openURL(
@@ -73,59 +72,54 @@ const ContactsScreen = () => {
                     }}
                     style={styles.infoContainer}
                   >
-                    {" "}
-                    <FontAwesomeIcon icon={faEnvelope} size={20} />
-                    {mission.projectReferent.email}
+                    {"   "}
+                    {user.mission.projectReferent.email}
                   </Text>
                 </View>
-              </View>
-            )}
           </View>
-          <View style={styles.firstContainer}>
-            <View>
-              <Text style={styles.textContainer}>{mission.hostStructure.name}</Text>
-            </View>
-            {mission.projectReferent && (
-              <View style={styles.infoContainer}>
+          <View style={styles.cardContainer}>
+
+              <Text style={styles.textContainer}>{user.mission.hostStructure.name}</Text>
+
+            <Text>______________</Text>
                 <View>
                   <Text style={styles.nameContainer}>
-                    Référent :
-                    {mission.hostStrcuture.missionReferent.surname}{" "}
-                    {mission.missionReferent.name}
+                    
+                    {`Référent : ${user.mission.hostStructure.projectReferent.surname} ${user.mission.hostStructure.projectReferent.name}`}
+                    
                   </Text>
                 </View>
 
-                <View>
+                <View style={styles.telContainer}>
+                  <FontAwesomeIcon icon={faPhone} size={20} style={{color: 'white'}}/>
                   <Text
                     onPress={() => {
                       Linking.openURL(
-                        `tel:${mission.projectReferent.phoneNumber}`
+                        `tel:${user.mission.hostStructure.projectReferent.phoneNumber}`
                       );
                     }}
                     style={styles.infoContainer}
                   >
-                    {" "}
-                    <FontAwesomeIcon icon={faPhone} size={20} />
-                    {mission.missionReferent.phone}
+                    {"   "}
+                    {user.mission.hostStructure.projectReferent.phone}
                   </Text>
                 </View>
 
-                <View>
+                <View style={styles.telContainer}>
+                  <FontAwesomeIcon icon={faEnvelope} size={20} style={{color: 'white'}}/>
                   <Text
                     onPress={() => {
                       Linking.openURL(
-                        `mailto:${mission.missionReferent.email}`
+                        `mailto:${user.mission.hostStructure.projectReferent.email}`
                       );
                     }}
                     style={styles.infoContainer}
                   >
-                    {" "}
-                    <FontAwesomeIcon icon={faEnvelope} size={20} />
-                    {mission.missionReferent.email}
+                    {"   "}
+                    {user.mission.hostStructure.projectReferent.email}
                   </Text>
                 </View>
-              </View>
-            )}
+
           </View>
         </View>
       </ImageBackground>
@@ -159,9 +153,10 @@ const makeStyles = () => {
       padding: 10,
     },
 
-    firstContainer: {
-      backgroundColor: "#a5d8e6",
-      height: 200,
+    cardContainer: {
+      backgroundColor: "#2D5971",
+      height: height*0.22,
+      width: width*0.9,
       justifyContent: "space-around",
       borderRadius: 20,
       display: "flex",
@@ -170,34 +165,43 @@ const makeStyles = () => {
       padding: 10,
     },
     textContainer: {
-      fontSize: 30,
+      fontSize: 20,
       fontWeight: "bold",
+      color:'white'
     },
     infoContainer: {
-      fontSize: 25,
+      fontSize: 18,
       justifyContent: "space-around",
       textAlign: "center",
       textDecorationLine: "underline",
       display: "flex",
       alignItems: "center",
       flexDirection: "column",
-      padding: 10,
+      color:'white',
+      // padding: 10,
     },
 
     nameContainer: {
-      fontSize: 25,
+      color: 'white',
+      fontSize: 18,
       justifyContent: "space-between",
       textAlign: "center",
       display: "flex",
     },
     mainContainer: {
-      paddingTop: 180,
+      paddingTop: height*0.25,
       display: "flex",
+      alignItems: 'center',
       justifyContent: "space-around",
       textAlign: "center",
-
-      height: height * 0.7,
+      height: height * 0.8,
     },
+    telContainer: {
+      display:'flex',
+      flexDirection:'row',
+      justifyContent:'center',
+      alignItems:'center',
+    }
   });
 };
 
