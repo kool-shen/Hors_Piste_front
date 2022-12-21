@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NativeBaseProvider } from "native-base";
@@ -14,11 +14,11 @@ import UploadDocumentsScreen from "./screens/UploadDocumentsScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import SignInScreen from "./screens/SignInScreen";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import SignDocumentsScreen from './screens/SignDocumentsScreen'
+import SignDocumentsScreen from "./screens/SignDocumentsScreen";
 import IntroductionScreen from "./screens/IntroductionScreen";
 
 const store = configureStore({
-  reducer: { user }
+  reducer: { user },
 });
 
 const Stack = createNativeStackNavigator();
@@ -26,24 +26,14 @@ const Stack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 const TabNavigator = () => {
-  const [tabBackgroundColor, setTabBackGroundColor] = useState("#143143");
+  const [tabBackgroundColor, setTabBackGroundColor] = useState("#2D5971");
   const [activeColorsMenu, setActiveColorsMenu] = useState({
-    tabBackground: "#143143",
+    tabBackground: "#2D5971",
     activeIcon: "#A5D8E6",
-    inactiveIcons: "#F29231"
+    inactiveIcons: "#F29231",
   });
-  const [activeTab, setActiveTab] = useState("Home");
-  const changeColor = (e) => {
-    if (e.target.split("-")[0] == activeTab) return;
-    setActiveTab(e.target.split("-")[0]);
-    const colors = ["#143143", "#F29231", "#F29231", "#143143", "#2D5971"];
-    setActiveColorsMenu({
-      tabBackground: colors[0],
-      activeIcon: colors[1],
-      inactiveIcons: colors[2]
-    });
-    setTimeout(() => setTabBackGroundColor(colors[0]), 400);
-  };
+
+  const colors = ["#2D5971", "#F29231", "#F29231", "#143143", "#2D5971"];
 
   return (
     <Tab.Navigator
@@ -65,43 +55,30 @@ const TabNavigator = () => {
           }
           return <FontAwesome name={iconName} size={25} color={color} />;
         },
-        headerShown: false
-        
+        headerShown: false,
       })}
       labeled={false}
       shifting={true}
       initialRouteName="Home"
       activeColor={activeColorsMenu.activeIcon}
       inactiveColor={activeColorsMenu.inactiveIcons}
-      
       barStyle={{ backgroundColor: tabBackgroundColor }}
-      theme={{colors: {secondaryContainer: 'yellow'}}}
+      theme={{ colors: { secondaryContainer: "yellow" } }}
     >
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
           tabBarColor: activeColorsMenu.tabBackground,
-          title: "Accueil"
+          title: "Accueil",
         }}
-        listeners={{
-          tabPress: (e) => {
-            changeColor(e);
-          }
-        }}
-        
       />
       <Tab.Screen
         name="MyDocuments"
         component={MyDocumentsScreen}
         options={{
           tabBarColor: activeColorsMenu.tabBackground,
-          title: "Documents"
-        }}
-        listeners={{
-          tabPress: (e) => {
-            changeColor(e);
-          }
+          title: "Documents",
         }}
       />
       <Tab.Screen
@@ -109,12 +86,7 @@ const TabNavigator = () => {
         component={SignDocumentsScreen}
         options={{
           tabBarColor: activeColorsMenu.tabBackground,
-          title: "Signer"
-        }}
-        listeners={{
-          tabPress: (e) => {
-            changeColor(e);
-          }
+          title: "Signer",
         }}
       />
       <Tab.Screen
@@ -122,12 +94,7 @@ const TabNavigator = () => {
         component={UploadDocumentsScreen}
         options={{
           tabBarColor: activeColorsMenu.tabBackground,
-          title: "Envoyer"
-        }}
-        listeners={{
-          tabPress: (e) => {
-            changeColor(e);
-          }
+          title: "Envoyer",
         }}
       />
       <Tab.Screen
@@ -135,12 +102,7 @@ const TabNavigator = () => {
         component={MyMissionScreen}
         options={{
           tabBarColor: activeColorsMenu.tabBackground,
-          title: "Mission"
-        }}
-        listeners={{
-          tabPress: (e) => {
-            changeColor(e);
-          }
+          title: "Mission",
         }}
       />
     </Tab.Navigator>
@@ -154,7 +116,10 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Introduction" component={IntroductionScreen} />
-            <Stack.Screen name="SignDocuments" component={SignDocumentsScreen} />
+            <Stack.Screen
+              name="SignDocuments"
+              component={SignDocumentsScreen}
+            />
             <Stack.Screen name="SignIn" component={SignInScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="MyDocuments" component={MyDocumentsScreen} />
@@ -168,6 +133,6 @@ export default function App() {
           </Stack.Navigator>
         </NavigationContainer>
       </NativeBaseProvider>
-    </StoreProvider> 
+    </StoreProvider>
   );
 }

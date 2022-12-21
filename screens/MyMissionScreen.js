@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import React from "react";
 import { useSelector } from "react-redux";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const MyMissionScreen = () => {
   const user = useSelector((state) => state.user.value);
@@ -18,7 +19,7 @@ const MyMissionScreen = () => {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <ImageBackground
-        source={require("../assets/backgrounds/orange.png")}
+        source={require("../assets/backgrounds/royalBlue.png")}
         style={styles.mainContainer}
       >
         <View style={styles.pageTitleContainer}>
@@ -28,27 +29,47 @@ const MyMissionScreen = () => {
           {user.mission.projectName && (
             <View style={styles.infoContainer}>
               <View style={styles.textContainer}>
-                <Text style={styles.titleContainer}>Type de mission</Text>
+                <Text style={styles.mainText}>Type de mission</Text>
                 <Text style={styles.dataContainer}>
+                  <FontAwesome
+                    name="arrow-right"
+                    size={20}
+                    style={styles.icon}
+                  />{" "}
                   {user.mission.missionType}
                 </Text>
               </View>
 
               <View style={styles.textContainer}>
-                <Text style={styles.titleContainer}> Date de départ</Text>
+                <Text style={styles.mainText}>Date de départ</Text>
                 <Text style={styles.dataContainer}>
+                  <FontAwesome
+                    name="arrow-right"
+                    size={20}
+                    style={styles.icon}
+                  />{" "}
                   {new Date(user.mission.startDate).toLocaleDateString("fr-FR")}
                 </Text>
               </View>
               <View style={styles.textContainer}>
-                <Text style={styles.titleContainer}>Nom du projet</Text>
+                <Text style={styles.mainText}>Nom du projet</Text>
                 <Text style={styles.dataContainer}>
+                  <FontAwesome
+                    name="arrow-right"
+                    size={20}
+                    style={styles.icon}
+                  />{" "}
                   {user.mission.projectName}
                 </Text>
               </View>
               <View style={styles.textContainer}>
-                <Text style={styles.titleContainer}>Date de fin</Text>
+                <Text style={styles.mainText}>Date de fin</Text>
                 <Text style={styles.dataContainer}>
+                  <FontAwesome
+                    name="arrow-right"
+                    size={20}
+                    style={styles.icon}
+                  />{" "}
                   {new Date(user.mission.endDate).toLocaleDateString("fr-FR")}
                 </Text>
               </View>
@@ -65,15 +86,15 @@ const makeStyles = () => {
   return StyleSheet.create({
     mainContainer: {
       backgroundColor: "#F8DFBD",
-      height: "100%",
-      width: "100%",
+      height: height,
+      width: width,
       flex: 1,
       zIndex: -1,
     },
 
     pageTitle: {
       color: "white",
-      fontSize: 40 / fontScale,
+      fontSize: 35 / fontScale,
       fontWeight: "bold",
     },
     progression: {
@@ -95,38 +116,34 @@ const makeStyles = () => {
       padding: 10,
     },
     missionListContainer: {
-      
       justifyContent: "center",
       alignItems: "center",
     },
     infoContainer: {
-      height: height * 0.45,
-      width: width * 0.9,
+      height: height * 0.6,
       display: "flex",
-      flexDirection: "column",
-      justifyContent: "space-between",
-      padding: 10,
-      borderRadius: 50,
+      justifyContent: "space-around",
     },
 
     textContainer: {
       fontSize: 0,
       fontWeight: "400",
       color: "#2D5971",
-      backgroundColor: "#a5d8e6",
       height: height * 0.1,
       width: width * 0.85,
       display: "flex",
-      padding: 20,
-      borderRadius: 30,
+
+      borderRadius: 10,
     },
-    titleContainer: {
+    mainText: {
       fontWeight: "bold",
-      fontSize: 30,
+      fontSize: 25,
+      color: "white",
     },
     dataContainer: {
       fontSize: 20,
-      fontWeight: "600",
+      fontWeight: "light",
+      color: "white",
     },
   });
 };

@@ -6,12 +6,13 @@ import {
   useWindowDimensions,
   Linking,
   ImageBackground,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import { Spinner, Button } from "native-base";
 import React, { useEffect, useState } from "react";
 import { BACKEND_URL } from "@env";
 import { useSelector } from "react-redux";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const MyDocumentsScreen = () => {
   const styles = makeStyles();
@@ -35,51 +36,68 @@ const MyDocumentsScreen = () => {
 
   console.log(documents);
   const documentsToComponents = documents.map((document, i) => (
-    <Button
-      key={i}
-      style={styles.listItem}
-      onPress={() =>
-        Linking.openURL(`https://docs.google.com/document/d/${document.id}`)
-      }
-    >
-      {document.name}
-    </Button>
+    <View style={styles.docContainer}>
+      <Text
+        key={i}
+        style={styles.docText}
+        onPress={() =>
+          Linking.openURL(`https://docs.google.com/document/d/${document.id}`)
+        }
+      >
+        <FontAwesome name="arrow-right" size={20} style={styles.icon} />
+        {document.name}
+      </Text>
+    </View>
   ));
   return (
-    <KeyboardAvoidingView
+    <ImageBackground
+      source={require("../assets/backgrounds/royalBlue.png")}
       style={styles.mainContainer}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <ImageBackground
-        source={require("../assets/backgrounds/orange.png")}
-        style={styles.mainContainer}
-      >
-        <View style={styles.pageTitleContainer}>
-          <Text style={styles.pageTitle}>Mes documents</Text>
+      <View style={styles.pageTitleContainer}>
+        <Text style={styles.pageTitle}>Mes documents</Text>
+      </View>
+      <ScrollView>
+        <View style={styles.listContainer}>
+          {loading ? <Spinner size="lg" /> : documentsToComponents}
+          {!documentsToComponents.length && (
+            <Text style={styles.text}>
+              Il n'y a aucun document à afficher pour le moment.
+            </Text>
+          )}
+          <Button style={styles.button} onPress={() => fetchCompleteDocs()}>
+            <Text style={styles.text}>Actualiser</Text>
+          </Button>
         </View>
-        <ScrollView>
-          <View style={styles.listContainer}>
-            {loading ? <Spinner size="lg" /> : documentsToComponents}
-            {!documentsToComponents.length && (
-              <Text>Il n'y a aucun document à afficher pour le moment.</Text>
-            )}
-            <Button onPress={() => fetchCompleteDocs()}>Actualiser</Button>
-          </View>
-        </ScrollView>
-      </ImageBackground>
-    </KeyboardAvoidingView>
+      </ScrollView>
+    </ImageBackground>
   );
 };
 
 const makeStyles = () => {
   const { fontScale, width, height } = useWindowDimensions();
   return StyleSheet.create({
+    docContainer: {
+      display: "flex",
+      justifyContent: "space-around",
+      textAlign: "center",
+    },
+    docText: {
+      fontSize: 20,
+      fontWeight: "light",
+      color: "white",
+    },
     mainContainer: {
       backgroundColor: "#F8DFBD",
-      height: "100%",
-      width: "100%",
+      height: height,
+      width: width,
       flex: 1,
-      zIndex: -1
+      zIndex: -1,
+    },
+    text: {
+      fontSize: 20 / fontScale,
+      color: "white",
+      fontWeight: "bold",
     },
     subBackground: {
       transform: [{ rotate: "35deg" }, { translateX: 9 }, { translateY: -16 }],
@@ -89,18 +107,18 @@ const makeStyles = () => {
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
-      paddingBottom: 20
+      paddingBottom: 20,
     },
 
     pageTitle: {
       color: "white",
       fontSize: 35 / fontScale,
-      fontWeight: "bold"
+      fontWeight: "bold",
     },
     progression: {
       color: "white",
       fontSize: 15 / fontScale,
-      alignSelf: "flex-end"
+      alignSelf: "flex-end",
     },
     pageTitleContainer: {
       backgroundColor: "#2D5971",
@@ -113,20 +131,28 @@ const makeStyles = () => {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
-      padding: 10
+      padding: 10,
+    },
+    button: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#2D5971",
+      width: width * 0.35,
+      height: height * 0.05,
+      borderRadius: 10,
     },
     listItem: {
       padding: 10,
       fontSize: 30,
       margin: 15,
-      width: width * 0.9
+      width: width * 0.9,
     },
     listContainer: {
-      marginTop: height*0.05,
       height: height,
       justifyContent: "center",
-      alignItems: "center"
-    }
+      alignItems: "center",
+    },
   });
 };
 export default MyDocumentsScreen;
