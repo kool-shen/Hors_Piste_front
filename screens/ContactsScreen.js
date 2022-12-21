@@ -2,17 +2,17 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
   useWindowDimensions,
   ImageBackground,
-  TouchableOpacity,
-  Button,
 } from "react-native";
+
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import EMail from "../component/EMail";
-import * as Mail from "expo-mail-composer";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { BACKEND_URL } from "@env";
+import { Linking } from "react-native";
+import BannerScreenTitle from "../component/BannerScreenTitle";
+import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 
 const ContactsScreen = () => {
   const user = useSelector((state) => state.user.value);
@@ -35,51 +35,109 @@ const ContactsScreen = () => {
         source={require("../assets/contactBackground.png")}
         style={styles.container}
       >
-        <View style={styles.pageTitleContainer}>
-          <Text style={styles.pageTitle}>Mes Contacts</Text>
-        </View>
+        <BannerScreenTitle title="Mes contacts" />
 
-        <View style={styles.firstContainer}>
-          <Text style={styles.textContainer}>Référent Hors Piste</Text>
+        <View style={styles.mainContainer}>
+          <View style={styles.firstContainer}>
+            <Text style={styles.textContainer}>Référent Hors Piste</Text>
 
-          {mission.projectReferant && (
-            <Text style={styles.infoContainer}>
-              Name:{mission.projectReferant.surname}{" "}
-              {mission.projectReferant.name}
-              {"\n"}N°:{mission.projectReferant.phoneNumber}
-              {"\n"}
-              Mail:{mission.projectReferant.email}
-            </Text>
-          )}
-        </View>
-        <View style={styles.secondContainer}>
-          <View>
-            <Text style={styles.textContainer}>Référent HAS</Text>
+            {mission.projectReferant && (
+              <View style={styles.infoContainer}>
+                <View>
+                  <Text style={styles.nameContainer}>
+                    {mission.projectReferant.surname}{" "}
+                    {mission.projectReferant.name}
+                  </Text>
+                </View>
+                <View>
+                  <Text
+                    onPress={() => {
+                      Linking.openURL(
+                        `tel:${mission.projectReferant.phoneNumber}`
+                      );
+                    }}
+                    style={styles.infoContainer}
+                  >
+                    {" "}
+                    <FontAwesomeIcon icon={faPhone} size={20} />
+                    {mission.projectReferant.phoneNumber}
+                  </Text>
+                </View>
+
+                <View>
+                  <Text
+                    onPress={() => {
+                      Linking.openURL(
+                        `mailto:${mission.missionReferant.email}`
+                      );
+                    }}
+                    style={styles.infoContainer}
+                  >
+                    {" "}
+                    <FontAwesomeIcon icon={faEnvelope} size={20} />
+                    {mission.missionReferant.email}
+                  </Text>
+                </View>
+              </View>
+            )}
           </View>
-          {mission.projectReferant && (
-            <Text style={styles.infoContainer}>
-              Name:{mission.missionReferant.surname}{" "}
-              {mission.missionReferant.name}
-              {"\n"}N°:{mission.missionReferant.phone}
-              {"\n"}
-              Mail:{mission.missionReferant.email}
-            </Text>
-          )}
+          <View style={styles.firstContainer}>
+            <View>
+              <Text style={styles.textContainer}>Référent HAS</Text>
+            </View>
+            {mission.projectReferant && (
+              <View style={styles.infoContainer}>
+                <View>
+                  <Text style={styles.nameContainer}>
+                    {mission.missionReferant.surname}{" "}
+                    {mission.missionReferant.name}
+                  </Text>
+                </View>
+
+                <View>
+                  <Text
+                    onPress={() => {
+                      Linking.openURL(
+                        `tel:${mission.projectReferant.phoneNumber}`
+                      );
+                    }}
+                    style={styles.infoContainer}
+                  >
+                    {" "}
+                    <FontAwesomeIcon icon={faPhone} size={20} />
+                    {mission.missionReferant.phone}
+                  </Text>
+                </View>
+
+                <View>
+                  <Text
+                    onPress={() => {
+                      Linking.openURL(
+                        `mailto:${mission.missionReferant.email}`
+                      );
+                    }}
+                    style={styles.infoContainer}
+                  >
+                    {" "}
+                    <FontAwesomeIcon icon={faEnvelope} size={20} />
+                    {mission.missionReferant.email}
+                  </Text>
+                </View>
+              </View>
+            )}
+          </View>
         </View>
-        <TouchableOpacity>
-          <Button title=" + Envoyer un mail" color="white" onPress={EMail} />
-        </TouchableOpacity>
       </ImageBackground>
     </View>
   );
 };
 const makeStyles = () => {
-  const { fontScale } = useWindowDimensions();
+  const { fontScale, height, width } = useWindowDimensions();
   return StyleSheet.create({
     container: {
       flex: 1,
-      width: "100%",
-      height: "100%",
+      width: width,
+      height: height,
     },
     pageTitle: {
       color: "white",
@@ -90,7 +148,7 @@ const makeStyles = () => {
       backgroundColor: "#2D5971",
       borderTopRightRadius: 10,
       borderBottomRightRadius: 10,
-      zIndex: 90,
+
       width: "80%",
       position: "absolute",
       top: 40,
@@ -99,27 +157,52 @@ const makeStyles = () => {
       justifyContent: "space-between",
       padding: 10,
     },
+
     firstContainer: {
       backgroundColor: "#a5d8e6",
-      justifyContent: "space-between",
-      marginTop: 250,
-      borderRadius: 15,
-      height: 150,
+      height: 200,
+      justifyContent: "space-around",
+      borderRadius: 20,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      padding: 10,
     },
-    secondContainer: {
-      backgroundColor: "#a5d8e6",
-      marginTop: 100,
-      borderRadius: 15,
-      height: 150,
-    },
-
     textContainer: {
       fontSize: 30,
+      fontWeight: "bold",
     },
     infoContainer: {
-      fontSize: 15,
+      fontSize: 25,
+      justifyContent: "space-around",
+      textAlign: "center",
+      textDecorationLine: "underline",
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "column",
+      padding:10
+    },
+
+    nameContainer: {
+      fontSize: 25,
+      justifyContent: "space-between",
+      textAlign: "center",
+      display: "flex",
+      
+    },
+    mainContainer: {
+      paddingTop: 180,
+      display: "flex",
+      justifyContent: "space-around",
+      textAlign: "center",
+     
+      height: height * 0.7,
+      
     },
   });
 };
 
 export default ContactsScreen;
+
+
+

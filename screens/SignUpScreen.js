@@ -12,16 +12,11 @@ import SignUpStep6 from "../component/signUpSteps/SignUpStep6";
 export default function SignUpScreen({ navigation }) {
   const styles = makeStyles();
   ////reducer user ///
-
   const [stepValue, setStepValue] = useState(0);
   const nextStep = () => setStepValue(stepValue + 1);
-
   let activeStep;
-
   if (stepValue === 0) {
-    activeStep = (
-      <SignUpStep0 navigation={navigation} nextStep={() => nextStep()} />
-    );
+    activeStep = (<SignUpStep0 navigation={navigation} nextStep={() => nextStep()} />);
   } else if (stepValue === 1) {
     activeStep = <SignUpStep1 nextStep={() => nextStep()} />;
   } else if (stepValue === 2) {
@@ -38,7 +33,6 @@ export default function SignUpScreen({ navigation }) {
     navigation.navigate("TabNavigator");
     return;
   }
-
   return <View style={styles.mainContainer}>{activeStep}</View>;
 }
 

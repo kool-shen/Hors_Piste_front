@@ -1,6 +1,5 @@
 import {
   StyleSheet,
-  TextInput,
   View,
   Text,
   TouchableOpacity,
@@ -10,7 +9,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import logo from "../assets/logo.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../reducers/user";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { BACKEND_URL } from "@env";
@@ -18,10 +17,9 @@ import { useToast } from "native-base";
 import MainInput from "../component/inputs/MainInput";
 
 export default function SignInScreen({ navigation }) {
-  const user = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("leoferte@gmail.com");
+  const [password, setPassword] = useState("Ferte");
   const styles = makeStyles();
   const toast = useToast();
 
