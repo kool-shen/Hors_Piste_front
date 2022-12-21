@@ -3,6 +3,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { View, Text } from "react-native";
 
 const BannerScreenTitle = (props) => {
+
   return (
     <View
       style={{
@@ -12,7 +13,7 @@ const BannerScreenTitle = (props) => {
         zIndex: 90,
         width: "80%",
         position: "absolute",
-        top: 40,
+        top: '10%',
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
@@ -38,7 +39,7 @@ const BannerScreenTitle = (props) => {
           alignSelf: "flex-end",
         }}
       >
-        {props.progressionStep}/6
+        {props.progressionStep && `${props.progressionStep}/6`}
       </Text>
     </View>
   );

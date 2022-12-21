@@ -110,7 +110,6 @@ const makeStyles = () => {
       alignItems: "center",
       justifyContent: "space-around",
       paddingBottom: 100,
-      
     },
     imageBackground: {
       flex: 1,
@@ -127,7 +126,7 @@ const makeStyles = () => {
       alignItems: "center",
       justifyContent: "space-between",
       margin: 15,
-      marginBottom:20
+      marginBottom: 20,
     },
     input: {
       backgroundColor: "white",
@@ -157,8 +156,8 @@ const makeStyles = () => {
       borderRadius: 5,
       color: "white",
       paddingHorizontal: 10,
-      margin:5,
-      whiteSpace: 'nowrap'
+      margin: 5,
+      whiteSpace: "nowrap",
     },
     forgot: {
       fontWeight: "bold",
@@ -182,7 +181,7 @@ const makeStyles = () => {
       fontSize: 20 / fontScale,
     },
     logo: {
-      width: 400,
+      width: 300,
       height: 400,
     },
   });

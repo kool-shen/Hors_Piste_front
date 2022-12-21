@@ -5,7 +5,7 @@ import {
   View,
   Text,
   useWindowDimensions,
-  ImageBackground,
+  ImageBackground
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
@@ -21,18 +21,19 @@ import SelectInput from "../inputs/SelectInput";
 
 export default function SignUpScreenFour(props) {
   const styles = makeStyles();
+  const userReducer = useSelector(state => state.user.value)
   ////reducer user ///
 
   const dispatch = useDispatch();
   const [user, setUser] = useState({
-    degrees: "",
-    occupation: "",
-    CESNumber: "",
+    degrees: userReducer.degrees,
+    occupation: userReducer.occupation,
+    CESNumber: userReducer.CESNumber
   });
 
   const handleValidate = () => {
     dispatch(updateUserProperties(user));
-    props.nextStep();
+    props.nextStep(1);
   };
 
   return (
@@ -51,14 +52,14 @@ export default function SignUpScreenFour(props) {
               value={user.degrees}
               onValueChange={(value) => setUser({ ...user, degrees: value })}
               style={styles.input}
-              numberOfSelections='7'
+              numberOfSelections="7"
               label1="niveau VI: je n'ai jamais obtenu de diplôme"
               label2="niveau V (CAP, BEP...)"
               label3="niveau IV (baccalauréats, BP, BTM...)"
               label4="niveau III (BTS, DUT, BM, autres bac+2...)"
-              label5='niveau II (licences, autres Bac+3...)'
-              label6='niveau I (Masters, Doctorat, autres bac+4/5 et plus...)'
-              label7='autre'
+              label5="niveau II (licences, autres Bac+3...)"
+              label6="niveau I (Masters, Doctorat, autres bac+4/5 et plus...)"
+              label7="autre"
             />
           </View>
           <View style={styles.inputContainer}>
@@ -68,13 +69,13 @@ export default function SignUpScreenFour(props) {
               value={user.occupation}
               onValueChange={(value) => setUser({ ...user, occupation: value })}
               style={styles.input}
-              numberOfSelections='6'
+              numberOfSelections="6"
               label1="en études"
               label2="en formation"
               label3="en volontariat"
-              label4='en emploi'
+              label4="en emploi"
               label5="en recherche d'emploi"
-              label6='autre'
+              label6="autre"
             />
           </View>
           <View style={styles.inputContainer}>
@@ -86,8 +87,10 @@ export default function SignUpScreenFour(props) {
             />
           </View>
 
-          <ValidateButton onPress={handleValidate} />
-          <NextPrevious />
+          <NextPrevious
+            nextStep={props.nextStep}
+            handleValidate={handleValidate}
+          />
         </View>
       </ImageBackground>
     </KeyboardAwareScrollView>
@@ -105,7 +108,7 @@ const makeStyles = () => {
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
-      paddingBottom: 20,
+      paddingBottom: 20
     },
 
     emergencyContainer: {
@@ -118,18 +121,18 @@ const makeStyles = () => {
       borderColor: "white",
       justifyContent: "center",
       alignItems: "center",
-      padding: 5,
+      padding: 5
     },
     emergencyText: {
       fontSize: 20 / fontScale,
       fontWeight: "bold",
-      textAlign: "center",
+      textAlign: "center"
     },
     inputContainer: {
       height: 70,
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between",
+      justifyContent: "space-between"
     },
     input: {
       backgroundColor: "white",
@@ -137,7 +140,7 @@ const makeStyles = () => {
       width: 250,
       borderColor: "gray",
       borderWidth: 1,
-      placeholderTextColor: "gray",
+      placeholderTextColor: "gray"
     },
     inputText: {
       backgroundColor: "#143143",
@@ -147,16 +150,17 @@ const makeStyles = () => {
       borderRadius: 5,
       color: "white",
       paddingHorizontal: 10,
+      margin: 5
     },
     pageTitle: {
       color: "white",
       fontSize: 40 / fontScale,
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     progression: {
       color: "white",
       fontSize: 15 / fontScale,
-      alignSelf: "flex-end",
+      alignSelf: "flex-end"
     },
     pageTitleContainer: {
       backgroundColor: "#2D5971",
@@ -170,17 +174,17 @@ const makeStyles = () => {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      padding: 10,
+      padding: 10
     },
     validateButton: {
       backgroundColor: "green",
       paddingHorizontal: 40,
-      borderRadius: 10,
+      borderRadius: 10
     },
     validate: {
       color: "white",
       fontWeight: "bold",
-      fontSize: 25 / fontScale,
-    },
+      fontSize: 25 / fontScale
+    }
   });
 };
