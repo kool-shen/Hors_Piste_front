@@ -162,6 +162,8 @@ const makeStyles = () => {
       color: "white",
       paddingHorizontal: 10,
       flexWrap: "nowrap",
+      
+      margin:5,
     },
     forgot: {
       fontWeight: "bold",
