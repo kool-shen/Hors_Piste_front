@@ -8,11 +8,9 @@ import {
   ImageBackground,
   ScrollView
 } from "react-native";
-
 import { Spinner, Button } from "native-base";
 import React, { useEffect, useState } from "react";
 import { BACKEND_URL } from "@env";
-
 import { useSelector } from "react-redux";
 
 const MyDocumentsScreen = () => {

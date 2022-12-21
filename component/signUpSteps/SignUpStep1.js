@@ -9,8 +9,6 @@ import {
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import NextPrevious from "../NextPrevious";
@@ -21,7 +19,6 @@ import { useToast } from "native-base";
 import SelectInput from "../inputs/SelectInput";
 
 export default function SignUpScreenOne(props) {
-  const toast = useToast();
   const styles = makeStyles();
   ////reducer user ///
   console.log(user);
@@ -31,10 +28,7 @@ export default function SignUpScreenOne(props) {
     name: "",
     surname: "",
     gender: "",
-    password: "",
-    password: null,
     birthDate: new Date().toISOString(),
-    birthCity: "",
   });
 
   const handleValidate = () => {
@@ -80,11 +74,10 @@ export default function SignUpScreenOne(props) {
               value={user.degrees}
               onValueChange={(value) => setUser({ ...user, gender: value })}
               style={styles.input}
-              numberOfSelections="4"
+              numberOfSelections="3"
               label1="Homme"
               label2="Femme"
-              label3="Transgenre"
-              label4="Non-binaire"
+              label3="Non-binaire"
             />
           </View>
 

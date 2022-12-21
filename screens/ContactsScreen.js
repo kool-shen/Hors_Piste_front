@@ -2,20 +2,13 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
   useWindowDimensions,
   ImageBackground,
-  TouchableOpacity,
-  Button,
 } from "react-native";
 
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
-import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-
-import * as Mail from "expo-mail-composer";
 import { BACKEND_URL } from "@env";
 import { Linking } from "react-native";
 import BannerScreenTitle from "../component/BannerScreenTitle";

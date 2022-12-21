@@ -8,7 +8,7 @@ import {
 import { useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser, faAddressCard } from "@fortawesome/free-solid-svg-icons";
+import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";

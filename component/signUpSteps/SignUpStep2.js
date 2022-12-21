@@ -3,32 +3,43 @@ import {
   View,
   Text,
   useWindowDimensions,
-  ImageBackground,
+  ImageBackground
 } from "react-native";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import NextPrevious from "../NextPrevious";
+import { useToast } from "native-base";
+import PasswordInput from '../inputs/PasswordInput'
 
 import MainInput from "../inputs/MainInput";
 
 export default function SignUpScreenTwo(props) {
+  const toast = useToast();
   const styles = makeStyles();
   const dispatch = useDispatch();
+  const [checkPassword, setCheckPassword] = useState("");
 
   const [user, setUser] = useState({
-    address: { street: "", zipCode: "", city: "", country: "" },
     phone: "",
+    password: '',
+    birthCity: ''
   });
 
   function handleValidate() {
-    dispatch(updateUserProperties(user));
-    props.nextStep();
+    if (user.password !== checkPassword) {
+      toast.show({
+        description: "Les mots de passe ne correspondent pas !"
+      });
+      return
+      
+    } else {
+      dispatch(updateUserProperties(user));
+      props.nextStep();
+    }
   }
 
   return (
@@ -48,7 +59,7 @@ export default function SignUpScreenTwo(props) {
               onChangeText={(value) =>
                 setUser({
                   ...user,
-                  birthCity: value,
+                  birthCity: value
                 })
               }
             />
@@ -61,7 +72,7 @@ export default function SignUpScreenTwo(props) {
               onChangeText={(value) =>
                 setUser({
                   ...user,
-                  phone: value,
+                  phone: value
                 })
               }
             />
@@ -69,28 +80,21 @@ export default function SignUpScreenTwo(props) {
 
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Mot de passe</Text>
-            <MainInput
+            <PasswordInput
               label="Ton mot de passe"
               value={user.password}
-              onChangeText={(value) =>
-                setUser({
-                  ...user,
-                  password: value,
-                })
-              }
+              onChangeText={(value) => setUser({
+                ...user,
+                password: value
+              })}
             />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Confirmation mot de passe</Text>
-            <MainInput
+            <PasswordInput
               label="Confirmation du mot de passe"
-              value={user.password}
-              onChangeText={(value) =>
-                setUser({
-                  ...user,
-                  password: value,
-                })
-              }
+              value={checkPassword}
+              onChangeText={(value) => setCheckPassword(value)}
             />
           </View>
 
@@ -113,14 +117,14 @@ const makeStyles = () => {
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
-      paddingBottom: 20,
+      paddingBottom: 20
     },
 
     inputContainer: {
       height: 70,
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between",
+      justifyContent: "space-between"
     },
     input: {
       backgroundColor: "white",
@@ -128,7 +132,7 @@ const makeStyles = () => {
       width: 250,
       borderColor: "gray",
       borderWidth: 1,
-      placeholderTextColor: "gray",
+      placeholderTextColor: "gray"
     },
     inputText: {
       backgroundColor: "#143143",
@@ -137,17 +141,17 @@ const makeStyles = () => {
       fontSize: 15 / fontScale,
       borderRadius: 5,
       color: "white",
-      paddingHorizontal: 10,
+      paddingHorizontal: 10
     },
     pageTitle: {
       color: "white",
       fontSize: 40 / fontScale,
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     progression: {
       color: "white",
       fontSize: 15 / fontScale,
-      alignSelf: "flex-end",
+      alignSelf: "flex-end"
     },
     pageTitleContainer: {
       backgroundColor: "#2D5971",
@@ -161,17 +165,17 @@ const makeStyles = () => {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      padding: 10,
+      padding: 10
     },
     validateButton: {
       backgroundColor: "green",
       paddingHorizontal: 40,
-      borderRadius: 10,
+      borderRadius: 10
     },
     validate: {
       color: "white",
       fontWeight: "bold",
-      fontSize: 25 / fontScale,
-    },
+      fontSize: 25 / fontScale
+    }
   });
 };

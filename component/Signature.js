@@ -32,10 +32,7 @@ const Sign = (props) => {
   const [infoModal, setInfoModal] = useState(true);
   const [inputModal, setInputModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [locationModal, setLocationModal] = useState(false);
   const [signature, setSignature] = useState("");
-  const [signatureImage, setSignatureImage] = useState("");
-  const [signatureLocation, setSignatureLocation] = useState(null);
   const [documentID, setDocumentID] = useState("");
   const ref = useRef();
 
@@ -68,15 +65,10 @@ const Sign = (props) => {
   };
 
   // Called after ref.current.getData()
-  const handleData = async (data) => {
+  const handleData = async () => {
     setLoading(true);
     const formData = new FormData();
     const path = FileSystem.cacheDirectory + "sign.png";
-    const encoding = await FileSystem.writeAsStringAsync(
-      path,
-      data.replace("data:image/png;base64,", ""),
-      { encoding: FileSystem.EncodingType.Base64 }
-    );
     const file = await FileSystem.getInfoAsync(path);
     console.log(file);
 

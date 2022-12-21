@@ -2,23 +2,14 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  KeyboardAvoidingView,
   useWindowDimensions,
-  Linking,
-  Pressable,
   ImageBackground,
   ScrollView
 } from "react-native";
-import { Button, Spinner, Modal, FormControl, Input } from "native-base";
-import React, { useEffect, useState, useRef } from "react";
-import { List } from "react-native-paper";
+import { Button, Spinner } from "native-base";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import * as FileSystem from "expo-file-system";
-import Signature from "react-native-signature-canvas";
 import Sign from "../component/Signature";
-import * as Location from "expo-location";
 import { BACKEND_URL } from "@env";
 
 const MyMissionScreen = () => {
@@ -26,12 +17,6 @@ const MyMissionScreen = () => {
   const [loading, setLoading] = useState(true);
   const [documents, setDocuments] = useState([]);
   const user = useSelector((state) => state.user.value);
-  const [documentID, setDocumentID] = useState(null);
-  const [signatureModal, setSignatureModal] = useState(false);
-  const [infoModal, setInfoModal] = useState(false);
-  const [signature, setSignature] = useState("");
-  const [signatureImage, setSignatureImage] = useState("");
-  const ref = useRef();
 
   //fetch tous les fichiers dans le drive et les affiches
   useEffect(() => {
