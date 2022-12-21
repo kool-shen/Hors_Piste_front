@@ -6,14 +6,15 @@ import {
   ImageBackground
 } from "react-native";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import NextPrevious from "../NextPrevious";
 import { useToast } from "native-base";
-import PasswordInput from '../inputs/PasswordInput'
+import PasswordInput from "../inputs/PasswordInput";
+import PhoneInput from "../inputs/PhoneInput";
 
 import MainInput from "../inputs/MainInput";
 
@@ -21,23 +22,24 @@ export default function SignUpScreenTwo(props) {
   const toast = useToast();
   const styles = makeStyles();
   const dispatch = useDispatch();
-  const [firstPassword, setFirstPassword] = useState(null)
+  const [firstPassword, setFirstPassword] = useState(null);
   const [checkPassword, setCheckPassword] = useState("");
+  const userReducer = useSelector(state => state.user.value)
 
   const [user, setUser] = useState({
-    phone: "",
+    phone: userReducer.phone,
     password: '',
-    birthCity: ''
+    birthCity: userReducer.birthCity
   });
 
   function handleValidate() {
     if (firstPassword === checkPassword) {
-      console.log(firstPassword)
-      console.log(user)
+      console.log(firstPassword);
+      console.log(user);
       dispatch(updateUserProperties(user));
-      props.nextStep();
+      props.nextStep(1);
     } else {
-      toast.show({description: 'Les mots de passes ne correspondent pas'})
+      toast.show({ description: "Les mots de passes ne correspondent pas" });
     }
   }
 
@@ -81,7 +83,7 @@ export default function SignUpScreenTwo(props) {
             <Text style={styles.inputText}>Mot de passe</Text>
             <PasswordInput
               label="Ton mot de passe"
-              value={user.password}
+              value={user.firstPassword}
               onChangeText={(value) => setFirstPassword(value)}
             />
           </View>
@@ -91,18 +93,19 @@ export default function SignUpScreenTwo(props) {
               label="Confirmation du mot de passe"
               value={checkPassword}
               onChangeText={(value) => {
-                  setCheckPassword(value)
-                  setUser({
-                    ...user,
-                    password: firstPassword,
-                  })
-                }
-              }
+                setCheckPassword(value);
+                setUser({
+                  ...user,
+                  password: firstPassword
+                });
+              }}
             />
           </View>
 
-          <ValidateButton onPress={handleValidate} />
-          <NextPrevious />
+          <NextPrevious
+            nextStep={props.nextStep}
+            handleValidate={handleValidate}
+          />
         </View>
       </ImageBackground>
     </KeyboardAwareScrollView>
@@ -144,7 +147,8 @@ const makeStyles = () => {
       fontSize: 15 / fontScale,
       borderRadius: 5,
       color: "white",
-      paddingHorizontal: 10
+      paddingHorizontal: 10,
+      margin: 5
     },
     pageTitle: {
       color: "white",

@@ -12,6 +12,9 @@ const NormalInput = (props) => {
       value={props.value}
       onChangeText={props.onChangeText}
       label={props.label}
+      size="lg"
+      h='85%'
+      w='85%'
     />
   );
 };

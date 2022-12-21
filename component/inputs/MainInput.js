@@ -3,13 +3,15 @@ import { Input, Box } from "native-base";
 
 const MainInput = (props) => {
   return (
-    <Box alignItems="center">
+    <Box alignItems="center" >
       <Input
         variant="filled"
         placeholder={props.label}
         onChangeText={props.onChangeText}
         value={props.value}
-        w="75%"
+        w="85%"
+        h='85%'
+        size="lg"
       />
     </Box>
   );

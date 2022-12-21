@@ -163,6 +163,8 @@ const makeStyles = () => {
       flexDirection: "column",
       alignItems: "center",
       padding: 10,
+      margin: height*0.01,
+      width: width * 0.95,
     },
     textContainer: {
       fontSize: 20,

@@ -4,9 +4,9 @@ import {
   View,
   Text,
   useWindowDimensions,
-  ImageBackground,
+  ImageBackground
 } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import BannerScreenTitle from "../BannerScreenTitle";
@@ -15,25 +15,38 @@ import NextPrevious from "../NextPrevious";
 
 import MainInput from "../inputs/MainInput";
 import DateInput from "../inputs/DateInput";
-import { useToast } from "native-base";
+import { Toast, useToast } from "native-base";
 import SelectInput from "../inputs/SelectInput";
 
 export default function SignUpScreenOne(props) {
   const styles = makeStyles();
+  const toast = useToast();
+  const userReducer = useSelector(state => state.user.value)
+
   ////reducer user ///
   console.log(user);
   const dispatch = useDispatch();
 
   const [user, setUser] = useState({
-    name: "",
-    surname: "",
-    gender: "",
-    birthDate: "",
+    name: userReducer.name,
+    surname: userReducer.surname,
+    gender: userReducer.gender,
+    birthDate: userReducer.birthDate
   });
 
   const handleValidate = () => {
+    if (
+      !/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/.test(
+        user.birthDate
+      )
+    ) {
+      return toast.show({
+        description: "Le format de la date doit etre dd/mm/yyyy"
+      });
+    }
     dispatch(updateUserProperties(user));
-    props.nextStep();
+
+    props.nextStep(1);
   };
 
   return (
@@ -65,7 +78,12 @@ export default function SignUpScreenOne(props) {
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Date de naissance</Text>
-            <DateInput />
+            <MainInput
+              label="dd/mm/yyyy"
+              value={user.birthDate}
+              onChangeText={(value) => setUser({ ...user, birthDate: value })}
+              style={styles.input}
+            />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Genre</Text>
@@ -81,8 +99,10 @@ export default function SignUpScreenOne(props) {
             />
           </View>
 
-          <ValidateButton onPress={handleValidate} />
-          <NextPrevious />
+          <NextPrevious
+            nextStep={props.nextStep}
+            handleValidate={handleValidate}
+          />
         </View>
       </ImageBackground>
     </KeyboardAwareScrollView>
@@ -100,17 +120,17 @@ const makeStyles = () => {
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
-      paddingBottom: 20,
+      paddingBottom: 20
     },
 
     inputContainer: {
       height: 70,
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between",
+      justifyContent: "space-between"
     },
     input: {
-      margin: 10,
+      margin: 10
     },
     inputText: {
       backgroundColor: "#143143",
@@ -120,16 +140,17 @@ const makeStyles = () => {
       borderRadius: 5,
       color: "white",
       paddingHorizontal: 10,
+      margin: 5
     },
     pageTitle: {
       color: "white",
       fontSize: 40,
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     progression: {
       color: "white",
       fontSize: 15,
-      alignSelf: "flex-end",
+      alignSelf: "flex-end"
     },
     pageTitleContainer: {
       backgroundColor: "#2D5971",
@@ -143,12 +164,12 @@ const makeStyles = () => {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      padding: 10,
+      padding: 10
     },
     validateButton: {
       backgroundColor: "green",
       paddingHorizontal: 40,
-      borderRadius: 10,
-    },
+      borderRadius: 10
+    }
   });
 };

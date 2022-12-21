@@ -4,7 +4,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 import { TouchableOpacity, View } from "react-native";
 
-const NextPrevious = () => {
+const NextPrevious = (props) => {
   return (
     <View
       style={{
@@ -15,10 +15,10 @@ const NextPrevious = () => {
         padding: 20,
       }}
     >
-      <TouchableOpacity>
+      <TouchableOpacity onPress={()=> props.nextStep(-1)}>
         <FontAwesome name="arrow-left" size={50} color="#143143" />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={()=> props.handleValidate()}>
         <FontAwesome name="arrow-right" size={50} color="#143143" />
       </TouchableOpacity>
     </View>

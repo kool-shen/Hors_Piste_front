@@ -13,22 +13,22 @@ export default function SignUpScreen({ navigation }) {
   const styles = makeStyles();
   ////reducer user ///
   const [stepValue, setStepValue] = useState(0);
-  const nextStep = () => setStepValue(stepValue + 1);
+  const nextStep = (direction) => setStepValue(stepValue + direction);
   let activeStep;
   if (stepValue === 0) {
-    activeStep = (<SignUpStep0 navigation={navigation} nextStep={() => nextStep()} />);
+    activeStep = (<SignUpStep0 navigation={navigation} nextStep={nextStep} />);
   } else if (stepValue === 1) {
-    activeStep = <SignUpStep1 nextStep={() => nextStep()} />;
+    activeStep = <SignUpStep1 nextStep={nextStep} />;
   } else if (stepValue === 2) {
-    activeStep = <SignUpStep2 nextStep={() => nextStep()} />;
+    activeStep = <SignUpStep2 nextStep={nextStep} />;
   } else if (stepValue === 3) {
-    activeStep = <SignUpStep3 nextStep={() => nextStep()} />;
+    activeStep = <SignUpStep3 nextStep={nextStep} />;
   } else if (stepValue === 4) {
-    activeStep = <SignUpStep4 nextStep={() => nextStep()} />;
+    activeStep = <SignUpStep4 nextStep={nextStep} />;
   } else if (stepValue === 5) {
-    activeStep = <SignUpStep5 nextStep={() => nextStep()} />;
+    activeStep = <SignUpStep5 nextStep={nextStep} />;
   } else if (stepValue === 6) {
-    activeStep = <SignUpStep6 nextStep={() => nextStep()} />;
+    activeStep = <SignUpStep6 nextStep={nextStep} />;
   } else if (stepValue === 7) {   
     navigation.navigate("TabNavigator");
     return;
