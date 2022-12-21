@@ -39,28 +39,28 @@ const ContactsScreen = () => {
 
         <View style={styles.mainContainer}>
           <View style={styles.firstContainer}>
-            <Text style={styles.textContainer}>Référent Hors Piste</Text>
+            <Text style={styles.textContainer}>Référent Hors Pistes</Text>
 
-            {mission.projectReferant && (
+            {mission.projectReferent && (
               <View style={styles.infoContainer}>
                 <View>
                   <Text style={styles.nameContainer}>
-                    {mission.projectReferant.surname}{" "}
-                    {mission.projectReferant.name}
+                    {mission.projectReferent.surname}{" "}
+                    {mission.projectReferent.name}
                   </Text>
                 </View>
                 <View>
                   <Text
                     onPress={() => {
                       Linking.openURL(
-                        `tel:${mission.projectReferant.phoneNumber}`
+                        `tel:${mission.projectReferent.phoneNumber}`
                       );
                     }}
                     style={styles.infoContainer}
                   >
                     {" "}
                     <FontAwesomeIcon icon={faPhone} size={20} />
-                    {mission.projectReferant.phoneNumber}
+                    {mission.projectReferent.phoneNumber}
                   </Text>
                 </View>
 
@@ -68,14 +68,14 @@ const ContactsScreen = () => {
                   <Text
                     onPress={() => {
                       Linking.openURL(
-                        `mailto:${mission.missionReferant.email}`
+                        `mailto:${mission.projectReferent.email}`
                       );
                     }}
                     style={styles.infoContainer}
                   >
                     {" "}
                     <FontAwesomeIcon icon={faEnvelope} size={20} />
-                    {mission.missionReferant.email}
+                    {mission.projectReferent.email}
                   </Text>
                 </View>
               </View>
@@ -83,14 +83,15 @@ const ContactsScreen = () => {
           </View>
           <View style={styles.firstContainer}>
             <View>
-              <Text style={styles.textContainer}>Référent HAS</Text>
+              <Text style={styles.textContainer}>{mission.hostStructure.name}</Text>
             </View>
-            {mission.projectReferant && (
+            {mission.projectReferent && (
               <View style={styles.infoContainer}>
                 <View>
                   <Text style={styles.nameContainer}>
-                    {mission.missionReferant.surname}{" "}
-                    {mission.missionReferant.name}
+                    Référent :
+                    {mission.hostStrcuture.missionReferent.surname}{" "}
+                    {mission.missionReferent.name}
                   </Text>
                 </View>
 
@@ -98,14 +99,14 @@ const ContactsScreen = () => {
                   <Text
                     onPress={() => {
                       Linking.openURL(
-                        `tel:${mission.projectReferant.phoneNumber}`
+                        `tel:${mission.projectReferent.phoneNumber}`
                       );
                     }}
                     style={styles.infoContainer}
                   >
                     {" "}
                     <FontAwesomeIcon icon={faPhone} size={20} />
-                    {mission.missionReferant.phone}
+                    {mission.missionReferent.phone}
                   </Text>
                 </View>
 
@@ -113,14 +114,14 @@ const ContactsScreen = () => {
                   <Text
                     onPress={() => {
                       Linking.openURL(
-                        `mailto:${mission.missionReferant.email}`
+                        `mailto:${mission.missionReferent.email}`
                       );
                     }}
                     style={styles.infoContainer}
                   >
                     {" "}
                     <FontAwesomeIcon icon={faEnvelope} size={20} />
-                    {mission.missionReferant.email}
+                    {mission.missionReferent.email}
                   </Text>
                 </View>
               </View>
