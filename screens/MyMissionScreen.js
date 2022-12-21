@@ -95,7 +95,7 @@ const makeStyles = () => {
       padding: 10,
     },
     missionListContainer: {
-      height,
+      
       justifyContent: "center",
       alignItems: "center",
     },
