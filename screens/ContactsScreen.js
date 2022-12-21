@@ -26,6 +26,7 @@ const ContactsScreen = () => {
       );
       const missionData = await res.json();
       setMission(missionData.data);
+      console.log(mission.missionReferent ? true : false)
     })();
   }, []);
 
@@ -39,7 +40,7 @@ const ContactsScreen = () => {
 
         <View style={styles.mainContainer}>
           <View style={styles.firstContainer}>
-            <Text style={styles.textContainer}>Référent Hors Piste</Text>
+            <Text style={styles.textContainer}>Référent Hors Pistes</Text>
 
             {mission.projectReferent && (
               <View style={styles.infoContainer}>
@@ -68,14 +69,14 @@ const ContactsScreen = () => {
                   <Text
                     onPress={() => {
                       Linking.openURL(
-                        `mailto:${mission.missionReferent.email}`
+                        `mailto:${mission.projectReferent.email}`
                       );
                     }}
                     style={styles.infoContainer}
                   >
                     {" "}
                     <FontAwesomeIcon icon={faEnvelope} size={20} />
-                    {mission.missionReferent.email}
+                    {mission.projectReferent.email}
                   </Text>
                 </View>
               </View>
@@ -83,12 +84,13 @@ const ContactsScreen = () => {
           </View>
           <View style={styles.firstContainer}>
             <View>
-              <Text style={styles.textContainer}>Référent HAS</Text>
+              {mission.hostStructure && <Text style={styles.textContainer}>{mission.hostStructure.name}</Text>}
             </View>
-            {mission.projectReferent && (
+            {mission.missionReferent && (
               <View style={styles.infoContainer}>
                 <View>
                   <Text style={styles.nameContainer}>
+                    Référent :
                     {mission.missionReferent.surname}{" "}
                     {mission.missionReferent.name}
                   </Text>

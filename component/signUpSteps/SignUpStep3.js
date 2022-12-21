@@ -10,8 +10,6 @@ import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import MainInput from "../inputs/MainInput";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import NextPrevious from "../NextPrevious";
@@ -19,16 +17,13 @@ import NextPrevious from "../NextPrevious";
 export default function SignUpScreenTwo(props) {
   const styles = makeStyles();
   const dispatch = useDispatch();
-
   const [user, setUser] = useState({
     address: { street: "", zipCode: "", city: "", country: "" },
   });
-
   function handleValidate() {
     dispatch(updateUserProperties(user));
     props.nextStep();
   }
-
   return (
     <KeyboardAwareScrollView>
       <ImageBackground
@@ -36,7 +31,6 @@ export default function SignUpScreenTwo(props) {
         style={{ width: "100%", height: "100%" }}
       >
         <BannerScreenTitle title="Inscription" progressionStep="3" />
-
         <View style={styles.background}>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Adresse</Text>
@@ -90,7 +84,6 @@ export default function SignUpScreenTwo(props) {
               }
             />
           </View>
-
           <ValidateButton onPress={handleValidate} />
           <NextPrevious />
         </View>

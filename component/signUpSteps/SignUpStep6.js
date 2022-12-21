@@ -20,6 +20,7 @@ import NextPrevious from "../NextPrevious";
 import {BACKEND_URL} from '@env'
 import { useToast } from "native-base";
 
+
 export default function SignUpScreenFive(props) {
   const styles = makeStyles();
   const userReducer = useSelector(state => state.user.value)
@@ -45,6 +46,7 @@ export default function SignUpScreenFive(props) {
     });
     const userData = await res.json();
     if (userData.result) {
+      console.log('ok')
       dispatch(updateUserProperties(userData.data))
       await fetch(`${BACKEND_URL}/docs/createFiles`, {
         method: "POST",
@@ -53,8 +55,8 @@ export default function SignUpScreenFive(props) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userData.data),
-      });
-      props.nextStep();
+      })
+      props.nextStep()
     }
     toast.show({
       description: userData.message,

@@ -29,7 +29,7 @@ export default function SignUpScreen({ navigation }) {
     activeStep = <SignUpStep5 nextStep={() => nextStep()} />;
   } else if (stepValue === 6) {
     activeStep = <SignUpStep6 nextStep={() => nextStep()} />;
-  } else {
+  } else if (stepValue === 7) {   
     navigation.navigate("TabNavigator");
     return;
   }
