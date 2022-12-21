@@ -11,66 +11,61 @@ import {
 import React, { useState } from "react";
 import * as DocumentPicker from "expo-document-picker";
 import { useSelector } from "react-redux";
-import { BACKEND_URL } from "@env"
+import { BACKEND_URL } from "@env";
 
 const UploadDocumentsScreen = () => {
-  const user = useSelector(state => state.user.value)
-  const [uploadFile, setUploadFile] = useState({})
-  const [uploadName, setUploadName] = useState('')
-  const [resultMessage, setResultMessage] = useState('')
-
+  const user = useSelector((state) => state.user.value);
+  const [uploadFile, setUploadFile] = useState({});
+  const [uploadName, setUploadName] = useState("");
+  const [resultMessage, setResultMessage] = useState("");
   const styles = makeStyles();
   const pickDocument = async () => {
     const result = await DocumentPicker.getDocumentAsync({});
-    setUploadName(result.name)
+    setUploadName(result.name);
     const formData = new FormData();
-    formData.append("document", {...result, type: 'image/jpeg'});  
-    setUploadFile(formData)
-    console.log(formData)
+    formData.append("document", { ...result, type: "image/jpeg" });
+    setUploadFile(formData);
+    console.log(formData);
   };
-
   const sendDocument = async () => {
-    const res = await fetch(`${BACKEND_URL}/docs/uploads/${user.folderIds.toValidateFolderId}`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
-      },
-      body: uploadFile,
-    })
-    const data = await res.json()
-    setResultMessage(data.message)
+    const res = await fetch(
+      `${BACKEND_URL}/docs/uploads/${user.folderIds.toValidateFolderId}`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data"
+        },
+        body: uploadFile
+      }
+    );
+    const data = await res.json();
+    setResultMessage(data.message);
   };
-    
-
-  
-
   return (
     <KeyboardAvoidingView
       style={styles.mainContainer}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <ImageBackground source={require("../assets/backgrounds/royalBlue.png")} style={styles.mainContainer}>
+      <ImageBackground
+        source={require("../assets/backgrounds/royalBlue.png")}
+        style={styles.mainContainer}
+      >
         <View style={styles.pageTitleContainer}>
           <Text style={styles.pageTitle}>Transmettre</Text>
         </View>
-        
-              <View style={styles.listContainer}>
-                <TouchableOpacity>
-                  <Button
-                    title="Choisir un fichier"
-                    color="black"
-                    onPress={pickDocument}
-                  />
-                  <Text>{uploadName}</Text>
-                  <Button
-                    title="Envoyer"
-                    color="black"
-                    onPress={sendDocument}
-                  />
-                  <Text>{resultMessage}</Text>
-                </TouchableOpacity>
-              </View>
+        <View style={styles.listContainer}>
+          <TouchableOpacity>
+            <Button
+              title="Choisir un fichier"
+              color="black"
+              onPress={pickDocument}
+            />
+            <Text>{uploadName}</Text>
+            <Button title="Envoyer" color="black" onPress={sendDocument} />
+            <Text>{resultMessage}</Text>
+          </TouchableOpacity>
+        </View>
       </ImageBackground>
     </KeyboardAvoidingView>
   );
@@ -118,13 +113,10 @@ const makeStyles = () => {
     },
     listContainer: {
       height: height,
-      justifyContent: 'center',
-      alignItems: 'center'
+      justifyContent: "center",
+      alignItems: "center"
     }
   });
 };
 
 export default UploadDocumentsScreen;
-
-
-

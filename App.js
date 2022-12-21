@@ -7,7 +7,6 @@ import { configureStore } from "@reduxjs/toolkit";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import user from "./reducers/user";
 import HomeScreen from "./screens/HomeScreen";
-import ProfileScreen from "./screens/ProfileScreen";
 import MyDocumentsScreen from "./screens/MyDocumentsScreen";
 import MyMissionScreen from "./screens/MyMissionScreen";
 import ContactsScreen from "./screens/ContactsScreen";
@@ -21,7 +20,6 @@ import IntroductionScreen from "./screens/IntroductionScreen";
 const store = configureStore({
   reducer: { user }
 });
-
 
 const Stack = createNativeStackNavigator();
 
@@ -39,8 +37,6 @@ const TabNavigator = () => {
     if (e.target.split("-")[0] == activeTab) return;
     setActiveTab(e.target.split("-")[0]);
     const colors = ["#143143", "#F29231", "#F29231", "#143143", "#2D5971"];
-    console.log(e.target.split("-")[0]);
-    console.log(activeTab);
     setActiveColorsMenu({
       tabBackground: colors[0],
       activeIcon: colors[1],
@@ -51,7 +47,6 @@ const TabNavigator = () => {
 
   return (
     <Tab.Navigator
-      // barStyle={{ backgroundColor: '#2D5971' }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
           let iconName = "";
@@ -148,8 +143,6 @@ const TabNavigator = () => {
           }
         }}
       />
-      
-      
     </Tab.Navigator>
   );
 };
@@ -166,12 +159,10 @@ export default function App() {
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="MyDocuments" component={MyDocumentsScreen} />
             <Stack.Screen name="TabNavigator" component={TabNavigator} />
-
             <Stack.Screen
               name="UploadDocuments"
               component={UploadDocumentsScreen}
             />
-
             <Stack.Screen name="MyMission" component={MyMissionScreen} />
             <Stack.Screen name="MyContacts" component={ContactsScreen} />
           </Stack.Navigator>
