@@ -187,7 +187,7 @@ const makeStyles = () => {
       display: "flex",
       alignItems: "center",
       flexDirection: "column",
-      padding:10
+      padding: 10,
     },
 
     nameContainer: {
@@ -195,21 +195,16 @@ const makeStyles = () => {
       justifyContent: "space-between",
       textAlign: "center",
       display: "flex",
-      
     },
     mainContainer: {
       paddingTop: 180,
       display: "flex",
       justifyContent: "space-around",
       textAlign: "center",
-     
+
       height: height * 0.7,
-      
     },
   });
 };
 
 export default ContactsScreen;
-
-
-
