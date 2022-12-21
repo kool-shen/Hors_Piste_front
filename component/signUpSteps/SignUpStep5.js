@@ -87,8 +87,8 @@ export default function SignUpScreenFour(props) {
           </View>
 
           <ValidateButton onPress={handleValidate} />
+          <NextPrevious />
         </View>
-        <NextPrevious />
       </ImageBackground>
     </KeyboardAwareScrollView>
   );

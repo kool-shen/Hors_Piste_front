@@ -2,20 +2,13 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
   useWindowDimensions,
   ImageBackground,
-  TouchableOpacity,
-  Button,
 } from "react-native";
 
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
-import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-
-import * as Mail from "expo-mail-composer";
 import { BACKEND_URL } from "@env";
 import { Linking } from "react-native";
 import BannerScreenTitle from "../component/BannerScreenTitle";
@@ -187,7 +180,7 @@ const makeStyles = () => {
       display: "flex",
       alignItems: "center",
       flexDirection: "column",
-      padding:10
+      padding: 10,
     },
 
     nameContainer: {
@@ -195,21 +188,16 @@ const makeStyles = () => {
       justifyContent: "space-between",
       textAlign: "center",
       display: "flex",
-      
     },
     mainContainer: {
       paddingTop: 180,
       display: "flex",
       justifyContent: "space-around",
       textAlign: "center",
-     
+
       height: height * 0.7,
-      
     },
   });
 };
 
 export default ContactsScreen;
-
-
-

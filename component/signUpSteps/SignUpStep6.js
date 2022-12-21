@@ -5,7 +5,6 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableOpacity,
   useWindowDimensions,
   ImageBackground,
 } from "react-native";
@@ -13,8 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
 import { useIsFocused } from "@react-navigation/native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCameraRetro } from "@fortawesome/free-solid-svg-icons";
 import MainInput from "../inputs/MainInput";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -49,7 +46,7 @@ export default function SignUpScreenFive(props) {
     const userData = await res.json();
     if (userData.result) {
       dispatch(updateUserProperties(userData.data))
-      const res = await fetch(`${BACKEND_URL}/docs/createFiles`, {
+      await fetch(`${BACKEND_URL}/docs/createFiles`, {
         method: "POST",
         headers: {
           Accept: "application/json",

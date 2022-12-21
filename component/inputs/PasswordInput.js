@@ -2,7 +2,6 @@ import * as React from "react";
 import { TextInput } from "react-native-paper";
 
 const PasswordInput = (props) => {
-  const [text, setText] = React.useState("");
 
   return (
     <TextInput

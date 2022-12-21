@@ -5,14 +5,6 @@ import {
   View,
   useWindowDimensions,
 } from "react-native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import {
-  faFile,
-  faEnvelope,
-  faPen,
-  faCircleDot,
-  faAddressBook,
-} from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
@@ -22,7 +14,7 @@ export default function HomeScreen({ navigation }) {
   console.log(user);
   return (
     <View style={styles.mainContainer}>
-      <View /*animation={keyframe}*/ style={styles.container1}>
+      <View style={styles.container1}>
         <TouchableOpacity
           style={styles.card1}
           onPress={() => navigation.navigate("MyDocuments")}

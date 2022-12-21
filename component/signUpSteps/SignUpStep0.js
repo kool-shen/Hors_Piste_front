@@ -3,20 +3,18 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Image,
   useWindowDimensions,
   ImageBackground,
 } from "react-native";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
-import { Button, Spinner } from "native-base";
+import { Spinner } from "native-base";
 import MainInput from "../inputs/MainInput";
 import ValidateButton from "../buttons/ValidateButton";
 import { BACKEND_URL } from "@env";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
 import NextPrevious from "../NextPrevious";
 
 export default function SignInScreen({ navigation, nextStep }) {

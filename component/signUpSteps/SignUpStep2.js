@@ -3,33 +3,30 @@ import {
   View,
   Text,
   useWindowDimensions,
-  ImageBackground,
+  ImageBackground
 } from "react-native";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import NextPrevious from "../NextPrevious";
 import { useToast } from "native-base";
-import PasswordInput from "../inputs/PasswordInput";
-
+import PasswordInput from '../inputs/PasswordInput'
 
 import MainInput from "../inputs/MainInput";
 
 export default function SignUpScreenTwo(props) {
-  const toast = useToast()
+  const toast = useToast();
   const styles = makeStyles();
   const dispatch = useDispatch();
-  const [firstPassword, setFirstPassword] = useState('')
-  const [checkPassword, setCheckPassword] = useState('')
+  const [checkPassword, setCheckPassword] = useState("");
 
   const [user, setUser] = useState({
     phone: "",
-    password:'',
+    password: '',
+    birthCity: ''
   });
 
   function handleValidate() {
@@ -38,10 +35,6 @@ export default function SignUpScreenTwo(props) {
       console.log(user)
       dispatch(updateUserProperties(user));
       props.nextStep();
-    } else {
-      toast.show({
-        description: 'Les mots de passe ne correspondent pas !',
-      });
     }
   }
 
@@ -62,7 +55,7 @@ export default function SignUpScreenTwo(props) {
               onChangeText={(value) =>
                 setUser({
                   ...user,
-                  birthCity: value,
+                  birthCity: value
                 })
               }
             />
@@ -75,7 +68,7 @@ export default function SignUpScreenTwo(props) {
               onChangeText={(value) =>
                 setUser({
                   ...user,
-                  phone: value,
+                  phone: value
                 })
               }
             />
@@ -85,10 +78,11 @@ export default function SignUpScreenTwo(props) {
             <Text style={styles.inputText}>Mot de passe</Text>
             <PasswordInput
               label="Ton mot de passe"
-              value={firstPassword}
-              onChangeText={(value) =>
-                setFirstPassword(value)
-              }
+              value={user.password}
+              onChangeText={(value) => setUser({
+                ...user,
+                password: value
+              })}
             />
           </View>
           <View style={styles.inputContainer}>
@@ -126,14 +120,14 @@ const makeStyles = () => {
       alignItems: "center",
       justifyContent: "space-around",
       paddingTop: 130,
-      paddingBottom: 20,
+      paddingBottom: 20
     },
 
     inputContainer: {
       height: 70,
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between",
+      justifyContent: "space-between"
     },
     input: {
       backgroundColor: "white",
@@ -141,7 +135,7 @@ const makeStyles = () => {
       width: 250,
       borderColor: "gray",
       borderWidth: 1,
-      placeholderTextColor: "gray",
+      placeholderTextColor: "gray"
     },
     inputText: {
       backgroundColor: "#143143",
@@ -150,17 +144,17 @@ const makeStyles = () => {
       fontSize: 15 / fontScale,
       borderRadius: 5,
       color: "white",
-      paddingHorizontal: 10,
+      paddingHorizontal: 10
     },
     pageTitle: {
       color: "white",
       fontSize: 40 / fontScale,
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     progression: {
       color: "white",
       fontSize: 15 / fontScale,
-      alignSelf: "flex-end",
+      alignSelf: "flex-end"
     },
     pageTitleContainer: {
       backgroundColor: "#2D5971",
@@ -174,17 +168,17 @@ const makeStyles = () => {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      padding: 10,
+      padding: 10
     },
     validateButton: {
       backgroundColor: "green",
       paddingHorizontal: 40,
-      borderRadius: 10,
+      borderRadius: 10
     },
     validate: {
       color: "white",
       fontWeight: "bold",
-      fontSize: 25 / fontScale,
-    },
+      fontSize: 25 / fontScale
+    }
   });
 };

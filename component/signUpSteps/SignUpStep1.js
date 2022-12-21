@@ -9,8 +9,6 @@ import {
 import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
 import ValidateButton from "../buttons/ValidateButton";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import NextPrevious from "../NextPrevious";
@@ -21,7 +19,6 @@ import { useToast } from "native-base";
 import SelectInput from "../inputs/SelectInput";
 
 export default function SignUpScreenOne(props) {
-  const toast = useToast();
   const styles = makeStyles();
   ////reducer user ///
   console.log(user);
@@ -32,7 +29,6 @@ export default function SignUpScreenOne(props) {
     surname: "",
     gender: "",
     birthDate: new Date().toISOString(),
-    birthCity: "",
   });
 
   const handleValidate = () => {

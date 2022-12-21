@@ -1,19 +1,15 @@
 import {
   View,
-  Text,
   StyleSheet,
-  TextInput,
   Button,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import * as DocumentPicker from "expo-document-picker";
 
 const UploadFile = (props) => {
   const pickDocument = async () => {
-    const result = await DocumentPicker.getDocumentAsync({});
-    console.log(result.uri);
-    console.log(result);
+    await DocumentPicker.getDocumentAsync({});
   };
 
   return (

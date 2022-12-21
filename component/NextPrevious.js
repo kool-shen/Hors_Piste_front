@@ -12,9 +12,7 @@ const NextPrevious = () => {
         flexDirection: "row",
         justifyContent: "space-between",
         width: "100%",
-        position: "absolute",
         padding: 20,
-        top: 720,
       }}
     >
       <TouchableOpacity>
