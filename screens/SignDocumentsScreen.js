@@ -4,7 +4,9 @@ import {
   StyleSheet,
   useWindowDimensions,
   ImageBackground,
-  ScrollView
+  ScrollView,
+  Touchable,
+  TouchableOpacity,
 } from "react-native";
 import { Button, Spinner } from "native-base";
 import React, { useEffect, useState } from "react";
@@ -25,6 +27,7 @@ const MyMissionScreen = () => {
 
   const fetchToSignDocs = async () => {
     setLoading(true);
+
     const res = await fetch(
       `${BACKEND_URL}/docs/listFolder/${user.folderIds.toSignFolderId}`
     );
@@ -54,9 +57,16 @@ const MyMissionScreen = () => {
         <View style={styles.listContainer}>
           {loading ? <Spinner size="lg" /> : documentsToComponents}
           {!documentsToComponents.length && (
-            <Text>Il n'y a aucun document à signer pour le moment.</Text>
+            <Text style={styles.text}>
+              Il n'y a aucun document à signer pour le moment.
+            </Text>
           )}
-          <Button onPress={() => fetchToSignDocs()}>Actualiser</Button>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => fetchToSignDocs()}
+          >
+            <Text style={styles.mainText}>Actualiser</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </ImageBackground>
@@ -66,23 +76,47 @@ const MyMissionScreen = () => {
 const makeStyles = () => {
   const { fontScale, width, height } = useWindowDimensions();
   return StyleSheet.create({
+    button: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#2D5971",
+      width: width * 0.35,
+      height: height * 0.05,
+      borderRadius: 10,
+    },
+    mainText: {
+      fontSize: 20 / fontScale,
+      color: "white",
+      fontWeight: "bold",
+    },
+    text: {
+      fontSize: 20 / fontScale,
+    },
     mainContainer: {
       height: height,
       width: width,
       margin: 0,
       display: "flex",
-      justifyContent: "space-around"
+      justifyContent: "space-around",
+    },
+    listContainer: {
+      height: height * 0.25,
+      alignItems: "center",
+      display: "flex",
+      justifyContent: "space-around",
+      //top: height * 0.25,
     },
 
     pageTitle: {
       color: "white",
       fontSize: 35 / fontScale,
-      fontWeight: "bold"
+      fontWeight: "bold",
     },
     progression: {
       color: "white",
       fontSize: 15 / fontScale,
-      alignSelf: "flex-end"
+      alignSelf: "flex-end",
     },
     pageTitleContainer: {
       backgroundColor: "#2D5971",
@@ -95,13 +129,13 @@ const makeStyles = () => {
       // display: "flex",
       // flexDirection: "row",
       // justifyContent: "space-between",
-      padding: 10
+      padding: 10,
     },
     listItem: {
       padding: 10,
       fontSize: 30,
       margin: 15,
-      width: width * 0.8
+      width: width * 0.8,
     },
     card: {
       height: height * 0.2,
@@ -109,31 +143,22 @@ const makeStyles = () => {
       // flex: 1,
       display: "flex",
       justifyContent: "center",
-      alignItems: "center"
+      alignItems: "center",
     },
     signButton: {
       color: "red",
       backgroundColor: "red",
-      width: width * 0.3
+      width: width * 0.3,
     },
-    listContainer: {
-      // backgroundColor: 'black',
-      width: width,
-      flex: 1,
-      display: "flex",
-      paddingTop: 20,
-      justifyContent: "center",
-      alignItems: "center",
-      height
-    },
+
     modal: {
       backgroundColor: "black",
       position: "relative",
       top: "50%",
-      left: "50%"
+      left: "50%",
       // alignItems: 'center',
       // justifyContent: 'center'
-    }
+    },
   });
 };
 export default MyMissionScreen;
