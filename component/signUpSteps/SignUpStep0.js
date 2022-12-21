@@ -103,7 +103,6 @@ export default function SignInScreen({ navigation, nextStep }) {
               <Text style={styles.createText}>Se connecter</Text>
             </TouchableOpacity>
           </View>
-          <NextPrevious />
         </View>
       </ImageBackground>
     </KeyboardAwareScrollView>
@@ -179,6 +178,7 @@ const makeStyles = () => {
       backgroundColor: "green",
       paddingHorizontal: 40,
       borderRadius: 10,
+      
     },
     validate: {
       color: "white",
