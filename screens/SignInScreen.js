@@ -15,6 +15,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { BACKEND_URL } from "@env";
 import { useToast } from "native-base";
 import MainInput from "../component/inputs/MainInput";
+import PasswordInput from "../component/inputs/PasswordInput";
 
 export default function SignInScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -73,7 +74,7 @@ export default function SignInScreen({ navigation }) {
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Mot de passe</Text>
-            <MainInput
+            <PasswordInput
               label="Ton mot de passe"
               value={password}
               onChangeText={(value) => setPassword(value)}

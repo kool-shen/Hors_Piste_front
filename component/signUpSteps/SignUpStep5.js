@@ -51,7 +51,7 @@ export default function SignUpScreenFour(props) {
               value={user.degrees}
               onValueChange={(value) => setUser({ ...user, degrees: value })}
               style={styles.input}
-              numberOfSelections="7"
+              numberOfSelections='7'
               label1="niveau VI: je n'ai jamais obtenu de diplôme"
               label2="niveau V (CAP, BEP...)"
               label3="niveau IV (baccalauréats, BP, BTM...)"
@@ -68,7 +68,7 @@ export default function SignUpScreenFour(props) {
               value={user.occupation}
               onValueChange={(value) => setUser({ ...user, occupation: value })}
               style={styles.input}
-              numberOfSelections="6"
+              numberOfSelections='6'
               label1="en études"
               label2="en formation"
               label3="en volontariat"

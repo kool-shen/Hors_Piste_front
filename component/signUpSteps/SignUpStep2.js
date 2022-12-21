@@ -21,6 +21,7 @@ export default function SignUpScreenTwo(props) {
   const toast = useToast();
   const styles = makeStyles();
   const dispatch = useDispatch();
+  const [firstPassword, setFirstPassword] = useState(null)
   const [checkPassword, setCheckPassword] = useState("");
 
   const [user, setUser] = useState({
@@ -30,15 +31,13 @@ export default function SignUpScreenTwo(props) {
   });
 
   function handleValidate() {
-    if (user.password !== checkPassword) {
-      toast.show({
-        description: "Les mots de passe ne correspondent pas !"
-      });
-      return
-      
-    } else {
+    if (firstPassword === checkPassword) {
+      console.log(firstPassword)
+      console.log(user)
       dispatch(updateUserProperties(user));
       props.nextStep();
+    } else {
+      toast.show({description: 'Les mots de passes ne correspondent pas'})
     }
   }
 
@@ -83,10 +82,7 @@ export default function SignUpScreenTwo(props) {
             <PasswordInput
               label="Ton mot de passe"
               value={user.password}
-              onChangeText={(value) => setUser({
-                ...user,
-                password: value
-              })}
+              onChangeText={(value) => setFirstPassword(value)}
             />
           </View>
           <View style={styles.inputContainer}>
@@ -94,7 +90,14 @@ export default function SignUpScreenTwo(props) {
             <PasswordInput
               label="Confirmation du mot de passe"
               value={checkPassword}
-              onChangeText={(value) => setCheckPassword(value)}
+              onChangeText={(value) => {
+                  setCheckPassword(value)
+                  setUser({
+                    ...user,
+                    password: firstPassword,
+                  })
+                }
+              }
             />
           </View>
 

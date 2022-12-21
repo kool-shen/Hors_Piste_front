@@ -26,6 +26,7 @@ const ContactsScreen = () => {
       );
       const missionData = await res.json();
       setMission(missionData.data);
+      console.log(mission.missionReferent ? true : false)
     })();
   }, []);
 
@@ -39,28 +40,28 @@ const ContactsScreen = () => {
 
         <View style={styles.mainContainer}>
           <View style={styles.firstContainer}>
-            <Text style={styles.textContainer}>Référent Hors Piste</Text>
+            <Text style={styles.textContainer}>Référent Hors Pistes</Text>
 
-            {mission.projectReferant && (
+            {mission.projectReferent && (
               <View style={styles.infoContainer}>
                 <View>
                   <Text style={styles.nameContainer}>
-                    {mission.projectReferant.surname}{" "}
-                    {mission.projectReferant.name}
+                    {mission.projectReferent.surname}{" "}
+                    {mission.projectReferent.name}
                   </Text>
                 </View>
                 <View>
                   <Text
                     onPress={() => {
                       Linking.openURL(
-                        `tel:${mission.projectReferant.phoneNumber}`
+                        `tel:${mission.projectReferent.phoneNumber}`
                       );
                     }}
                     style={styles.infoContainer}
                   >
                     {" "}
                     <FontAwesomeIcon icon={faPhone} size={20} />
-                    {mission.projectReferant.phoneNumber}
+                    {mission.projectReferent.phoneNumber}
                   </Text>
                 </View>
 
@@ -68,14 +69,14 @@ const ContactsScreen = () => {
                   <Text
                     onPress={() => {
                       Linking.openURL(
-                        `mailto:${mission.missionReferant.email}`
+                        `mailto:${mission.projectReferent.email}`
                       );
                     }}
                     style={styles.infoContainer}
                   >
                     {" "}
                     <FontAwesomeIcon icon={faEnvelope} size={20} />
-                    {mission.missionReferant.email}
+                    {mission.projectReferent.email}
                   </Text>
                 </View>
               </View>
@@ -83,14 +84,15 @@ const ContactsScreen = () => {
           </View>
           <View style={styles.firstContainer}>
             <View>
-              <Text style={styles.textContainer}>Référent HAS</Text>
+              {mission.hostStructure && <Text style={styles.textContainer}>{mission.hostStructure.name}</Text>}
             </View>
-            {mission.projectReferant && (
+            {mission.missionReferent && (
               <View style={styles.infoContainer}>
                 <View>
                   <Text style={styles.nameContainer}>
-                    {mission.missionReferant.surname}{" "}
-                    {mission.missionReferant.name}
+                    Référent :
+                    {mission.missionReferent.surname}{" "}
+                    {mission.missionReferent.name}
                   </Text>
                 </View>
 
@@ -98,14 +100,14 @@ const ContactsScreen = () => {
                   <Text
                     onPress={() => {
                       Linking.openURL(
-                        `tel:${mission.projectReferant.phoneNumber}`
+                        `tel:${mission.projectReferent.phoneNumber}`
                       );
                     }}
                     style={styles.infoContainer}
                   >
                     {" "}
                     <FontAwesomeIcon icon={faPhone} size={20} />
-                    {mission.missionReferant.phone}
+                    {mission.missionReferent.phone}
                   </Text>
                 </View>
 
@@ -113,14 +115,14 @@ const ContactsScreen = () => {
                   <Text
                     onPress={() => {
                       Linking.openURL(
-                        `mailto:${mission.missionReferant.email}`
+                        `mailto:${mission.missionReferent.email}`
                       );
                     }}
                     style={styles.infoContainer}
                   >
                     {" "}
                     <FontAwesomeIcon icon={faEnvelope} size={20} />
-                    {mission.missionReferant.email}
+                    {mission.missionReferent.email}
                   </Text>
                 </View>
               </View>
@@ -180,7 +182,7 @@ const makeStyles = () => {
       display: "flex",
       alignItems: "center",
       flexDirection: "column",
-      padding:10
+      padding: 10,
     },
 
     nameContainer: {
@@ -188,21 +190,16 @@ const makeStyles = () => {
       justifyContent: "space-between",
       textAlign: "center",
       display: "flex",
-      
     },
     mainContainer: {
       paddingTop: 180,
       display: "flex",
       justifyContent: "space-around",
       textAlign: "center",
-     
+
       height: height * 0.7,
-      
     },
   });
 };
 
 export default ContactsScreen;
-
-
-
