@@ -26,6 +26,7 @@ const ContactsScreen = () => {
       );
       const missionData = await res.json();
       setMission(missionData.data);
+      console.log(mission.missionReferent ? true : false)
     })();
   }, []);
 
@@ -83,14 +84,14 @@ const ContactsScreen = () => {
           </View>
           <View style={styles.firstContainer}>
             <View>
-              <Text style={styles.textContainer}>{mission.hostStructure.name}</Text>
+              {mission.hostStructure && <Text style={styles.textContainer}>{mission.hostStructure.name}</Text>}
             </View>
-            {mission.projectReferent && (
+            {mission.missionReferent && (
               <View style={styles.infoContainer}>
                 <View>
                   <Text style={styles.nameContainer}>
                     Référent :
-                    {mission.hostStrcuture.missionReferent.surname}{" "}
+                    {mission.missionReferent.surname}{" "}
                     {mission.missionReferent.name}
                   </Text>
                 </View>
