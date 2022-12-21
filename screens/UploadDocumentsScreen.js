@@ -25,7 +25,6 @@ const UploadDocumentsScreen = () => {
     const formData = new FormData();
     formData.append("document", { ...result, type: "image/jpeg" });
     setUploadFile(formData);
-    console.log(formData);
   };
   const sendDocument = async () => {
     const res = await fetch(
