@@ -28,7 +28,7 @@ export default function SignUpScreenOne(props) {
     name: "",
     surname: "",
     gender: "",
-    birthDate: new Date().toISOString(),
+    birthDate: "",
   });
 
   const handleValidate = () => {

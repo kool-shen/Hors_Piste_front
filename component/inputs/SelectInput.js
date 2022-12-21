@@ -28,9 +28,7 @@ const SelectInput = (props) => {
           value={props.value}
           label={props.label}
           numberOfSelections={props.numberOfSelections}
-
         >
-
           {props.label1 && <Select.Item label={props.label1} value={props.label1} />}
           {props.label2 && <Select.Item label={props.label2} value={props.label2} />}
           {props.label3 && <Select.Item label={props.label3} value={props.label3} />}
