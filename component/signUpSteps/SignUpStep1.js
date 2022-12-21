@@ -15,11 +15,12 @@ import NextPrevious from "../NextPrevious";
 
 import MainInput from "../inputs/MainInput";
 import DateInput from "../inputs/DateInput";
-import { useToast } from "native-base";
+import { Toast, useToast } from "native-base";
 import SelectInput from "../inputs/SelectInput";
 
 export default function SignUpScreenOne(props) {
   const styles = makeStyles();
+  const toast = useToast()
   ////reducer user ///
   console.log(user);
   const dispatch = useDispatch();
@@ -32,6 +33,9 @@ export default function SignUpScreenOne(props) {
   });
 
   const handleValidate = () => {
+    if (!/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/.test(user.birthDate)){
+      return toast.show({description:'Le format de la date doit etre dd/mm/yyyy'})
+    }
     dispatch(updateUserProperties(user));
     props.nextStep();
   };
@@ -65,7 +69,12 @@ export default function SignUpScreenOne(props) {
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Date de naissance</Text>
-            <DateInput />
+            <MainInput
+              label="dd/mm/yyyy"
+              value={user.birthDate}
+              onChangeText={(value) => setUser({ ...user, birthDate: value })}
+              style={styles.input}
+            />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputText}>Genre</Text>
@@ -120,6 +129,7 @@ const makeStyles = () => {
       borderRadius: 5,
       color: "white",
       paddingHorizontal: 10,
+      margin:5
     },
     pageTitle: {
       color: "white",
