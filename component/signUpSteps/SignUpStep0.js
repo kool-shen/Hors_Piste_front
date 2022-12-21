@@ -93,7 +93,12 @@ export default function SignInScreen({ navigation, nextStep }) {
                 style={styles.input}
               />
             </View>
-            <ValidateButton onPress={() => handleConnect()} />
+            <TouchableOpacity
+            style={styles.connectButton}
+            onPress={() => handleConnect()}
+          >
+            <Text style={styles.validate}>S'inscrire</Text>
+          </TouchableOpacity>
             {loading && <Spinner size="lg" />}
             <Text style={styles.notYet}>Déjà inscrit ?</Text>
             <TouchableOpacity
@@ -184,6 +189,18 @@ const makeStyles = () => {
       color: "white",
       fontWeight: "bold",
       fontSize: 25 / fontScale,
+    },
+    connectButton: {
+      marginTop: 30,
+      backgroundColor: "#F29231",
+      paddingHorizontal: 30,
+      paddingVertical: 10,
+      borderRadius: 10,
+    },
+    validate: {
+      color: "white",
+      fontWeight: "bold",
+      fontSize: 20 / fontScale,
     },
   });
 };

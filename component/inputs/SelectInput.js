@@ -7,13 +7,14 @@ import {
   WarningOutlineIcon,
   CheckIcon,
 } from "native-base";
+import { useWindowDimensions } from "react-native";
 
 const SelectInput = (props) => {
   const placeHolderLowerCased = props.label.toLowerCase();
-
+  const { width } = useWindowDimensions()
   return (
     <Center>
-      <FormControl w="3/4" maxW="300" isRequired isInvalid>
+      <FormControl w={width*0.85} h='85%'  isRequired isInvalid>
         <Select
           bgColor="white"
           minWidth="300"
@@ -28,6 +29,7 @@ const SelectInput = (props) => {
           value={props.value}
           label={props.label}
           numberOfSelections={props.numberOfSelections}
+          
         >
           {props.label1 && <Select.Item label={props.label1} value={props.label1} />}
           {props.label2 && <Select.Item label={props.label2} value={props.label2} />}
