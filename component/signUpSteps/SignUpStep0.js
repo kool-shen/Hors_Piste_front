@@ -27,6 +27,7 @@ export default function SignInScreen({ navigation, nextStep }) {
   const [loading, setLoading] = useState(false);
 
   const handleConnect = async () => {
+    console.log(`${BACKEND_URL}/users/firstConnection`)
     setLoading(true);
     const res = await fetch(`${BACKEND_URL}/users/firstConnection`, {
       method: "POST",

@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useReducer } from "react";
 import { Camera } from "expo-camera";
 
 import {
@@ -20,15 +20,20 @@ import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import UploadFile from "../UploadFile";
 import NextPrevious from "../NextPrevious";
+import {BACKEND_URL} from '@env'
+import { useToast } from "native-base";
 
 export default function SignUpScreenFive(props) {
   const styles = makeStyles();
   const userReducer = useSelector(state => state.user.value)
   ////RÉCUPÉRER LA PHOTO DANS LE STORE////
-
+  const toast = useToast()
   const dispatch = useDispatch();
   const [user, setUser] = useState({
     photo: "",
+    ICNumber: "",
+    ICExpirationDate: "",
+    IBAN: ""
   });
 
   const handleValidate = async () => {
@@ -50,7 +55,7 @@ export default function SignUpScreenFive(props) {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(userReducer),
+        body: JSON.stringify(userData.data),
       });
       props.nextStep();
     }

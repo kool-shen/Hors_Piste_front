@@ -27,6 +27,8 @@ const SelectInput = (props) => {
           onValueChange={props.onValueChange}
           value={props.value}
           label={props.label}
+          numberOfSelections={props.numberOfSelections}
+
         >
           <Select.Item label={props.label1} value={props.label1} />
           <Select.Item label={props.label2} value={props.label2} />

@@ -15,6 +15,7 @@ import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import NextPrevious from "../NextPrevious";
 import { useToast } from "native-base";
+import PasswordInput from "../inputs/PasswordInput";
 
 
 import MainInput from "../inputs/MainInput";
@@ -27,15 +28,14 @@ export default function SignUpScreenTwo(props) {
   const [checkPassword, setCheckPassword] = useState('')
 
   const [user, setUser] = useState({
-    address: { street: "", zipCode: "", city: "", country: "" },
     phone: "",
+    password:'',
   });
 
   function handleValidate() {
-    if (setFirstPassword === setCheckPassword) {
-      setUser({
-        ...user,
-      })
+    if (firstPassword === checkPassword) {
+      console.log(firstPassword)
+      console.log(user)
       dispatch(updateUserProperties(user));
       props.nextStep();
     } else {
@@ -96,8 +96,13 @@ export default function SignUpScreenTwo(props) {
             <PasswordInput
               label="Confirmation du mot de passe"
               value={checkPassword}
-              onChangeText={(value) =>
-                setCheckPassword(value)
+              onChangeText={(value) => {
+                  setCheckPassword(value)
+                  setUser({
+                    ...user,
+                    password: firstPassword,
+                  })
+                }
               }
             />
           </View>

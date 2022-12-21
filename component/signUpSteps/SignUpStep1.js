@@ -31,8 +31,6 @@ export default function SignUpScreenOne(props) {
     name: "",
     surname: "",
     gender: "",
-    password: "",
-    password: null,
     birthDate: new Date().toISOString(),
     birthCity: "",
   });
