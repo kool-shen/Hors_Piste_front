@@ -26,7 +26,7 @@ const ContactsScreen = () => {
       );
       const missionData = await res.json();
       setMission(missionData.data);
-      console.log(mission.missionReferent ? true : false)
+      console.log(mission.missionReferent ? true : false);
     })();
   }, []);
 
@@ -84,14 +84,17 @@ const ContactsScreen = () => {
           </View>
           <View style={styles.firstContainer}>
             <View>
-              {mission.hostStructure && <Text style={styles.textContainer}>{mission.hostStructure.name}</Text>}
+              {mission.hostStructure && (
+                <Text style={styles.textContainer}>
+                  {mission.hostStructure.name}
+                </Text>
+              )}
             </View>
             {mission.missionReferent && (
               <View style={styles.infoContainer}>
                 <View>
                   <Text style={styles.nameContainer}>
-                    Référent :
-                    {mission.missionReferent.surname}{" "}
+                    Référent :{mission.missionReferent.surname}{" "}
                     {mission.missionReferent.name}
                   </Text>
                 </View>
@@ -169,7 +172,7 @@ const makeStyles = () => {
       flexDirection: "column",
       alignItems: "center",
       padding: 10,
-      margin: height*0.01,
+      margin: height * 0.01,
       width: width * 0.95,
     },
     textContainer: {
@@ -197,11 +200,10 @@ const makeStyles = () => {
       paddingTop: 180,
       display: "flex",
       justifyContent: "center",
-      alignItems: 'center',
+      alignItems: "center",
       textAlign: "center",
       width: width,
-      height: height*0.8,
-
+      height: height * 0.8,
     },
   });
 };

@@ -47,7 +47,7 @@ const MyMissionScreen = () => {
 
   return (
     <ImageBackground
-      source={require("../assets/backgrounds/lightBlue.png")}
+      source={require("../assets/backgrounds/royalBlue.png")}
       style={styles.mainContainer}
     >
       <View style={styles.pageTitleContainer}>
@@ -92,6 +92,7 @@ const makeStyles = () => {
     },
     text: {
       fontSize: 20 / fontScale,
+      color: "white",
     },
     mainContainer: {
       height: height,
