@@ -13,7 +13,7 @@ const IntroductionScreen = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate("SignIn");
-    }, 2000);
+    }, 3000);
   }, []);
 
   return (
@@ -35,9 +35,9 @@ const makeStyles = () => {
       alignItems: "center",
     },
     logo: {
-      width: "100%",
-      height: 600,
-      marginLeft: 20,
+      width: "75%",
+      height: 250,
+     
     },
   });
 };
