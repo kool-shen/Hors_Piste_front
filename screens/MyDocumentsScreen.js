@@ -56,7 +56,7 @@ const MyDocumentsScreen = () => {
       style={styles.mainContainer}
     >
       <BannerScreenTitle title="Mes documents" />
-      <ScrollView>
+      <ScrollView style={styles.scrollView}>
         <View style={styles.listContainer}>
           {loading ? <Spinner size="lg" /> : documentsToComponents}
           {!documentsToComponents.length && (
@@ -119,7 +119,7 @@ const makeStyles = () => {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",
-      paddingTop: 130,
+      // paddingTop: 130,
       paddingBottom: 20,
     },
 
@@ -144,7 +144,7 @@ const makeStyles = () => {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
-      padding: 10,
+      // padding: 10,
     },
     button: {
       display: "flex",
@@ -157,7 +157,7 @@ const makeStyles = () => {
       marginTop: 10
     },
     listItem: {
-      padding: 10,
+      // padding: 10,
       fontSize: 30,
       margin: 15,
       width: width * 0.9,
@@ -167,6 +167,10 @@ const makeStyles = () => {
       justifyContent: "center",
       alignItems: "center",
     },
+    scrollView: {
+      marginTop: height*0.20,
+      marginBottom: height*0.15,
+    }
   });
 };
 export default MyDocumentsScreen;

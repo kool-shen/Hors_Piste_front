@@ -251,7 +251,7 @@ const makeStyles = () => {
       justifyContent: "space-around"
     },
     background: {
-      backgroundColor: "#A5D8E6",
+      // backgroundColor: "#A5D8E6",
       transform: [
         { rotate: "-35deg" },
         { translateX: -100 },

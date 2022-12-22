@@ -55,7 +55,7 @@ const MyMissionScreen = () => {
       style={styles.mainContainer}
     >
       <BannerScreenTitle title={`Mes documents${"\n"}à signer`} />
-      <ScrollView>
+      <ScrollView style={styles.scrollView}>
         <View style={styles.listContainer}>
           {loading ? <Spinner size="lg" /> : documentsToComponents}
           {!documentsToComponents.length && (
@@ -128,14 +128,15 @@ const makeStyles = () => {
       height: height,
       width: width,
       margin: 0,
-      display: "flex",
-      justifyContent: "space-around"
+      // display: "flex",
+      // justifyContent: "space-around"
     },
     listContainer: {
-      height: height,
+      height: height*0.7,
       alignItems: "center",
-      justifyContent: "center",
-      top: height * 0.2,
+      // justifyContent: "center",
+      // marginTop: height * 0.05,
+      paddingBottom: height*0.2,
       marginBottom: height * 0.15
     },
 
@@ -193,6 +194,10 @@ const makeStyles = () => {
       fontSize: 20 / fontScale,
       color: "white",
       fontWeight: "bold"
+    },
+    scrollView: {
+      marginTop: height*0.25,
+      marginBottom: height*0.15,
     }
   });
 };
