@@ -67,15 +67,10 @@ const Sign = (props) => {
   };
 
   // Called after ref.current.getData()
-  const handleData = async (data) => {
+  const handleData = async () => {
     setLoading(true);
     const formData = new FormData();
     const path = FileSystem.cacheDirectory + "sign.png";
-    const encoding = await FileSystem.writeAsStringAsync(
-      path,
-      data.replace("data:image/png;base64,", ""),
-      { encoding: FileSystem.EncodingType.Base64 }
-    );
     const file = await FileSystem.getInfoAsync(path);
     console.log(file);
 
@@ -89,6 +84,7 @@ const Sign = (props) => {
     formData.append("location", location);
     formData.append("completeFolder", user.folderIds.completeFolderId);
     formData.append("toSignFolder", user.folderIds.toSignFolderId);
+    console.log(formData)
     fetch(`${BACKEND_URL}/signature/`, {
       method: "POST",
       headers: {
