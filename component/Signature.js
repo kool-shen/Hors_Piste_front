@@ -240,7 +240,8 @@ const makeStyles = () => {
       color: "white",
       textAlign: "left",
       borderRadius: 10,
-      width: width*0.85
+      width: width*0.95,
+      backgroundColor: "#2D5971",
     },
     mainContainer: {
       backgroundColor: "#F8DFBD",
@@ -297,7 +298,7 @@ const makeStyles = () => {
       width: width * 0.9
     },
     card: {
-      backgroundColor: "#2D5971",
+      // backgroundColor: "#2D5971",
       // height: height * 0.22,
       width: width * 0.9,
       justifyContent: "center",
@@ -315,6 +316,7 @@ const makeStyles = () => {
       width: width * 0.3
     },
     listContainer: {
+      
       width: width,
       flex: 1,
       display: "flex",

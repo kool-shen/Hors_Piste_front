@@ -54,7 +54,7 @@ const MyMissionScreen = () => {
       source={require("../assets/backgrounds/royalBlue.png")}
       style={styles.mainContainer}
     >
-      <BannerScreenTitle title={`Mes documents${"\n"}à signer`} />
+      <BannerScreenTitle title={`Signer documents`} />
       <ScrollView>
         <View style={styles.listContainer}>
           {loading ? <Spinner size="lg" /> : documentsToComponents}
@@ -89,7 +89,7 @@ const makeStyles = () => {
   const { fontScale, width, height } = useWindowDimensions();
   return StyleSheet.create({
     docContainer: {
-      backgroundColor: "#2D5971",
+      // backgroundColor: "#2D5971",
       // height: height * 0.22,
       width: width * 0.9,
       justifyContent: "space-around",
@@ -113,7 +113,8 @@ const makeStyles = () => {
       width: width * 0.15,
       // height: height * 0.05,
       borderRadius: 10,
-      marginBottom: height * 0.07
+      marginBottom: height * 0.07,
+      
     },
     mainText: {
       fontSize: 20 / fontScale,
