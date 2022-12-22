@@ -19,14 +19,16 @@ import IntroductionScreen from "./screens/IntroductionScreen";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useFonts } from 'expo-font';
 
-export default function App() {
-  const [loaded] = useFonts({
-    Montserrat: require('./assets/fonts/Yatra-One.ttf'),
-  });
+const [loaded] = useFonts({
+  Montserrat: require('./assets/fonts/Yatra-One.ttf'),
+});
 
-  if (!loaded) {
-    return null;
-  }
+if (!loaded) {
+  return null;
+}
+
+
+
 const store = configureStore({
   reducer: { user },
 });
