@@ -2,7 +2,6 @@ import {
   View,
   Text,
   StyleSheet,
-  KeyboardAvoidingView,
   useWindowDimensions,
   ImageBackground,
   ScrollView,
@@ -10,13 +9,11 @@ import {
 import React, {useState} from "react";
 import { useSelector } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { FontAwesomeIcon, faPhone, faEnvelope } from "@fortawesome/react-native-fontawesome";
 import BannerScreenTitle from "../component/BannerScreenTitle";
 
 
 const MyMissionScreen = () => {
   const user = useSelector((state) => state.user.value);
-  const [mission, setMission] = useState({});
   const styles = makeStyles();
 
   let startDate = new Date(user.mission.startDate)
@@ -62,12 +59,6 @@ const MyMissionScreen = () => {
             </ScrollView>
           </View>
         </ScrollView>
-        <View
-          style={styles.footer}
-        >
-          {/* <FontAwesome name='home' size={25} color={"#2D5971"} /> */}
-         <FontAwesome name='home' size='40' color='orange' onPress={() => navigation.navigate('TabNavigator')}/>
-        </View>
       </ImageBackground>
     </View>
   );
@@ -124,25 +115,6 @@ const makeStyles = () => {
       // justifyContent: 'flex-start',
       // alignItems: 'space-around',
     },
-    infoContainer: {
-      fontSize: 18,
-      justifyContent: "space-around",
-      textAlign: "center",
-      textDecorationLine: "underline",
-      display: "flex",
-      alignItems: "center",
-      flexDirection: "column",
-      color: "white",
-      // padding: 10,
-    },
-
-    nameContainer: {
-      color: "white",
-      fontSize: 18,
-      justifyContent: "space-between",
-      textAlign: "center",
-      display: "flex",
-    },
     mainContainer: {
       paddingTop: height * 0.25,
       display: "flex",
@@ -150,12 +122,6 @@ const makeStyles = () => {
       justifyContent: "space-around",
       textAlign: "center",
       height: height * 0.8,
-    },
-    telContainer: {
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "center",
-      alignItems: "center",
     },
     footer: {
       display: 'flex',
