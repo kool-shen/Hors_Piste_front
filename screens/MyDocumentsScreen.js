@@ -13,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import { BACKEND_URL } from "@env";
 import { useSelector } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import BannerScreenTitle from "../component/BannerScreenTitle";
+import BannerScreenTitle2 from "../component/BannerScreenTitle2";
 
 const MyDocumentsScreen = () => {
   const styles = makeStyles();
@@ -55,7 +55,7 @@ const MyDocumentsScreen = () => {
       source={require("../assets/backgrounds/royalBlue.png")}
       style={styles.mainContainer}
     >
-      <BannerScreenTitle title="Mes documents" />
+      <BannerScreenTitle2 title="Mes documents" icon="folder-open" />
       <ScrollView>
         <View style={styles.listContainer}>
           {loading ? <Spinner size="lg" /> : documentsToComponents}
@@ -80,6 +80,7 @@ const makeStyles = () => {
       display: "flex",
       justifyContent: "space-around",
       alignItems: "flex-start",
+
       width: width * 0.9,
     },
     docText: {
