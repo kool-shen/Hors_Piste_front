@@ -83,7 +83,7 @@ const makeStyles = () => {
       zIndex: -1,
     },
     card1: {
-      backgroundColor: "#A5D8E6",
+      backgroundColor: "#2D5971",
       transform: [{ rotate: "13deg" }],
       width: 200,
       height: 80,
@@ -95,7 +95,7 @@ const makeStyles = () => {
       padding: 15,
     },
     card2: {
-      backgroundColor: "#A5D8E6",
+      backgroundColor: "#2D5971",
       transform: [{ rotate: "-13deg" }],
       width: 200,
       height: 80,
@@ -107,7 +107,7 @@ const makeStyles = () => {
       padding: 15,
     },
     card3: {
-      backgroundColor: "#A5D8E6",
+      backgroundColor: "#2D5971",
       transform: [{ rotate: "13deg" }],
       width: 200,
       height: 80,

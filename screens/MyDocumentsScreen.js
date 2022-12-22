@@ -136,7 +136,7 @@ const makeStyles = () => {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#2D5971",
+      backgroundColor: "#F29231",
       width: width * 0.35,
       height: height * 0.05,
       borderRadius: 10,

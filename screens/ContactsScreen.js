@@ -14,8 +14,9 @@ import { Linking } from "react-native";
 import BannerScreenTitle from "../component/BannerScreenTitle";
 import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { Center } from "native-base";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
-const ContactsScreen = () => {
+const ContactsScreen = ({navigation}) => {
   const user = useSelector((state) => state.user.value);
   const [mission, setMission] = useState({});
   const styles = makeStyles();
@@ -44,7 +45,7 @@ const ContactsScreen = () => {
             <Text>______________</Text>
             <View>
               <Text style={styles.nameContainer}>
-                {`Référent : ${user.mission.projectReferent.surname} ${user.mission.projectReferent.name}`}
+                {`Référent(e) : ${user.mission.projectReferent.surname} ${user.mission.projectReferent.name}`}
               </Text>
             </View>
             <View style={styles.telContainer}>
@@ -91,7 +92,7 @@ const ContactsScreen = () => {
             <Text>______________</Text>
             <View>
               <Text style={styles.nameContainer}>
-                {`Référent : ${user.mission.hostStructure.projectReferent.surname} ${user.mission.hostStructure.projectReferent.name}`}
+                {`Référent(e) : ${user.mission.hostStructure.projectReferent.surname} ${user.mission.hostStructure.projectReferent.name}`}
               </Text>
             </View>
 
@@ -134,6 +135,12 @@ const ContactsScreen = () => {
             </View>
           </View>
         </View>
+        <View
+          style={styles.footer}
+        >
+          {/* <FontAwesome name='home' size={25} color={"#2D5971"} /> */}
+         <FontAwesome name='home' size='40' color='orange' onPress={() => navigation.navigate('TabNavigator')}/>
+        </View>
       </ImageBackground>
     </View>
   );
@@ -169,11 +176,11 @@ const makeStyles = () => {
       backgroundColor: "#2D5971",
       height: height * 0.22,
       width: width * 0.9,
-      justifyContent: "space-around",
       borderRadius: 20,
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
+      justifyContent: 'space-around',
       padding: 10,
       margin: height * 0.01,
       width: width * 0.95,
@@ -216,6 +223,17 @@ const makeStyles = () => {
       justifyContent: "center",
       alignItems: "center",
     },
+    footer: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-around',
+      flexDirection: 'row',
+      position: "absolute",
+      top: height*0.88,
+      height: height*0.12,
+      width: width,
+      backgroundColor: '#2D5971',
+    }
   });
 };
 
