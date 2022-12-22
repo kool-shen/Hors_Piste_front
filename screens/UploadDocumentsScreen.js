@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import { BACKEND_URL } from "@env";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useToast } from "native-base";
-import BannerScreenTitle from "../component/BannerScreenTitle";
+import BannerScreenTitle2 from "../component/BannerScreenTitle2";
 
 const UploadDocumentsScreen = () => {
   const toast = useToast();
@@ -56,7 +56,7 @@ const UploadDocumentsScreen = () => {
       source={require("../assets/backgrounds/royalBlue.png")}
       style={styles.mainContainer}
     >
-      <BannerScreenTitle title='Transmettre'/>
+      <BannerScreenTitle2 title="Transmettre" icon="upload" />
       <View style={styles.listContainer}>
         <TouchableOpacity onPress={pickDocument} style={styles.card}>
           <Text style={styles.mainText}>Choisir un fichier</Text>

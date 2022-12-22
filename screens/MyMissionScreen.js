@@ -9,7 +9,7 @@ import {
 import React, {useState} from "react";
 import { useSelector } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import BannerScreenTitle from "../component/BannerScreenTitle";
+import BannerScreenTitle from "../component/BannerScreenTitle2";
 
 
 const MyMissionScreen = () => {
@@ -28,7 +28,7 @@ const MyMissionScreen = () => {
         source={require("../assets/contactBackground.png")}
         style={styles.container}
       >
-        <BannerScreenTitle title="Ma Mission" />
+        <BannerScreenTitle icon='plane' title="Ma Mission" />
         <ScrollView>
           <View style={styles.mainContainer}>
             <View style={styles.cardContainer}>
