@@ -25,7 +25,8 @@ export default function SignInScreen({ navigation }) {
   const toast = useToast();
 
   const handleConnect = async () => {
-    console.log(password);
+    console.log(BACKEND_URL);
+
     const res = await fetch(`${BACKEND_URL}/users/signin`, {
       method: "POST",
       headers: {
