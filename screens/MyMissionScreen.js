@@ -9,6 +9,7 @@ import {
 import React from "react";
 import { useSelector } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import BannerScreenTitle from "../component/BannerScreenTitle";
 
 const MyMissionScreen = () => {
   const user = useSelector((state) => state.user.value);
@@ -22,9 +23,7 @@ const MyMissionScreen = () => {
         source={require("../assets/backgrounds/royalBlue.png")}
         style={styles.mainContainer}
       >
-        <View style={styles.pageTitleContainer}>
-          <Text style={styles.pageTitle}>Ma Mission</Text>
-        </View>
+        <BannerScreenTitle title="Ma mission"/>
         <View style={styles.missionListContainer}>
           {user.mission.projectName && (
             <View style={styles.infoContainer}>
@@ -116,6 +115,7 @@ const makeStyles = () => {
       padding: 10,
     },
     missionListContainer: {
+      marginTop: height*0.2,
       justifyContent: "center",
       alignItems: "center",
     },
