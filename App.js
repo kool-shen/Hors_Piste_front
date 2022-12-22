@@ -17,6 +17,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import SignDocumentsScreen from "./screens/SignDocumentsScreen";
 import IntroductionScreen from "./screens/IntroductionScreen";
 
+
 const store = configureStore({
   reducer: { user },
 });
@@ -50,13 +51,12 @@ const TabNavigator = () => {
             iconName = "upload";
           } else if (route.name === "MyMission") {
             iconName = "plane";
-          } else if (route.name === "MyContacts") {
-            iconName = "address-book";
           }
           return <FontAwesome name={iconName} size={25} color={color} />;
         },
         headerShown: false,
       })}
+      tabBarVisible={false}
       labeled={false}
       shifting={true}
       initialRouteName="Home"
@@ -116,10 +116,11 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Introduction" component={IntroductionScreen} />
-            <Stack.Screen
+            <Stack.Screen name='Home' component={HomeScreen} />
+            {/* <Stack.Screen
               name="SignDocuments"
               component={SignDocumentsScreen}
-            />
+            /> */}
             <Stack.Screen name="SignIn" component={SignInScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="MyDocuments" component={MyDocumentsScreen} />

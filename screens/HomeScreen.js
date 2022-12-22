@@ -90,7 +90,7 @@ const makeStyles = () => {
       alignItems: "center",
     },
     card1: {
-      backgroundColor: "#A5D8E6",
+      backgroundColor: "#2D5971",
       width: width * 0.5,
       height: height * 0.1,
       borderRadius: 10,
@@ -101,7 +101,7 @@ const makeStyles = () => {
       padding: "2%",
     },
     card2: {
-      backgroundColor: "#A5D8E6",
+      backgroundColor: "#2D5971",
       width: width * 0.5,
       height: height * 0.1,
       borderRadius: 10,
@@ -112,7 +112,7 @@ const makeStyles = () => {
       padding: "2%",
     },
     card3: {
-      backgroundColor: "#A5D8E6",
+      backgroundColor: "#2D5971",
       width: width * 0.5,
       height: height * 0.1,
       borderRadius: 10,
