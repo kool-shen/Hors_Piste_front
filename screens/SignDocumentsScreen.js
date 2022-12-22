@@ -6,7 +6,7 @@ import {
   ImageBackground,
   ScrollView,
   Touchable,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import { Button, Spinner } from "native-base";
 import React, { useEffect, useState } from "react";
@@ -14,11 +14,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateUserProperties } from "../reducers/user";
 import Sign from "../component/Signature";
 import { BACKEND_URL } from "@env";
-import BannerScreenTitle from "../component/BannerScreenTitle";
+import BannerScreenTitle2 from "../component/BannerScreenTitle2";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const MyMissionScreen = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const styles = makeStyles();
   const [loading, setLoading] = useState(true);
   const [documents, setDocuments] = useState([]);
@@ -37,7 +37,7 @@ const MyMissionScreen = () => {
     );
     const documentsData = await res.json();
     setDocuments(documentsData);
-    dispatch(updateUserProperties({nbOfToSignDocs: documentsData.length}))
+    dispatch(updateUserProperties({ nbOfToSignDocs: documentsData.length }));
     setLoading(false);
   };
 
@@ -58,7 +58,7 @@ const MyMissionScreen = () => {
       style={styles.mainContainer}
     >
       <BannerScreenTitle title={`Mes documents${"\n"}à signer`} />
-      <ScrollView style={styles.scrollView}>
+      <ScrollView>
         <View style={styles.listContainer}>
           {loading ? <Spinner size="lg" /> : documentsToComponents}
           {!documentsToComponents.length && (
@@ -101,11 +101,11 @@ const makeStyles = () => {
       alignItems: "center",
       padding: 10,
       margin: height * 0.01,
-      width: width * 0.9
+      width: width * 0.9,
     },
     buttonContainer: {
       justifyContent: "center",
-      alignItems: "center"
+      alignItems: "center",
     },
     button: {
       display: "flex",
@@ -116,16 +116,15 @@ const makeStyles = () => {
       // height: height * 0.05,
       borderRadius: 10,
       marginBottom: height * 0.07,
-      
     },
     mainText: {
       fontSize: 20 / fontScale,
       color: "white",
-      fontWeight: "bold"
+      fontWeight: "bold",
     },
     text: {
       fontSize: 20 / fontScale,
-      color: "white"
+      color: "white",
     },
     mainContainer: {
       height: height,
@@ -135,23 +134,23 @@ const makeStyles = () => {
       // justifyContent: "space-around"
     },
     listContainer: {
-      height: height*0.7,
+      height: height * 0.7,
       alignItems: "center",
       // justifyContent: "center",
       // marginTop: height * 0.05,
-      paddingBottom: height*0.2,
-      marginBottom: height * 0.15
+      paddingBottom: height * 0.2,
+      marginBottom: height * 0.15,
     },
 
     pageTitle: {
       color: "white",
       fontSize: 35 / fontScale,
-      fontWeight: "bold"
+      fontWeight: "bold",
     },
     progression: {
       color: "white",
       fontSize: 15 / fontScale,
-      alignSelf: "flex-end"
+      alignSelf: "flex-end",
     },
     pageTitleContainer: {
       backgroundColor: "#2D5971",
@@ -164,12 +163,12 @@ const makeStyles = () => {
       // display: "flex",
       // flexDirection: "row",
       // justifyContent: "space-between",
-      padding: 10
+      padding: 10,
     },
     listItem: {
       padding: 10,
       fontSize: 30,
-      width: width * 0.8
+      width: width * 0.8,
     },
     card: {
       // height: height * 0.2,
@@ -177,31 +176,31 @@ const makeStyles = () => {
       // flex: 1,
       display: "flex",
       justifyContent: "center",
-      alignItems: "center"
+      alignItems: "center",
     },
     signButton: {
       color: "red",
       backgroundColor: "red",
-      width: width * 0.3
+      width: width * 0.3,
     },
 
     modal: {
       backgroundColor: "black",
       position: "relative",
       top: "50%",
-      left: "50%"
+      left: "50%",
       // alignItems: 'center',
       // justifyContent: 'center'
     },
     text: {
       fontSize: 20 / fontScale,
       color: "white",
-      fontWeight: "bold"
+      fontWeight: "bold",
     },
     scrollView: {
-      marginTop: height*0.25,
-      marginBottom: height*0.15,
-    }
+      marginTop: height * 0.25,
+      marginBottom: height * 0.15,
+    },
   });
 };
 export default MyMissionScreen;

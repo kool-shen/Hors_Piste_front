@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { BACKEND_URL } from "@env";
 import { Linking } from "react-native";
-import BannerScreenTitle from "../component/BannerScreenTitle";
+import BannerScreenTitle2 from "../component/BannerScreenTitle2";
 import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { Center } from "native-base";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -37,7 +37,7 @@ const ContactsScreen = ({navigation}) => {
         source={require("../assets/contactBackground.png")}
         style={styles.container}
       >
-        <BannerScreenTitle title="Mes contacts" />
+        <BannerScreenTitle2 title="Mes contacts" icon="address-book" />
 
         <View style={styles.mainContainer}>
           <View style={styles.cardContainer}>
