@@ -91,7 +91,6 @@ const makeStyles = () => {
     docContainer: {
       // backgroundColor: "#2D5971",
       // height: height * 0.22,
-      width: width * 0.9,
       justifyContent: "space-around",
       borderRadius: 10,
       display: "flex",
@@ -99,7 +98,7 @@ const makeStyles = () => {
       alignItems: "center",
       padding: 10,
       margin: height * 0.01,
-      width: width * 0.95
+      width: width * 0.9
     },
     buttonContainer: {
       justifyContent: "center",

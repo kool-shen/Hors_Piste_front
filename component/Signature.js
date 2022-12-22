@@ -235,12 +235,12 @@ const makeStyles = () => {
       marginTop: 5
     },
     buttonDoc: {
-      fontSize: 15,
+      fontSize: 18,
       fontWeight: "light",
       color: "white",
       textAlign: "left",
       borderRadius: 10,
-      width: width*0.95,
+      width: width*0.85,
       backgroundColor: "#2D5971",
     },
     mainContainer: {

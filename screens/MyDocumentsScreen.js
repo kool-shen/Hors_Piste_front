@@ -46,6 +46,7 @@ const MyDocumentsScreen = () => {
         }
       >
         <FontAwesome name="arrow-right" size={20} style={styles.icon} />
+        {' '}
         {document.name}
       </Text>
     </View>
@@ -91,11 +92,11 @@ const makeStyles = () => {
       flexDirection: "column",
       alignItems: "center",
       padding: 10,
-      margin: height * 0.01,
-      width: width * 0.95,
+      margin: 30,
+      width: width * 0.9,
     },
     docText: {
-      fontSize: 20,
+      fontSize: 18,
       fontWeight: "light",
       color: "white",
       textAlign: "left",
@@ -154,7 +155,7 @@ const makeStyles = () => {
       width: 50,
       // height: height * 0.05,
       borderRadius: 10,
-      marginTop: 10
+      marginTop: 30
     },
     listItem: {
       // padding: 10,
@@ -163,8 +164,9 @@ const makeStyles = () => {
       width: width * 0.9,
     },
     listContainer: {
-      height: height,
-      justifyContent: "center",
+      height: '100%',
+      display: 'flex',
+      // justifyContent: "center",
       alignItems: "center",
     },
     scrollView: {
