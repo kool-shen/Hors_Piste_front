@@ -83,7 +83,7 @@ export default function SignUpScreenTwo(props) {
             <RegisterText text='Pays de résidence'/>
             <MainInput
               label="Ton pays de résidence"
-              value={user.address.city}
+              value={user.address.country}
               onChangeText={(value) =>
                 setUser({
                   ...user,

@@ -177,6 +177,7 @@ const makeStyles = () => {
       paddingHorizontal: 30,
       paddingVertical: 10,
       borderRadius: 10,
+      marginTop:20
     },
     validate: {
       color: "white",

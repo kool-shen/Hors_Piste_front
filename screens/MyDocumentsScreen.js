@@ -55,7 +55,7 @@ const MyDocumentsScreen = () => {
       source={require("../assets/backgrounds/royalBlue.png")}
       style={styles.mainContainer}
     >
-      <BannerScreenTitle title='Mes documents'/>
+      <BannerScreenTitle title="Mes documents" />
       <ScrollView>
         <View style={styles.listContainer}>
           {loading ? <Spinner size="lg" /> : documentsToComponents}
@@ -79,12 +79,14 @@ const makeStyles = () => {
     docContainer: {
       display: "flex",
       justifyContent: "space-around",
-      textAlign: "center",
+      alignItems: "flex-start",
+      width: width * 0.9,
     },
     docText: {
       fontSize: 20,
       fontWeight: "light",
       color: "white",
+      textAlign: "left",
     },
     mainContainer: {
       backgroundColor: "#F8DFBD",
