@@ -10,8 +10,7 @@ import {
 import React, {useState} from "react";
 import { useSelector } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { FontAwesomeIcon, faPhone, faEnvelope } from "@fortawesome/react-native-fontawesome";
-import BannerScreenTitle from "../component/BannerScreenTitle";
+import BannerScreenTitle from "../component/BannerScreenTitle2";
 
 
 const MyMissionScreen = () => {
@@ -31,7 +30,7 @@ const MyMissionScreen = () => {
         source={require("../assets/contactBackground.png")}
         style={styles.container}
       >
-        <BannerScreenTitle title="Ma Mission" />
+        <BannerScreenTitle icon='plane' title="Ma Mission" />
         <ScrollView>
           <View style={styles.mainContainer}>
             <View style={styles.cardContainer}>
@@ -62,12 +61,6 @@ const MyMissionScreen = () => {
             </ScrollView>
           </View>
         </ScrollView>
-        <View
-          style={styles.footer}
-        >
-          {/* <FontAwesome name='home' size={25} color={"#2D5971"} /> */}
-         <FontAwesome name='home' size='40' color='orange' onPress={() => navigation.navigate('TabNavigator')}/>
-        </View>
       </ImageBackground>
     </View>
   );

@@ -57,7 +57,7 @@ const MyMissionScreen = () => {
       source={require("../assets/backgrounds/royalBlue.png")}
       style={styles.mainContainer}
     >
-      <BannerScreenTitle title={`Signer documents`} />
+      <BannerScreenTitle icon='pencil' title={`Signer documents`} />
       <ScrollView>
         <View style={styles.listContainer}>
           {loading ? <Spinner size="lg" /> : documentsToComponents}
