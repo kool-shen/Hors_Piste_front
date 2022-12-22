@@ -57,8 +57,8 @@ const MyMissionScreen = () => {
       source={require("../assets/backgrounds/royalBlue.png")}
       style={styles.mainContainer}
     >
-      <BannerScreenTitle title={`Signer documents`} />
-      <ScrollView>
+      <BannerScreenTitle title={`Mes documents${"\n"}à signer`} />
+      <ScrollView style={styles.scrollView}>
         <View style={styles.listContainer}>
           {loading ? <Spinner size="lg" /> : documentsToComponents}
           {!documentsToComponents.length && (
@@ -94,7 +94,6 @@ const makeStyles = () => {
     docContainer: {
       // backgroundColor: "#2D5971",
       // height: height * 0.22,
-      width: width * 0.9,
       justifyContent: "space-around",
       borderRadius: 10,
       display: "flex",
@@ -102,7 +101,7 @@ const makeStyles = () => {
       alignItems: "center",
       padding: 10,
       margin: height * 0.01,
-      width: width * 0.95
+      width: width * 0.9
     },
     buttonContainer: {
       justifyContent: "center",
@@ -132,14 +131,15 @@ const makeStyles = () => {
       height: height,
       width: width,
       margin: 0,
-      display: "flex",
-      justifyContent: "space-around"
+      // display: "flex",
+      // justifyContent: "space-around"
     },
     listContainer: {
-      height: height,
+      height: height*0.7,
       alignItems: "center",
-      justifyContent: "center",
-      top: height * 0.2,
+      // justifyContent: "center",
+      // marginTop: height * 0.05,
+      paddingBottom: height*0.2,
       marginBottom: height * 0.15
     },
 
@@ -197,6 +197,10 @@ const makeStyles = () => {
       fontSize: 20 / fontScale,
       color: "white",
       fontWeight: "bold"
+    },
+    scrollView: {
+      marginTop: height*0.25,
+      marginBottom: height*0.15,
     }
   });
 };
