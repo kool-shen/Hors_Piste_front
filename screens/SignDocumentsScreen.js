@@ -10,13 +10,15 @@ import {
 } from "react-native";
 import { Button, Spinner } from "native-base";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateUserProperties } from "../reducers/user";
 import Sign from "../component/Signature";
 import { BACKEND_URL } from "@env";
 import BannerScreenTitle from "../component/BannerScreenTitle";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const MyMissionScreen = () => {
+  const dispatch = useDispatch()
   const styles = makeStyles();
   const [loading, setLoading] = useState(true);
   const [documents, setDocuments] = useState([]);
@@ -35,6 +37,7 @@ const MyMissionScreen = () => {
     );
     const documentsData = await res.json();
     setDocuments(documentsData);
+    dispatch(updateUserProperties({nbOfToSignDocs: documentsData.length}))
     setLoading(false);
   };
 

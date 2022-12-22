@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: {
+    nbOfToSignDocs: 0,
     passportImg: "",
     connectionCode: "",
     token: "",
