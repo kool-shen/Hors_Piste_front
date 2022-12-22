@@ -16,15 +16,7 @@ import SignInScreen from "./screens/SignInScreen";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import SignDocumentsScreen from "./screens/SignDocumentsScreen";
 import IntroductionScreen from "./screens/IntroductionScreen";
-
-const [loaded] = useFonts({
-  Montserrat: require('./assets/fonts/Yatra-One.ttf'),
-});
-
-if (!loaded) {
-  return null;
-}
-
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
 const store = configureStore({

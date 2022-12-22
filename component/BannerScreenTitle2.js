@@ -27,7 +27,6 @@ const BannerScreenTitle2 = (props) => {
           color: "white",
           fontSize: 35,
           fontWeight: "bold",
-          fontFamily: "BELLABOO-Regular",
         }}
       >
         {props.title}
