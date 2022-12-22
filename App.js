@@ -16,6 +16,7 @@ import SignInScreen from "./screens/SignInScreen";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import SignDocumentsScreen from './screens/SignDocumentsScreen'
 import IntroductionScreen from "./screens/IntroductionScreen";
+import CameraScreen from "./screens/CameraScreen"
 
 const store = configureStore({
   reducer: { user }
@@ -61,6 +62,8 @@ const TabNavigator = () => {
           } else if (route.name === "MyMission") {
             iconName = "plane";
           } else if (route.name === "MyContacts") {
+            iconName = "address-book";
+          } else if (route.name === "CameraScreen") {
             iconName = "address-book";
           }
           return <FontAwesome name={iconName} size={25} color={color} />;
@@ -136,6 +139,19 @@ const TabNavigator = () => {
         options={{
           tabBarColor: activeColorsMenu.tabBackground,
           title: "Mission"
+        }}
+        listeners={{
+          tabPress: (e) => {
+            changeColor(e);
+          }
+        }}
+      />
+       <Tab.Screen
+        name="CameraScreen"
+        component={CameraScreen}
+        options={{
+          tabBarColor: activeColorsMenu.tabBackground,
+          title: "Camera"
         }}
         listeners={{
           tabPress: (e) => {
