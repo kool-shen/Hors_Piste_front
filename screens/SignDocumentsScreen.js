@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Sign from "../component/Signature";
 import { BACKEND_URL } from "@env";
+import BannerScreenTitle from "../component/BannerScreenTitle";
 
 const MyMissionScreen = () => {
   const styles = makeStyles();
@@ -50,9 +51,7 @@ const MyMissionScreen = () => {
       source={require("../assets/backgrounds/royalBlue.png")}
       style={styles.mainContainer}
     >
-      <View style={styles.pageTitleContainer}>
-        <Text style={styles.pageTitle}>Mes documents{"\n"}à signer</Text>
-      </View>
+      <BannerScreenTitle title={`Mes documents${"\n"}à signer`}/>
       <ScrollView>
         <View style={styles.listContainer}>
           {loading ? <Spinner size="lg" /> : documentsToComponents}
@@ -102,11 +101,11 @@ const makeStyles = () => {
       justifyContent: "space-around",
     },
     listContainer: {
-      height: height * 0.25,
+      height: height,
       alignItems: "center",
       display: "flex",
       justifyContent: "space-around",
-      //top: height * 0.25,
+      top: height * 0.25,
     },
 
     pageTitle: {

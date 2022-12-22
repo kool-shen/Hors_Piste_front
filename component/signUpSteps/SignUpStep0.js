@@ -28,7 +28,7 @@ export default function SignInScreen({ navigation, nextStep }) {
   const handleConnect = async () => {
     console.log(`${BACKEND_URL}/users/firstConnection`);
     setLoading(true);
-    const res = await fetch(`${BACKEND_URL}/users/firstConnection`, {
+    const res = await fetch(`http://localhost:3000/users/firstConnection`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -125,15 +125,14 @@ const makeStyles = () => {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",
-      paddingTop: 130,
-      paddingBottom: 20
+      paddingTop: height*0.3,
     },
 
     containerSignin: {
       display: "flex",
       alignItems: "center",
-      height: 350,
-      justifyContent: "space-between"
+      height: height,
+      justifyContent: "space-between",
     },
     inputContainer: {
       height: 70,

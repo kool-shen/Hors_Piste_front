@@ -11,7 +11,7 @@ const BannerScreenTitle = (props) => {
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10,
         zIndex: 90,
-        width: "80%",
+        maxWidth: "110%",
         position: "absolute",
         top: '10%',
         display: "flex",
@@ -24,11 +24,12 @@ const BannerScreenTitle = (props) => {
       <Text
         style={{
           color: "white",
-          fontSize: 40,
+          fontSize: 35,
           fontWeight: "bold",
         }}
       >
         {props.title}
+      {'  '}
       </Text>
       <FontAwesomeIcon icon={faUser} color="#F29231" size={40} />
 

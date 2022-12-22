@@ -132,12 +132,11 @@ const makeStyles = () => {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",
-      paddingTop: 130,
-      paddingBottom: 20
+      paddingTop: height*0.2,
     },
 
     emergencyContainer: {
-      backgroundColor: "#F5C2C8",
+      backgroundColor: "#F29231",
       maxWidth: 350,
       maxHeight: 100,
       display: "flex",

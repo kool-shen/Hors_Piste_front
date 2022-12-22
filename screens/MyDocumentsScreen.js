@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import { BACKEND_URL } from "@env";
 import { useSelector } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import BannerScreenTitle from "../component/BannerScreenTitle";
 
 const MyDocumentsScreen = () => {
   const styles = makeStyles();
@@ -54,9 +55,7 @@ const MyDocumentsScreen = () => {
       source={require("../assets/backgrounds/royalBlue.png")}
       style={styles.mainContainer}
     >
-      <View style={styles.pageTitleContainer}>
-        <Text style={styles.pageTitle}>Mes documents</Text>
-      </View>
+      <BannerScreenTitle title='Mes documents'/>
       <ScrollView>
         <View style={styles.listContainer}>
           {loading ? <Spinner size="lg" /> : documentsToComponents}

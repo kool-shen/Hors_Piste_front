@@ -123,8 +123,7 @@ const makeStyles = () => {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",
-      paddingTop: 130,
-      paddingBottom: 20
+      paddingTop: height*0.2,
     },
 
     inputContainer: {
