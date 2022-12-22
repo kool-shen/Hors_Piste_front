@@ -13,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import { BACKEND_URL } from "@env";
 import { useSelector } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import BannerScreenTitle2 from "../component/BannerScreenTitle2";
+import BannerScreenTitle from "../component/BannerScreenTitle2";
 
 const MyDocumentsScreen = () => {
   const styles = makeStyles();
@@ -45,7 +45,8 @@ const MyDocumentsScreen = () => {
           Linking.openURL(`https://docs.google.com/document/d/${document.id}`)
         }
       >
-        <FontAwesome name="arrow-right" size={20} style={styles.icon} />{" "}
+        <FontAwesome name="arrow-right" size={20} style={styles.icon} />
+        {' '}
         {document.name}
       </Text>
     </View>
@@ -55,7 +56,7 @@ const MyDocumentsScreen = () => {
       source={require("../assets/backgrounds/royalBlue.png")}
       style={styles.mainContainer}
     >
-      <BannerScreenTitle title="Mes documents" />
+      <BannerScreenTitle icon='folder-open' title="Mes documents" />
       <ScrollView style={styles.scrollView}>
         <View style={styles.listContainer}>
           {loading ? <Spinner size="lg" /> : documentsToComponents}
@@ -65,12 +66,12 @@ const MyDocumentsScreen = () => {
             </Text>
           )}
           <Button style={styles.button} onPress={() => fetchCompleteDocs()}>
-            <FontAwesome
-              name="refresh"
-              size={22}
-              style={styles.icon}
-              color="white"
-            />
+          <FontAwesome
+                name="refresh"
+                size={22}
+                style={styles.icon}
+                color="white"
+              />
           </Button>
         </View>
       </ScrollView>
@@ -86,7 +87,12 @@ const makeStyles = () => {
       // height: height * 0.22,
       width: width * 0.9,
       justifyContent: "space-around",
-      alignItems: "flex-start",
+      borderRadius: 10,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      padding: 10,
+      margin: 30,
       width: width * 0.9,
     },
     docText: {
@@ -149,7 +155,7 @@ const makeStyles = () => {
       width: 50,
       // height: height * 0.05,
       borderRadius: 10,
-      marginTop: 30,
+      marginTop: 30
     },
     listItem: {
       // padding: 10,
@@ -158,15 +164,15 @@ const makeStyles = () => {
       width: width * 0.9,
     },
     listContainer: {
-      height: "100%",
-      display: "flex",
+      height: '100%',
+      display: 'flex',
       // justifyContent: "center",
       alignItems: "center",
     },
     scrollView: {
-      marginTop: height * 0.2,
-      marginBottom: height * 0.15,
-    },
+      marginTop: height*0.20,
+      marginBottom: height*0.15,
+    }
   });
 };
 export default MyDocumentsScreen;
