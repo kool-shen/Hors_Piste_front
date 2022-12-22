@@ -28,7 +28,7 @@ export default function SignInScreen({ navigation, nextStep }) {
   const handleConnect = async () => {
     console.log(`${BACKEND_URL}/users/firstConnection`);
     setLoading(true);
-    const res = await fetch(`http://localhost:3000/users/firstConnection`, {
+    const res = await fetch(`${BACKEND_URL}/users/firstConnection`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -96,6 +96,7 @@ export default function SignInScreen({ navigation, nextStep }) {
                 style={styles.input}
               />
             </View>
+            <View style={styles.btnContainer}>
             <TouchableOpacity
               style={styles.connectButton}
               onPress={() => handleConnect()}
@@ -110,6 +111,7 @@ export default function SignInScreen({ navigation, nextStep }) {
             >
               <Text style={styles.createText}>Se connecter</Text>
             </TouchableOpacity>
+            </View>
           </View>
         </View>
       </ImageBackground>
@@ -121,24 +123,25 @@ const makeStyles = () => {
   return StyleSheet.create({
     background: {
       flex: 1,
-      minHeight: height,
+      height: height,
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-around",
-      paddingTop: height*0.3,
+      justifyContent: "center",
+      paddingTop: height*0.1,
     },
 
     containerSignin: {
       display: "flex",
       alignItems: "center",
       height: height,
-      justifyContent: "space-between",
+      justifyContent: "center",
     },
     inputContainer: {
       height: 70,
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between"
+      justifyContent: "center",
+      margin: 25
     },
     input: {
       backgroundColor: "white",
