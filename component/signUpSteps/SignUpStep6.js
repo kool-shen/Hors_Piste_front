@@ -63,10 +63,6 @@ export default function SignUpScreenFive(props) {
     });
   };
 
-  /////
-
-  const isFocused = useIsFocused();
-
   /////CAMERA/////
 
   return (

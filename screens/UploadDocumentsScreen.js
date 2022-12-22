@@ -93,7 +93,7 @@ const makeStyles = () => {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#F29231",
+      backgroundColor: "#2D5971",
       width: width * 0.6,
       height: 100,
       borderRadius: 10,

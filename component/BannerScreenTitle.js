@@ -31,7 +31,7 @@ const BannerScreenTitle = (props) => {
         {props.title}
       {'  '}
       </Text>
-      <FontAwesomeIcon icon={faUser} color="#F29231" size={40} />
+      {props.progressionStep && <FontAwesomeIcon icon={faUser} color="#F29231" size={40} />}
 
       <Text
         style={{

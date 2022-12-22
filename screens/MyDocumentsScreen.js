@@ -37,7 +37,7 @@ const MyDocumentsScreen = () => {
 
   console.log(documents);
   const documentsToComponents = documents.map((document, i) => (
-    <View style={styles.docContainer}>
+    <View style={styles.docContainer} key={i}>
       <Text
         key={i}
         style={styles.docText}
@@ -45,7 +45,7 @@ const MyDocumentsScreen = () => {
           Linking.openURL(`https://docs.google.com/document/d/${document.id}`)
         }
       >
-        <FontAwesome name="arrow-right" size={20} style={styles.icon} />
+        <FontAwesome name="arrow-right" size={20} style={styles.icon} />{" "}
         {document.name}
       </Text>
     </View>
@@ -55,8 +55,8 @@ const MyDocumentsScreen = () => {
       source={require("../assets/backgrounds/royalBlue.png")}
       style={styles.mainContainer}
     >
-      <BannerScreenTitle2 title="Mes documents" icon="folder-open" />
-      <ScrollView>
+      <BannerScreenTitle title="Mes documents" />
+      <ScrollView style={styles.scrollView}>
         <View style={styles.listContainer}>
           {loading ? <Spinner size="lg" /> : documentsToComponents}
           {!documentsToComponents.length && (
@@ -65,7 +65,12 @@ const MyDocumentsScreen = () => {
             </Text>
           )}
           <Button style={styles.button} onPress={() => fetchCompleteDocs()}>
-            <Text style={styles.text}>Actualiser</Text>
+            <FontAwesome
+              name="refresh"
+              size={22}
+              style={styles.icon}
+              color="white"
+            />
           </Button>
         </View>
       </ScrollView>
@@ -77,14 +82,15 @@ const makeStyles = () => {
   const { fontScale, width, height } = useWindowDimensions();
   return StyleSheet.create({
     docContainer: {
-      display: "flex",
+      backgroundColor: "#2D5971",
+      // height: height * 0.22,
+      width: width * 0.9,
       justifyContent: "space-around",
       alignItems: "flex-start",
-
       width: width * 0.9,
     },
     docText: {
-      fontSize: 20,
+      fontSize: 18,
       fontWeight: "light",
       color: "white",
       textAlign: "left",
@@ -108,7 +114,7 @@ const makeStyles = () => {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",
-      paddingTop: 130,
+      // paddingTop: 130,
       paddingBottom: 20,
     },
 
@@ -133,27 +139,33 @@ const makeStyles = () => {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
-      padding: 10,
+      // padding: 10,
     },
     button: {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#2D5971",
-      width: width * 0.35,
-      height: height * 0.05,
+      backgroundColor: "#F29231",
+      width: 50,
+      // height: height * 0.05,
       borderRadius: 10,
+      marginTop: 30,
     },
     listItem: {
-      padding: 10,
+      // padding: 10,
       fontSize: 30,
       margin: 15,
       width: width * 0.9,
     },
     listContainer: {
-      height: height,
-      justifyContent: "center",
+      height: "100%",
+      display: "flex",
+      // justifyContent: "center",
       alignItems: "center",
+    },
+    scrollView: {
+      marginTop: height * 0.2,
+      marginBottom: height * 0.15,
     },
   });
 };
