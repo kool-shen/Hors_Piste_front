@@ -16,6 +16,7 @@ import MainInput from "../inputs/MainInput";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import NextPrevious from "../NextPrevious";
+import RegisterText from "../RegisterText";
 
 export default function SignUpScreenThree(props) {
   const styles = makeStyles();
@@ -54,7 +55,7 @@ export default function SignUpScreenThree(props) {
             </Text>
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Prénom</Text>
+          <RegisterText text='Prénom'/>
             <MainInput
               label="Prénom"
               value={user.emergencyContact.name}
@@ -67,7 +68,7 @@ export default function SignUpScreenThree(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Nom</Text>
+          <RegisterText text='Nom'/>
             <MainInput
               label="Nom"
               value={user.emergencyContact.surname}
@@ -83,7 +84,7 @@ export default function SignUpScreenThree(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Numéro de téléphone</Text>
+          <RegisterText text='Numéro de téléphone'/>
             <MainInput
               label="Numéro de téléphone"
               value={user.emergencyContact.phone}
@@ -96,7 +97,7 @@ export default function SignUpScreenThree(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Lien (famille, ami(e),...)</Text>
+            <RegisterText text='Lien (famille, ami(e),...)'/>
             <MainInput
               label="Lien"
               value={user.emergencyContact.relation}

@@ -15,6 +15,7 @@ import NextPrevious from "../NextPrevious";
 import { useToast } from "native-base";
 import PasswordInput from "../inputs/PasswordInput";
 import PhoneInput from "../inputs/PhoneInput";
+import RegisterText from "../RegisterText";
 
 import MainInput from "../inputs/MainInput";
 
@@ -53,7 +54,7 @@ export default function SignUpScreenTwo(props) {
 
         <View style={styles.background}>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Ville de naissance</Text>
+          <RegisterText text='Ville de naissance'/>
             <MainInput
               label="Ta ville de naissance"
               value={user.birthCity}
@@ -66,7 +67,7 @@ export default function SignUpScreenTwo(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Téléphone</Text>
+          <RegisterText text='Téléphone'/>
             <MainInput
               label="Ton numéro de téléphone"
               value={user.phone}
@@ -80,7 +81,7 @@ export default function SignUpScreenTwo(props) {
           </View>
 
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Mot de passe</Text>
+          <RegisterText text='Mot de passe'/>
             <PasswordInput
               label="Ton mot de passe"
               value={user.firstPassword}
@@ -88,7 +89,7 @@ export default function SignUpScreenTwo(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Confirmation mot de passe</Text>
+          <RegisterText text='Confirmation du mot de passe'/>
             <PasswordInput
               label="Confirmation du mot de passe"
               value={checkPassword}

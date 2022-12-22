@@ -16,6 +16,7 @@ import { BACKEND_URL } from "@env";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import NextPrevious from "../NextPrevious";
+import RegisterText from "../RegisterText";
 
 export default function SignInScreen({ navigation, nextStep }) {
   const dispatch = useDispatch();
@@ -39,7 +40,9 @@ export default function SignInScreen({ navigation, nextStep }) {
       })
     });
     const userData = await res.json();
+    console.log(userData)
     if (userData.result) {
+      console.log('ok')
       const res = await fetch(`${BACKEND_URL}/docs/createFolders`, {
         method: "POST",
         headers: {
@@ -76,7 +79,7 @@ export default function SignInScreen({ navigation, nextStep }) {
         <View style={styles.background}>
           <View style={styles.containerSignin}>
             <View style={styles.inputContainer}>
-              <Text style={styles.inputText}>Email</Text>
+              <RegisterText text='Email'/>
               <MainInput
                 label="Ton adresse mail"
                 value={email}
@@ -85,7 +88,7 @@ export default function SignInScreen({ navigation, nextStep }) {
               />
             </View>
             <View style={styles.inputContainer}>
-              <Text style={styles.inputText}>Code de connexion</Text>
+              <RegisterText text='Code de connexion'/>
               <MainInput
                 label="Ton code de connection"
                 value={connectionCode}

@@ -17,6 +17,7 @@ import MainInput from "../inputs/MainInput";
 import DateInput from "../inputs/DateInput";
 import { Toast, useToast } from "native-base";
 import SelectInput from "../inputs/SelectInput";
+import RegisterText from "../RegisterText";
 
 export default function SignUpScreenOne(props) {
   const styles = makeStyles();
@@ -58,8 +59,7 @@ export default function SignUpScreenOne(props) {
         <BannerScreenTitle title="Inscription" progressionStep="1" />
         <View style={styles.background}>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Prénom</Text>
-
+            <RegisterText text='Prénom'/>
             <MainInput
               label="Ton prénom"
               value={user.name}
@@ -68,7 +68,7 @@ export default function SignUpScreenOne(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Nom</Text>
+          <RegisterText text='Nom'/>
             <MainInput
               label="Ton nom de famille"
               value={user.surname}
@@ -77,7 +77,7 @@ export default function SignUpScreenOne(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Date de naissance</Text>
+          <RegisterText text='Date de naissance'/>
             <MainInput
               label="dd/mm/yyyy"
               value={user.birthDate}
@@ -86,7 +86,7 @@ export default function SignUpScreenOne(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Genre</Text>
+          <RegisterText text='Genre'/>
             <SelectInput
               label="Ton genre"
               value={user.degrees}

@@ -19,6 +19,7 @@ import UploadFile from "../UploadFile";
 import NextPrevious from "../NextPrevious";
 import { BACKEND_URL } from "@env";
 import { useToast } from "native-base";
+import RegisterText from "../RegisterText";
 
 export default function SignUpScreenFive(props) {
   const styles = makeStyles();
@@ -79,7 +80,7 @@ export default function SignUpScreenFive(props) {
         <View style={styles.container}>
           <View style={styles.contentContainer}>
             <View style={styles.inputContainer}>
-              <Text style={styles.inputText}>Numéro de passeport</Text>
+              <RegisterText text='Numéro de passeport'/>
               <MainInput
                 label="Numéro de passeport"
                 value={user.phone}
@@ -93,9 +94,7 @@ export default function SignUpScreenFive(props) {
             </View>
 
             <View style={styles.inputContainer}>
-              <Text style={styles.inputText}>
-                Date d'expiration du passeport
-              </Text>
+              <RegisterText text="Date d'expiration du passeport"/>
               <MainInput
                 label="Date d'expiration du passeport"
                 value={user.ICExpirationDate}
@@ -108,7 +107,7 @@ export default function SignUpScreenFive(props) {
               />
             </View>
             <View style={styles.inputContainer}>
-              <Text style={styles.inputText}>Mon RIB</Text>
+              <RegisterText text='Mon RIB'/>
               <MainInput
                 label="Mon RIB"
                 value={user.IBAN}

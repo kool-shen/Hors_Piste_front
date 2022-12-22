@@ -13,6 +13,7 @@ import MainInput from "../inputs/MainInput";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import NextPrevious from "../NextPrevious";
+import RegisterText from "../RegisterText";
 
 export default function SignUpScreenTwo(props) {
   const userReducer = useSelector(state => state.user.value);
@@ -40,7 +41,7 @@ export default function SignUpScreenTwo(props) {
         <BannerScreenTitle title="Inscription" progressionStep="3" />
         <View style={styles.background}>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Adresse</Text>
+          <RegisterText text='Adresse'/>
             <MainInput
               label="Ton adresse"
               value={user.address.street}
@@ -53,7 +54,7 @@ export default function SignUpScreenTwo(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Code Postal</Text>
+          <RegisterText text='Code postal'/>
             <MainInput
               label="Ton code postal"
               value={user.address.zipCode}
@@ -66,7 +67,7 @@ export default function SignUpScreenTwo(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Ville de résidence</Text>
+          <RegisterText text='Ville de résidence'/>
             <MainInput
               label="Ta ville de résidence"
               value={user.address.city}
@@ -79,7 +80,7 @@ export default function SignUpScreenTwo(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Pays de résidence</Text>
+            <RegisterText text='Pays de résidence'/>
             <MainInput
               label="Ton pays de résidence"
               value={user.address.city}

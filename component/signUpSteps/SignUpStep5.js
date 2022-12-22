@@ -16,6 +16,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import NextPrevious from "../NextPrevious";
+import RegisterText from "../RegisterText";
 
 import SelectInput from "../inputs/SelectInput";
 
@@ -46,7 +47,7 @@ export default function SignUpScreenFour(props) {
 
         <View style={styles.background}>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Diplôme</Text>
+            <RegisterText text='Diplôme'/>
             <SelectInput
               label="Ton niveau de diplôme"
               value={user.degrees}
@@ -63,7 +64,7 @@ export default function SignUpScreenFour(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Situation</Text>
+            <RegisterText text='Situation'/>
             <SelectInput
               label="Ta situation actuelle"
               value={user.occupation}
@@ -79,7 +80,7 @@ export default function SignUpScreenFour(props) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Numéro CES</Text>
+            <RegisterText text='Numéro CES'/>
             <MainInput
               label="Ton numéro CES"
               value={user.CESNumber}

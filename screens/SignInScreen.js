@@ -16,6 +16,7 @@ import { BACKEND_URL } from "@env";
 import { useToast } from "native-base";
 import MainInput from "../component/inputs/MainInput";
 import PasswordInput from "../component/inputs/PasswordInput";
+import RegisterText from "../component/RegisterText";
 
 export default function SignInScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -64,7 +65,7 @@ export default function SignInScreen({ navigation }) {
         <View style={styles.background}>
           <Image source={logo} style={styles.logo} resizeMode="contain" />
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Email</Text>
+            <RegisterText text='Email'/>
             <MainInput
               label="Ton adresse mail"
               value={email}
@@ -73,7 +74,7 @@ export default function SignInScreen({ navigation }) {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputText}>Mot de passe</Text>
+            <RegisterText text='Mot de passe'/>
             <PasswordInput
               label="Ton mot de passe"
               value={password}
@@ -156,8 +157,9 @@ const makeStyles = () => {
       borderRadius: 5,
       color: "white",
       paddingHorizontal: 10,
-      margin: 5,
+      margin: 10,
       whiteSpace: "nowrap",
+      borderRadius: 10,
     },
     forgot: {
       fontWeight: "bold",
