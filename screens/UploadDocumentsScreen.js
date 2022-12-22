@@ -51,29 +51,24 @@ const UploadDocumentsScreen = () => {
     setUploadFile({});
   };
   return (
-    <KeyboardAvoidingView
+    <ImageBackground
+      source={require("../assets/backgrounds/royalBlue.png")}
       style={styles.mainContainer}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <ImageBackground
-        source={require("../assets/backgrounds/royalBlue.png")}
-        style={styles.mainContainer}
-      >
-        <View style={styles.pageTitleContainer}>
-          <Text style={styles.pageTitle}>Transmettre</Text>
-        </View>
-        <View style={styles.listContainer}>
-          <TouchableOpacity onPress={pickDocument} style={styles.card}>
-            <Text style={styles.mainText}>Choisir un fichier</Text>
-            <Text style={styles.uploadText}>{uploadName}</Text>
-            <FontAwesome name="upload" size={40} style={styles.icon2} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={sendDocument} style={styles.button}>
-            <Text style={styles.mainText}>Envoyer</Text>
-          </TouchableOpacity>
-        </View>
-      </ImageBackground>
-    </KeyboardAvoidingView>
+      <View style={styles.pageTitleContainer}>
+        <Text style={styles.pageTitle}>Transmettre</Text>
+      </View>
+      <View style={styles.listContainer}>
+        <TouchableOpacity onPress={pickDocument} style={styles.card}>
+          <Text style={styles.mainText}>Choisir un fichier</Text>
+          <Text style={styles.uploadText}>{uploadName}</Text>
+          <FontAwesome name="upload" size={40} style={styles.icon2} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={sendDocument} style={styles.button}>
+          <Text style={styles.mainText}>Envoyer</Text>
+        </TouchableOpacity>
+      </View>
+    </ImageBackground>
   );
 };
 
@@ -82,8 +77,8 @@ const makeStyles = () => {
   return StyleSheet.create({
     mainContainer: {
       backgroundColor: "#F8DFBD",
-      height: "100%",
-      width: "100%",
+      height: height,
+      width: width,
       flex: 1,
       zIndex: -1,
     },
