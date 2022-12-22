@@ -6,7 +6,7 @@ import {
   ImageBackground,
   ScrollView,
   Touchable,
-  TouchableOpacity,
+  TouchableOpacity
 } from "react-native";
 import { Button, Spinner } from "native-base";
 import React, { useEffect, useState } from "react";
@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import Sign from "../component/Signature";
 import { BACKEND_URL } from "@env";
 import BannerScreenTitle from "../component/BannerScreenTitle";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const MyMissionScreen = () => {
   const styles = makeStyles();
@@ -38,12 +39,14 @@ const MyMissionScreen = () => {
   };
 
   const documentsToComponents = documents.map((document, i) => (
-    <Sign
-      key={i}
-      ID={document.id}
-      name={document.name}
-      fetchToSignDocs={fetchToSignDocs}
-    />
+    <View style={styles.docContainer} key={i}>
+      <Sign
+        key={i}
+        ID={document.id}
+        name={document.name}
+        fetchToSignDocs={fetchToSignDocs}
+      />
+    </View>
   ));
 
   return (
@@ -51,7 +54,7 @@ const MyMissionScreen = () => {
       source={require("../assets/backgrounds/royalBlue.png")}
       style={styles.mainContainer}
     >
-      <BannerScreenTitle title={`Mes documents${"\n"}à signer`}/>
+      <BannerScreenTitle title={`Mes documents${"\n"}à signer`} />
       <ScrollView>
         <View style={styles.listContainer}>
           {loading ? <Spinner size="lg" /> : documentsToComponents}
@@ -60,12 +63,22 @@ const MyMissionScreen = () => {
               Il n'y a aucun document à signer pour le moment.
             </Text>
           )}
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => fetchToSignDocs()}
-          >
-            <Text style={styles.mainText}>Actualiser</Text>
-          </TouchableOpacity>
+          <View style={styles.buttonContainer}>
+            <Button style={styles.button} onPress={() => fetchToSignDocs()}>
+              <FontAwesome
+                name="refresh"
+                size={22}
+                style={styles.icon}
+                color="white"
+              />
+            </Button>
+          </View>
+          {/* <Button
+                style={styles.button}
+                onPress={() => fetchToSignDocs()}
+              >
+                Signez le documents
+              </Button> */}
         </View>
       </ScrollView>
     </ImageBackground>
@@ -75,48 +88,66 @@ const MyMissionScreen = () => {
 const makeStyles = () => {
   const { fontScale, width, height } = useWindowDimensions();
   return StyleSheet.create({
+    docContainer: {
+      backgroundColor: "#2D5971",
+      // height: height * 0.22,
+      width: width * 0.9,
+      justifyContent: "space-around",
+      borderRadius: 10,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      padding: 10,
+      margin: height * 0.01,
+      width: width * 0.95
+    },
+    buttonContainer: {
+      justifyContent: "center",
+      alignItems: "center"
+    },
     button: {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#2D5971",
-      width: width * 0.35,
-      height: height * 0.05,
+      backgroundColor: "#F29231",
+      width: width * 0.15,
+      // height: height * 0.05,
       borderRadius: 10,
+      marginBottom: height * 0.07
     },
     mainText: {
       fontSize: 20 / fontScale,
       color: "white",
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     text: {
       fontSize: 20 / fontScale,
-      color: "white",
+      color: "white"
     },
     mainContainer: {
       height: height,
       width: width,
       margin: 0,
       display: "flex",
-      justifyContent: "space-around",
+      justifyContent: "space-around"
     },
     listContainer: {
       height: height,
       alignItems: "center",
-      display: "flex",
-      justifyContent: "space-around",
-      top: height * 0.25,
+      justifyContent: "center",
+      top: height * 0.2,
+      marginBottom: height * 0.15
     },
 
     pageTitle: {
       color: "white",
       fontSize: 35 / fontScale,
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     progression: {
       color: "white",
       fontSize: 15 / fontScale,
-      alignSelf: "flex-end",
+      alignSelf: "flex-end"
     },
     pageTitleContainer: {
       backgroundColor: "#2D5971",
@@ -129,36 +160,40 @@ const makeStyles = () => {
       // display: "flex",
       // flexDirection: "row",
       // justifyContent: "space-between",
-      padding: 10,
+      padding: 10
     },
     listItem: {
       padding: 10,
       fontSize: 30,
-      margin: 15,
-      width: width * 0.8,
+      width: width * 0.8
     },
     card: {
-      height: height * 0.2,
+      // height: height * 0.2,
       width: width,
       // flex: 1,
       display: "flex",
       justifyContent: "center",
-      alignItems: "center",
+      alignItems: "center"
     },
     signButton: {
       color: "red",
       backgroundColor: "red",
-      width: width * 0.3,
+      width: width * 0.3
     },
 
     modal: {
       backgroundColor: "black",
       position: "relative",
       top: "50%",
-      left: "50%",
+      left: "50%"
       // alignItems: 'center',
       // justifyContent: 'center'
     },
+    text: {
+      fontSize: 20 / fontScale,
+      color: "white",
+      fontWeight: "bold"
+    }
   });
 };
 export default MyMissionScreen;

@@ -24,6 +24,7 @@ import * as FileSystem from "expo-file-system";
 import Signature from "react-native-signature-canvas";
 import * as Location from "expo-location";
 import { BACKEND_URL } from "@env";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const Sign = (props) => {
   const toast = useToast();
@@ -34,6 +35,7 @@ const Sign = (props) => {
   const [loading, setLoading] = useState(false);
   const [signature, setSignature] = useState("");
   const [documentID, setDocumentID] = useState("");
+  
   const ref = useRef();
 
   const [location, setLocation] = useState(null);
@@ -65,10 +67,15 @@ const Sign = (props) => {
   };
 
   // Called after ref.current.getData()
-  const handleData = async () => {
+  const handleData = async (data) => {
     setLoading(true);
     const formData = new FormData();
     const path = FileSystem.cacheDirectory + "sign.png";
+    const encoding = await FileSystem.writeAsStringAsync(
+      path,
+      data.replace("data:image/png;base64,", ""),
+      { encoding: FileSystem.EncodingType.Base64 }
+    );
     const file = await FileSystem.getInfoAsync(path);
     console.log(file);
 
@@ -123,15 +130,16 @@ const Sign = (props) => {
       {loading ? (
         <Spinner size="lg" />
       ) : (
-        <>
-          <Modal isOpen={inputModal} onClose={() => setInputModal(!inputModal)}>
+        <View style={styles.containerGlobal}>
+          <Modal style={styles.modalContainer} isOpen={inputModal} onClose={() => setInputModal(!inputModal)}>
             <Input
-              placeholder="fait à..."
+              placeholder="Fait à..."
               style={styles.input}
-              onChangeText={(value) => setSignatureLocation(value)}
+              onChangeText={(value) => setLocation(value)}
             ></Input>
             <Text style={styles.input}>Le {date}</Text>
             <Button
+              style={styles.button}
               onPress={() => {
                 setInputModal(!inputModal);
                 setSignatureModal(!signatureModal);
@@ -165,10 +173,11 @@ const Sign = (props) => {
               />
             </View>
           </Modal>
+      
           <View style={styles.card}>
             <Button
               size="lg"
-              style={styles.listItem}
+              style={styles.buttonDoc}
               onPress={() => {
                 Linking.openURL(
                   `https://docs.google.com/document/d/${props.ID}`
@@ -189,19 +198,18 @@ const Sign = (props) => {
               }}
             >
               <Button
-                style={styles.signButton}
+                style={styles.button}
                 onPress={() => {
-                  console.log("test");
 
                   setInputModal(!inputModal);
                 }}
                 disabled={infoModal}
               >
-                Sign document
+                Signez le document
               </Button>
             </Pressable>
           </View>
-        </>
+        </View>
       )}
     </View>
   );
@@ -210,6 +218,30 @@ const Sign = (props) => {
 const makeStyles = () => {
   const { fontScale, width, height } = useWindowDimensions();
   return StyleSheet.create({
+    containerGlobal: {
+      // height: height,
+      width:width,
+      justifyContent:'center',
+      alignItems: 'center'
+    },
+    button: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#F29231",
+      // width: width * 0.35,
+      // height: height * 0.05,
+      borderRadius: 10,
+      marginTop: 5
+    },
+    buttonDoc: {
+      fontSize: 15,
+      fontWeight: "light",
+      color: "white",
+      textAlign: "left",
+      borderRadius: 10,
+      width: width*0.85
+    },
     mainContainer: {
       backgroundColor: "#F8DFBD",
       height: height,
@@ -261,17 +293,21 @@ const makeStyles = () => {
       padding: 10
     },
     listItem: {
-      padding: 10,
       fontSize: 30,
-      margin: 15,
       width: width * 0.9
     },
     card: {
-      height: height * 0.2,
-      width: width,
-      display: "flex",
+      backgroundColor: "#2D5971",
+      // height: height * 0.22,
+      width: width * 0.9,
       justifyContent: "center",
-      alignItems: "center"
+      borderRadius: 10,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      padding: 5,
+      // margin: height * 0.01,
+      width: width * 0.95,
     },
     signButton: {
       color: "red",
@@ -291,9 +327,23 @@ const makeStyles = () => {
       left: "50%"
     },
     input: {
-      backgroundColor: "white"
+      // backgroundColor: "white",
+      padding: 15,
+      borderRadius: 10,
+      margin: 10,
+      border: 'none',
+      color: 'white',
+      fontSize: fontScale*20
       // borderBottomRightRadius: 'none',
       // borderBottomEndRadius: 'none'
+    },
+    modalContainer: {
+      backgroundColor:"#2D5971",
+      height: 'auto',
+      borderRadius: 10,
+      marginTop: height*0.4,
+      padding: 25,
+      width: width,
     }
   });
 };

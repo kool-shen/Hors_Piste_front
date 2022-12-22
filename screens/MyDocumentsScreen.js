@@ -37,7 +37,7 @@ const MyDocumentsScreen = () => {
 
   console.log(documents);
   const documentsToComponents = documents.map((document, i) => (
-    <View style={styles.docContainer}>
+    <View style={styles.docContainer} key={i}>
       <Text
         key={i}
         style={styles.docText}
@@ -65,7 +65,12 @@ const MyDocumentsScreen = () => {
             </Text>
           )}
           <Button style={styles.button} onPress={() => fetchCompleteDocs()}>
-            <Text style={styles.text}>Actualiser</Text>
+          <FontAwesome
+                name="refresh"
+                size={22}
+                style={styles.icon}
+                color="white"
+              />
           </Button>
         </View>
       </ScrollView>
@@ -77,10 +82,17 @@ const makeStyles = () => {
   const { fontScale, width, height } = useWindowDimensions();
   return StyleSheet.create({
     docContainer: {
-      display: "flex",
-      justifyContent: "space-around",
-      alignItems: "flex-start",
+      backgroundColor: "#2D5971",
+      // height: height * 0.22,
       width: width * 0.9,
+      justifyContent: "space-around",
+      borderRadius: 10,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      padding: 10,
+      margin: height * 0.01,
+      width: width * 0.95,
     },
     docText: {
       fontSize: 20,
@@ -139,9 +151,10 @@ const makeStyles = () => {
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: "#F29231",
-      width: width * 0.35,
-      height: height * 0.05,
+      width: 50,
+      // height: height * 0.05,
       borderRadius: 10,
+      marginTop: 10
     },
     listItem: {
       padding: 10,
