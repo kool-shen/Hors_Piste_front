@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NativeBaseProvider } from "native-base";
-import { Provider as StoreProvider } from "react-redux";
+import { Provider as StoreProvider, useSelector } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import user from "./reducers/user";
@@ -28,6 +28,8 @@ const Stack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 const TabNavigator = () => {
+  const userReducer = useSelector(state => state.user.value)
+  console.log(userReducer)
   const [tabBackgroundColor, setTabBackGroundColor] = useState("#2D5971");
   const [activeColorsMenu, setActiveColorsMenu] = useState({
     tabBackground: "#2D5971",
@@ -88,6 +90,7 @@ const TabNavigator = () => {
         options={{
           tabBarColor: activeColorsMenu.tabBackground,
           title: "Signer",
+          tabBarBadge: userReducer.nbOfToSignDocs ? userReducer.nbOfToSignDocs : false
         }}
       />
       <Tab.Screen
