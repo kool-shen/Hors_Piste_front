@@ -16,8 +16,6 @@ import SignInScreen from "./screens/SignInScreen";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import SignDocumentsScreen from "./screens/SignDocumentsScreen";
 import IntroductionScreen from "./screens/IntroductionScreen";
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useFonts } from 'expo-font';
 
 const [loaded] = useFonts({
   Montserrat: require('./assets/fonts/Yatra-One.ttf'),
