@@ -181,7 +181,8 @@ const makeStyles = () => {
 
     notYet: {
       color: "white",
-      paddingTop: 20
+      paddingTop: 20,
+      textAlign: 'center'
     },
 
     validateButton: {
@@ -192,14 +193,17 @@ const makeStyles = () => {
     validate: {
       color: "white",
       fontWeight: "bold",
-      fontSize: 25 / fontScale
+      fontSize: 25 / fontScale,
+      textAlign: 'center'
     },
     connectButton: {
       marginTop: 30,
       backgroundColor: "#F29231",
       paddingHorizontal: 30,
       paddingVertical: 10,
-      borderRadius: 10
+      borderRadius: 10,
+      justifyContent: 'center',
+      alignItems: 'center'
     },
     validate: {
       color: "white",
