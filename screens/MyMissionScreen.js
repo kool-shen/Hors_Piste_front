@@ -42,11 +42,11 @@ const MyMissionScreen = () => {
               </View>
               <View style={styles.textContainer}>
                 <Text style={styles.title}>Numéro CES: </Text>
-                <Text tyle={styles.text}>{user.CESNumber}</Text>
+                <Text style={styles.text}>{user.CESNumber}</Text>
               </View>
               <View style={styles.textContainer}>
                 <Text style={styles.title}>Durée de la mission : </Text>
-                <Text tyle={styles.text}>du {startDate} au {endDate}</Text>
+                <Text style={styles.text}>du {startDate} au {endDate}</Text>
               </View>
             </View>
             <ScrollView>
