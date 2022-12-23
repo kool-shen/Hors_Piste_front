@@ -20,13 +20,12 @@ import RegisterText from "../component/RegisterText";
 
 export default function SignInScreen({ navigation }) {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("leoferte@gmail.com");
-  const [password, setPassword] = useState("Ferte");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const styles = makeStyles();
   const toast = useToast();
 
   const handleConnect = async () => {
-    console.log(BACKEND_URL);
 
     const res = await fetch(`${BACKEND_URL}/users/signin`, {
       method: "POST",
