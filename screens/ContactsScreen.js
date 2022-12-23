@@ -4,6 +4,7 @@ import {
   StyleSheet,
   useWindowDimensions,
   ImageBackground,
+  Touchable,
 } from "react-native";
 
 import React, { useEffect, useState } from "react";
@@ -49,8 +50,8 @@ const ContactsScreen = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.telContainer}>
-              <FontAwesomeIcon
-                icon={faPhone}
+              <FontAwesome
+                name='phone'
                 size={20}
                 style={{ color: "white" }}
               />
@@ -68,8 +69,8 @@ const ContactsScreen = ({navigation}) => {
             </View>
 
             <View style={styles.telContainer}>
-              <FontAwesomeIcon
-                icon={faEnvelope}
+              <FontAwesome
+                icon='Envelope'
                 size={20}
                 style={{ color: "white" }}
               />
@@ -97,8 +98,8 @@ const ContactsScreen = ({navigation}) => {
             </View>
 
             <View style={styles.telContainer}>
-              <FontAwesomeIcon
-                icon={faPhone}
+              <FontAwesome
+                name='phone'
                 size={20}
                 style={{ color: "white" }}
               />
@@ -116,8 +117,8 @@ const ContactsScreen = ({navigation}) => {
             </View>
 
             <View style={styles.telContainer}>
-              <FontAwesomeIcon
-                icon={faEnvelope}
+              <FontAwesome
+                name='envelope'
                 size={20}
                 style={{ color: "white" }}
               />
@@ -138,9 +139,8 @@ const ContactsScreen = ({navigation}) => {
         <View
           style={styles.footer}
         >
-          {/* <FontAwesome name='home' size={25} color={"#2D5971"} /> */}
-         <FontAwesome name='home' size='40' color='orange' onPress={() => navigation.navigate('TabNavigator')}/>
-        </View>
+        <FontAwesome name='home' size={40} style={{color: 'orange'}} onPress={() => navigation.navigate('TabNavigator')}/>
+        </View> 
       </ImageBackground>
     </View>
   );
@@ -233,6 +233,7 @@ const makeStyles = () => {
       height: height*0.12,
       width: width,
       backgroundColor: '#2D5971',
+      marginBottom: 0,
     }
   });
 };
