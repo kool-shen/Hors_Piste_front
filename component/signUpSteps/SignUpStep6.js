@@ -36,19 +36,19 @@ export default function SignUpScreenFive(props) {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        authorization: `bearer ${userReducer.token}`,
       },
       body: JSON.stringify(userReducer)
     });
     const userData = await res.json();
     if (userData.result) {
-      console.log("ok");
       dispatch(updateUserProperties(userData.data));
       await fetch(`${BACKEND_URL}/docs/createFiles`, {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          authorization: `bearer ${user.token}`,
+          authorization: `bearer ${userReducer.token}`,
         },
         body: JSON.stringify(userData.data)
       });

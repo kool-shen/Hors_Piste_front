@@ -40,21 +40,20 @@ export default function SignInScreen({ navigation, nextStep }) {
       })
     });
     const userData = await res.json();
-    console.log(userData);
+    console.log(userData.token);
     if (userData.result) {
-      console.log("ok");
       const res = await fetch(`${BACKEND_URL}/docs/createFolders`, {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          authorization: `bearer ${userData.token}`,
         },
         body: JSON.stringify({
           connectionString: connectionCode
         })
       });
       const foldersData = await res.json();
-      console.log(foldersData);
       dispatch(
         updateUserProperties({
           ...userData.data,
