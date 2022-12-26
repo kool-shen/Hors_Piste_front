@@ -4,33 +4,16 @@ import {
   StyleSheet,
   useWindowDimensions,
   ImageBackground,
-  Touchable,
 } from "react-native";
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { BACKEND_URL } from "@env";
 import { Linking } from "react-native";
 import BannerScreenTitle2 from "../component/BannerScreenTitle2";
-import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
-import { Center } from "native-base";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const ContactsScreen = ({navigation}) => {
   const user = useSelector((state) => state.user.value);
-  const [mission, setMission] = useState({});
   const styles = makeStyles();
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const res = await fetch(
-  //       `${BACKEND_URL}/missions/${user.mission._id}/${user.userId}`
-  //     );
-  //     const missionData = await res.json();
-  //     setMission(missionData.data);
-  //   })();
-  // }, []);
 
   return (
     <View style={styles.container}>
@@ -76,7 +59,7 @@ const ContactsScreen = ({navigation}) => {
               />
               <Text
                 onPress={() => {
-                  Linking.openURL(`mailto:${mission.projectReferent.email}`);
+                  Linking.openURL(`mailto:${user.mission.projectReferent.email}`);
                 }}
                 style={styles.infoContainer}
               >
@@ -153,25 +136,6 @@ const makeStyles = () => {
       width: width,
       height: height,
     },
-    pageTitle: {
-      color: "white",
-      fontSize: 40 / fontScale,
-      fontWeight: "bold",
-    },
-    pageTitleContainer: {
-      backgroundColor: "#2D5971",
-      borderTopRightRadius: 10,
-      borderBottomRightRadius: 10,
-
-      width: "80%",
-      position: "absolute",
-      top: 40,
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-between",
-      padding: 10,
-    },
-
     cardContainer: {
       backgroundColor: "#2D5971",
       height: height * 0.22,
@@ -201,7 +165,6 @@ const makeStyles = () => {
       color: "white",
       // padding: 10,
     },
-
     nameContainer: {
       color: "white",
       fontSize: 18,

@@ -1,21 +1,16 @@
-import { useEffect, useState, useRef, useReducer } from "react";
-import { Camera } from "expo-camera";
+import { useState } from "react";
 
 import {
   StyleSheet,
   View,
-  Text,
   useWindowDimensions,
   ImageBackground
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProperties } from "../../reducers/user";
-import ValidateButton from "../buttons/ValidateButton";
-import { useIsFocused } from "@react-navigation/native";
 import MainInput from "../inputs/MainInput";
 import BannerScreenTitle from "../BannerScreenTitle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import UploadFile from "../UploadFile";
 import NextPrevious from "../NextPrevious";
 import { BACKEND_URL } from "@env";
 import { useToast } from "native-base";
@@ -40,7 +35,7 @@ export default function SignUpScreenFive(props) {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(userReducer)
     });
@@ -52,7 +47,8 @@ export default function SignUpScreenFive(props) {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          authorization: `bearer ${user.token}`,
         },
         body: JSON.stringify(userData.data)
       });

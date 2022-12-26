@@ -6,9 +6,8 @@ import {
   ImageBackground,
   ScrollView,
 } from "react-native";
-import React, {useState} from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
 import BannerScreenTitle from "../component/BannerScreenTitle2";
 
 
@@ -71,25 +70,6 @@ const makeStyles = () => {
       width: width,
       height: height,
     },
-    pageTitle: {
-      color: "white",
-      fontSize: 40 / fontScale,
-      fontWeight: "bold",
-    },
-    pageTitleContainer: {
-      backgroundColor: "#2D5971",
-      borderTopRightRadius: 10,
-      borderBottomRightRadius: 10,
-
-      width: "80%",
-      position: "absolute",
-      top: 40,
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-between",
-      padding: 10,
-    },
-
     cardContainer: {
       backgroundColor: "#2D5971",
       height: height * 0.22,
@@ -97,7 +77,6 @@ const makeStyles = () => {
       borderRadius: 20,
       display: "flex",
       flexDirection: "column",
-      // alignItems: "center",
       justifyContent: 'space-around',
       padding: 10,
       margin: height * 0.01,
@@ -105,15 +84,10 @@ const makeStyles = () => {
     },
     textContainer: {
       display: 'flex',
-      // flexDirection: 'row',
-      // justifyContent: 'flex-start',
       alignItems: 'flex-start',
     },
     taskContainer: {
       display: 'flex',
-      // flexDirection: 'row',
-      // justifyContent: 'flex-start',
-      // alignItems: 'space-around',
     },
     mainContainer: {
       paddingTop: height * 0.25,
@@ -122,17 +96,6 @@ const makeStyles = () => {
       justifyContent: "space-around",
       textAlign: "center",
       height: height * 0.8,
-    },
-    footer: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-around',
-      flexDirection: 'row',
-      position: "absolute",
-      top: height*0.88,
-      height: height*0.12,
-      width: width,
-      backgroundColor: '#2D5971',
     },
     title: {
       fontSize: 18,

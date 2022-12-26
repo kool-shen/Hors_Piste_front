@@ -3,9 +3,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  KeyboardAvoidingView,
   useWindowDimensions,
-  Button,
   ImageBackground,
 } from "react-native";
 import React, { useState } from "react";
@@ -21,7 +19,6 @@ const UploadDocumentsScreen = () => {
   const user = useSelector((state) => state.user.value);
   const [uploadFile, setUploadFile] = useState({});
   const [uploadName, setUploadName] = useState("");
-  const [resultMessage, setResultMessage] = useState("");
   const styles = makeStyles();
 
   const pickDocument = async () => {
@@ -32,6 +29,7 @@ const UploadDocumentsScreen = () => {
     setUploadFile(formData);
   };
   const sendDocument = async () => {
+    console.log(`${BACKEND_URL}/docs/uploads/${user.folderIds.toValidateFolderId}`)
     if (!uploadName)
       return toast.show({ description: "Veuillez sélectionner un fichier !" });
     const res = await fetch(
@@ -41,6 +39,7 @@ const UploadDocumentsScreen = () => {
         headers: {
           Accept: "application/json",
           "Content-Type": "multipart/form-data",
+          authorization: `bearer ${user.token}`,
         },
         body: uploadFile,
       }
@@ -109,35 +108,6 @@ const makeStyles = () => {
     },
     icon2: {
       color: "white",
-    },
-    pageTitle: {
-      color: "white",
-      fontSize: 35 / fontScale,
-      fontWeight: "bold",
-    },
-    progression: {
-      color: "white",
-      fontSize: 15 / fontScale,
-      alignSelf: "flex-end",
-    },
-    pageTitleContainer: {
-      backgroundColor: "#2D5971",
-      borderTopRightRadius: 10,
-      borderBottomRightRadius: 10,
-      zIndex: 90,
-      width: "80%",
-      position: "absolute",
-      top: 40,
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-between",
-      padding: 10,
-    },
-    listItem: {
-      padding: 10,
-      fontSize: 30,
-      margin: 15,
-      width: width * 0.9,
     },
     listContainer: {
       height: height * 0.4,

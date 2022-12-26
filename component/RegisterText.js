@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, useWindowDimensions, StyleSheet } from "react-native";
+import { Text, View, useWindowDimensions, StyleSheet } from "react-native";
 
 export default function RegisterText(props) {
     const styles = makeStyles();

@@ -25,7 +25,6 @@ export default function SignUpScreenOne(props) {
   const userReducer = useSelector(state => state.user.value)
 
   ////reducer user ///
-  console.log(user);
   const dispatch = useDispatch();
 
   const [user, setUser] = useState({
@@ -46,7 +45,6 @@ export default function SignUpScreenOne(props) {
       });
     }
     dispatch(updateUserProperties(user));
-
     props.nextStep(1);
   };
 
@@ -131,39 +129,10 @@ const makeStyles = () => {
     input: {
       margin: 10
     },
-    inputText: {
-      backgroundColor: "#143143",
-      maxWidth: 150,
-      textAlign: "center",
-      fontSize: 15,
-      borderRadius: 5,
-      color: "white",
-      paddingHorizontal: 10,
-      margin: 5
-    },
-    pageTitle: {
-      color: "white",
-      fontSize: 40,
-      fontWeight: "bold"
-    },
     progression: {
       color: "white",
       fontSize: 15,
       alignSelf: "flex-end"
-    },
-    pageTitleContainer: {
-      backgroundColor: "#2D5971",
-      borderTopRightRadius: 10,
-      borderBottomRightRadius: 10,
-      zIndex: 90,
-      width: "80%",
-      position: "absolute",
-      top: 40,
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-      padding: 10
     },
     validateButton: {
       backgroundColor: "green",

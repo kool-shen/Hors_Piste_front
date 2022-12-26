@@ -35,11 +35,9 @@ const Sign = (props) => {
   const [loading, setLoading] = useState(false);
   const [signature, setSignature] = useState("");
   const [documentID, setDocumentID] = useState("");
-  
-  const ref = useRef();
-
   const [location, setLocation] = useState(null);
 
+  const ref = useRef();
   const user = useSelector((state) => state.user.value);
 
   let date = new Date();
@@ -93,7 +91,8 @@ const Sign = (props) => {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "multipart/form-data"
+        "Content-Type": "multipart/form-data",
+        authorization: `bearer ${user.token}`
       },
       body: formData
     })
@@ -131,7 +130,11 @@ const Sign = (props) => {
         <Spinner size="lg" />
       ) : (
         <View style={styles.containerGlobal}>
-          <Modal style={styles.modalContainer} isOpen={inputModal} onClose={() => setInputModal(!inputModal)}>
+          <Modal
+            style={styles.modalContainer}
+            isOpen={inputModal}
+            onClose={() => setInputModal(!inputModal)}
+          >
             <Input
               placeholder="Fait à..."
               style={styles.input}
@@ -173,7 +176,7 @@ const Sign = (props) => {
               />
             </View>
           </Modal>
-      
+
           <View style={styles.card}>
             <Button
               size="lg"
@@ -200,7 +203,6 @@ const Sign = (props) => {
               <Button
                 style={styles.button}
                 onPress={() => {
-
                   setInputModal(!inputModal);
                 }}
                 disabled={infoModal}
@@ -220,9 +222,9 @@ const makeStyles = () => {
   return StyleSheet.create({
     containerGlobal: {
       // height: height,
-      width:width,
-      justifyContent:'center',
-      alignItems: 'center'
+      width: width,
+      justifyContent: "center",
+      alignItems: "center"
     },
     button: {
       display: "flex",
@@ -240,66 +242,10 @@ const makeStyles = () => {
       color: "white",
       textAlign: "left",
       borderRadius: 10,
-      width: width*0.85,
-      backgroundColor: "#2D5971",
-    },
-    mainContainer: {
-      backgroundColor: "#F8DFBD",
-      height: height,
-      width: width,
-      margin: 0,
-      display: "flex",
-      justifyContent: "space-around"
-    },
-    background: {
-      // backgroundColor: "#A5D8E6",
-      transform: [
-        { rotate: "-35deg" },
-        { translateX: -100 },
-        { translateY: -50 }
-      ],
-      height: "100%",
-      width: 600,
-      flex: 1,
-      alignItems: "center"
-    },
-    subBackground: {
-      transform: [{ rotate: "35deg" }, { translateX: 9 }, { translateY: -16 }],
-      height: height,
-      width: width,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-around",
-      paddingTop: 130,
-      paddingBottom: 20
-    },
-
-    pageTitle: {
-      color: "white",
-      fontSize: 35 / fontScale,
-      fontWeight: "bold"
-    },
-    progression: {
-      color: "white",
-      fontSize: 15 / fontScale,
-      alignSelf: "flex-end"
-    },
-    pageTitleContainer: {
-      backgroundColor: "#2D5971",
-      borderTopRightRadius: 10,
-      borderBottomRightRadius: 10,
-      zIndex: 90,
-      width: "100%",
-      marginTop: height * 0.1,
-      padding: 10
-    },
-    listItem: {
-      fontSize: 30,
-      width: width * 0.9
+      width: width * 0.85,
+      backgroundColor: "#2D5971"
     },
     card: {
-      // backgroundColor: "#2D5971",
-      // height: height * 0.22,
       width: width * 0.9,
       justifyContent: "center",
       borderRadius: 10,
@@ -307,20 +253,7 @@ const makeStyles = () => {
       flexDirection: "column",
       alignItems: "center",
       padding: 5,
-      // margin: height * 0.01,
-      width: width * 0.95,
-    },
-    signButton: {
-      color: "red",
-      backgroundColor: "red",
-      width: width * 0.3
-    },
-    listContainer: {
-      
-      width: width,
-      flex: 1,
-      display: "flex",
-      paddingTop: 20
+      width: width * 0.95
     },
     modal: {
       backgroundColor: "black",
@@ -329,23 +262,20 @@ const makeStyles = () => {
       left: "50%"
     },
     input: {
-      // backgroundColor: "white",
       padding: 15,
       borderRadius: 10,
       margin: 10,
-      border: 'none',
-      color: 'white',
-      fontSize: fontScale*20
-      // borderBottomRightRadius: 'none',
-      // borderBottomEndRadius: 'none'
+      border: "none",
+      color: "white",
+      fontSize: fontScale * 20
     },
     modalContainer: {
-      backgroundColor:"#2D5971",
-      height: 'auto',
+      backgroundColor: "#2D5971",
+      height: "auto",
       borderRadius: 10,
-      marginTop: height*0.4,
+      marginTop: height * 0.4,
       padding: 25,
-      width: width,
+      width: width
     }
   });
 };

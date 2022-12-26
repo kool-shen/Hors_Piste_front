@@ -18,7 +18,7 @@ import BannerScreenTitle from "../component/BannerScreenTitle2";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const MyMissionScreen = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const styles = makeStyles();
   const [loading, setLoading] = useState(true);
   const [documents, setDocuments] = useState([]);
@@ -33,11 +33,18 @@ const MyMissionScreen = () => {
     setLoading(true);
 
     const res = await fetch(
-      `${BACKEND_URL}/docs/listFolder/${user.folderIds.toSignFolderId}`
+      `${BACKEND_URL}/docs/listFolder/${user.folderIds.toSignFolderId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `bearer ${user.token}`
+        }
+      }
     );
     const documentsData = await res.json();
     setDocuments(documentsData);
-    dispatch(updateUserProperties({nbOfToSignDocs: documentsData.length}))
+    dispatch(updateUserProperties({ nbOfToSignDocs: documentsData.length }));
     setLoading(false);
   };
 
@@ -57,7 +64,7 @@ const MyMissionScreen = () => {
       source={require("../assets/backgrounds/royalBlue.png")}
       style={styles.mainContainer}
     >
-      <BannerScreenTitle icon='pencil' title={`Signer documents`} />
+      <BannerScreenTitle icon="pencil" title={`Signer documents`} />
       <ScrollView>
         <View style={styles.listContainer}>
           {loading ? <Spinner size="lg" /> : documentsToComponents}
@@ -76,12 +83,6 @@ const MyMissionScreen = () => {
               />
             </Button>
           </View>
-          {/* <Button
-                style={styles.button}
-                onPress={() => fetchToSignDocs()}
-              >
-                Signez le documents
-              </Button> */}
         </View>
       </ScrollView>
     </ImageBackground>
@@ -92,8 +93,6 @@ const makeStyles = () => {
   const { fontScale, width, height } = useWindowDimensions();
   return StyleSheet.create({
     docContainer: {
-      // backgroundColor: "#2D5971",
-      // height: height * 0.22,
       width: width * 0.9,
       justifyContent: "space-around",
       borderRadius: 10,
@@ -116,17 +115,7 @@ const makeStyles = () => {
       width: width * 0.15,
       // height: height * 0.05,
       borderRadius: 10,
-      marginBottom: height * 0.07,
-      
-    },
-    mainText: {
-      fontSize: 20 / fontScale,
-      color: "white",
-      fontWeight: "bold"
-    },
-    text: {
-      fontSize: 20 / fontScale,
-      color: "white"
+      marginBottom: height * 0.07
     },
     mainContainer: {
       height: height,
@@ -141,57 +130,6 @@ const makeStyles = () => {
       justifyContent: "center",
       top: height * 0.2,
       marginBottom: height * 0.15
-    },
-
-    pageTitle: {
-      color: "white",
-      fontSize: 35 / fontScale,
-      fontWeight: "bold"
-    },
-    progression: {
-      color: "white",
-      fontSize: 15 / fontScale,
-      alignSelf: "flex-end"
-    },
-    pageTitleContainer: {
-      backgroundColor: "#2D5971",
-      borderTopRightRadius: 10,
-      borderBottomRightRadius: 10,
-      zIndex: 90,
-      width: width * 0.9,
-      // position: "absolute",
-      marginTop: height * 0.05,
-      // display: "flex",
-      // flexDirection: "row",
-      // justifyContent: "space-between",
-      padding: 10
-    },
-    listItem: {
-      padding: 10,
-      fontSize: 30,
-      width: width * 0.8
-    },
-    card: {
-      // height: height * 0.2,
-      width: width,
-      // flex: 1,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center"
-    },
-    signButton: {
-      color: "red",
-      backgroundColor: "red",
-      width: width * 0.3
-    },
-
-    modal: {
-      backgroundColor: "black",
-      position: "relative",
-      top: "50%",
-      left: "50%"
-      // alignItems: 'center',
-      // justifyContent: 'center'
     },
     text: {
       fontSize: 20 / fontScale,

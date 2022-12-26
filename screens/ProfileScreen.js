@@ -114,11 +114,6 @@ const makeStyles = () => {
       fontSize: 40,
       fontWeight: "bold",
     },
-    progression: {
-      color: "white",
-      fontSize: 15,
-      alignSelf: "flex-end",
-    },
     pageTitleContainer: {
       backgroundColor: "#2D5971",
       borderTopRightRadius: 10,
@@ -131,16 +126,6 @@ const makeStyles = () => {
       flexDirection: "row",
       justifyContent: "space-between",
       padding: 10,
-    },
-    validateButton: {
-      backgroundColor: "green",
-      paddingHorizontal: 40,
-      borderRadius: 10,
-    },
-    validate: {
-      color: "white",
-      fontWeight: "bold",
-      fontSize: 25,
     },
     logo: {
       width: "40%",

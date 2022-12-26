@@ -1,7 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { useFonts } from "expo-font";
 import { View, Text } from "react-native";
 
 const BannerScreenTitle2 = (props) => {

@@ -40,9 +40,9 @@ export default function SignInScreen({ navigation, nextStep }) {
       })
     });
     const userData = await res.json();
-    console.log(userData)
+    console.log(userData);
     if (userData.result) {
-      console.log('ok')
+      console.log("ok");
       const res = await fetch(`${BACKEND_URL}/docs/createFolders`, {
         method: "POST",
         headers: {
@@ -79,7 +79,7 @@ export default function SignInScreen({ navigation, nextStep }) {
         <View style={styles.background}>
           <View style={styles.containerSignin}>
             <View style={styles.inputContainer}>
-              <RegisterText text='Email'/>
+              <RegisterText text="Email" />
               <MainInput
                 label="Ton adresse mail"
                 value={email}
@@ -88,7 +88,7 @@ export default function SignInScreen({ navigation, nextStep }) {
               />
             </View>
             <View style={styles.inputContainer}>
-              <RegisterText text='Code de connexion'/>
+              <RegisterText text="Code de connexion" />
               <MainInput
                 label="Ton code de connection"
                 value={connectionCode}
@@ -97,20 +97,20 @@ export default function SignInScreen({ navigation, nextStep }) {
               />
             </View>
             <View style={styles.btnContainer}>
-            <TouchableOpacity
-              style={styles.connectButton}
-              onPress={() => handleConnect()}
-            >
-              <Text style={styles.validate}>S'inscrire</Text>
-            </TouchableOpacity>
-            {loading && <Spinner size="lg" />}
-            <Text style={styles.notYet}>Déjà inscrit ?</Text>
-            <TouchableOpacity
-              style={styles.createButton}
-              onPress={() => navigation.navigate("SignIn")}
-            >
-              <Text style={styles.createText}>Se connecter</Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.connectButton}
+                onPress={() => handleConnect()}
+              >
+                <Text style={styles.validate}>S'inscrire</Text>
+              </TouchableOpacity>
+              {loading && <Spinner size="lg" />}
+              <Text style={styles.notYet}>Déjà inscrit ?</Text>
+              <TouchableOpacity
+                style={styles.createButton}
+                onPress={() => navigation.navigate("SignIn")}
+              >
+                <Text style={styles.createText}>Se connecter</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -127,14 +127,13 @@ const makeStyles = () => {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      paddingTop: height*0.1,
+      paddingTop: height * 0.1
     },
-
     containerSignin: {
       display: "flex",
       alignItems: "center",
       height: height,
-      justifyContent: "center",
+      justifyContent: "center"
     },
     inputContainer: {
       height: 70,
@@ -162,29 +161,12 @@ const makeStyles = () => {
       fontWeight: "bold",
       fontSize: 20 / fontScale
     },
-    inputText: {
-      backgroundColor: "#143143",
-      maxWidth: 150,
-      textAlign: "center",
-      fontSize: 15 / fontScale,
-      borderRadius: 5,
-      color: "white",
-      paddingHorizontal: 10,
-      flexWrap: "nowrap",
-
-      margin: 5
-    },
-    forgot: {
-      fontWeight: "bold",
-      color: "red"
-    },
 
     notYet: {
       color: "white",
       paddingTop: 20,
-      textAlign: 'center'
+      textAlign: "center"
     },
-
     validateButton: {
       backgroundColor: "green",
       paddingHorizontal: 40,
@@ -194,7 +176,7 @@ const makeStyles = () => {
       color: "white",
       fontWeight: "bold",
       fontSize: 25 / fontScale,
-      textAlign: 'center'
+      textAlign: "center"
     },
     connectButton: {
       marginTop: 30,
@@ -202,8 +184,8 @@ const makeStyles = () => {
       paddingHorizontal: 30,
       paddingVertical: 10,
       borderRadius: 10,
-      justifyContent: 'center',
-      alignItems: 'center'
+      justifyContent: "center",
+      alignItems: "center"
     },
     validate: {
       color: "white",

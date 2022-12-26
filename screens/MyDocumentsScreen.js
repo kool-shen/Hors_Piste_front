@@ -2,7 +2,6 @@ import {
   View,
   Text,
   StyleSheet,
-  KeyboardAvoidingView,
   useWindowDimensions,
   Linking,
   ImageBackground,
@@ -28,14 +27,19 @@ const MyDocumentsScreen = () => {
   const fetchCompleteDocs = async () => {
     setLoading(true);
     const res = await fetch(
-      `${BACKEND_URL}/docs/listFolder/${user.folderIds.completeFolderId}`
+      `${BACKEND_URL}/docs/listFolder/${user.folderIds.completeFolderId}`,{
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `bearer ${user.token}`,
+        },
+      }
     );
     const documentsData = await res.json();
     setDocuments(documentsData);
     setLoading(false);
   };
 
-  console.log(documents);
   const documentsToComponents = documents.map((document, i) => (
     <View style={styles.docContainer} key={i}>
       <Text
@@ -84,7 +88,6 @@ const makeStyles = () => {
   return StyleSheet.create({
     docContainer: {
       backgroundColor: "#2D5971",
-      // height: height * 0.22,
       width: width * 0.9,
       justifyContent: "space-around",
       borderRadius: 10,
@@ -113,60 +116,18 @@ const makeStyles = () => {
       color: "white",
       fontWeight: "bold",
     },
-    subBackground: {
-      transform: [{ rotate: "35deg" }, { translateX: 9 }, { translateY: -16 }],
-      height: "100%",
-      width: 300,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-around",
-      // paddingTop: 130,
-      paddingBottom: 20,
-    },
-
-    pageTitle: {
-      color: "white",
-      fontSize: 35 / fontScale,
-      fontWeight: "bold",
-    },
-    progression: {
-      color: "white",
-      fontSize: 15 / fontScale,
-      alignSelf: "flex-end",
-    },
-    pageTitleContainer: {
-      backgroundColor: "#2D5971",
-      borderTopRightRadius: 10,
-      borderBottomRightRadius: 10,
-      zIndex: 90,
-      width: "80%",
-      position: "absolute",
-      top: 40,
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-between",
-      // padding: 10,
-    },
     button: {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: "#F29231",
       width: 50,
-      // height: height * 0.05,
       borderRadius: 10,
       marginTop: 30
-    },
-    listItem: {
-      // padding: 10,
-      fontSize: 30,
-      margin: 15,
-      width: width * 0.9,
     },
     listContainer: {
       height: '100%',
       display: 'flex',
-      // justifyContent: "center",
       alignItems: "center",
     },
     scrollView: {

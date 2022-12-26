@@ -149,28 +149,10 @@ const makeStyles = () => {
       fontSize: 20 / fontScale,
       flexWrap: "wrap",
     },
-    inputText: {
-      backgroundColor: "#143143",
-      minWidth: 150,
-      textAlign: "center",
-      fontSize: 15 / fontScale,
-      borderRadius: 5,
-      color: "white",
-      paddingHorizontal: 10,
-      margin: 10,
-      whiteSpace: "nowrap",
-      borderRadius: 10,
-    },
-    forgot: {
-      fontWeight: "bold",
-      color: "red",
-    },
-
     notYet: {
       color: "white",
       paddingTop: 20,
     },
-
     connectButton: {
       backgroundColor: "#F29231",
       paddingHorizontal: 30,

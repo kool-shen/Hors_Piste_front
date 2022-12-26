@@ -9,23 +9,28 @@ import { useDispatch, useSelector } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useEffect } from "react";
 import { updateUserProperties } from "../reducers/user";
-import {BACKEND_URL} from '@env'
+import { BACKEND_URL } from "@env";
 
 export default function HomeScreen({ navigation }) {
-  console.log('useeffect')
-  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        `${BACKEND_URL}/docs/listFolder/${user.folderIds.toSignFolderId}`
+        `${BACKEND_URL}/docs/listFolder/${user.folderIds.toSignFolderId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `bearer ${user.token}`
+          }
+        }
       );
       const documentsData = await res.json();
-      dispatch(updateUserProperties({nbOfToSignDocs: documentsData.length}))
+      dispatch(updateUserProperties({ nbOfToSignDocs: documentsData.length }));
     })();
   }, []);
   const styles = makeStyles();
-  const user = useSelector((state) => state.user.value);
-  console.log(user);
   return (
     <View style={styles.mainContainer}>
       <View style={styles.container1}>
