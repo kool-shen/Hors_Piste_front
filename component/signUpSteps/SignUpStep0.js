@@ -40,7 +40,7 @@ export default function SignInScreen({ navigation, nextStep }) {
       })
     });
     const userData = await res.json();
-    console.log(userData.token);
+    console.log(userData);
     if (userData.result) {
       const res = await fetch(`${BACKEND_URL}/docs/createFolders`, {
         method: "POST",

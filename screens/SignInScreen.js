@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { updateUserProperties } from "../reducers/user";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { BACKEND_URL } from "@env";
-import { useToast } from "native-base";
+import { useToast, Spinner } from "native-base";
 import MainInput from "../component/inputs/MainInput";
 import PasswordInput from "../component/inputs/PasswordInput";
 import RegisterText from "../component/RegisterText";
@@ -23,10 +23,11 @@ export default function SignInScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const styles = makeStyles();
+  const [loading, setLoading] = useState(false);
   const toast = useToast();
 
   const handleConnect = async () => {
-
+    setLoading(true)
     const res = await fetch(`${BACKEND_URL}/users/signin`, {
       method: "POST",
       headers: {
@@ -54,6 +55,7 @@ export default function SignInScreen({ navigation }) {
     toast.show({
       description: userData.message,
     });
+    setLoading(false)
   };
 
   return (
@@ -88,6 +90,7 @@ export default function SignInScreen({ navigation }) {
           >
             <Text style={styles.validate}>Se connecter</Text>
           </TouchableOpacity>
+          {loading && <Spinner size="lg" />}
 
           <Text style={styles.notYet}>Pas encore de compte ?</Text>
           <TouchableOpacity
