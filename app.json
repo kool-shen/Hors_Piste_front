@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "myapp",
+    "name": "hors-pistes",
     "slug": "myapp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -25,7 +25,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.rouliane.myapp"
+      "package": "com.rouliane.horspistes"
     },
     "web": {
       "favicon": "./assets/favicon.png"
